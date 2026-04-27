@@ -1,0 +1,364 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "App",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5e97226d-213e-4618-8439-1ef39036744f",
+      "name": "Webhook",
+      "webhookId": "2e0a6e59-af26-4d95-b572-cf3c5568b51d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "87368181-c119-4ac0-a72b-c242ad2827eb",
+              "name": "event",
+              "value": "={{ $json.body.event }}",
+              "type": "string"
+            },
+            {
+              "id": "89152dcd-cb87-4373-8a45-7ce1e7e9cbf8",
+              "name": "fromMe",
+              "value": "={{ $json.body.data.key.fromMe }}",
+              "type": "boolean"
+            },
+            {
+              "id": "957202d4-39c6-4772-9576-7aea39a89b42",
+              "name": "remoteJid",
+              "value": "={{ $json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "249dc942-ef6e-4c08-9505-de0544484b6e",
+              "name": "conversation",
+              "value": "={{ $json.body.data.message.conversation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "82bc511a-a91e-4c83-a2f6-d624503368fe",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Como posso te ajudar hoje? Digite o número da opção desejada:\\n\\n1️⃣ - Consultar boletos pendentes (Segunda via)\\n2️⃣ - Informar pagamento realizado\\n3️⃣ - Falar com um consultor\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "5393454b-b13c-4d68-b609-643fa2775dc8",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "=1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "4c0bfa92-e3a4-42a9-9357-c32eb4648ced"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "case-1"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "be39f03c-22b1-4c5c-ada2-61197acb8613",
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "case-2"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "415adc0c-e130-4f41-ae84-ff4c36358dd6",
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "case-3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        0
+      ],
+      "id": "61a2bc94-36c2-4de3-b04e-684211166116",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Como posso te ajudar hoje? Digite o número da opção desejada:\\n\\n1️⃣ - Consultar boletos pendentes (Segunda via)\\n2️⃣ - Informar pagamento realizado\\n3️⃣ - Falar com um consultor\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        848,
+        -192
+      ],
+      "id": "2a63e02e-2b19-4cc7-baf7-757dc30704b9",
+      "name": "HTTP Request2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Como posso te ajudar hoje? Digite o número da opção desejada:\\n\\n1️⃣ - Consultar boletos pendentes (Segunda via)\\n2️⃣ - Informar pagamento realizado\\n3️⃣ - Falar com um consultor\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        912,
+        16
+      ],
+      "id": "b288984e-ecd6-4218-807f-76e4b435837b",
+      "name": "HTTP Request3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Como posso te ajudar hoje? Digite o número da opção desejada:\\n\\n1️⃣ - Consultar boletos pendentes (Segunda via)\\n2️⃣ - Informar pagamento realizado\\n3️⃣ - Falar com um consultor\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        896,
+        208
+      ],
+      "id": "b9e81198-ca34-4b4e-85cd-c8b0260867b2",
+      "name": "HTTP Request4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "headers": {
+          "accept": "application/json, text/plain, */*",
+          "content-type": "application/json",
+          "user-agent": "axios/1.13.2",
+          "content-length": "659",
+          "accept-encoding": "gzip, compress, deflate, br",
+          "host": "n8n_app:5678",
+          "connection": "keep-alive"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "event": "messages.upsert",
+          "instance": "App",
+          "data": {
+            "key": {
+              "remoteJid": "556992162902@s.whatsapp.net",
+              "remoteJidAlt": "556992162902@s.whatsapp.net",
+              "fromMe": true,
+              "id": "ACCCF8A106DDE67D6C5B6059075BA631",
+              "participant": "",
+              "addressingMode": "lid"
+            },
+            "pushName": "Santi",
+            "status": "SERVER_ACK",
+            "message": {
+              "conversation": "."
+            },
+            "messageType": "conversation",
+            "messageTimestamp": 1777302965,
+            "instanceId": "7caa7f26-018d-4d9c-a2e7-887b5b8d4f14",
+            "source": "android"
+          },
+          "destination": "http://n8n_app:5678/webhook-test/App",
+          "date_time": "2026-04-27T12:16:06.110Z",
+          "sender": "556992162902@s.whatsapp.net",
+          "server_url": "http://localhost:8080",
+          "apikey": "24BC32FF1A40-487F-B807-D126E7CA05A2"
+        },
+        "webhookUrl": "http://localhost:5678/webhook-test/App",
+        "executionMode": "test"
+      }
+    ]
+  },
+  "meta": {
+    "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
+  }
+}
