@@ -1,0 +1,1002 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"menu 3 em teste\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1472,
+        -96
+      ],
+      "id": "b9e81198-ca34-4b4e-85cd-c8b0260867b2",
+      "name": "HTTP Request4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"1 - lista de boletos\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1472,
+        -288
+      ],
+      "id": "b288984e-ecd6-4218-807f-76e4b435837b",
+      "name": "HTTP Request3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Digite o número da opção desejada:\\n\\n1️⃣ - Boletos a vencer\\n2️⃣ - boletos vencidos\\n0️⃣ - Voltar\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1472,
+        -480
+      ],
+      "id": "2a63e02e-2b19-4cc7-baf7-757dc30704b9",
+      "name": "HTTP Request2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fa2c5480-bf48-457d-80e5-50628ad7fd78",
+                    "leftValue": "={{ ($json.conversation == \"1\" && ($json.estado_anterior == \"menu_principal\" || !$json.estado_anterior)).toString() }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "faturas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "11d0f764-d4ec-45ba-85de-4f9e0ffc50de",
+                    "leftValue": "={{ ($json.conversation == \"2\" && $json.estado_anterior == \"menu_principal\").toString() }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "vencidos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "aef0bdf0-3e10-4830-9faf-a4acb880b8d0",
+                    "leftValue": "={{ ($json.conversation == \"3\" && $json.estado_anterior == \"menu_principal\").toString() }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "dados"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "2c8b50f5-563d-47a1-b971-810603badaad",
+                    "leftValue": "={{ ($json.conversation == \"0\" && ($json.estado_anterior == \"Faturas\" || $json.estado_anterior == \"Boletos_vencidos\" || $json.estado_anterior == \"Atualiza_Dados\")).toString() }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "voltar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f18ec05e-3183-48fc-aa75-ae78cf3629eb",
+                    "leftValue": "={{ ($json.conversation == \"1\" && $json.estado_anterior == \"Boletos_vencidos\").toString() }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "boletos_Lista"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1152,
+        -240
+      ],
+      "id": "61a2bc94-36c2-4de3-b04e-684211166116",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "87368181-c119-4ac0-a72b-c242ad2827eb",
+              "name": "event",
+              "value": "={{ $json.body.event }}",
+              "type": "string"
+            },
+            {
+              "id": "89152dcd-cb87-4373-8a45-7ce1e7e9cbf8",
+              "name": "fromMe",
+              "value": "={{ $json.body.data.key.fromMe }}",
+              "type": "boolean"
+            },
+            {
+              "id": "957202d4-39c6-4772-9576-7aea39a89b42",
+              "name": "remoteJid",
+              "value": "={{ $json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "249dc942-ef6e-4c08-9505-de0544484b6e",
+              "name": "conversation",
+              "value": "={{ $json.body.data.message.conversation }}",
+              "type": "string"
+            },
+            {
+              "id": "123533f4-4711-4276-b3d7-eb11f4b5493d",
+              "name": "pushName",
+              "value": "={{ $json.body.data.pushName }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        -192
+      ],
+      "id": "82bc511a-a91e-4c83-a2f6-d624503368fe",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "App",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -192
+      ],
+      "id": "5e97226d-213e-4618-8439-1ef39036744f",
+      "name": "Webhook",
+      "webhookId": "2e0a6e59-af26-4d95-b572-cf3c5568b51d"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"(menu 1)Olá, {{ $('Edit Fields').item.json.pushName }}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n0️⃣ - Voltar\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1472,
+        96
+      ],
+      "id": "5393454b-b13c-4d68-b609-643fa2775dc8",
+      "name": "Menu principal",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "estado_anterior",
+        "key": "={{ $json.remoteJid }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        656,
+        -192
+      ],
+      "id": "3026d1f1-5dde-4997-b1fc-049aba0a97a1",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "A18qjIRpH8H3hiGJ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
+        "value": "menu_principal",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        96
+      ],
+      "id": "04ecfbea-e4df-4762-9c94-b06a709f7c09",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "A18qjIRpH8H3hiGJ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
+        "value": "Atualiza_Dados",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        -96
+      ],
+      "id": "c646e41d-e497-4514-81e0-447b3146ebb8",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "A18qjIRpH8H3hiGJ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
+        "value": "Boletos_vencidos",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        -288
+      ],
+      "id": "3c62188a-e178-447b-b5a1-dd22e95e9584",
+      "name": "Redis3",
+      "credentials": {
+        "redis": {
+          "id": "A18qjIRpH8H3hiGJ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
+        "value": "Faturas",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1696,
+        -480
+      ],
+      "id": "2126ecb1-70f5-4212-a7ef-a51eb9ca1818",
+      "name": "Redis4",
+      "credentials": {
+        "redis": {
+          "id": "A18qjIRpH8H3hiGJ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f60b288-0bb6-4b40-9f4d-e560c864fad0",
+              "name": "conversation",
+              "value": "={{ $('Edit Fields').item.json.conversation }}",
+              "type": "string"
+            },
+            {
+              "id": "af4dbab0-7ba2-4f88-959f-83505f293c4f",
+              "name": "estado_anterior",
+              "value": "={{ $json.estado_anterior }}",
+              "type": "string"
+            },
+            {
+              "id": "411b96b3-091c-434c-9e5e-877817aca640",
+              "name": "remoteJid",
+              "value": "={{ $('Edit Fields').item.json.remoteJid }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        -192
+      ],
+      "id": "98263482-e93f-404d-9380-0a41f470bc6e",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Edit Fields1').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1968,
+        -288
+      ],
+      "id": "61288f70-6da5-4089-bcf2-cd7239e2153e",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Redis').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1984,
+        96
+      ],
+      "id": "d9428749-d286-4781-8c65-60769e628519",
+      "name": "HTTP Request1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Edit Fields1').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1952,
+        -96
+      ],
+      "id": "b9d3d96a-55c4-47b6-a596-b6f8ee91260a",
+      "name": "HTTP Request5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Edit Fields1').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1968,
+        -464
+      ],
+      "id": "1fa65c64-c0c8-439c-a707-b394d0819053",
+      "name": "HTTP Request6",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"(sub-menu Boletos)\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1376,
+        320
+      ],
+      "id": "faabc67a-a393-413a-ae7e-382cee757be4",
+      "name": "Menu principal1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        -464
+      ],
+      "id": "26825090-14f4-4250-8709-060c68ee0ee8",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const msg = $json.conversation;\nconst estado = $json.estado_anterior || 'Menu_Principal';\nconst nome = $json.pushName || 'cliente';\n\n// Definimos os textos, próximos estados e a rota para o Switch\nconst menus = {\n    'Menu_Principal': {\n        '1': { \n            txt: `(menu 1) Olá, ${nome}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n0️⃣ - Voltar\\n\\nPor favor, digite apenas o número.`,\n            prox: 'Faturas',\n            rota: 'ir_faturas' // Saída padrão do Switch\n        },\n        '2': { \n            txt: `⚠️ *Bifinance - Boletos Vencidos*\\n${nome}, estamos localizando seus débitos pendentes...`,\n            prox: 'Boletos_vencidos',\n            rota: 'ir_vencidos' // Saída padrão do Switch\n        },\n        '3': {\n            txt: `👤 *Atualizar Dados*\\n${nome}, escolha o que deseja alterar...`,\n            prox: 'Atualiza_Dados',\n            rota: 'ir_dados' // Saída padrão do Switch\n        }\n    },\n    'Faturas': {\n        '1': { \n            txt: \"Gerando seu boleto... Aguarde.\", \n            prox: 'Faturas', \n            rota: 'gerar_boleto' // Essa cairia na Saída 2 do seu Switch!\n        },\n        '0': { \n            txt: \"Voltando ao Menu Principal... Como posso ajudar?\", \n            prox: 'Menu_Principal',\n            rota: 'voltar'\n        }\n    }\n};\n\n// Lógica de seleção\nconst selecao = (menus[estado] && menus[estado][msg]) \n    ? menus[estado][msg] \n    : { \n        txt: \"❌ Opção inválida. Digite apenas o número correspondente.\", \n        prox: estado,\n        rota: 'fallback' // Essa cai na Saída 1 do seu Switch!\n      };\n\nreturn {\n    ...$json,\n    mensagem_texto: selecao.txt,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota // O Switch lê exatamente este campo aqui\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        640
+      ],
+      "id": "872a4566-1286-4c2c-bc59-c5488dc72651",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"menu 3 em teste\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        864
+      ],
+      "id": "b2af8426-6971-4930-8989-e20af9848bbb",
+      "name": "HTTP Request7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"1 - lista de boletos\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        672
+      ],
+      "id": "dfcbcf1a-7ef6-40af-b451-fc829fe7448b",
+      "name": "HTTP Request8",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Digite o número da opção desejada:\\n\\n1️⃣ - Boletos a vencer\\n2️⃣ - boletos vencidos\\n0️⃣ - Voltar\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        480
+      ],
+      "id": "3071d014-f46e-44ba-8705-76eb7a995ef4",
+      "name": "HTTP Request9",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"(menu 1)Olá, {{ $('Edit Fields').item.json.pushName }}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n0️⃣ - Voltar\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        1056
+      ],
+      "id": "dabd2074-abdc-443c-95fc-085551ebd932",
+      "name": "Menu principal2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "x04fO2t1m5adliez",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "erro-id",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Erro / Opção Inválida"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "id": "acao-id",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "gerar_boleto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ações Especiais (Ex: PDF)"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": 0
+        }
+      },
+      "id": "f9c8a9e1-9d74-4926-940b-1a01bcfb73ba",
+      "name": "Roteador Central",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.1,
+      "position": [
+        416,
+        640
+      ]
+    }
+  ],
+  "connections": {
+    "HTTP Request4": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Redis4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Menu principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Menu principal1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Menu principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Menu principal": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Roteador Central",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
+  }
+}
