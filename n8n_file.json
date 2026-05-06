@@ -2,228 +2,6 @@
   "nodes": [
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"menu 3 em teste\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1472,
-        -96
-      ],
-      "id": "b9e81198-ca34-4b4e-85cd-c8b0260867b2",
-      "name": "HTTP Request4",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"1 - lista de boletos\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1472,
-        -288
-      ],
-      "id": "b288984e-ecd6-4218-807f-76e4b435837b",
-      "name": "HTTP Request3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Digite o número da opção desejada:\\n\\n1️⃣ - Boletos a vencer\\n2️⃣ - boletos vencidos\\n0️⃣ - Voltar\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1472,
-        -480
-      ],
-      "id": "2a63e02e-2b19-4cc7-baf7-757dc30704b9",
-      "name": "HTTP Request2",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "fa2c5480-bf48-457d-80e5-50628ad7fd78",
-                    "leftValue": "={{ ($json.conversation == \"1\" && ($json.estado_anterior == \"menu_principal\" || !$json.estado_anterior)).toString() }}",
-                    "rightValue": "true",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "faturas"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "11d0f764-d4ec-45ba-85de-4f9e0ffc50de",
-                    "leftValue": "={{ ($json.conversation == \"2\" && $json.estado_anterior == \"menu_principal\").toString() }}",
-                    "rightValue": "true",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "vencidos"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "aef0bdf0-3e10-4830-9faf-a4acb880b8d0",
-                    "leftValue": "={{ ($json.conversation == \"3\" && $json.estado_anterior == \"menu_principal\").toString() }}",
-                    "rightValue": "true",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "dados"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "2c8b50f5-563d-47a1-b971-810603badaad",
-                    "leftValue": "={{ ($json.conversation == \"0\" && ($json.estado_anterior == \"Faturas\" || $json.estado_anterior == \"Boletos_vencidos\" || $json.estado_anterior == \"Atualiza_Dados\")).toString() }}",
-                    "rightValue": "true",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "voltar"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "f18ec05e-3183-48fc-aa75-ae78cf3629eb",
-                    "leftValue": "={{ ($json.conversation == \"1\" && $json.estado_anterior == \"Boletos_vencidos\").toString() }}",
-                    "rightValue": "true",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "boletos_Lista"
-            }
-          ]
-        },
-        "options": {
-          "fallbackOutput": "extra"
-        }
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        1152,
-        -240
-      ],
-      "id": "61a2bc94-36c2-4de3-b04e-684211166116",
-      "name": "Switch"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -263,10 +41,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        224,
-        -192
+        -2672,
+        304
       ],
-      "id": "82bc511a-a91e-4c83-a2f6-d624503368fe",
+      "id": "3b1481a7-30e6-4412-9882-c6eb1928d3d5",
       "name": "Edit Fields"
     },
     {
@@ -278,12 +56,163 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        -192
+        -2912,
+        304
       ],
-      "id": "5e97226d-213e-4618-8439-1ef39036744f",
+      "id": "00e9e5df-a0bc-40a9-8e43-56bb163b556b",
       "name": "Webhook",
       "webhookId": "2e0a6e59-af26-4d95-b572-cf3c5568b51d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "12e5dc7b-21dc-41c9-bde4-e09add17fa3c",
+              "leftValue": "={{ $json.fromMe }}",
+              "rightValue": "556992742275@s.whatsapp.net",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "e5f3ee70-88a0-4a75-9ea4-359e9c583b4a",
+              "leftValue": "={{ $json.remoteJid }}",
+              "rightValue": "=556992510441@s.whatsapp.net",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2496,
+        304
+      ],
+      "id": "7222c801-b577-4be7-85b0-f5c03e8d1850",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Edit Fields').item.json.conversation }}",
+        "options": {
+          "systemMessage": "=# PERSONA\nVocê é o assistente inteligente da Alpha Software. Atue de forma humanizada, educada e direta, e principalmente textos curtos.\n\n# CONTEXTO DO CLIENTE\nNome: \nStatus: {{ $('Redis').item.json.dados_sessao.parseJson().autenticado ? 'Autenticado' : 'Visitante' }}\nEtapa: {{ $('Redis').item.json.dados_sessao.parseJson().estado_anterior }}\n\n# REGRAS DE NEGÓCIO\n1. TRATAMENTO DE DOCUMENTOS: Se o usuário enviar um CPF ou CNPJ (números longos), use IMEDIATAMENTE a ferramenta 'buscar_cliente'. Nunca repita o documento no chat.\n2. MENUS NUMÉRICOS: Se o usuário digitar \"1\", \"2\", \"3\" ou \"0\", execute a opção correspondente:\n   [1] Ver Faturas (ainda nao implementado - de uma mensagem para o usuario)\n   [2] Meu CCR (ainda nao implementado - de uma mensagem para o usuario)\n   [3] Meus Contratos (ainda nao implementado - de uma mensagem para o usuario)\n   [0] Sair\n3. DÚVIDAS: Se o usuário fizer uma pergunta geral, responda de forma humanizada e, ao final, ofereça o menu numérico acima.\n4. se o usaurio querer ver os dados dele use a ferramente buscar_cliente, peça o cpf/cnpj para ele novamente por segurança, ai asim busque os dados dele e mostre\n\n5.qualque mensagem que possa parecer com alguma das opções do menu tente chamar a opção responsaval\n\n6.se o usuario quizer sair e usar o muno ou mandar uma mensagem relacionada chame as tools de redis delete status e o delete historico \n# RESTRIÇÃO DE SAÍDA\nResponda apenas com o texto que será enviado ao WhatsApp, sem metadados ou explicações internas.",
+          "maxIterations": 4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        592,
+        192
+      ],
+      "id": "f8b3dd14-4649-4255-aaee-f9022df3a18b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "use essa ferramenta para buscar os dados do cliente",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/730ec099-9deb-47a8-a50d-976f29df751a/listContacts?pageNumber=1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "searchParam",
+              "value": "={{ $('Edit Fields').item.json.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        1088,
+        624
+      ],
+      "id": "d6172436-b5fb-4c7f-a594-a2c3305e795d",
+      "name": "buscar_cliente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "0BSHO15UgWj1dH8O",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "dados_sessao",
+        "key": "={{ \"status:\" + $json.remoteJid }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2272,
+        288
+      ],
+      "id": "8be763ed-a1ce-46ed-9726-caa10c8abde6",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bdf899b5-76d5-4dcf-a406-fe6612df7caf",
+              "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().autenticado }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -144,
+        320
+      ],
+      "id": "766c40b8-3971-43fb-b3f6-7f227d59a06b",
+      "name": "if_auth"
     },
     {
       "parameters": {
@@ -293,139 +222,78 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"(menu 1)Olá, {{ $('Edit Fields').item.json.pushName }}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n0️⃣ - Voltar\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"ola {{ $('Edit Fields').item.json.pushName }}, me encaminhe seu cnpj/cpf para poder continuar\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1472,
-        96
+        -176,
+        48
       ],
-      "id": "5393454b-b13c-4d68-b609-643fa2775dc8",
-      "name": "Menu principal",
+      "id": "1bed53f4-a9c0-47cd-b11a-8a4fbd2fbd7b",
+      "name": "confirma cnpnj/cpf",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
+          "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
         }
       }
     },
     {
       "parameters": {
-        "operation": "get",
-        "propertyName": "estado_anterior",
-        "key": "={{ $json.remoteJid }}",
-        "options": {
-          "dotNotation": true
-        }
+        "assignments": {
+          "assignments": [
+            {
+              "id": "937ba465-25bb-4929-b775-f1dfd76949e8",
+              "name": "message.conversation",
+              "value": "={{ $('Edit Fields').item.json.conversation.replace(/\\D/g, '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        656,
-        -192
+        -592,
+        592
       ],
-      "id": "3026d1f1-5dde-4997-b1fc-049aba0a97a1",
-      "name": "Redis",
-      "credentials": {
-        "redis": {
-          "id": "A18qjIRpH8H3hiGJ",
-          "name": "Redis account"
-        }
-      }
+      "id": "a3c00b91-f71d-416d-a09e-a1593c6316ef",
+      "name": "get_data"
     },
     {
       "parameters": {
-        "operation": "set",
-        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
-        "value": "menu_principal",
-        "expire": true,
-        "ttl": 1800
+        "url": "https://api.alphasoftware.com.br/v2/api/external/730ec099-9deb-47a8-a50d-976f29df751a/listContacts?pageNumber=1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "searchParam",
+              "value": "={{ $json.message.conversation }}"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
       "position": [
-        1696,
-        96
+        -432,
+        592
       ],
-      "id": "04ecfbea-e4df-4762-9c94-b06a709f7c09",
-      "name": "Redis1",
+      "id": "b6a60a3c-ca86-4bb8-bbbd-e9b521076d67",
+      "name": "auth",
       "credentials": {
-        "redis": {
-          "id": "A18qjIRpH8H3hiGJ",
-          "name": "Redis account"
+        "httpBearerAuth": {
+          "id": "0BSHO15UgWj1dH8O",
+          "name": "Bearer Auth account"
         }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
-        "value": "Atualiza_Dados",
-        "expire": true,
-        "ttl": 1800
       },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        1696,
-        -96
-      ],
-      "id": "c646e41d-e497-4514-81e0-447b3146ebb8",
-      "name": "Redis2",
-      "credentials": {
-        "redis": {
-          "id": "A18qjIRpH8H3hiGJ",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
-        "value": "Boletos_vencidos",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        1696,
-        -288
-      ],
-      "id": "3c62188a-e178-447b-b5a1-dd22e95e9584",
-      "name": "Redis3",
-      "credentials": {
-        "redis": {
-          "id": "A18qjIRpH8H3hiGJ",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{ $node[\"Edit Fields\"].json.remoteJid }}",
-        "value": "Faturas",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        1696,
-        -480
-      ],
-      "id": "2126ecb1-70f5-4212-a7ef-a51eb9ca1818",
-      "name": "Redis4",
-      "credentials": {
-        "redis": {
-          "id": "A18qjIRpH8H3hiGJ",
-          "name": "Redis account"
-        }
-      }
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -456,11 +324,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        880,
-        -192
+        -448,
+        336
       ],
-      "id": "98263482-e93f-404d-9380-0a41f470bc6e",
-      "name": "Edit Fields1"
+      "id": "b67fa40e-4256-4c21-ae90-87dcb664dfc8",
+      "name": "get_dados"
     },
     {
       "parameters": {
@@ -470,23 +338,48 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Edit Fields1').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($json.output) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1968,
-        -288
+        1088,
+        304
       ],
-      "id": "61288f70-6da5-4089-bcf2-cd7239e2153e",
-      "name": "HTTP Request",
+      "id": "2fe40c6a-a336-4c52-8f92-a40b99cb6f63",
+      "name": "confirma cnpnj/cpf1",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
+          "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3da3a001-f08d-4e76-86cd-a9cd30b83ab6",
+              "name": "dados_sessao",
+              "value": "={{ ($json.dados_sessao ?? \"{}\").parseJson() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2080,
+        288
+      ],
+      "id": "3c6a43eb-e1c0-451d-bf65-6761373e055b",
+      "name": "data_redis"
     },
     {
       "parameters": {
@@ -496,127 +389,251 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Redis').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"desculpe {{ $('Edit Fields').item.json.pushName }}, mas não encontramos seu cadastro, nos forneça outro\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1984,
-        96
+        96,
+        800
       ],
-      "id": "d9428749-d286-4781-8c65-60769e628519",
-      "name": "HTTP Request1",
+      "id": "f4d6fbfb-1d87-4af2-92b5-88032c7f01a5",
+      "name": "confirma dados",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
+          "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
         }
       }
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Edit Fields1').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
+              "leftValue": "={{ $json.count }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
       "position": [
-        1952,
-        -96
+        -192,
+        576
       ],
-      "id": "b9d3d96a-55c4-47b6-a596-b6f8ee91260a",
-      "name": "HTTP Request5",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
+      "id": "cec4f08a-5fed-465c-963d-b31aa994cdc3",
+      "name": "If1"
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields1').item.json.remoteJid }}\",\n  \"text\": \"{{ $('Edit Fields1').item.json.estado_anterior }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cad983d0-b6b0-4c8f-a3f4-9f143e27f4e2",
+              "leftValue": "={{ $json.dados_sessao }}",
+              "rightValue": "autenticado",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "ab688678-7ee9-4ba7-8b5f-45e244c23708",
+              "leftValue": "={{ $json.dados_sessao.parseJson().estado_anterior }}",
+              "rightValue": "AGUARDANDO_CPF",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
       "position": [
-        1968,
-        -464
+        -1456,
+        464
       ],
-      "id": "1fa65c64-c0c8-439c-a707-b394d0819053",
-      "name": "HTTP Request6",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
+      "id": "6c94c3c2-3455-4c95-b1c9-dda307074e3e",
+      "name": "é_cliente"
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"(sub-menu Boletos)\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "56529dba-601e-4b54-ab18-48333a39e077",
+              "leftValue": "={{ $json.dados_sessao.parseJson().cliente }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "99a555a8-08bf-41d4-8746-e00e61530f8c",
+              "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+              "rightValue": "1",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
       "position": [
-        1376,
-        320
+        -1184,
+        544
       ],
-      "id": "faabc67a-a393-413a-ae7e-382cee757be4",
-      "name": "Menu principal1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
+      "id": "8b7c0fed-0887-4da7-b2dc-9b3898f7efef",
+      "name": "cliente"
     },
     {
       "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+        "model": {
+          "__rl": true,
+          "value": "llama-3.3-70b-versatile",
+          "mode": "list",
+          "cachedResultName": "llama-3.3-70b-versatile"
+        },
+        "builtInTools": {},
+        "options": {}
       },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
       "position": [
-        2176,
-        -464
-      ],
-      "id": "26825090-14f4-4250-8709-060c68ee0ee8",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "jsCode": "const msg = $json.conversation;\nconst estado = $json.estado_anterior || 'Menu_Principal';\nconst nome = $json.pushName || 'cliente';\n\n// Definimos os textos, próximos estados e a rota para o Switch\nconst menus = {\n    'Menu_Principal': {\n        '1': { \n            txt: `(menu 1) Olá, ${nome}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n0️⃣ - Voltar\\n\\nPor favor, digite apenas o número.`,\n            prox: 'Faturas',\n            rota: 'ir_faturas' // Saída padrão do Switch\n        },\n        '2': { \n            txt: `⚠️ *Bifinance - Boletos Vencidos*\\n${nome}, estamos localizando seus débitos pendentes...`,\n            prox: 'Boletos_vencidos',\n            rota: 'ir_vencidos' // Saída padrão do Switch\n        },\n        '3': {\n            txt: `👤 *Atualizar Dados*\\n${nome}, escolha o que deseja alterar...`,\n            prox: 'Atualiza_Dados',\n            rota: 'ir_dados' // Saída padrão do Switch\n        }\n    },\n    'Faturas': {\n        '1': { \n            txt: \"Gerando seu boleto... Aguarde.\", \n            prox: 'Faturas', \n            rota: 'gerar_boleto' // Essa cairia na Saída 2 do seu Switch!\n        },\n        '0': { \n            txt: \"Voltando ao Menu Principal... Como posso ajudar?\", \n            prox: 'Menu_Principal',\n            rota: 'voltar'\n        }\n    }\n};\n\n// Lógica de seleção\nconst selecao = (menus[estado] && menus[estado][msg]) \n    ? menus[estado][msg] \n    : { \n        txt: \"❌ Opção inválida. Digite apenas o número correspondente.\", \n        prox: estado,\n        rota: 'fallback' // Essa cai na Saída 1 do seu Switch!\n      };\n\nreturn {\n    ...$json,\n    mensagem_texto: selecao.txt,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota // O Switch lê exatamente este campo aqui\n};"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        208,
+        480,
         640
       ],
-      "id": "872a4566-1286-4c2c-bc59-c5488dc72651",
-      "name": "Code in JavaScript1"
+      "id": "a344d65b-07c9-4ab8-a10c-d818549ec88d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "5Ry0SNqau8MTO5Yv",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2128,
+        720
+      ],
+      "id": "9e091866-d42d-4c1a-906b-24a23741c0a8",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1776,
+        704
+      ],
+      "id": "a13e46a9-3fca-4870-a486-17497a7e0285",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "deletar status do chat ",
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redisTool",
+      "typeVersion": 1,
+      "position": [
+        912,
+        640
+      ],
+      "id": "caad0ff1-1f4e-4662-9d31-5e4baf63caa9",
+      "name": "redis delete status",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "deleta o historio do chat",
+        "operation": "delete",
+        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redisTool",
+      "typeVersion": 1,
+      "position": [
+        736,
+        640
+      ],
+      "id": "03d38a2e-b2d1-482b-825f-9f1e56f0974d",
+      "name": "delete historioco",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
     },
     {
       "parameters": {
@@ -626,20 +643,20 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"menu 3 em teste\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola ${$('Edit Fields').item.json.pushName}, você ja é cliente?\\n \\n1 - sim\\n2 - não\\n\\ndigite apenas o numero`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1120,
-        864
+        -1552,
+        688
       ],
-      "id": "b2af8426-6971-4930-8989-e20af9848bbb",
-      "name": "HTTP Request7",
+      "id": "4e663d16-83e4-46b4-a70e-cf86a24df49c",
+      "name": "é cliente",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
+          "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
         }
       }
@@ -652,72 +669,20 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"1 - lista de boletos\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera trasnferido a um atendente\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1120,
-        672
+        -1056,
+        752
       ],
-      "id": "dfcbcf1a-7ef6-40af-b451-fc829fe7448b",
-      "name": "HTTP Request8",
+      "id": "12ccadc5-e193-4395-b579-e6e67e0e6182",
+      "name": "transferencia",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"Digite o número da opção desejada:\\n\\n1️⃣ - Boletos a vencer\\n2️⃣ - boletos vencidos\\n0️⃣ - Voltar\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1120,
-        480
-      ],
-      "id": "3071d014-f46e-44ba-8705-76eb7a995ef4",
-      "name": "HTTP Request9",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"(menu 1)Olá, {{ $('Edit Fields').item.json.pushName }}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n0️⃣ - Voltar\\n\\nPor favor, digite apenas o número.\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1120,
-        1056
-      ],
-      "id": "dabd2074-abdc-443c-95fc-085551ebd932",
-      "name": "Menu principal2",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "x04fO2t1m5adliez",
+          "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
         }
       }
@@ -732,23 +697,23 @@
                   "caseSensitive": true,
                   "leftValue": "",
                   "typeValidation": "strict",
-                  "version": 1
+                  "version": 3
                 },
                 "conditions": [
                   {
-                    "id": "erro-id",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "fallback",
+                    "id": "541cb187-62c0-4f6d-ae0b-367f2621a5d4",
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "sair",
                     "operator": {
                       "type": "string",
-                      "operation": "equals"
+                      "operation": "contains"
                     }
                   }
                 ],
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "Erro / Opção Inválida"
+              "outputKey": "logof"
             },
             {
               "conditions": {
@@ -756,127 +721,510 @@
                   "caseSensitive": true,
                   "leftValue": "",
                   "typeValidation": "strict",
-                  "version": 1
+                  "version": 3
                 },
                 "conditions": [
                   {
-                    "id": "acao-id",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "gerar_boleto",
+                    "id": "383fb634-43f7-4f53-a706-eace6cfb7c68",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "aceite",
                     "operator": {
                       "type": "string",
-                      "operation": "equals"
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "24925e92-c31c-4847-bdc7-40e07b0c2c1e",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "apresentacao",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
                     }
                   }
                 ],
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "Ações Especiais (Ex: PDF)"
+              "outputKey": "aceite"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().autenticado }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "ba05c81a-5090-4188-b440-fe769146d4d4"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "autenticado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8ea7857d-220f-4e7e-88d0-f02167089bf4",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "login",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "login"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d97afbda-d402-4cba-a344-f0c631c832f2",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "AGUARDANDO_CPF",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "aguardando_cpf"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "646a3091-8189-4715-8ce3-283a4fd8c232",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().autenticado }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "false",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente novo"
             }
           ]
         },
-        "options": {
-          "fallbackOutput": 0
-        }
+        "options": {}
       },
-      "id": "f9c8a9e1-9d74-4926-940b-1a01bcfb73ba",
-      "name": "Roteador Central",
       "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.1,
+      "typeVersion": 3.4,
       "position": [
-        416,
-        640
-      ]
+        -1808,
+        240
+      ],
+      "id": "8a7520b0-c09b-4f2e-bd4c-692251571091",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e0089a19-8b0c-4c3b-8173-e12b4cb4c443",
+                    "leftValue": "={{ $json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "login",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "login"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "AGUARDANDO_CPF",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "dfcbc9a8-a678-4eca-a92c-153d288d46d0"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "AUTH"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -736,
+        384
+      ],
+      "id": "146aa18e-98d5-4a2f-b09f-46b8e35d6266",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"AGUARDANDO_CPF\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        160,
+        16
+      ],
+      "id": "a3c17865-814f-46ac-98b7-3a041a2916a3",
+      "name": "SET AGUARDANDO_CPF",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" +  $('Edit Fields').item.json.remoteJid }}",
+        "value": "={{ JSON.stringify({ \"autenticado\": true, \"estado_anterior\": \"Menu_Principal\", \"nome\": $json.contacts[0].name }) }}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        32,
+        576
+      ],
+      "id": "8a35b8bc-2f40-4691-887f-accdda6a8e12",
+      "name": "SET AUTENTICADO",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"apresentacao\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1376,
+        688
+      ],
+      "id": "173d43b2-6a5f-43b3-b98d-dc552ca224ef",
+      "name": "SET CLIENTE",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola ${$('Edit Fields').item.json.pushName}, para continaur precisamos validar seus dados\\nDeseja continuar? \\n \\n1 - sim\\n2 - não\\n\\ndigite apenas o numero`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1360,
+        160
+      ],
+      "id": "4909478f-16ca-42a6-b1cf-2c92cb9648f1",
+      "name": "aceite",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "56529dba-601e-4b54-ab18-48333a39e077",
+              "leftValue": "={{ $json.dados_sessao.parseJson().cliente }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "99a555a8-08bf-41d4-8746-e00e61530f8c",
+              "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+              "rightValue": "1",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1408,
+        -32
+      ],
+      "id": "fcf4efb2-5a0e-4d71-a700-73da3ae5a06c",
+      "name": "cliente1"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"login\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1136,
+        -288
+      ],
+      "id": "8e605f72-a839-4cf4-aa6f-ce759181bbb6",
+      "name": "SET CLIENTE3",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": 'chat finalizado',\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1136,
+        -96
+      ],
+      "id": "331a6573-d427-4ef9-acf4-3e8818ee20df",
+      "name": "aceite1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        -80
+      ],
+      "id": "c298167e-5b43-437b-90d0-b5a17afb537d",
+      "name": "Redis3",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        -96
+      ],
+      "id": "675b4ba7-05e8-4ae0-b81e-f61dd5f61872",
+      "name": "Redis4",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"aceite\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        160
+      ],
+      "id": "2b18992a-2f50-44f4-a03b-da5a387105f9",
+      "name": "SET CLIENTE4",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"ola {{ $('Edit Fields').item.json.pushName }}, Bemvindo, logado\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        320,
+        304
+      ],
+      "id": "f40f6328-3a89-43db-b3d9-c411f3ed330a",
+      "name": "confirma cnpnj/cpf3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
     }
   ],
   "connections": {
-    "HTTP Request4": {
-      "main": [
-        [
-          {
-            "node": "Redis2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request3": {
-      "main": [
-        [
-          {
-            "node": "Redis3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request2": {
-      "main": [
-        [
-          {
-            "node": "Redis4",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "HTTP Request3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "HTTP Request4",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Menu principal",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Menu principal1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Menu principal",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [],
-        []
-      ]
-    },
     "Edit Fields": {
       "main": [
         [
           {
-            "node": "Redis",
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -894,7 +1242,222 @@
         ]
       ]
     },
-    "Menu principal": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "confirma cnpnj/cpf1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar_cliente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "data_redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_auth": {
+      "main": [
+        [
+          {
+            "node": "confirma cnpnj/cpf3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "confirma cnpnj/cpf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma cnpnj/cpf": {
+      "main": [
+        [
+          {
+            "node": "SET AGUARDANDO_CPF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_data": {
+      "main": [
+        [
+          {
+            "node": "auth",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "auth": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "confirma dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_dados": {
+      "main": [
+        [
+          {
+            "node": "if_auth",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma cnpnj/cpf1": {
+      "main": [
+        []
+      ]
+    },
+    "data_redis": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma dados": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "get_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "SET AUTENTICADO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "confirma dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é_cliente": {
+      "main": [
+        [
+          {
+            "node": "é cliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cliente": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "transferencia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        []
+      ]
+    },
+    "Redis2": {
       "main": [
         [
           {
@@ -905,44 +1468,166 @@
         ]
       ]
     },
-    "Redis": {
+    "redis delete status": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete historioco": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é cliente": {
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "SET CLIENTE",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Redis1": {
+    "Switch": {
       "main": [
         [
           {
-            "node": "HTTP Request1",
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "cliente1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "aceite",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "if_auth",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "é_cliente",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Redis2": {
+    "Switch1": {
       "main": [
         [
           {
-            "node": "HTTP Request5",
+            "node": "get_dados",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_data",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Redis3": {
+    "SET AUTENTICADO": {
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "confirma cnpnj/cpf3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aceite": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cliente1": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "aceite1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SET CLIENTE3": {
+      "main": [
+        [
+          {
+            "node": "get_dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aceite1": {
+      "main": [
+        [
+          {
+            "node": "Redis4",
             "type": "main",
             "index": 0
           }
@@ -953,40 +1638,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request6",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request6": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript1": {
-      "main": [
-        [
-          {
-            "node": "Roteador Central",
+            "node": "Redis3",
             "type": "main",
             "index": 0
           }
