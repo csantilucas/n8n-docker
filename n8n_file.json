@@ -41,10 +41,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2672,
-        304
+        -3408,
+        16
       ],
-      "id": "3b1481a7-30e6-4412-9882-c6eb1928d3d5",
+      "id": "b551dcd7-c0d5-4909-9527-407924609a25",
       "name": "Edit Fields"
     },
     {
@@ -56,10 +56,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -2912,
-        304
+        -3648,
+        16
       ],
-      "id": "00e9e5df-a0bc-40a9-8e43-56bb163b556b",
+      "id": "bd1582f2-9d37-4943-bcca-e50304ce0a95",
       "name": "Webhook",
       "webhookId": "2e0a6e59-af26-4d95-b572-cf3c5568b51d"
     },
@@ -100,61 +100,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2496,
-        304
+        -3232,
+        16
       ],
-      "id": "7222c801-b577-4be7-85b0-f5c03e8d1850",
+      "id": "a1a3b1c1-3900-48ed-ac04-4978d57c35c3",
       "name": "If"
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "={{ $('Edit Fields').item.json.conversation }}",
-        "options": {
-          "systemMessage": "=# PERSONA\nVocê é o assistente inteligente da Alpha Software. Atue de forma humanizada, educada e direta, e principalmente textos curtos.\n\n# CONTEXTO DO CLIENTE\nNome: \nStatus: {{ $('Redis').item.json.dados_sessao.parseJson().autenticado ? 'Autenticado' : 'Visitante' }}\nEtapa: {{ $('Redis').item.json.dados_sessao.parseJson().estado_anterior }}\n\n# REGRAS DE NEGÓCIO\n1. TRATAMENTO DE DOCUMENTOS: Se o usuário enviar um CPF ou CNPJ (números longos), use IMEDIATAMENTE a ferramenta 'buscar_cliente'. Nunca repita o documento no chat.\n2. MENUS NUMÉRICOS: Se o usuário digitar \"1\", \"2\", \"3\" ou \"0\", execute a opção correspondente:\n   [1] Ver Faturas (ainda nao implementado - de uma mensagem para o usuario)\n   [2] Meu CCR (ainda nao implementado - de uma mensagem para o usuario)\n   [3] Meus Contratos (ainda nao implementado - de uma mensagem para o usuario)\n   [0] Sair\n3. DÚVIDAS: Se o usuário fizer uma pergunta geral, responda de forma humanizada e, ao final, ofereça o menu numérico acima.\n4. se o usaurio querer ver os dados dele use a ferramente buscar_cliente, peça o cpf/cnpj para ele novamente por segurança, ai asim busque os dados dele e mostre\n\n5.qualque mensagem que possa parecer com alguma das opções do menu tente chamar a opção responsaval\n\n6.se o usuario quizer sair e usar o muno ou mandar uma mensagem relacionada chame as tools de redis delete status e o delete historico \n# RESTRIÇÃO DE SAÍDA\nResponda apenas com o texto que será enviado ao WhatsApp, sem metadados ou explicações internas.",
-          "maxIterations": 4
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3.1,
-      "position": [
-        592,
-        192
-      ],
-      "id": "f8b3dd14-4649-4255-aaee-f9022df3a18b",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "toolDescription": "use essa ferramenta para buscar os dados do cliente",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/730ec099-9deb-47a8-a50d-976f29df751a/listContacts?pageNumber=1",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "searchParam",
-              "value": "={{ $('Edit Fields').item.json.conversation }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.4,
-      "position": [
-        1088,
-        624
-      ],
-      "id": "d6172436-b5fb-4c7f-a594-a2c3305e795d",
-      "name": "buscar_cliente",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "0BSHO15UgWj1dH8O",
-          "name": "Bearer Auth account"
-        }
-      }
     },
     {
       "parameters": {
@@ -168,75 +118,15 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2272,
-        288
+        -3008,
+        0
       ],
-      "id": "8be763ed-a1ce-46ed-9726-caa10c8abde6",
+      "id": "8c0f60f2-05b6-457f-a979-dba1c2974450",
       "name": "Redis",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
           "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "bdf899b5-76d5-4dcf-a406-fe6612df7caf",
-              "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().autenticado }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -144,
-        320
-      ],
-      "id": "766c40b8-3971-43fb-b3f6-7f227d59a06b",
-      "name": "if_auth"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"ola {{ $('Edit Fields').item.json.pushName }}, me encaminhe seu cnpj/cpf para poder continuar\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -176,
-        48
-      ],
-      "id": "1bed53f4-a9c0-47cd-b11a-8a4fbd2fbd7b",
-      "name": "confirma cnpnj/cpf",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "58e8GuLLt0IjtaTT",
-          "name": "Header Auth account"
         }
       }
     },
@@ -257,10 +147,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -592,
-        592
+        -2432,
+        400
       ],
-      "id": "a3c00b91-f71d-416d-a09e-a1593c6316ef",
+      "id": "454e1d65-b548-48be-9219-56df83b9e794",
       "name": "get_data"
     },
     {
@@ -282,10 +172,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -432,
-        592
+        -2400,
+        832
       ],
-      "id": "b6a60a3c-ca86-4bb8-bbbd-e9b521076d67",
+      "id": "497f8dcc-7ef3-42b9-b9ab-2795350f7dda",
       "name": "auth",
       "credentials": {
         "httpBearerAuth": {
@@ -324,37 +214,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -448,
-        336
+        -976,
+        -32
       ],
-      "id": "b67fa40e-4256-4c21-ae90-87dcb664dfc8",
+      "id": "d9af736a-4a41-46b1-8b64-68edf771e42a",
       "name": "get_dados"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($json.output) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1088,
-        304
-      ],
-      "id": "2fe40c6a-a336-4c52-8f92-a40b99cb6f63",
-      "name": "confirma cnpnj/cpf1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "58e8GuLLt0IjtaTT",
-          "name": "Header Auth account"
-        }
-      }
     },
     {
       "parameters": {
@@ -375,10 +239,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2080,
-        288
+        -2816,
+        0
       ],
-      "id": "3c6a43eb-e1c0-451d-bf65-6761373e055b",
+      "id": "d9517e87-4fa4-4299-95fc-29e4d1310bdb",
       "name": "data_redis"
     },
     {
@@ -395,10 +259,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        96,
-        800
+        -2384,
+        1088
       ],
-      "id": "f4d6fbfb-1d87-4af2-92b5-88032c7f01a5",
+      "id": "853df5a0-4832-4f25-93c9-dad4c143fd3c",
       "name": "confirma dados",
       "credentials": {
         "httpHeaderAuth": {
@@ -434,122 +298,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -192,
-        576
+        -2208,
+        816
       ],
-      "id": "cec4f08a-5fed-465c-963d-b31aa994cdc3",
+      "id": "0ced2436-59ac-4761-b9bc-386ac4883a1f",
       "name": "If1"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "cad983d0-b6b0-4c8f-a3f4-9f143e27f4e2",
-              "leftValue": "={{ $json.dados_sessao }}",
-              "rightValue": "autenticado",
-              "operator": {
-                "type": "string",
-                "operation": "notContains"
-              }
-            },
-            {
-              "id": "ab688678-7ee9-4ba7-8b5f-45e244c23708",
-              "leftValue": "={{ $json.dados_sessao.parseJson().estado_anterior }}",
-              "rightValue": "AGUARDANDO_CPF",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -1456,
-        464
-      ],
-      "id": "6c94c3c2-3455-4c95-b1c9-dda307074e3e",
-      "name": "é_cliente"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "56529dba-601e-4b54-ab18-48333a39e077",
-              "leftValue": "={{ $json.dados_sessao.parseJson().cliente }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            },
-            {
-              "id": "99a555a8-08bf-41d4-8746-e00e61530f8c",
-              "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
-              "rightValue": "1",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -1184,
-        544
-      ],
-      "id": "8b7c0fed-0887-4da7-b2dc-9b3898f7efef",
-      "name": "cliente"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "llama-3.3-70b-versatile",
-          "mode": "list",
-          "cachedResultName": "llama-3.3-70b-versatile"
-        },
-        "builtInTools": {},
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        480,
-        640
-      ],
-      "id": "a344d65b-07c9-4ab8-a10c-d818549ec88d",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "5Ry0SNqau8MTO5Yv",
-          "name": "OpenAI account"
-        }
-      }
     },
     {
       "parameters": {
@@ -559,10 +312,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2128,
-        720
+        -2624,
+        -688
       ],
-      "id": "9e091866-d42d-4c1a-906b-24a23741c0a8",
+      "id": "38d79e25-353d-4ee6-b4de-95ce5849f841",
       "name": "Redis1",
       "credentials": {
         "redis": {
@@ -579,10 +332,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1776,
-        704
+        -2608,
+        -496
       ],
-      "id": "a13e46a9-3fca-4870-a486-17497a7e0285",
+      "id": "5982ac6d-32af-4027-9c05-fa56d1b4441a",
       "name": "Redis2",
       "credentials": {
         "redis": {
@@ -593,92 +346,22 @@
     },
     {
       "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "deletar status do chat ",
-        "operation": "delete",
-        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
-      },
-      "type": "n8n-nodes-base.redisTool",
-      "typeVersion": 1,
-      "position": [
-        912,
-        640
-      ],
-      "id": "caad0ff1-1f4e-4662-9d31-5e4baf63caa9",
-      "name": "redis delete status",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "deleta o historio do chat",
-        "operation": "delete",
-        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
-      },
-      "type": "n8n-nodes-base.redisTool",
-      "typeVersion": 1,
-      "position": [
-        736,
-        640
-      ],
-      "id": "03d38a2e-b2d1-482b-825f-9f1e56f0974d",
-      "name": "delete historioco",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "http://evolution_api:8080/message/sendText/App",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola ${$('Edit Fields').item.json.pushName}, você ja é cliente?\\n \\n1 - sim\\n2 - não\\n\\ndigite apenas o numero`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\":`Olá👋\n\nPercebemos que você ainda não é cliente\nda Preserva.\n\nPara direcionarmos seu atendimento ao\nsetor comercial, por favor informe os \ndados abaixo:\n\n📄 CPF/CNPJ\n👤 Nome completo ou Razão Social\n📍 Cidade\n\nAssim que recebermos as informações, \num de nossos atendentes continuará\nseu atendimento. 😊\n`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1552,
-        688
+        -1696,
+        -720
       ],
-      "id": "4e663d16-83e4-46b4-a70e-cf86a24df49c",
-      "name": "é cliente",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "58e8GuLLt0IjtaTT",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera trasnferido a um atendente\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -1056,
-        752
-      ],
-      "id": "12ccadc5-e193-4395-b579-e6e67e0e6182",
+      "id": "e5ac827f-049b-4bbb-bd06-01a6bef25b1d",
       "name": "transferencia",
       "credentials": {
         "httpHeaderAuth": {
@@ -725,9 +408,9 @@
                 },
                 "conditions": [
                   {
-                    "id": "383fb634-43f7-4f53-a706-eace6cfb7c68",
-                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
-                    "rightValue": "aceite",
+                    "id": "539a0456-d8f5-4079-97be-a6bd723d5e9c",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao}}",
+                    "rightValue": "{}",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -736,7 +419,9 @@
                   }
                 ],
                 "combinator": "and"
-              }
+              },
+              "renameOutput": true,
+              "outputKey": "primeiro contato"
             },
             {
               "conditions": {
@@ -748,9 +433,33 @@
                 },
                 "conditions": [
                   {
-                    "id": "24925e92-c31c-4847-bdc7-40e07b0c2c1e",
+                    "id": "646a3091-8189-4715-8ce3-283a4fd8c232",
                     "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
-                    "rightValue": "apresentacao",
+                    "rightValue": "cliente_novo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente novo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "383fb634-43f7-4f53-a706-eace6cfb7c68",
+                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().estado_anterior }}",
+                    "rightValue": "aceite",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -837,31 +546,6 @@
               },
               "renameOutput": true,
               "outputKey": "aguardando_cpf"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "646a3091-8189-4715-8ce3-283a4fd8c232",
-                    "leftValue": "={{ $('data_redis').item.json.dados_sessao.parseJson().autenticado }}",
-                    "rightValue": "",
-                    "operator": {
-                      "type": "boolean",
-                      "operation": "false",
-                      "singleValue": true
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "cliente novo"
             }
           ]
         },
@@ -870,10 +554,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1808,
-        240
+        -2656,
+        -128
       ],
-      "id": "8a7520b0-c09b-4f2e-bd4c-692251571091",
+      "id": "ae9390c5-b08f-473a-9797-14defcda46cc",
       "name": "Switch"
     },
     {
@@ -931,15 +615,17 @@
             }
           ]
         },
-        "options": {}
+        "options": {
+          "fallbackOutput": "extra"
+        }
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -736,
-        384
+        -1632,
+        272
       ],
-      "id": "146aa18e-98d5-4a2f-b09f-46b8e35d6266",
+      "id": "50e7593b-0cc3-4e6d-b4c8-5c30dd3e178d",
       "name": "Switch1"
     },
     {
@@ -953,10 +639,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        160,
-        16
+        -576,
+        608
       ],
-      "id": "a3c17865-814f-46ac-98b7-3a041a2916a3",
+      "id": "4745bf56-e5a9-4646-bc3c-0a2cf53d87b6",
       "name": "SET AGUARDANDO_CPF",
       "credentials": {
         "redis": {
@@ -976,10 +662,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        32,
-        576
+        -1872,
+        832
       ],
-      "id": "8a35b8bc-2f40-4691-887f-accdda6a8e12",
+      "id": "76879340-dc66-442a-a8eb-507cc300946e",
       "name": "SET AUTENTICADO",
       "credentials": {
         "redis": {
@@ -992,99 +678,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"apresentacao\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -1376,
-        688
-      ],
-      "id": "173d43b2-6a5f-43b3-b98d-dc552ca224ef",
-      "name": "SET CLIENTE",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola ${$('Edit Fields').item.json.pushName}, para continaur precisamos validar seus dados\\nDeseja continuar? \\n \\n1 - sim\\n2 - não\\n\\ndigite apenas o numero`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -1360,
-        160
-      ],
-      "id": "4909478f-16ca-42a6-b1cf-2c92cb9648f1",
-      "name": "aceite",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "58e8GuLLt0IjtaTT",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "56529dba-601e-4b54-ab18-48333a39e077",
-              "leftValue": "={{ $json.dados_sessao.parseJson().cliente }}",
-              "rightValue": "",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            },
-            {
-              "id": "99a555a8-08bf-41d4-8746-e00e61530f8c",
-              "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
-              "rightValue": "1",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -1408,
-        -32
-      ],
-      "id": "fcf4efb2-5a0e-4d71-a700-73da3ae5a06c",
-      "name": "cliente1"
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"login\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "value": "={\"autenticado\": false, \"estado_anterior\":\"AGUARDANDO_CPF\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
         "expire": true,
         "ttl": 1800
       },
@@ -1092,9 +686,9 @@
       "typeVersion": 1,
       "position": [
         -1136,
-        -288
+        -240
       ],
-      "id": "8e605f72-a839-4cf4-aa6f-ce759181bbb6",
+      "id": "90e35b90-ab87-462a-87a8-efc77289dc04",
       "name": "SET CLIENTE3",
       "credentials": {
         "redis": {
@@ -1117,78 +711,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1136,
-        -96
+        -768,
+        -704
       ],
-      "id": "331a6573-d427-4ef9-acf4-3e8818ee20df",
+      "id": "1cbd4341-126d-43fd-9cdb-c9c42e5545a4",
       "name": "aceite1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "delete",
-        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -736,
-        -80
-      ],
-      "id": "c298167e-5b43-437b-90d0-b5a17afb537d",
-      "name": "Redis3",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "delete",
-        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -960,
-        -96
-      ],
-      "id": "675b4ba7-05e8-4ae0-b81e-f61dd5f61872",
-      "name": "Redis4",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"aceite\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -1152,
-        160
-      ],
-      "id": "2b18992a-2f50-44f4-a03b-da5a387105f9",
-      "name": "SET CLIENTE4",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
         }
       }
     },
@@ -1206,15 +737,545 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        320,
-        304
+        -656,
+        -48
       ],
-      "id": "f40f6328-3a89-43db-b3d9-c411f3ed330a",
+      "id": "10c221a2-8a5e-4b40-be0e-4f7c0bd2cf2d",
       "name": "confirma cnpnj/cpf3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Edit Fields').item.json.conversation }}",
+        "options": {
+          "systemMessage": "=# PERSONA\nVocê é o assistente inteligente da Alpha Software. Atue de forma humanizada, educada e direta, e principalmente textos curtos.\n\n# CONTEXTO DO CLIENTE\nNome: \nStatus: {{ $('Redis').item.json.dados_sessao.parseJson().autenticado ? 'Autenticado' : 'Visitante' }}\nEtapa: {{ $('Redis').item.json.dados_sessao.parseJson().estado_anterior }}\n\n# REGRAS DE NEGÓCIO\n1. TRATAMENTO DE DOCUMENTOS: Se o usuário enviar um CPF ou CNPJ (números longos), use IMEDIATAMENTE a ferramenta 'buscar_cliente'. Nunca repita o documento no chat.\n2. MENUS NUMÉRICOS: Se o usuário digitar \"1\", \"2\", \"3\" ou \"0\", execute a opção correspondente:\n   [1] Ver Faturas (ainda nao implementado - de uma mensagem para o usuario)\n   [2] Meu CCR (ainda nao implementado - de uma mensagem para o usuario)\n   [3] Meus Contratos (ainda nao implementado - de uma mensagem para o usuario)\n   [0] Sair\n3. DÚVIDAS: Se o usuário fizer uma pergunta geral, responda de forma humanizada e, ao final, ofereça o menu numérico acima.\n4. se o usaurio querer ver os dados dele use a ferramente buscar_cliente, peça o cpf/cnpj para ele novamente por segurança, ai asim busque os dados dele e mostre\n\n5.qualque mensagem que possa parecer com alguma das opções do menu tente chamar a opção responsaval\n\n6.se o usuario quizer sair e usar o muno ou mandar uma mensagem relacionada chame as tools de redis delete status e o delete historico \n# RESTRIÇÃO DE SAÍDA\nResponda apenas com o texto que será enviado ao WhatsApp, sem metadados ou explicações internas.",
+          "maxIterations": 4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -144,
+        -96
+      ],
+      "id": "3c9bb913-b70e-4cb8-8d28-a70fd18577e2",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "toolDescription": "use essa ferramenta para buscar os dados do cliente",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/730ec099-9deb-47a8-a50d-976f29df751a/listContacts?pageNumber=1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "searchParam",
+              "value": "={{ $('Edit Fields').item.json.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.4,
+      "position": [
+        352,
+        336
+      ],
+      "id": "a4c1e5ac-8378-4437-accb-a34889461443",
+      "name": "buscar_cliente1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "0BSHO15UgWj1dH8O",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($json.output) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        352,
+        16
+      ],
+      "id": "5295e03f-c35e-43b0-badb-acb662dde4cb",
+      "name": "confirma cnpnj/cpf2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "llama-3.3-70b-versatile",
+          "mode": "list",
+          "cachedResultName": "llama-3.3-70b-versatile"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -256,
+        352
+      ],
+      "id": "138f6c57-60ef-47b4-8378-443a8757d0d1",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "5Ry0SNqau8MTO5Yv",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "deletar status do chat ",
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redisTool",
+      "typeVersion": 1,
+      "position": [
+        176,
+        352
+      ],
+      "id": "bfab5566-77d0-4e40-9243-54acd7c2ef24",
+      "name": "redis delete status1",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "deleta o historio do chat",
+        "operation": "delete",
+        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redisTool",
+      "typeVersion": 1,
+      "position": [
+        0,
+        352
+      ],
+      "id": "cd981555-eb23-4079-8044-0fd25f37a4ad",
+      "name": "delete historioco1",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola ${$('Edit Fields').item.json.pushName}, seja bem-vindo(a)! 👋\\nSou o assistente virtual da Preserva.`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2256,
+        -464
+      ],
+      "id": "566c3898-6f37-46d7-811b-592daa539fbc",
+      "name": "é cliente1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"cliente_novo\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2256,
+        -976
+      ],
+      "id": "e73fb28b-a453-41fc-afe9-05ab24aa21ce",
+      "name": "SET CLIENTE1",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ed6d20d5-cd71-4ada-8139-9daac5f1f77b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "061cb7a7-fcf9-4d3d-bd3d-b43493383e9b",
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "nao cliente"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1920,
+        -416
+      ],
+      "id": "5b2d3953-9260-4988-a332-d703f0899b4c",
+      "name": "Switch2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `${$('Edit Fields').item.json.pushName}, Para continuar, precisamos validar seus dados.\nDeseja continuar?\n\n  1️⃣ - sim\n  2️⃣ - não\n\nDigite apena o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1920,
+        -752
+      ],
+      "id": "c1e0878c-d80f-4b46-bc7d-ee503effe646",
+      "name": "aceite2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"aceite\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1920,
+        -928
+      ],
+      "id": "021d0e5c-7326-49e4-a955-1dc2c5420227",
+      "name": "SET CLIENTE",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "0a384f85-9869-4b1b-875a-610c5f658a73"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "sim"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "06c1d80d-3786-4261-9330-2249441947ef",
+                    "leftValue": "={{ $('If').item.json.conversation }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "nao"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "allMatchingOutputs": false
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1568,
+        -224
+      ],
+      "id": "a7ccd1c4-d8ba-4c11-ab3e-d42a44cdef3f",
+      "name": "Switch3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e0aec0a0-f488-4740-b97f-baa2c481e8fa",
+              "name": "texto_erro",
+              "value": "={{    (() => {     const estado = $json.dados_sessao?.parseJson()?.estado_anterior;          if (estado === 'aceite') {       return 'Ops! 😕 Não entendi. Por favor, responda apenas 1 para SIM ou 2 para NÃO.';     }          if (estado === 'AGUARDANDO_CPF') {       return 'Formato inválido. Por favor, me envie apenas os números do seu CPF ou CNPJ.';     }          if (estado === 'login') {       return 'Para iniciar o login, preciso que você confirme se já é nosso cliente.';     }      return 'Desculpe, não entendi essa opção. Escolha uma das opções do menu ou digite *Sair*.';   })() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2016,
+        48
+      ],
+      "id": "b143126a-a67c-42cf-a541-a88641b6460a",
+      "name": "Preparar Fallback"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"{{ $json.texto_erro }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1824,
+        48
+      ],
+      "id": "7e1b49ef-0606-4392-94e5-3797c4acba9f",
+      "name": "invalido",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"ola {{ $('Edit Fields').item.json.pushName }}, me encaminhe seu cnpj/cpf para poder continuar\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -896,
+        624
+      ],
+      "id": "16a059c0-1f88-4973-aa47-83152cc35836",
+      "name": "confirma cnpnj/cpf",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `${$('Edit Fields').item.json.pushName}, Escolha uma das opções abaixo`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2256,
+        -656
+      ],
+      "id": "e0515ddb-1e57-471a-9cd6-40700ac5ff9d",
+      "name": "é cliente",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `Digite apena o numero: \\n1️⃣ - sim\\n2️⃣ - não`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2256,
+        -816
+      ],
+      "id": "c263a06f-f5fc-4143-aa56-5feeb9be8e85",
+      "name": "é cliente2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"aceite\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, cliente:false\"}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -896,
+        -928
+      ],
+      "id": "b0d33940-d428-427e-9702-962232011278",
+      "name": "SET CLIENTE2",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
         }
       }
     }
@@ -1253,62 +1314,11 @@
         ]
       ]
     },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "confirma cnpnj/cpf1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "buscar_cliente": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Redis": {
       "main": [
         [
           {
             "node": "data_redis",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "if_auth": {
-      "main": [
-        [
-          {
-            "node": "confirma cnpnj/cpf3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "confirma cnpnj/cpf",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "confirma cnpnj/cpf": {
-      "main": [
-        [
-          {
-            "node": "SET AGUARDANDO_CPF",
             "type": "main",
             "index": 0
           }
@@ -1348,16 +1358,11 @@
       "main": [
         [
           {
-            "node": "if_auth",
+            "node": "confirma cnpnj/cpf3",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "confirma cnpnj/cpf1": {
-      "main": [
-        []
       ]
     },
     "data_redis": {
@@ -1405,96 +1410,11 @@
         ]
       ]
     },
-    "é_cliente": {
-      "main": [
-        [
-          {
-            "node": "é cliente",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "cliente",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "cliente": {
-      "main": [
-        [
-          {
-            "node": "Switch1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "transferencia",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Redis1": {
-      "main": [
-        []
-      ]
-    },
     "Redis2": {
       "main": [
         [
           {
             "node": "Redis1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "redis delete status": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "delete historioco": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "é cliente": {
-      "main": [
-        [
-          {
-            "node": "SET CLIENTE",
             "type": "main",
             "index": 0
           }
@@ -1512,21 +1432,28 @@
         ],
         [
           {
-            "node": "cliente1",
+            "node": "é cliente1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "aceite",
+            "node": "Switch2",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "if_auth",
+            "node": "Switch3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_dados",
             "type": "main",
             "index": 0
           }
@@ -1541,13 +1468,6 @@
         [
           {
             "node": "get_data",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "é_cliente",
             "type": "main",
             "index": 0
           }
@@ -1569,6 +1489,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Preparar Fallback",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -1576,25 +1503,132 @@
       "main": [
         [
           {
-            "node": "confirma cnpnj/cpf3",
+            "node": "get_dados",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "aceite": {
+    "SET CLIENTE3": {
       "main": [
         [
           {
-            "node": "SET CLIENTE4",
+            "node": "Switch1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "cliente1": {
+    "aceite1": {
+      "main": [
+        []
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "confirma cnpnj/cpf2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar_cliente1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "redis delete status1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete historioco1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é cliente1": {
+      "main": [
+        [
+          {
+            "node": "é cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "aceite2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "transferencia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Fallback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aceite2": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch3": {
       "main": [
         [
           {
@@ -1609,36 +1643,54 @@
             "type": "main",
             "index": 0
           }
-        ]
-      ]
-    },
-    "SET CLIENTE3": {
-      "main": [
+        ],
         [
           {
-            "node": "get_dados",
+            "node": "Preparar Fallback",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "aceite1": {
+    "Preparar Fallback": {
       "main": [
         [
           {
-            "node": "Redis4",
+            "node": "invalido",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Redis4": {
+    "confirma cnpnj/cpf": {
       "main": [
         [
           {
-            "node": "Redis3",
+            "node": "SET AGUARDANDO_CPF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é cliente": {
+      "main": [
+        [
+          {
+            "node": "é cliente2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é cliente2": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE1",
             "type": "main",
             "index": 0
           }
