@@ -14,7 +14,7 @@
             {
               "id": "8288279c-5c3c-40b6-b547-f59da0831121",
               "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
-              "rightValue": "={{ $json.cliente.slice(0,4) }}",
+              "rightValue": "={{ $json.cliente.cpf_responsavel.slice(0,4)}}",
               "operator": {
                 "type": "string",
                 "operation": "equals"
@@ -46,7 +46,7 @@
           "conditions": [
             {
               "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
-              "leftValue": "={{ $json.count }}",
+              "leftValue": "={{ $('auth').item.json.count }}",
               "rightValue": "0",
               "operator": {
                 "type": "string",
@@ -81,8 +81,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2080,
-        816
+        -2144,
+        1088
       ],
       "id": "853df5a0-4832-4f25-93c9-dad4c143fd3c",
       "name": "login invalido",
@@ -185,8 +185,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1872,
-        96
+        -2000,
+        112
       ],
       "id": "7e1b49ef-0606-4392-94e5-3797c4acba9f",
       "name": "invalido",
@@ -204,7 +204,7 @@
             {
               "id": "e0aec0a0-f488-4740-b97f-baa2c481e8fa",
               "name": "texto_erro",
-              "value": "={{\n  (() => {\n    // Tenta pegar o estado; se der erro no parse ou não existir, assume 'inicio'\n    let estado = 'inicio';\n    try {\n      const sessao = $json.dados_sessao?.parseJson();\n      estado = sessao?.estado_anterior || 'inicio';\n    } catch (e) {\n      estado = 'inicio';\n    }\n\n    // Mapeamento de mensagens por estado\n    if (estado === 'cliente_novo') {\n      return 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n    }\n\n    if (estado === 'autorizado') {\n      return 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n    }\n\n    if (estado === 'AGUARDANDO_CPF') {\n      return 'Desculpe, o CPF ou CNPJ informado parece inválido. Por favor, envie apenas os *números* do seu cadastro.';\n    }\n\n    if (estado === 'AGUARDANDO_CONFIRMAR') {\n      return 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n    }\n\n    // Mensagem padrão caso caia em um estado desconhecido ou no menu inicial\n    return 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n  })()\n}}",
+              "value": "={{\n  (() => {\n    // Tenta pegar o estado; se der erro no parse ou não existir, assume 'inicio'\n    let estado = 'inicio';\n    try {\n      const sessao = $json.dados_sessao?.parseJson();\n      estado = sessao?.estado_anterior || 'inicio';\n    } catch (e) {\n      estado = 'inicio';\n    }\n\n    // Mapeamento de mensagens por estado\nif($('Webhook').item.json.body.data.messageType != \"textMessage\"){ \nreturn \"Opa, não consigo indentificar mensagens essa mensagem, somente texto\"\n}\n\n    if (estado === 'cliente_novo') {\n      return 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n    }\n\n    if (estado === 'autorizado') {\n      return 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n    }\n\n    if (estado === 'AGUARDANDO_CPF') {\n      return 'Desculpe, o CPF ou CNPJ informado parece inválido. Por favor, envie apenas os *números* do seu cadastro.';\n    }\n\n    if (estado === 'AGUARDANDO_CONFIRMAR') {\n      return 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n    }\n\n    // Mensagem padrão caso caia em um estado desconhecido ou no menu inicial\n    return 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n  })()\n}}",
               "type": "string"
             }
           ]
@@ -214,8 +214,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1984,
-        96
+        -2144,
+        112
       ],
       "id": "b143126a-a67c-42cf-a541-a88641b6460a",
       "name": "Preparar Fallback"
@@ -282,8 +282,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1440,
-        -64
+        -1568,
+        48
       ],
       "id": "a7ccd1c4-d8ba-4c11-ab3e-d42a44cdef3f",
       "name": "Switch3"
@@ -292,7 +292,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"autorizado\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, \"cliente\":\"\"}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
@@ -319,7 +319,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `🆗 ${$('Edit Fields').item.json.pushName}, Para continuar, precisamos validar seus dados.\nDeseja continuar?\n\n  1️⃣ - sim\n  2️⃣ - não\n\nDigite apena o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `${$('Edit Fields').item.json.pushName}, Para continuar, precisamos validar seus dados.\nDeseja continuar?\n\n  1️⃣ - sim\n  2️⃣ - não\n\nDigite apena o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -407,29 +407,6 @@
     },
     {
       "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"cliente_novo\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, \"cliente\":\"\"}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -2256,
-        -976
-      ],
-      "id": "e73fb28b-a453-41fc-afe9-05ab24aa21ce",
-      "name": "SET CLIENTE1",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "http://evolution_api:8080/message/sendText/App",
         "authentication": "genericCredentialType",
@@ -464,8 +441,8 @@
       "type": "n8n-nodes-base.redisTool",
       "typeVersion": 1,
       "position": [
-        768,
-        -1232
+        2560,
+        -1472
       ],
       "id": "cd981555-eb23-4079-8044-0fd25f37a4ad",
       "name": "delete historioco1",
@@ -486,8 +463,8 @@
       "type": "n8n-nodes-base.redisTool",
       "typeVersion": 1,
       "position": [
-        944,
-        -1232
+        2736,
+        -1472
       ],
       "id": "bfab5566-77d0-4e40-9243-54acd7c2ef24",
       "name": "redis delete status1",
@@ -512,8 +489,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        512,
-        -1232
+        2304,
+        -1472
       ],
       "id": "138f6c57-60ef-47b4-8378-443a8757d0d1",
       "name": "OpenAI Chat Model1",
@@ -538,8 +515,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1120,
-        -1568
+        2912,
+        -1808
       ],
       "id": "5295e03f-c35e-43b0-badb-acb662dde4cb",
       "name": "confirma cnpnj/cpf2",
@@ -570,8 +547,8 @@
       "type": "n8n-nodes-base.httpRequestTool",
       "typeVersion": 4.4,
       "position": [
-        1120,
-        -1248
+        2912,
+        -1488
       ],
       "id": "a4c1e5ac-8378-4437-accb-a34889461443",
       "name": "buscar_cliente1",
@@ -594,8 +571,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        624,
-        -1680
+        2416,
+        -1920
       ],
       "id": "3c9bb913-b70e-4cb8-8d28-a70fd18577e2",
       "name": "AI Agent1"
@@ -608,14 +585,14 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"Escolha uma das opções abaixo:\\n\\n1️⃣ - 📑 Minhas faturas\\n2️⃣ - 📋 Meus CCR\\n3️⃣ - 🚛 MTR\\n4️⃣ - 📄 Meus contratos\\n5️⃣ - Falar com atendente\\n\\n0️⃣ - 🔙 Voltar\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"Escolha uma das opções abaixo:\\n\\n1️⃣ - Minhas faturas\\n2️⃣ - Meus CCR\\n3️⃣ - MTR\\n4️⃣ - Meus contratos\\n5️⃣ - Falar com atendente\\n\\n0️⃣ - Voltar \\n\\n ou digite sair para fechar a sessão\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -416,
-        128
+        448,
+        -448
       ],
       "id": "10c221a2-8a5e-4b40-be0e-4f7c0bd2cf2d",
       "name": "confirma cnpnj/cpf3",
@@ -630,7 +607,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\":\"AGUARDANDO_CPF\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}, \"cliente\":\"\"}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
@@ -664,7 +641,7 @@
                 "conditions": [
                   {
                     "id": "e0089a19-8b0c-4c3b-8173-e12b4cb4c443",
-                    "leftValue": "={{ $('data_redis').item.json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "login",
                     "operator": {
                       "type": "string",
@@ -688,7 +665,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('data_redis').item.json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "AGUARDANDO_CPF",
                     "operator": {
                       "type": "string",
@@ -713,7 +690,7 @@
                 "conditions": [
                   {
                     "id": "9dbb5e66-bcde-498d-9624-b42931dcfdc3",
-                    "leftValue": "={{ $('data_redis').item.json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "AGUARDANDO_CONFIRMAR",
                     "operator": {
                       "type": "string",
@@ -781,7 +758,7 @@
                 "conditions": [
                   {
                     "id": "646a3091-8189-4715-8ce3-283a4fd8c232",
-                    "leftValue": "={{ $json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "cliente_novo",
                     "operator": {
                       "type": "string",
@@ -805,7 +782,7 @@
                 "conditions": [
                   {
                     "id": "383fb634-43f7-4f53-a706-eace6cfb7c68",
-                    "leftValue": "={{ $json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "autorizado",
                     "operator": {
                       "type": "string",
@@ -855,7 +832,7 @@
                 "conditions": [
                   {
                     "id": "716539f0-8791-4179-985d-f310eaaf084f",
-                    "leftValue": "={{ $json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "autenticado_autorizado",
                     "operator": {
                       "type": "string",
@@ -879,7 +856,7 @@
                 "conditions": [
                   {
                     "id": "d97afbda-d402-4cba-a344-f0c631c832f2",
-                    "leftValue": "={{ $json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "AGUARDANDO_CPF",
                     "operator": {
                       "type": "string",
@@ -904,7 +881,7 @@
                 "conditions": [
                   {
                     "id": "8ea7857d-220f-4e7e-88d0-f02167089bf4",
-                    "leftValue": "={{ $json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "login",
                     "operator": {
                       "type": "string",
@@ -929,7 +906,7 @@
                 "conditions": [
                   {
                     "id": "a41f6871-d41d-4054-a3e2-2629194b6d43",
-                    "leftValue": "={{ $json.estado_anterior }}",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
                     "rightValue": "AGUARDANDO_CONFIRMAR",
                     "operator": {
                       "type": "string",
@@ -1083,8 +1060,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1056,
-        144
+        -560,
+        -16
       ],
       "id": "d9af736a-4a41-46b1-8b64-68edf771e42a",
       "name": "get_dados"
@@ -1109,7 +1086,7 @@
       "typeVersion": 4.4,
       "position": [
         -2528,
-        640
+        656
       ],
       "id": "497f8dcc-7ef3-42b9-b9ab-2795350f7dda",
       "name": "auth",
@@ -1156,7 +1133,7 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3344,
+        -3696,
         -16
       ],
       "id": "8c0f60f2-05b6-457f-a979-dba1c2974450",
@@ -1179,9 +1156,9 @@
           },
           "conditions": [
             {
-              "id": "12e5dc7b-21dc-41c9-bde4-e09add17fa3c",
+              "id": "0a27d2d1-9f0d-4584-b500-c68120c8a36c",
               "leftValue": "={{ $json.fromMe }}",
-              "rightValue": "556992742275@s.whatsapp.net",
+              "rightValue": false,
               "operator": {
                 "type": "boolean",
                 "operation": "true",
@@ -1189,23 +1166,23 @@
               }
             },
             {
-              "id": "e5f3ee70-88a0-4a75-9ea4-359e9c583b4a",
+              "id": "047c36a7-3a45-4f80-bc07-c5d3dc1b4002",
               "leftValue": "={{ $json.remoteJid }}",
-              "rightValue": "=556992510441@s.whatsapp.net",
+              "rightValue": "@s.whatsapp.net",
               "operator": {
                 "type": "string",
-                "operation": "equals"
+                "operation": "endsWith"
               }
             }
           ],
-          "combinator": "or"
+          "combinator": "and"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3568,
+        -3920,
         0
       ],
       "id": "a1a3b1c1-3900-48ed-ac04-4978d57c35c3",
@@ -1220,7 +1197,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -3984,
+        -4336,
         0
       ],
       "id": "bd1582f2-9d37-4943-bcca-e50304ce0a95",
@@ -1260,6 +1237,12 @@
               "name": "pushName",
               "value": "={{ $json.body.data.pushName }}",
               "type": "string"
+            },
+            {
+              "id": "c20b8f72-88d8-45ae-b290-af829338e05a",
+              "name": "horario",
+              "value": "={{ $json.body.date_time }}",
+              "type": "string"
             }
           ]
         },
@@ -1268,7 +1251,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3744,
+        -4096,
         0
       ],
       "id": "b551dcd7-c0d5-4909-9527-407924609a25",
@@ -1315,7 +1298,7 @@
       "typeVersion": 4.4,
       "position": [
         -2528,
-        1328
+        1280
       ],
       "id": "c5a691ca-b13c-44b9-be6a-c4c7bf212ed6",
       "name": "valido",
@@ -1328,46 +1311,17 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "d1c36b9f-0909-423d-8d3d-7a14a270a37d",
-              "name": "name",
-              "value": "={{ $('encontrado').item.json.contacts[0].name }}",
-              "type": "string"
-            },
-            {
-              "id": "cb61dc61-1489-401f-ad2f-fec2d61ffe23",
-              "name": "cpf",
-              "value": "={{ $('encontrado').item.json.contacts[0].cpf }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -2528,
-        1728
-      ],
-      "id": "5bc0bab2-3032-4366-adf8-0396ca77cf80",
-      "name": "dados usuario1"
-    },
-    {
-      "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}\", \"cliente\":\"{{ $('auth').item.json.contacts[0].cpf }}\"}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('Edit Fields').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      },\n      \"cliente\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n          \"bloqueado\":$json.bloqueado,\n          \"Inativo\":$json.inativo,\n          \"cpf_responsavel\":$json.cpf_responsavel,\n          \"email\":$json.email,\n          \"senha\":$json.senha\n\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2528,
-        1520
+        -2128,
+        1280
       ],
       "id": "031b69d7-b0ed-4910-9fe2-b681ae408749",
       "name": "SET AGUARDANDO_CONFIRMAR",
@@ -1412,7 +1366,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"sessão encerrada 👋\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"sessão encerrada, até mais 👋\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1464,7 +1418,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"✅ CPF/CNPJ encontrado\\n\\n Nome: {{ $('Edit Fields').item.json.pushName }}\\n Empresa: {{ $('Edit Fields').item.json.pushName }}\\n Vilhena📍\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"✅ CPF/CNPJ encontrado\\n\\n Nome: {{ $json.auth.nome }}\\n Empresa: {{ $json.cliente.empresa || \"PMP Motos\" }}\\n {{ $json.cliente.cidade || \"Vilhena\" }}📍\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1496,8 +1450,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -848,
-        144
+        464,
+        256
       ],
       "id": "aadccd37-38a4-4581-8bab-2803e44557bd",
       "name": "confirma cnpnj/cpf4",
@@ -1522,8 +1476,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -624,
-        128
+        448,
+        -240
       ],
       "id": "2cdbe13f-d6ca-4293-bec0-9d6bb6f5b097",
       "name": "confirma cnpnj/cpf5",
@@ -1538,7 +1492,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\n  \"auth\": {\n    \"logado\": true,\n    \"data_login\": \"2026-05-07T10:56:00\",\n    \"estado_anterior\": \"autorizado\"\n  },\n  \"perfil\": {\n    \"nome\": \"Lucas Coimbra Santi\",\n    \"documento\": \"12345678900\",\n    \"empresa\": \"Alpha Software\",\n    \"cidade\": \"Vilhena\"\n  },\n  \"navegacao\": {\n    \"menu_atual\": \"MENU_PRINCIPAL\",\n    \"ultima_interacao\": \"2026-05-07T10:57:00\"\n  },\n  \"contexto\": {\n    \"ultimo_id_fatura\": \"9982\",\n    \"protocolo\": \"20260507-001\"\n  }\n}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":\"$('Edit Fields').item.json.horario\",\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n     \"perfil\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().perfil,\n        \"documento\":\"\"\n      },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":\"$('Edit Fields').item.json.horario\"\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
@@ -1556,6 +1510,322 @@
           "name": "Redis account"
         }
       }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -3440,
+        0
+      ],
+      "id": "5b0d0fc7-a073-4048-98d1-c224521f5f94",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('Edit Fields').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": \"\"\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"ultima_interacao\": $('Edit Fields').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  }  \n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2256,
+        -976
+      ],
+      "id": "e73fb28b-a453-41fc-afe9-05ab24aa21ce",
+      "name": "SET CLIENTE2",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fb3ed8ad-0f7d-43fc-b1a7-37f515eb4582",
+              "name": "idCliente",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "53070489-f720-420a-8160-50c9e30eb2ba",
+              "name": "responsavel",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "cec9d65f-ccc2-4cc8-93f7-a20e0c64a2a8",
+              "name": "empresa",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "3464d2b2-c69b-4041-8bd0-6b2c5fc2c364",
+              "name": "name",
+              "value": "={{ $('auth').item.json.contacts[0].name }}",
+              "type": "string"
+            },
+            {
+              "id": "d7c9f06f-e065-47a4-876b-41676b82a97b",
+              "name": "cidade",
+              "value": "Vilhena",
+              "type": "string"
+            },
+            {
+              "id": "5ce6adaa-c4f0-4dbe-a4ea-5b4e86f428ed",
+              "name": "inativo",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "1f69d41d-07c6-435d-a626-d4223c68a2ae",
+              "name": "bloqueado",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "2fb56671-478f-47c6-9484-973e3d3d918f",
+              "name": "number",
+              "value": "={{ $('auth').item.json.contacts[0].number }}",
+              "type": "string"
+            },
+            {
+              "id": "12edb63c-2edd-4ac5-b25b-3c27aeb2b07d",
+              "name": "cpf_responsavel",
+              "value": "={{ $('auth').item.json.contacts[0].cpf }}",
+              "type": "string"
+            },
+            {
+              "id": "dd33eb97-f146-416d-84ca-f9abb2e1ae06",
+              "name": "email",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "65f826bc-03a6-4731-98d3-27aa99aead12",
+              "name": "senha",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2320,
+        1280
+      ],
+      "id": "29cc43d2-bd59-4848-aa3e-7fec1fdf3a76",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2528,
+        224
+      ],
+      "id": "e88c228d-3581-456f-ad6a-d85550e88241",
+      "name": "SET CLIENTE4",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('get_dados').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($json.mensagem_texto) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        560,
+        816
+      ],
+      "id": "16787f80-fe05-42c3-8dd4-33f5654166e4",
+      "name": "HTTP Request11",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $json.remoteJid }}\",\n  \"text\": \"ainda nao implementado\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        576,
+        976
+      ],
+      "id": "e2aa8843-243b-46fb-8652-40acb3bb1f15",
+      "name": "HTTP Request12",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const msg = ($json.output && $json.output.length <= 2) ? $json.output : ($json.conversation || \"\").toLowerCase().trim();\n\nconst estado = $json.estado_anterior || 'Menu_Principal';\nconst nome = $json.pushName;\n\n// --- 1. DEFINIÇÃO DOS MENUS ---\n\nconst menuPrincipal = {\n        'apresentacao': `Olá, ${nome}! Tudo bem? O que gostaria de fazer?\\n\\n1️⃣ - Minhas faturas e Boletos\\n2️⃣ - Boletos Vencidos\\n3️⃣ - Atualizar meus dados\\n\\nPor favor, digite apenas o número.`,\n  \n    '1': { prox: 'Faturas', rota: 'ir_faturas' },\n    '2': { prox: 'Boletos_vencidos', rota: 'ir_vencidos' },\n    '3': { prox: 'Atualiza_Dados', rota: 'ir_dados' }\n};\n\nconst menuFaturas = {\n    'apresentacao': `📄 *Bifinance - Faturas*\\n\\n1️⃣ - Ver faturas abertas\\n2️⃣ - Histórico de pagamentos\\n0️⃣ - Voltar`,\n    '1': { \n      txt: \"🔍 Buscando faturas abertas...\", \n      prox: 'Faturas', \n      rota: 'gerar_boleto' \n    },\n    '0': { \n      prox: 'Menu_Principal', \n      rota: 'voltar' \n    }\n};\n\nconst menuVencidos = {\n    'apresentacao': `⚠️ *Bifinance - Boletos Vencidos*\\n\\n1️⃣ - Por data\\n2️⃣ - Último boleto\\n3️⃣ - Lista completa\\n0️⃣ - Voltar`,\n  \n    '1': { \n      txt: \"📅 Digite a data desejada:\", \n      prox: 'Aguardando_Data', \n      rota: 'coletar_data' \n    },\n    '0': { prox: 'Menu_Principal', rota: 'voltar' }\n};\n\n\nconst gerarBoleto = {\n  'apresentacao':'📄 boleto*\\n\\n1️⃣ - gerar PDF\\n2️⃣ - gerar QRcode\\n0️⃣ - Voltar',\n  '1':{ \n        txt:\"função em produção\",\n        prox:\"Gerar_boleto\", \n        rota:'executar_pdf_boleto'\n  },\n  '2':{\n    txt:\"função em produção\", \n    prox:\"Gerar_boleto\", \n    rota:'executar_qrcode_boleto'\n  },\n  \n  '0': {prox:'Faturas'}\n}\n\n// --- 2. MAPEAMENTO DE ESTADOS ---\n\nconst mapaMenus = {\n    'Menu_Principal': menuPrincipal,\n    'Faturas': menuFaturas,\n    'Boletos_vencidos': menuVencidos,\n    'Gerar_boleto':gerarBoleto\n};\n\n\n\n// --- 3. LÓGICA DE DECISÃO ---\n\nlet menuAtual = mapaMenus[estado] || menuPrincipal;\nlet selecao = menuAtual[msg];\n\n// Se a seleção for válida\nif (selecao) {\n    let proximoEstado = selecao.prox;\n    let textoEnvio = selecao.txt;\n\n    // SE O USUÁRIO QUER VOLTAR OU SE A OPÇÃO NÃO TEM TEXTO PRÓPRIO:\n    if (!textoEnvio) {\n        textoEnvio = mapaMenus[proximoEstado].apresentacao;\n    }\n\n    return {\n        ...$json,\n        mensagem_texto: textoEnvio,\n        proximo_estado: proximoEstado,\n        rota_destino: selecao.rota\n    };\n\n} else {\n    // FALLBACK: Se digitar errado, apenas repete o menu atual (apresentação)\n    return {\n        ...$json,\n        mensagem_texto: menuAtual['apresentacao'],\n        proximo_estado: estado,\n        rota_destino: 'fallback'\n    };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -128,
+        512
+      ],
+      "id": "031cbd84-4581-4279-99b8-ecbd38792ed0",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e9ddef04-4c19-4225-a5cc-91ba2ab576b9"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c7e2f0c8-5753-41f7-a0fd-4531bd7b5e6b",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "gerar_boleto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3fe44a9e-8dce-430e-9e6b-d02f2deb99d0",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "executar_pdf_boleto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ca90d18a-918a-4969-bbb3-51300901cae6",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "executar_qrcode_boleto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        864
+      ],
+      "id": "e2ecb6dd-a955-4427-970e-d96cb655dad4",
+      "name": "Switch4"
     }
   ],
   "pinData": {},
@@ -1580,18 +1850,7 @@
     },
     "login invalido": {
       "main": [
-        [
-          {
-            "node": "Switch1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "get_data",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "é cliente": {
@@ -1681,7 +1940,7 @@
       "main": [
         [
           {
-            "node": "SET CLIENTE1",
+            "node": "SET CLIENTE2",
             "type": "main",
             "index": 0
           }
@@ -1930,7 +2189,7 @@
       "main": [
         [
           {
-            "node": "data_redis",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -1974,7 +2233,7 @@
       "main": [
         [
           {
-            "node": "SET AGUARDANDO_CONFIRMAR",
+            "node": "Edit Fields1",
             "type": "main",
             "index": 0
           }
@@ -2001,13 +2260,7 @@
     },
     "SET AGUARDANDO_CONFIRMAR": {
       "main": [
-        [
-          {
-            "node": "dados usuario1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "invalido1": {
@@ -2080,6 +2333,93 @@
           }
         ]
       ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "data_redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "SET AGUARDANDO_CONFIRMAR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "recusa": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Switch4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request11",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request11",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request11",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -2087,7 +2427,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "8cf04ae7-4480-40c0-b13c-adc70dcdfecf",
+  "versionId": "42542b5d-6eed-4027-9761-e33cde3b5e32",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
