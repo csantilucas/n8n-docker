@@ -28,8 +28,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1408,
-        496
+        -1536,
+        768
       ],
       "id": "9bcf41c1-4bc0-4f72-878e-821456508ef9",
       "name": "If1"
@@ -62,7 +62,7 @@
       "typeVersion": 2.3,
       "position": [
         -2528,
-        800
+        1072
       ],
       "id": "0ced2436-59ac-4761-b9bc-386ac4883a1f",
       "name": "encontrado"
@@ -75,7 +75,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"desculpe {{ $('Edit Fields').item.json.pushName }}, mas não encontramos seu cadastro, nos forneça outro\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"❌ desculpe {{ $('Edit Fields').item.json.pushName }}, mas não encontramos seu cadastro, nos forneça outro\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -101,7 +101,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `Informe o CPF ou CNPJ do cadastro (apenas números)\nSeus dados são protegidos`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✔️ Informe o CPF ou CNPJ do cadastro (apenas números)\nSeus dados são protegidos`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -153,7 +153,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `${$('Edit Fields').item.json.pushName}, Escolha uma das opções abaixo`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `${$('Edit Fields').item.json.pushName}, Escolha uma das opções abaixo ✏️`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -204,7 +204,7 @@
             {
               "id": "e0aec0a0-f488-4740-b97f-baa2c481e8fa",
               "name": "texto_erro",
-              "value": "={{    (() => {     const estado = $json.dados_sessao?.parseJson()?.estado_anterior;          if (estado === 'aceite') {       return 'Ops! 😕 Não entendi. Por favor, responda apenas 1 para SIM ou 2 para NÃO.';     }          if (estado === 'AGUARDANDO_CPF') {       return 'Formato inválido. Por favor, me envie apenas os números do seu CPF ou CNPJ.';     }          if (estado === 'login') {       return 'Para iniciar o login, preciso que você confirme se já é nosso cliente.';     }      return 'Desculpe, não entendi essa opção. Escolha uma das opções do menu ou digite *Sair*.';   })() }}",
+              "value": "={{\n  (() => {\n    // Tenta pegar o estado; se der erro no parse ou não existir, assume 'inicio'\n    let estado = 'inicio';\n    try {\n      const sessao = $json.dados_sessao?.parseJson();\n      estado = sessao?.estado_anterior || 'inicio';\n    } catch (e) {\n      estado = 'inicio';\n    }\n\n    // Mapeamento de mensagens por estado\n    if (estado === 'cliente_novo') {\n      return 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n    }\n\n    if (estado === 'autorizado') {\n      return 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n    }\n\n    if (estado === 'AGUARDANDO_CPF') {\n      return 'Desculpe, o CPF ou CNPJ informado parece inválido. Por favor, envie apenas os *números* do seu cadastro.';\n    }\n\n    if (estado === 'AGUARDANDO_CONFIRMAR') {\n      return 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n    }\n\n    // Mensagem padrão caso caia em um estado desconhecido ou no menu inicial\n    return 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n  })()\n}}",
               "type": "string"
             }
           ]
@@ -319,7 +319,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `${$('Edit Fields').item.json.pushName}, Para continuar, precisamos validar seus dados.\nDeseja continuar?\n\n  1️⃣ - sim\n  2️⃣ - não\n\nDigite apena o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `🆗 ${$('Edit Fields').item.json.pushName}, Para continuar, precisamos validar seus dados.\nDeseja continuar?\n\n  1️⃣ - sim\n  2️⃣ - não\n\nDigite apena o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -608,13 +608,13 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"ola {{ $('Edit Fields').item.json.pushName }}, Bem vindo, logado\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"Escolha uma das opções abaixo:\\n\\n1️⃣ - 📑 Minhas faturas\\n2️⃣ - 📋 Meus CCR\\n3️⃣ - 🚛 MTR\\n4️⃣ - 📄 Meus contratos\\n5️⃣ - Falar com atendente\\n\\n0️⃣ - 🔙 Voltar\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -816,
+        -416,
         128
       ],
       "id": "10c221a2-8a5e-4b40-be0e-4f7c0bd2cf2d",
@@ -642,29 +642,6 @@
       ],
       "id": "90e35b90-ab87-462a-87a8-efc77289dc04",
       "name": "SET CLIENTE3",
-      "credentials": {
-        "redis": {
-          "id": "Nlx2xipOfGaXNmN3",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\":true, \"estado_anterior\": \"autorizado_autenticado\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}\"}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -1072,
-        480
-      ],
-      "id": "4745bf56-e5a9-4646-bc3c-0a2cf53d87b6",
-      "name": "SET AGUARDANDO_CPF",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -852,7 +829,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.autenticado }}",
+                    "leftValue": "={{ $json.auth.logado }}",
                     "rightValue": "",
                     "operator": {
                       "type": "boolean",
@@ -1015,8 +992,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2608,
-        -496
+        -2624,
+        -480
       ],
       "id": "5982ac6d-32af-4027-9c05-fa56d1b4441a",
       "name": "Redis2",
@@ -1078,7 +1055,7 @@
             {
               "id": "af4dbab0-7ba2-4f88-959f-83505f293c4f",
               "name": "estado_anterior",
-              "value": "={{ $('If1').item.json.estado_anterior }}",
+              "value": "={{ $json.auth.estado_anterior }}",
               "type": "string"
             },
             {
@@ -1090,13 +1067,13 @@
             {
               "id": "3a85803a-f106-488b-aa87-11daa8f1d9ac",
               "name": "nome",
-              "value": "={{ $('If1').item.json.cliente }}",
+              "value": "={{ $json.perfil.nome }}",
               "type": "string"
             },
             {
               "id": "19c31a5f-de04-4dd0-9e98-211cde9f536a",
-              "name": "",
-              "value": "",
+              "name": "menu_atual",
+              "value": "={{ $json.navegacao.menu_atual }}",
               "type": "string"
             }
           ]
@@ -1106,8 +1083,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1072,
-        160
+        -1056,
+        144
       ],
       "id": "d9af736a-4a41-46b1-8b64-68edf771e42a",
       "name": "get_dados"
@@ -1331,14 +1308,14 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"ok, seu cadastro foi encontrado, digite os 4 primeiro dígitos do CPF do responsável pela empresa.\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"✔️ ok, seu cadastro foi encontrado, digite os 4 primeiro dígitos do CPF do responsável pela empresa.\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
         -2528,
-        1008
+        1328
       ],
       "id": "c5a691ca-b13c-44b9-be6a-c4c7bf212ed6",
       "name": "valido",
@@ -1373,7 +1350,7 @@
       "typeVersion": 3.4,
       "position": [
         -2528,
-        1456
+        1728
       ],
       "id": "5bc0bab2-3032-4366-adf8-0396ca77cf80",
       "name": "dados usuario1"
@@ -1382,7 +1359,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={\"autenticado\": false, \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}\", \"cliente\":\"{{ $('encontrado').item.json.contacts[0].cpf }}\"}",
+        "value": "={\"autenticado\": false, \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\", \"nome\": \"{{ $('Edit Fields').item.json.pushName }}\", \"cliente\":\"{{ $('auth').item.json.contacts[0].cpf }}\"}",
         "expire": true,
         "ttl": 1800
       },
@@ -1390,7 +1367,7 @@
       "typeVersion": 1,
       "position": [
         -2528,
-        1232
+        1520
       ],
       "id": "031b69d7-b0ed-4910-9fe2-b681ae408749",
       "name": "SET AGUARDANDO_CONFIRMAR",
@@ -1409,14 +1386,14 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"não foi possivel autenticar tente novamente\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"❌ não foi possivel autenticar tente novamente\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1408,
-        752
+        -1200,
+        784
       ],
       "id": "26c89c34-ca87-4dbf-ba46-cf4b50c5c016",
       "name": "invalido1",
@@ -1424,6 +1401,159 @@
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"sessão encerrada 👋\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2624,
+        -864
+      ],
+      "id": "cec4713c-538e-4ee0-bef4-193ebc15fe63",
+      "name": "login invalido2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"⌛ um momento {{ $('Edit Fields').item.json.pushName }}, estamos buscando seu cadastro ⌛...\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2528,
+        864
+      ],
+      "id": "f4189ef5-fc21-4986-946e-f9e3d044fc04",
+      "name": "buscando",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"✅ CPF/CNPJ encontrado\\n\\n Nome: {{ $('Edit Fields').item.json.pushName }}\\n Empresa: {{ $('Edit Fields').item.json.pushName }}\\n Vilhena📍\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1536,
+        912
+      ],
+      "id": "c5e12b63-024e-4a73-8d0c-80fcb49ca498",
+      "name": "confirma cnpnj/cpf",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"Olá, {{ $json.nome }} Como posso te ajudar hoje?\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -848,
+        144
+      ],
+      "id": "aadccd37-38a4-4581-8bab-2803e44557bd",
+      "name": "confirma cnpnj/cpf4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"Menu Principal\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -624,
+        128
+      ],
+      "id": "2cdbe13f-d6ca-4293-bec0-9d6bb6f5b097",
+      "name": "confirma cnpnj/cpf5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
+        "value": "={\n  \"auth\": {\n    \"logado\": true,\n    \"data_login\": \"2026-05-07T10:56:00\",\n    \"estado_anterior\": \"autorizado\"\n  },\n  \"perfil\": {\n    \"nome\": \"Lucas Coimbra Santi\",\n    \"documento\": \"12345678900\",\n    \"empresa\": \"Alpha Software\",\n    \"cidade\": \"Vilhena\"\n  },\n  \"navegacao\": {\n    \"menu_atual\": \"MENU_PRINCIPAL\",\n    \"ultima_interacao\": \"2026-05-07T10:57:00\"\n  },\n  \"contexto\": {\n    \"ultimo_id_fatura\": \"9982\",\n    \"protocolo\": \"20260507-001\"\n  }\n}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        1136
+      ],
+      "id": "4745bf56-e5a9-4646-bc3c-0a2cf53d87b6",
+      "name": "DADOS_COMPLETOS",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
         }
       }
     }
@@ -1760,7 +1890,7 @@
       "main": [
         [
           {
-            "node": "confirma cnpnj/cpf3",
+            "node": "confirma cnpnj/cpf4",
             "type": "main",
             "index": 0
           }
@@ -1771,7 +1901,7 @@
       "main": [
         [
           {
-            "node": "encontrado",
+            "node": "buscando",
             "type": "main",
             "index": 0
           }
@@ -1855,7 +1985,7 @@
       "main": [
         [
           {
-            "node": "SET AGUARDANDO_CPF",
+            "node": "confirma cnpnj/cpf",
             "type": "main",
             "index": 0
           }
@@ -1863,17 +1993,6 @@
         [
           {
             "node": "invalido1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "SET AGUARDANDO_CPF": {
-      "main": [
-        [
-          {
-            "node": "get_dados",
             "type": "main",
             "index": 0
           }
@@ -1895,6 +2014,72 @@
       "main": [
         []
       ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "login invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscando": {
+      "main": [
+        [
+          {
+            "node": "encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma cnpnj/cpf": {
+      "main": [
+        [
+          {
+            "node": "DADOS_COMPLETOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma cnpnj/cpf4": {
+      "main": [
+        [
+          {
+            "node": "confirma cnpnj/cpf5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma cnpnj/cpf5": {
+      "main": [
+        [
+          {
+            "node": "confirma cnpnj/cpf3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DADOS_COMPLETOS": {
+      "main": [
+        [
+          {
+            "node": "get_dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -1902,7 +2087,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "f7ee0fbe-9b12-4348-9dad-7d725bf80054",
+  "versionId": "8cf04ae7-4480-40c0-b13c-adc70dcdfecf",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
