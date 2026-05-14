@@ -46,7 +46,7 @@
           "conditions": [
             {
               "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
-              "leftValue": "={{ $('auth').item.json.clienteEncontrado }}",
+              "leftValue": "={{ $('API_ALPHA(auth)').item.json.clienteEncontrado }}",
               "rightValue": "0",
               "operator": {
                 "type": "boolean",
@@ -128,7 +128,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\":`Você já é nosso *cliente*?\n\n1️⃣ - _sim_\n2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\":`Você já é nosso *cliente*?\n\n1️⃣ - _sim_\n2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -154,7 +154,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `*${$('Edit Fields').item.json.pushName}*, Escolha uma das _opções_ _abaixo_`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `*${$('Edit Fields').item.json.pushName}*, Escolha uma das _opções_ _abaixo_`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -414,7 +414,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola *${$('Edit Fields').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*.`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola *${$('Edit Fields').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*.`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -972,37 +972,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "http://host.docker.internal:5080/api/client/buscar",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "documento",
-              "value": "={{ $json.message.conversation }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2528,
-        912
-      ],
-      "id": "497f8dcc-7ef3-42b9-b9ab-2795350f7dda",
-      "name": "auth",
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -1229,7 +1198,7 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2160,
+        -2144,
         1536
       ],
       "id": "031b69d7-b0ed-4910-9fe2-b681ae408749",
@@ -1275,33 +1244,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"⌛ um momento {{ $('Edit Fields').item.json.pushName }}, estamos buscando seu cadastro ⌛...\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2528,
-        1120
-      ],
-      "id": "f4189ef5-fc21-4986-946e-f9e3d044fc04",
-      "name": "buscando",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "58e8GuLLt0IjtaTT",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$json.auth.nome}\n*Empresa:* ${$json.cliente.empresa || \"PMP Motos\"}\n*Cidade:*${$json.cliente.cidade || \"Vilhena\"}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$json.auth.nome}\n*Empresa:* ${$json.cliente.empresa}\n*Cidade:* ${$json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1373,8 +1316,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        -400
+        -96,
+        -480
       ],
       "id": "16787f80-fe05-42c3-8dd4-33f5654166e4",
       "name": "HTTP Request11",
@@ -1462,7 +1405,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\n\n// 2. CAPTURA A MENSAGEM DO \"AGORA\" (Webhook)\nconst msgWebhook = $('Edit Fields').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\nconst rodapeSair = \"\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\n\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR*\n3️⃣ - *MTR*\n4️⃣ - *Meus contratos*\n9 - *Falar com atendente*\n${rodapeSair}`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"abrir_menu\" }, \n    \"3\": { prox: \"buscar_MTR\", rota: \"abrir_menu\" },\n    \"4\": { prox: \"Meus_Contratos\", rota: \"abrir_menu\" },\n    \"5\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *CCR DISPONÍVEIS*\n\nEncontramos 6 CCRs vinculados ao seu cadastro.\nComo deseja receber?\n\n1️⃣ - Último CCR\n2️⃣ - Últimos 3 CCRs\n3️⃣ - Últimos 6 CCRs\n\n9 - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  opcoes: {\n    \"1\": { prox: \"enviar_ccr_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"enviar_ccr_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"enviar_ccr_6\", rota: \"buscar_ccr\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" },\n    \"5\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuBoleto = {\n  nome: \"selecione_boleto\",\n  msg: \"\", // O texto aqui é gerado dinamicamente no fluxo anterior\n  opcoes: {\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"selecione_boleto\": menuBoleto,\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n\n\n//logica dos boletos\n\n// --- LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\") {\n    // Se digitou 0 ou 9, deixa o fluxo seguir para a lógica de menus normal abaixo\n    if (msgNum === \"0\" || msgNum === \"9\") {\n        // Não faz nada aqui, deixa o código continuar para processar 0 ou 9\n    } \n    else if (msgNum !== \"\") {\n        const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n        const faturaAchada = faturas.find(f => f.numeroVenda == msgNum);\n\n        if (faturaAchada) {\n            return {\n                ...inputJson,\n                mensagem_confirmacao: `✅ Fatura *${msgNum}* selecionada!`,\n                mensagem_texto: \"⏳ Gerando o arquivo para você...\",\n                idVenda: faturaAchada.numeroVenda,\n                rota_destino: \"selecione_boleto\", // Rota para o nó de PDF\n                sucesso: true\n            };\n        } else {\n            // BLOQUEIO: Digitou um número, mas não é uma fatura da lista\n            return {\n                ...inputJson,\n                mensagem_confirmacao: \"⚠️ Número não encontrado\",\n                        mensagem_texto: \"⚠️ Esse número de fatura não consta na sua lista.\\n\\nDigite o número correto da venda ou *0* para voltar ao menu.\",\n                proximo_estado: \"selecione_boleto\",\n                rota_destino: \"fallback\",\n                sucesso: false\n            };\n        }\n    }\n}\n\n\n\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  \n  // LÓGICA DE CAPTURA DO NOME DA OPÇÃO (Melhorada para evitar texto vazio)\n  const linhas = menuAtual.msg.split('\\n');\n  const linhaOpcao = linhas.find(l => l.includes(msgNum)) || \"\";\n  let nomeLimpo = linhaOpcao.replace(/.*- \\*/, '').replace(/\\*/g, '').trim();\n  \n  if (msgNum === \"0\") nomeLimpo = \"Voltar\";\n\n  // CASO ESPECÍFICO: BUSCAR FATURAS\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Estou a localizar as suas faturas no sistema da **Preserva**. Um momento.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  // FLUXO DE NAVEGAÇÃO NORMAL\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  \n  // GARANTIA: Se mensagem_confirmacao ou mensagem_texto estiverem vazias, define um padrão para o HTTP não dar erro\n  return {\n    ...inputJson,\n    mensagem_confirmacao: nomeLimpo ? `✅ Você selecionou: *${nomeLimpo}*` : \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n\n} else {\n  // FALLBACK\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
+        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\n\n// 2. CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('Edit Fields').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\\n━━━━━━━━━━━━━━━━━━\\nOlá, *${nomeUsuario}*! \\nComo posso te ajudar hoje?\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR*\\n3️⃣ - *MTR*\\n4️⃣ - *Meus contratos*\\n9 - *Falar com atendente*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"nenu_ccr\" }, \n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: \"📦 *CCR DISPONÍVEIS*...\",\n  opcoes: {\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1475,165 +1418,6 @@
     },
     {
       "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "c6fa4e9e-80ac-488a-b262-7c553666c1b6",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "abrir_menu",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "fallback"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "d654f92e-218f-424f-86f8-0a6f6cefbd64",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "buscar_faturas",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "faturas"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "c3c1833f-1620-468a-a34b-63c556914a9a",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "buscar_ccr",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "37f94411-62d1-49ac-8ee0-8aa5a3f6f056",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "fallback",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "1755e496-725f-49c6-8635-ef51c5e5ded0",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "ir_atendimento",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "fe2e3886-0019-431c-82dc-b31b2210db51",
-                    "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "selecione_boleto",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        -128,
-        32
-      ],
-      "id": "e2ecb6dd-a955-4427-970e-d96cb655dad4",
-      "name": "Switch-menu"
-    },
-    {
-      "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
         "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json, // Puxamos tudo que o Code cuspiu (auth, cliente, etc)\n    \"navegacao\": {\n      \"menu_atual\": $node[\"menu1\"].json.proximo_estado, // O novo menu\n      \"ultima_interacao\": $('Edit Fields').item.json.horario\n    },\n    \"auth\": {\n      ...$node[\"menu1\"].json.auth,\n      \"estado_anterior\": $node[\"menu1\"].json.limpar_login ? \"\" : ($node[\"menu1\"].json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('Edit Fields').item.json.conversation,\n      \"type\": $('Edit Fields').item.json.messageType\n    }\n  }) \n}}",
@@ -1643,8 +1427,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        656,
-        -400
+        -112,
+        -656
       ],
       "id": "02b214cc-e28e-47b5-a311-da7196598b1e",
       "name": "estados_menus",
@@ -1695,8 +1479,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        176,
-        -400
+        -96,
+        -288
       ],
       "id": "9a75d094-2237-4038-9960-e5be0a1b43ea",
       "name": "HTTP Request",
@@ -1721,8 +1505,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        432,
-        -176
+        272,
+        -704
       ],
       "id": "21b0431d-b1cb-42b9-8cd2-27888c6b64b0",
       "name": "HTTP Request1",
@@ -1740,19 +1524,19 @@
             {
               "id": "fb3ed8ad-0f7d-43fc-b1a7-37f515eb4582",
               "name": "idCliente",
-              "value": "={{ $('auth').item.json.client.idCliente }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.idCliente }}",
               "type": "number"
             },
             {
               "id": "53070489-f720-420a-8160-50c9e30eb2ba",
               "name": "responsavel",
-              "value": "={{ $('auth').item.json.client.nomeResponsavel }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.nomeResponsavel }}",
               "type": "string"
             },
             {
               "id": "cec9d65f-ccc2-4cc8-93f7-a20e0c64a2a8",
               "name": "empresa",
-              "value": "={{ $('auth').item.json.client.empresa }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.empresa }}",
               "type": "string"
             },
             {
@@ -1764,19 +1548,19 @@
             {
               "id": "d7c9f06f-e065-47a4-876b-41676b82a97b",
               "name": "cidade",
-              "value": "={{ $('auth').item.json.client.cidade }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.cidade }}",
               "type": "string"
             },
             {
               "id": "5ce6adaa-c4f0-4dbe-a4ea-5b4e86f428ed",
               "name": "inativo",
-              "value": "={{ $('auth').item.json.client.inativo }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.inativo }}",
               "type": "string"
             },
             {
               "id": "1f69d41d-07c6-435d-a626-d4223c68a2ae",
               "name": "bloqueado",
-              "value": "={{ $('auth').item.json.client.bloqueado }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.bloqueado }}",
               "type": "string"
             },
             {
@@ -1788,13 +1572,13 @@
             {
               "id": "12edb63c-2edd-4ac5-b25b-3c27aeb2b07d",
               "name": "cpf_responsavel",
-              "value": "={{ $('auth').item.json.client.cpfresponsavel }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.cpfresponsavel }}",
               "type": "string"
             },
             {
               "id": "dd33eb97-f146-416d-84ca-f9abb2e1ae06",
               "name": "email",
-              "value": "={{ $('auth').item.json.client.email }}",
+              "value": "={{ $('API_ALPHA(auth)').item.json.client.email }}",
               "type": "string"
             },
             {
@@ -1830,8 +1614,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        176,
-        -176
+        272,
+        -528
       ],
       "id": "8eaef02c-0d7d-4b0e-b82c-0bf6df39eda4",
       "name": "HTTP Request4",
@@ -1856,8 +1640,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        160,
-        144
+        544,
+        -1072
       ],
       "id": "0baf5999-9bcc-46ea-a91c-310a7ad31a94",
       "name": "HTTP Request5",
@@ -1882,8 +1666,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        368,
-        144
+        544,
+        -1232
       ],
       "id": "9f9762ea-4c60-442e-bf2e-0e9269c22d24",
       "name": "HTTP Request6",
@@ -1908,8 +1692,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        592,
-        144
+        544,
+        -1392
       ],
       "id": "aff043ae-434d-401d-99cb-d96f581604bb",
       "name": "HTTP Request7",
@@ -1924,15 +1708,15 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"Meus_CCR\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        832,
-        144
+        544,
+        -1536
       ],
       "id": "3ed4f23e-d11e-41c7-b6bb-5606d4070b64",
       "name": "estados_menus2",
@@ -1945,7 +1729,7 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/api/Vendas/id/{{ $('Switch-menu').item.json.cliente.idCliente }}/6",
+        "url": "=http://host.docker.internal:5080/fatura/cliente/{{ $('Switch-menu').item.json.cliente.idCliente }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "options": {}
@@ -1953,8 +1737,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        720,
-        -176
+        272,
+        -848
       ],
       "id": "b1482070-ac35-4a62-9b0d-630ecc7ee097",
       "name": "API_ALPHA(Boletos)",
@@ -1967,13 +1751,13 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a lista de boletos que veio da API\nconst boletos = $input.all();\n\n// 2. Formata cada boleto num texto amigável\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\n\nboletos.forEach((item) => {\n  const boleto = item.json;\n\n  // AJUSTE: Usar o nome exato do JSON: 'numeroVenda'\n  const numero = boleto.numeroVenda;\n  \n  // AJUSTE: Usar o campo 'data', pois o 'dataFechamento' está vazio (0001-01-01)\n  const dataRef = new Date(boleto.data);\n  const dataFormatada = dataRef.toLocaleDateString('pt-BR');\n\n  // Formata o valor para moeda (Real)\n  const valorFormatado = boleto.valor.toLocaleString('pt-BR', {\n    style: 'currency',\n    currency: 'BRL',\n  });\n\n  listaFormatada += `🛍️ *Fatura:* ${numero}\\n`;\n  listaFormatada += `🗓️ *Data:* ${dataFormatada}\\n`;\n  listaFormatada += `💰 *Valor:* ${valorFormatado}\\n\\n`;\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\";\n\n// 3. Retorna o texto pronto para o próximo nó\nreturn {\n  texto_final: listaFormatada\n};"
+        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\nconst faturas = resposta.fatura || [];\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; // Cria o número 1, 2, 3...\n  const dataFormatada = new Date(item.dt_fechamento).toLocaleDateString('pt-BR');\n  const valorFormatado = item.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n  \n  // Limpa a linha digitável (sem espaços) com Regex\n  const linhaLimpa = item.linha_dgt.replace(/\\s+/g, '');\n\n  listaFormatada += `${opcao}️⃣ *Boleto:*  ${item.num_bol}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  \n  // USANDO BLOCO DE CÓDIGO (```) PARA FACILITAR A CÓPIA NO WHATSAPP\n  listaFormatada += `🔗 *Copia e Cola:*\\n\\`\\`\\`${linhaLimpa}\\`\\`\\`\\n\\n`;\n\n  // Guarda no mapeamento para o Redis ou próximo nó\n  faturasMapeadas.push({\n      indice: opcao,\n      boleto_id: item.id_boleto, // ID que a API Alpha usa (ID_BOLETO_GERADO)\n      numero_boleto: item.num_bol,\n      linha: linhaLimpa\n    });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"👉 Digite o *número da opção* para baixar o PDF.\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        928,
-        -176
+        272,
+        -992
       ],
       "id": "5303cebd-823f-41c4-93ff-8c50e6fd5392",
       "name": "Code in JavaScript"
@@ -1992,8 +1776,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1152,
-        -176
+        272,
+        -1168
       ],
       "id": "0b7691c7-04d6-4a2e-a65c-4e66b002a7ff",
       "name": "HTTP Request2",
@@ -2018,8 +1802,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1328,
-        -176
+        272,
+        -1392
       ],
       "id": "58ff33b8-72fa-4fdf-97cb-c328ae0d8c76",
       "name": "HTTP Request8",
@@ -2034,15 +1818,15 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json, // Puxamos tudo que o Code cuspiu (auth, cliente, etc)\n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\",\n    \"faturas_disponiveis\": $(\"API_ALPHA(Boletos)\").all().map(i => i.json),\n      \"ultima_interacao\": $('Edit Fields').item.json.horario\n    }\n  }) \n}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json, \n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\",\n      \"faturas_disponiveis\": $(\"Code in JavaScript\").item.json.faturas_mapeadas, \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1584,
-        -176
+        272,
+        -1536
       ],
       "id": "d602c6a4-45d9-4cd5-bd93-377c462bf43e",
       "name": "estados_menus3",
@@ -2055,7 +1839,7 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/api/Vendas/id/venda/{{ $('Edit Fields').item.json.conversation }}/{{ $json.cliente.idCliente }}",
+        "url": "=http://host.docker.internal:5080/fatura/{{ $('Switch-menu').item.json.idFatura }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "options": {}
@@ -2063,8 +1847,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        176,
-        448
+        816,
+        -896
       ],
       "id": "c2454f55-cfc8-4b0f-8da1-156b7dcf05b3",
       "name": "API_ALPHA(Boletos)1",
@@ -2083,17 +1867,519 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✅ *FATURA LOCALIZADA*\n━━━━━━━━━━━━━━━━━━\n\n📄 *Número:* ${$json.numeroVenda}\n🗓️ *Vencimento:* ${new Date($json.data).toLocaleDateString('pt-BR')}\n💰 *Valor total:* ${$json.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n\n━━━━━━━━━━━━━━━━━━\n_O arquivo PDF está sendo gerado e será enviado abaixo._ ⏳`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"✅ *FATURA LOCALIZADA*\\n━━━━━━━━━━━━━━━━━━\\n\\n📄 *Boleto:* {{ $json.fatura.num_bol }}\\n🗓️ *Vencimento:* {{ new Date($json.fatura.dt_fechamento).toLocaleDateString('pt-BR') }}\\n💰 *Valor total:* {{ $json.fatura.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}\\n\\n🔗 *Copia e Cola:*\\n```{{ $json.fatura.linha_dgt.replace(/\\\\s+/g, '') }}```\\n\\n━━━━━━━━━━━━━━━━━━\\n_O arquivo PDF está sendo gerado e será enviado abaixo._ ⏳\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        384,
-        448
+        816,
+        -1120
       ],
       "id": "17d49090-1f5b-4f16-b74b-4eb43faceaf2",
       "name": "HTTP Request9",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5080/data/cliente/buscar",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $('Edit Fields').item.json.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2528,
+        1136
+      ],
+      "id": "497f8dcc-7ef3-42b9-b9ab-2795350f7dda",
+      "name": "API_ALPHA(auth)",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"⌛ um momento {{ $('Edit Fields').item.json.pushName }}, estamos buscando seu cadastro ⌛...\" ,\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2528,
+        944
+      ],
+      "id": "93f8c04e-88eb-4df7-8ef5-4e59e15839cf",
+      "name": "buscando1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        816,
+        -672
+      ],
+      "id": "c228cd76-ba82-4440-b45d-78c521de3738",
+      "name": "HTTP Request10",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera trasnferido aguarde\",\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -208,
+        -848
+      ],
+      "id": "59c0bc96-1a48-42dd-9f8b-197a7e8aaf46",
+      "name": "HTTP Request12",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        336
+      ],
+      "id": "d19c791d-b94e-4436-af3a-580f2dae46b2",
+      "name": "HTTP Request13",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"📄 *PLATAFORMA DE CERTIFICADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nVocê pode acessar seus certificados de coleta diretamente pela nossa plataforma:\\n\\n🌐 *Acesse aqui:*\\nhttps://documentos-alphasoftware.premiumasp.net/\\n\\n🔐 *DADOS DE ACESSO*\\n\\n• *Domínio:* `preservasolucoes` \\n• *E-mail:* `\" + ($('menu1').item.json.cliente.email || \"não encontrado\") + \"`\\n• *Senha:* _Os 4 primeiros dígitos do seu CPF/CNPJ_\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Dica: Clique no link acima para fazer o login._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        640,
+        336
+      ],
+      "id": "09b9fef0-6178-4bda-a9e7-2d8c5769e3c5",
+      "name": "HTTP Request14",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n{\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera transferido aguarde ⌛...\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        480,
+        32
+      ],
+      "id": "5f251313-2d09-42de-b9dd-0707998c13d1",
+      "name": "HTTP Request15",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c6fa4e9e-80ac-488a-b262-7c553666c1b6",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "abrir_menu",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d654f92e-218f-424f-86f8-0a6f6cefbd64",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "buscar_faturas",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "faturas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fe2e3886-0019-431c-82dc-b31b2210db51",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "selecione_boleto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "selecione_boleto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1755e496-725f-49c6-8635-ef51c5e5ded0",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "ir_atendimento",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "atendente"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "37f94411-62d1-49ac-8ee0-8aa5a3f6f056",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fallback"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c3c1833f-1620-468a-a34b-63c556914a9a",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "nenu_ccr",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_ccr"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "919df953-4f52-4c56-9663-fe4900ba4a50",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "buscar_ccr",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "buscar_ccr"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -80,
+        16
+      ],
+      "id": "78ad7168-7779-47ad-9004-d658a1e5390b",
+      "name": "Switch-menu"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"📦 *CCRs DISPONÍVEIS*\\n━━━━━━━━━━━━━━━━━━\\nEncontramos *6 CCRs* vinculados ao seu cadastro.\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n━━━━━━━━━━━━━━━━━━\\n\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*\\n_💡 Digite a opção desejada._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        832,
+        336
+      ],
+      "id": "8d863f48-32c4-4bdf-ada0-db1c9d4b5306",
+      "name": "HTTP Request16",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"buscar_ccr\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        336
+      ],
+      "id": "b3b57b0d-d226-48bd-adfa-35fb5eb92daf",
+      "name": "estados_menus5",
+      "credentials": {
+        "redis": {
+          "id": "Nlx2xipOfGaXNmN3",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"{{ $json.mensagem_texto }}\",\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        496,
+        544
+      ],
+      "id": "d4c86c1a-90ac-42bc-ad88-edfad430411d",
+      "name": "HTTP Request17",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:5080/ccr/cliente/{{ $('Switch-menu').item.json.cliente.idCliente }}/{{ $('Switch-menu').item.json.quantidade_ccr }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        704,
+        544
+      ],
+      "id": "a653ef99-65dc-451e-b491-855f915abb7c",
+      "name": "API_ALPHA(Ccr)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.texto_ccr,\n  \"delay\": 1200,\n  \"linkPreview\": false\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1088,
+        544
+      ],
+      "id": "ed41324d-2bb0-4fe2-a121-aeb2bd1b6563",
+      "name": "HTTP Request18",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2112,11 +2398,11 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        592,
-        448
+        1552,
+        -352
       ],
       "id": "ac55a4b9-1710-4401-ab69-4c2ad880abf3",
-      "name": "estados_menus4",
+      "name": "finalizado",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -2132,23 +2418,36 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": `\nAtendimento finalizado\nFoi um prazer te atender, Lucas!\nSe precisar de qualquer informação, \né só chamar novamente\n\n1 - Iniciar novo atendimento\n2 - Falar com atendente\n`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        896,
-        448
+        1760,
+        -352
       ],
       "id": "8012a301-6e14-4857-91db-369024cc8181",
-      "name": "menu principal1",
+      "name": "finalizado1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
           "name": "Header Auth account"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a resposta da API (considerando que vem dentro de um array [0])\nconst resposta = $input.first().json;\nconst listaCcr = resposta.ccr || [];\n\nif (listaCcr.length === 0) {\n    return { texto_ccr: \"⚠️ Nenhuma coleta foi localizada para o seu cadastro.\" };\n}\n\n// 2. Monta o cabeçalho\nlet mensagem = `📄 *CCRs LOCALIZADOS (${listaCcr.length})*\\n`;\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\\n\";\n\n// 3. Percorre a lista e adiciona cada item\nlistaCcr.forEach((item, index) => {\n    const data = new Date(item.dt_coleta).toLocaleDateString('pt-BR');\n    const quantidade = item.quant_coleta > 0 ? `${item.quant_coleta} un/kg` : \"Consulte no PDF\";\n    \n    mensagem += `${index + 1}️⃣ *Coleta em ${data}*\\n`;\n    mensagem += `📦 *Qtd:* ${quantidade}\\n`;\n    mensagem += `🔗 *Link:* ${item.link}\\n\\n`;\n});\n\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\";\nmensagem += \"_💡 Clique nos links acima para visualizar os documentos._\";\n\nreturn {\n    texto_ccr: mensagem\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        560
+      ],
+      "id": "5ef3c138-969d-48d8-a07e-906e43a33dab",
+      "name": "Code in JavaScript1"
     }
   ],
   "pinData": {},
@@ -2461,29 +2760,11 @@
         ]
       ]
     },
-    "auth": {
-      "main": [
-        [
-          {
-            "node": "buscando",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "login invalido",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "get_data": {
       "main": [
         [
           {
-            "node": "auth",
+            "node": "buscando1",
             "type": "main",
             "index": 0
           }
@@ -2584,17 +2865,6 @@
         ]
       ]
     },
-    "buscando": {
-      "main": [
-        [
-          {
-            "node": "encontrado",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "confirma cnpnj/cpf": {
       "main": [
         [
@@ -2677,52 +2947,6 @@
         [
           {
             "node": "Switch-menu",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch-menu": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "HTTP Request4",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "HTTP Request5",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Preparar Fallback",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Redis2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "API_ALPHA(Boletos)1",
             "type": "main",
             "index": 0
           }
@@ -2865,18 +3089,188 @@
       "main": [
         [
           {
-            "node": "estados_menus4",
+            "node": "finalizado",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "estados_menus4": {
+    "API_ALPHA(auth)": {
       "main": [
         [
           {
-            "node": "menu principal1",
+            "node": "encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "login invalido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscando1": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(auth)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request10": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Boletos)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request13": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-menu": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request10",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request15",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Fallback",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request13",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request17",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request14": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request16",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request16": {
+      "main": [
+        [
+          {
+            "node": "estados_menus5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request17": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Ccr)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Ccr)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request18": {
+      "main": [
+        [
+          {
+            "node": "finalizado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "finalizado": {
+      "main": [
+        [
+          {
+            "node": "finalizado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request18",
             "type": "main",
             "index": 0
           }
@@ -2889,7 +3283,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "c610c5ae-1b91-449c-b262-33c4ea3dcb85",
+  "versionId": "54741936-49ab-4bac-8e23-deefa95fad37",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
