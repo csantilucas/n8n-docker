@@ -1405,13 +1405,13 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\n\n// 2. CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('Edit Fields').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\\n━━━━━━━━━━━━━━━━━━\\nOlá, *${nomeUsuario}*! \\nComo posso te ajudar hoje?\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR*\\n3️⃣ - *MTR*\\n4️⃣ - *Meus contratos*\\n9 - *Falar com atendente*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"nenu_ccr\" }, \n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: \"📦 *CCR DISPONÍVEIS*...\",\n  opcoes: {\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
+        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('Edit Fields').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"abrir_menu\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"abrir_menu\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -496,
-        80
+        -464,
+        96
       ],
       "id": "031cbd84-4581-4279-99b8-ecbd38792ed0",
       "name": "menu1"
@@ -1751,7 +1751,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\nconst faturas = resposta.fatura || [];\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; // Cria o número 1, 2, 3...\n  const dataFormatada = new Date(item.dt_fechamento).toLocaleDateString('pt-BR');\n  const valorFormatado = item.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n  \n  // Limpa a linha digitável (sem espaços) com Regex\n  const linhaLimpa = item.linha_dgt.replace(/\\s+/g, '');\n\n  listaFormatada += `${opcao}️⃣ *Boleto:*  ${item.num_bol}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  \n  // USANDO BLOCO DE CÓDIGO (```) PARA FACILITAR A CÓPIA NO WHATSAPP\n  listaFormatada += `🔗 *Copia e Cola:*\\n\\`\\`\\`${linhaLimpa}\\`\\`\\`\\n\\n`;\n\n  // Guarda no mapeamento para o Redis ou próximo nó\n  faturasMapeadas.push({\n      indice: opcao,\n      boleto_id: item.id_boleto, // ID que a API Alpha usa (ID_BOLETO_GERADO)\n      numero_boleto: item.num_bol,\n      linha: linhaLimpa\n    });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"👉 Digite o *número da opção* para baixar o PDF.\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas\n};"
+        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\n\n// VERIFICAÇÃO: Se não houver boletos ou a API retornar false\nif (resposta.boletosEncontrado === false || !resposta.fatura || resposta.fatura.length === 0) {\n  return {\n    texto_final: \"📄 *CONSULTA DE FATURAS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNenhuma fatura pendente foi encontrada no seu cadastro no momento. ✅\\n\\n━━━━━━━━━━━━━━━━━━\\n_Deseja consultar outra coisa? Digite *0* para voltar ao menu._\",\n    faturas_mapeadas: [],\n    nenhum_boleto: true // Flag extra caso queira usar num Switch depois\n  };\n}\n\nconst faturas = resposta.fatura;\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; \n  const dataFormatada = new Date(item.dt_fechamento).toLocaleDateString('pt-BR');\n  const valorFormatado = item.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n  \n  // Limpa a linha digitável (sem espaços) com Regex\n  const linhaLimpa = item.linha_dgt.replace(/\\s+/g, '');\n\n  listaFormatada += `${opcao}️⃣ *Boleto:* ${item.num_bol}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  \n  // USANDO BLOCO DE CÓDIGO (```) PARA FACILITAR A CÓPIA NO WHATSAPP\n  listaFormatada += `🔗 *Copia e Cola:*\\n\\`\\`\\`${linhaLimpa}\\`\\`\\`\\n\\n`;\n\n  // Guarda no mapeamento para o Redis ou próximo nó\n  faturasMapeadas.push({\n      indice: opcao,\n      boleto_id: item.id_boleto, \n      numero_boleto: item.num_bol,\n      linha: linhaLimpa\n    });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"👉 Digite o *número da opção* para baixar o PDF.\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas,\n  nenhum_boleto: false\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1796,7 +1796,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\":` 📄 Digite o número da fatura para receber\no PDF ou link. Ou\n━━━━━━━━━━━━━━━━━━\n9 - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  \"delay\": 600,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\n\n━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  \"delay\": 600,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2008,8 +2008,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        480,
-        336
+        336,
+        592
       ],
       "id": "d19c791d-b94e-4436-af3a-580f2dae46b2",
       "name": "HTTP Request13",
@@ -2034,8 +2034,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        640,
-        336
+        352,
+        800
       ],
       "id": "09b9fef0-6178-4bda-a9e7-2d8c5769e3c5",
       "name": "HTTP Request14",
@@ -2054,14 +2054,14 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n{\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera transferido aguarde ⌛...\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        480,
-        32
+        416,
+        112
       ],
       "id": "5f251313-2d09-42de-b9dd-0707998c13d1",
       "name": "HTTP Request15",
@@ -2250,6 +2250,56 @@
               },
               "renameOutput": true,
               "outputKey": "buscar_ccr"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b3a676ce-9a95-4f0f-b95d-fff00fe0e6f8",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "menu_contrato",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_contratos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f696d7d0-7a4e-43cf-a7ed-cf231516ab16",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "cliente_bloqueado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente_bloquado"
             }
           ]
         },
@@ -2278,8 +2328,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        832,
-        336
+        352,
+        1024
       ],
       "id": "8d863f48-32c4-4bdf-ada0-db1c9d4b5306",
       "name": "HTTP Request16",
@@ -2301,8 +2351,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1024,
-        336
+        368,
+        1216
       ],
       "id": "b3b57b0d-d226-48bd-adfa-35fb5eb92daf",
       "name": "estados_menus5",
@@ -2327,8 +2377,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        496,
-        544
+        64,
+        592
       ],
       "id": "d4c86c1a-90ac-42bc-ad88-edfad430411d",
       "name": "HTTP Request17",
@@ -2349,8 +2399,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        704,
-        544
+        80,
+        816
       ],
       "id": "a653ef99-65dc-451e-b491-855f915abb7c",
       "name": "API_ALPHA(Ccr)",
@@ -2375,8 +2425,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1088,
-        544
+        96,
+        1168
       ],
       "id": "ed41324d-2bb0-4fe2-a121-aeb2bd1b6563",
       "name": "HTTP Request18",
@@ -2418,7 +2468,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._\",\n  \"delay\": 2400,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2443,11 +2493,150 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        896,
-        560
+        80,
+        1008
       ],
       "id": "5ef3c138-969d-48d8-a07e-906e43a33dab",
       "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.texto_final,\n  \"delay\": 1200,\n  \"linkPreview\": false\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        960,
+        1264
+      ],
+      "id": "ac51cad1-2cc1-42b2-8bc2-6cbeb82d913d",
+      "name": "HTTP Request20",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\n\n// VERIFICAÇÃO: Se não houver contratos ou a API retornar contratoEncontrado como false\nif (resposta.contratoEncontrado === false || !resposta.contratos || resposta.contratos.length === 0) {\n  return {\n    texto_final: \"📜 *CONSULTA DE CONTRATOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNão localizamos contratos ativos ou anteriores vinculados ao seu cadastro no momento. 📂\\n\\n━━━━━━━━━━━━━━━━━━\\n_Digite *0* para voltar ao menu principal._\",\n    contratos_mapeados: [],\n    sucesso_busca: false\n  };\n}\n\nconst contratos = resposta.contratos;\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📜 *CONTRATOS LOCALIZADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet contratosMapeados = [];\n\ncontratos.forEach((item, index) => {\n  const opcao = index + 1; // 1, 2, 3...\n  \n  // Formata a data de validade\n  const dataValidade = new Date(item.dt_validade).toLocaleDateString('pt-BR');\n  \n  // Verifica se o contrato está vencido (comparando com a data de hoje)\n  const hoje = new Date();\n  const dataVenc = new Date(item.dt_validade);\n  const status = dataVenc < hoje ? \"🔴 *Expirado*\" : \"🟢 *Ativo*\";\n\n  listaFormatada += `${opcao}️⃣ *Contrato:* ${item.number}\\n`;\n  listaFormatada += `📅 *Validade:* ${dataValidade}\\n`;\n  listaFormatada += `📌 *Status:* ${status}\\n\\n`;\n\n  // Guarda no mapeamento para identificação posterior\n  contratosMapeados.push({\n      indice: opcao,\n      numero_contrato: item.number,\n      validade: dataValidade\n    });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\n\n\nreturn {\n  texto_final: listaFormatada,\n  contratos_mapeados: contratosMapeados,\n  sucesso_busca: true\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        928,
+        1024
+      ],
+      "id": "f862188c-b2a2-4643-a141-80eaf77d8c6b",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        928,
+        624
+      ],
+      "id": "2c5b93f3-fea3-4673-b3cc-c6c878627485",
+      "name": "HTTP Request21",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:5080/contrato/cliente/{{ $('Switch-menu').item.json.cliente.idCliente }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        928,
+        848
+      ],
+      "id": "e7cfcc78-94da-46a3-bfc6-7ddf13e51b15",
+      "name": "API_ALPHA(Contratos)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid, \n  \"text\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu1').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu').item.json.cliente.razao_social || $('Switch-menu').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu1').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('Edit Fields').item.json.remoteJid.replace('@s.whatsapp.net', '')}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"delay\": 600,\n  \"linkPreview\": false\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        640,
+        112
+      ],
+      "id": "7338105a-e655-49e8-aa85-310ab2079b48",
+      "name": "HTTP Request19",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.mensagem_texto,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -320,
+        528
+      ],
+      "id": "e142479f-b1c7-4628-b264-729bf9c2f0d9",
+      "name": "HTTP Request22",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -2508,7 +2697,7 @@
         ],
         [
           {
-            "node": "recusa",
+            "node": "HTTP Request15",
             "type": "main",
             "index": 0
           }
@@ -2889,24 +3078,12 @@
     },
     "recusa": {
       "main": [
-        [
-          {
-            "node": "Redis2",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "transferencia": {
       "main": [
-        [
-          {
-            "node": "Redis2",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "DADOS_COMPLETOS1": {
@@ -3197,6 +3374,20 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "HTTP Request21",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request22",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -3276,6 +3467,72 @@
           }
         ]
       ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request21": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Contratos)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Contratos)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request20": {
+      "main": [
+        [
+          {
+            "node": "finalizado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request15": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request19",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request22": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -3283,7 +3540,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "54741936-49ab-4bac-8e23-deefa95fad37",
+  "versionId": "049f5b2d-0b59-46b9-ab6c-2c002bb8c06f",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
