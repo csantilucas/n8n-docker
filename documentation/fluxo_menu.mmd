@@ -1,0 +1,28 @@
+---
+config:
+  layout: elk
+  look: classic
+  theme: default
+  elk:
+    mergeEdges: true
+---
+flowchart TD
+    MP[Menu Principal] --> Faturas[1. Minhas Faturas]
+    MP --> CCR[2. Meus CCR]
+    MP --> MTR[3. MTR]
+    MP --> Contratos[4. Meus Contratos]
+    MP --> Suporte[9. Atendente]
+
+    Faturas --> API_F[API Boletos]
+    API_F --> ListaF[Lista de Opções]
+    ListaF --> Gerar[Gera PDF Selecionado]
+
+    CCR --> API_C[API CCR]
+    API_C --> ListaC[Lista Links CCR]
+
+    Contratos --> API_Con[API Contratos]
+    API_Con --> ListaCon[Lista Validades]
+
+    Gerar -.->|Voltar| MP
+    ListaC -.->|Voltar| MP
+    ListaCon -.->|Voltar| MP

@@ -1,0 +1,25 @@
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+flowchart TD
+    Start((Início)) --> Guest[Estado: Guest]
+    Guest --> InputCPF[Informa CPF/CNPJ]
+    InputCPF --> API_Auth{API Busca Cliente}
+    
+    API_Auth -->|Não encontrado| Error[Mensagem de Erro]
+    Error --> Guest
+    
+    API_Auth -->|Encontrado| Verif[Estado: Verificação]
+    Verif --> Input4[Digita 4 dígitos]
+    Input4 --> Valid{Dados Corretos?}
+    
+    Valid -->|Não| Verif
+    Valid -->|Sim| CheckStatus{Inativo / Bloqueado?}
+    
+    CheckStatus -->|Sim| Blocked[Menu Bloqueado]
+    CheckStatus -->|Não| Auth[Estado: Autenticado]
+    
+    Blocked --> Transfer[Transf. Atendente]
+    Auth --> MP[Carrega Menu Principal]
