@@ -442,8 +442,8 @@
       "type": "n8n-nodes-base.redisTool",
       "typeVersion": 1,
       "position": [
-        2560,
-        -1472
+        3616,
+        384
       ],
       "id": "cd981555-eb23-4079-8044-0fd25f37a4ad",
       "name": "delete historioco1",
@@ -464,8 +464,8 @@
       "type": "n8n-nodes-base.redisTool",
       "typeVersion": 1,
       "position": [
-        2736,
-        -1472
+        3792,
+        384
       ],
       "id": "bfab5566-77d0-4e40-9243-54acd7c2ef24",
       "name": "redis delete status1",
@@ -490,8 +490,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        2304,
-        -1472
+        3360,
+        384
       ],
       "id": "138f6c57-60ef-47b4-8378-443a8757d0d1",
       "name": "OpenAI Chat Model1",
@@ -516,8 +516,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2912,
-        -1808
+        3968,
+        48
       ],
       "id": "5295e03f-c35e-43b0-badb-acb662dde4cb",
       "name": "confirma cnpnj/cpf2",
@@ -548,8 +548,8 @@
       "type": "n8n-nodes-base.httpRequestTool",
       "typeVersion": 4.4,
       "position": [
-        2912,
-        -1488
+        3968,
+        368
       ],
       "id": "a4c1e5ac-8378-4437-accb-a34889461443",
       "name": "buscar_cliente1",
@@ -572,8 +572,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        2416,
-        -1920
+        3472,
+        -64
       ],
       "id": "3c9bb913-b70e-4cb8-8d28-a70fd18577e2",
       "name": "AI Agent1"
@@ -963,8 +963,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3104,
-        -16
+        -3184,
+        144
       ],
       "id": "d9517e87-4fa4-4299-95fc-29e4d1310bdb",
       "name": "data_redis",
@@ -1005,8 +1005,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3696,
-        -16
+        -3456,
+        144
       ],
       "id": "8c0f60f2-05b6-457f-a979-dba1c2974450",
       "name": "Redis",
@@ -1054,8 +1054,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3920,
-        0
+        -3632,
+        -208
       ],
       "id": "a1a3b1c1-3900-48ed-ac04-4978d57c35c3",
       "name": "If"
@@ -1069,8 +1069,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -4336,
-        0
+        -3936,
+        -192
       ],
       "id": "bd1582f2-9d37-4943-bcca-e50304ce0a95",
       "name": "Webhook",
@@ -1129,8 +1129,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -4096,
-        0
+        -3808,
+        144
       ],
       "id": "b551dcd7-c0d5-4909-9527-407924609a25",
       "name": "Edit Fields"
@@ -1273,8 +1273,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -3440,
-        0
+        -3312,
+        -192
       ],
       "id": "5b0d0fc7-a073-4048-98d1-c224521f5f94",
       "name": "Merge"
@@ -1411,7 +1411,7 @@
       "typeVersion": 2,
       "position": [
         -464,
-        96
+        -16
       ],
       "id": "031cbd84-4581-4279-99b8-ecbd38792ed0",
       "name": "menu1"
@@ -1505,8 +1505,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        272,
-        -704
+        416,
+        -608
       ],
       "id": "21b0431d-b1cb-42b9-8cd2-27888c6b64b0",
       "name": "HTTP Request1",
@@ -1614,8 +1614,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        272,
-        -528
+        416,
+        -432
       ],
       "id": "8eaef02c-0d7d-4b0e-b82c-0bf6df39eda4",
       "name": "HTTP Request4",
@@ -1640,8 +1640,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        544,
-        -1072
+        928,
+        -944
       ],
       "id": "0baf5999-9bcc-46ea-a91c-310a7ad31a94",
       "name": "HTTP Request5",
@@ -1666,8 +1666,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        544,
-        -1232
+        928,
+        -1104
       ],
       "id": "9f9762ea-4c60-442e-bf2e-0e9269c22d24",
       "name": "HTTP Request6",
@@ -1692,8 +1692,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        544,
-        -1392
+        928,
+        -1264
       ],
       "id": "aff043ae-434d-401d-99cb-d96f581604bb",
       "name": "HTTP Request7",
@@ -1715,8 +1715,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        544,
-        -1536
+        928,
+        -1408
       ],
       "id": "3ed4f23e-d11e-41c7-b6bb-5606d4070b64",
       "name": "estados_menus2",
@@ -1737,8 +1737,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        272,
-        -848
+        416,
+        -752
       ],
       "id": "b1482070-ac35-4a62-9b0d-630ecc7ee097",
       "name": "API_ALPHA(Boletos)",
@@ -1756,8 +1756,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        272,
-        -992
+        416,
+        -896
       ],
       "id": "5303cebd-823f-41c4-93ff-8c50e6fd5392",
       "name": "Code in JavaScript"
@@ -1776,8 +1776,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        272,
-        -1168
+        416,
+        -1072
       ],
       "id": "0b7691c7-04d6-4a2e-a65c-4e66b002a7ff",
       "name": "HTTP Request2",
@@ -1802,8 +1802,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        272,
-        -1392
+        416,
+        -1296
       ],
       "id": "58ff33b8-72fa-4fdf-97cb-c328ae0d8c76",
       "name": "HTTP Request8",
@@ -1825,8 +1825,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        272,
-        -1536
+        416,
+        -1440
       ],
       "id": "d602c6a4-45d9-4cd5-bd93-377c462bf43e",
       "name": "estados_menus3",
@@ -1847,8 +1847,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        816,
-        -896
+        1200,
+        -768
       ],
       "id": "c2454f55-cfc8-4b0f-8da1-156b7dcf05b3",
       "name": "API_ALPHA(Boletos)1",
@@ -1873,8 +1873,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        816,
-        -1120
+        1200,
+        -992
       ],
       "id": "17d49090-1f5b-4f16-b74b-4eb43faceaf2",
       "name": "HTTP Request9",
@@ -1956,8 +1956,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        816,
-        -672
+        1200,
+        -544
       ],
       "id": "c228cd76-ba82-4440-b45d-78c521de3738",
       "name": "HTTP Request10",
@@ -2008,8 +2008,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        336,
-        592
+        608,
+        816
       ],
       "id": "d19c791d-b94e-4436-af3a-580f2dae46b2",
       "name": "HTTP Request13",
@@ -2034,8 +2034,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        352,
-        800
+        640,
+        1040
       ],
       "id": "09b9fef0-6178-4bda-a9e7-2d8c5769e3c5",
       "name": "HTTP Request14",
@@ -2060,8 +2060,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        112
+        736,
+        64
       ],
       "id": "5f251313-2d09-42de-b9dd-0707998c13d1",
       "name": "HTTP Request15",
@@ -2328,8 +2328,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        352,
-        1024
+        656,
+        1248
       ],
       "id": "8d863f48-32c4-4bdf-ada0-db1c9d4b5306",
       "name": "HTTP Request16",
@@ -2351,8 +2351,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        368,
-        1216
+        672,
+        1488
       ],
       "id": "b3b57b0d-d226-48bd-adfa-35fb5eb92daf",
       "name": "estados_menus5",
@@ -2377,8 +2377,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        64,
-        592
+        256,
+        640
       ],
       "id": "d4c86c1a-90ac-42bc-ad88-edfad430411d",
       "name": "HTTP Request17",
@@ -2399,8 +2399,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        80,
-        816
+        288,
+        848
       ],
       "id": "a653ef99-65dc-451e-b491-855f915abb7c",
       "name": "API_ALPHA(Ccr)",
@@ -2425,8 +2425,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        96,
-        1168
+        336,
+        1232
       ],
       "id": "ed41324d-2bb0-4fe2-a121-aeb2bd1b6563",
       "name": "HTTP Request18",
@@ -2448,8 +2448,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1552,
-        -352
+        1984,
+        32
       ],
       "id": "ac55a4b9-1710-4401-ab69-4c2ad880abf3",
       "name": "finalizado",
@@ -2474,8 +2474,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1760,
-        -352
+        2416,
+        32
       ],
       "id": "8012a301-6e14-4857-91db-369024cc8181",
       "name": "finalizado1",
@@ -2493,8 +2493,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        80,
-        1008
+        304,
+        1040
       ],
       "id": "5ef3c138-969d-48d8-a07e-906e43a33dab",
       "name": "Code in JavaScript1"
@@ -2513,8 +2513,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        960,
-        1264
+        1184,
+        1568
       ],
       "id": "ac51cad1-2cc1-42b2-8bc2-6cbeb82d913d",
       "name": "HTTP Request20",
@@ -2532,8 +2532,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        928,
-        1024
+        1152,
+        1328
       ],
       "id": "f862188c-b2a2-4643-a141-80eaf77d8c6b",
       "name": "Code in JavaScript2"
@@ -2552,8 +2552,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        928,
-        624
+        1152,
+        928
       ],
       "id": "2c5b93f3-fea3-4673-b3cc-c6c878627485",
       "name": "HTTP Request21",
@@ -2574,8 +2574,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        928,
-        848
+        1152,
+        1152
       ],
       "id": "e7cfcc78-94da-46a3-bfc6-7ddf13e51b15",
       "name": "API_ALPHA(Contratos)",
@@ -2600,8 +2600,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        640,
-        112
+        1152,
+        64
       ],
       "id": "7338105a-e655-49e8-aa85-310ab2079b48",
       "name": "HTTP Request19",
@@ -2620,17 +2620,43 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.mensagem_texto,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "=={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `⚠️ *AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. ❌\n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. 🎧`,\n  \"delay\": 1200\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -320,
-        528
+        736,
+        304
       ],
       "id": "e142479f-b1c7-4628-b264-729bf9c2f0d9",
       "name": "HTTP Request22",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1088,
+        304
+      ],
+      "id": "35ac7c9f-1e10-4f69-9c83-640091e01c6f",
+      "name": "HTTP Request23",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -3527,7 +3553,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request15",
+            "node": "HTTP Request23",
             "type": "main",
             "index": 0
           }
@@ -3540,7 +3566,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "049f5b2d-0b59-46b9-ab6c-2c002bb8c06f",
+  "versionId": "02856334-dc39-4112-a931-dc3c1b89565a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
