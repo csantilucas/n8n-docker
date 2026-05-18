@@ -13,7 +13,7 @@
           "conditions": [
             {
               "id": "8288279c-5c3c-40b6-b547-f59da0831121",
-              "leftValue": "={{ $('Edit Fields').item.json.conversation.replace(/\\D/g,'') }}",
+              "leftValue": "={{ $('Edit Fields2').item.json.conversation.replace(/\\D/g,'') }}",
               "rightValue": "={{ $json.cliente.cpf_responsavel.slice(0,4) }}",
               "operator": {
                 "type": "string",
@@ -28,11 +28,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1536,
-        1024
+        -4256,
+        8128
       ],
-      "id": "9bcf41c1-4bc0-4f72-878e-821456508ef9",
-      "name": "If1"
+      "id": "14dc0b8b-9efe-4fe8-b5a5-8ff315297979",
+      "name": "If2"
     },
     {
       "parameters": {
@@ -46,7 +46,7 @@
           "conditions": [
             {
               "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
-              "leftValue": "={{ $('API_ALPHA(auth)').item.json.clienteEncontrado }}",
+              "leftValue": "={{ $('API_ALPHA(auth)1').item.json.clienteEncontrado }}",
               "rightValue": "0",
               "operator": {
                 "type": "boolean",
@@ -62,11 +62,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2528,
-        1328
+        -5248,
+        8432
       ],
-      "id": "0ced2436-59ac-4761-b9bc-386ac4883a1f",
-      "name": "encontrado"
+      "id": "48569d3a-7423-4658-94e0-d85bd680af95",
+      "name": "encontrado1"
     },
     {
       "parameters": {
@@ -76,17 +76,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"❌ desculpe {{ $('Edit Fields').item.json.pushName }}, mas não encontramos seu cadastro, nos forneça outro\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"❌ desculpe {{ $('Edit Fields2').item.json.pushName }}, mas não encontramos seu cadastro, nos forneça outro\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2144,
-        1344
+        -4864,
+        8448
       ],
-      "id": "853df5a0-4832-4f25-93c9-dad4c143fd3c",
-      "name": "login invalido",
+      "id": "aa961669-24ed-4164-8b27-59f95e234756",
+      "name": "login invalido1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -102,17 +102,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✅ *VALIDAÇÃO DE ACESSO*\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n\\n` +\n          `Por favor, informe o *CPF* ou *CNPJ* do cadastro.\\n\\n` +\n          `_Digite apenas os números._\\n\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n` +\n          `🛡️ _Seus dados estão protegidos e criptografados._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `✅ *VALIDAÇÃO DE ACESSO*\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n\\n` +\n          `Por favor, informe o *CPF* ou *CNPJ* do cadastro.\\n\\n` +\n          `_Digite apenas os números._\\n\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n` +\n          `🛡️ _Seus dados estão protegidos e criptografados._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1552,
-        -656
+        -4272,
+        6448
       ],
-      "id": "25ce0290-9ba2-4ace-8435-267b50a00db6",
-      "name": "aceite",
+      "id": "841d8876-b2ee-49dd-99c3-ede599defe2d",
+      "name": "aceite1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -128,17 +128,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\":`Você já é nosso *cliente*?\n\n1️⃣ - _sim_\n2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\":`Você já é nosso *cliente*?\n\n1️⃣ - _sim_\n2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2256,
-        -816
+        -4976,
+        6288
       ],
-      "id": "c263a06f-f5fc-4143-aa56-5feeb9be8e85",
-      "name": "é cliente2",
+      "id": "cb080c42-1422-4f87-999e-5486159c9d1a",
+      "name": "é cliente3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -154,17 +154,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `*${$('Edit Fields').item.json.pushName}*, Escolha uma das _opções_ _abaixo_`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `*${$('Edit Fields2').item.json.pushName}*, Escolha uma das _opções_ _abaixo_`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2256,
-        -656
+        -4976,
+        6448
       ],
-      "id": "e0515ddb-1e57-471a-9cd6-40700ac5ff9d",
-      "name": "é cliente",
+      "id": "79fb051b-c060-4e5c-90f3-509377c43675",
+      "name": "é cliente4",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -180,17 +180,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"{{ $json.texto_erro }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"{{ $json.texto_erro }}\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2000,
-        112
+        -4720,
+        7216
       ],
-      "id": "7e1b49ef-0606-4392-94e5-3797c4acba9f",
-      "name": "invalido",
+      "id": "493072aa-a2d0-478a-af22-77faa1db5593",
+      "name": "invalido2",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -205,7 +205,7 @@
             {
               "id": "e0aec0a0-f488-4740-b97f-baa2c481e8fa",
               "name": "texto_erro",
-              "value": "={{\n  (() => {\n    // Tenta pegar o estado; se der erro no parse ou não existir, assume 'inicio'\n    let estado = 'inicio';\n    try {\n      const sessao = $json.dados_sessao?.parseJson();\n      estado = sessao?.estado_anterior || 'inicio';\n    } catch (e) {\n      estado = 'inicio';\n    }\n\n    // Mapeamento de mensagens por estado\nif($('Webhook').item.json.body.data.messageType != \"textMessage\"){ \nreturn \"Opa, não consigo indentificar mensagens essa mensagem, somente texto\"\n}\n\n    if (estado === 'cliente_novo') {\n      return 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n    }\n\n    if (estado === 'autorizado') {\n      return 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n    }\n\n    if (estado === 'AGUARDANDO_CPF') {\n      return 'Desculpe, o CPF ou CNPJ informado parece inválido. Por favor, envie apenas os *números* do seu cadastro.';\n    }\n\n    if (estado === 'AGUARDANDO_CONFIRMAR') {\n      return 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n    }\n\n    // Mensagem padrão caso caia em um estado desconhecido ou no menu inicial\n    return 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n  })()\n}}",
+              "value": "={{\n  (() => {\n    // Tenta pegar o estado; se der erro no parse ou não existir, assume 'inicio'\n    let estado = 'inicio';\n    try {\n      const sessao = $json.dados_sessao?.parseJson();\n      estado = sessao?.estado_anterior || 'inicio';\n    } catch (e) {\n      estado = 'inicio';\n    }\n\n    // Mapeamento de mensagens por estado\nif($('Webhook1').item.json.body.data.messageType != \"textMessage\"){ \nreturn \"Opa, não consigo indentificar mensagens essa mensagem, somente texto\"\n}\n\n    if (estado === 'cliente_novo') {\n      return 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n    }\n\n    if (estado === 'autorizado') {\n      return 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n    }\n\n    if (estado === 'AGUARDANDO_CPF') {\n      return 'Desculpe, o CPF ou CNPJ informado parece inválido. Por favor, envie apenas os *números* do seu cadastro.';\n    }\n\n    if (estado === 'AGUARDANDO_CONFIRMAR') {\n      return 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n    }\n\n    // Mensagem padrão caso caia em um estado desconhecido ou no menu inicial\n    return 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n  })()\n}}",
               "type": "string"
             }
           ]
@@ -215,11 +215,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2144,
-        112
+        -4864,
+        7216
       ],
-      "id": "b143126a-a67c-42cf-a541-a88641b6460a",
-      "name": "Preparar Fallback"
+      "id": "b32acbd2-2a70-4714-94a1-e5df6d7500d5",
+      "name": "Preparar Fallback1"
     },
     {
       "parameters": {
@@ -235,7 +235,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "leftValue": "={{ $('Edit Fields2').item.json.conversation }}",
                     "rightValue": "1",
                     "operator": {
                       "type": "string",
@@ -260,7 +260,7 @@
                 "conditions": [
                   {
                     "id": "06c1d80d-3786-4261-9330-2249441947ef",
-                    "leftValue": "={{ $('If').item.json.conversation }}",
+                    "leftValue": "={{ $('If3').item.json.conversation }}",
                     "rightValue": "2",
                     "operator": {
                       "type": "string",
@@ -283,28 +283,28 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -928,
-        -432
+        -3648,
+        6672
       ],
-      "id": "a7ccd1c4-d8ba-4c11-ab3e-d42a44cdef3f",
-      "name": "Switch3"
+      "id": "3c8170c7-2a4e-48d3-a004-5fd3257ccb8e",
+      "name": "Switch4"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().message,\n        \"text\":$('Edit Fields').item.json.conversation,\n        \"type\":$('Edit Fields').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields2').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('Edit Fields2').item.json.conversation,\n        \"type\":$('Edit Fields2').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1920,
-        -928
+        -4640,
+        6176
       ],
-      "id": "021d0e5c-7326-49e4-a955-1dc2c5420227",
-      "name": "SET CLIENTE",
+      "id": "bae9468a-55df-4c41-8697-2bf026e2eebc",
+      "name": "SET CLIENTE1",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -320,17 +320,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `*${$('Edit Fields').item.json.pushName}*, Para continuar, precisamos validar seus *dados*.\n_Deseja continuar?_\n\n  1️⃣ - _sim_\n  2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `*${$('Edit Fields2').item.json.pushName}*, Para continuar, precisamos validar seus *dados*.\n_Deseja continuar?_\n\n  1️⃣ - _sim_\n  2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1920,
-        -752
+        -4640,
+        6352
       ],
-      "id": "c1e0878c-d80f-4b46-bc7d-ee503effe646",
-      "name": "aceite2",
+      "id": "dce69a6a-4ceb-4344-9066-404acb4f7207",
+      "name": "aceite3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -352,7 +352,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "leftValue": "={{ $('Edit Fields2').item.json.conversation }}",
                     "rightValue": "1",
                     "operator": {
                       "type": "string",
@@ -377,7 +377,7 @@
                 "conditions": [
                   {
                     "id": "061cb7a7-fcf9-4d3d-bd3d-b43493383e9b",
-                    "leftValue": "={{ $('Edit Fields').item.json.conversation }}",
+                    "leftValue": "={{ $('Edit Fields2').item.json.conversation }}",
                     "rightValue": "2",
                     "operator": {
                       "type": "string",
@@ -400,11 +400,11 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1920,
-        -480
+        -4640,
+        6624
       ],
-      "id": "5b2d3953-9260-4988-a332-d703f0899b4c",
-      "name": "Switch2"
+      "id": "1d2f72c4-9343-4dd1-ad1e-c231771cf6ca",
+      "name": "Switch5"
     },
     {
       "parameters": {
@@ -414,17 +414,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `ola *${$('Edit Fields').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*.`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `ola *${$('Edit Fields2').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*.`,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2256,
-        -464
+        -4976,
+        6640
       ],
-      "id": "566c3898-6f37-46d7-811b-592daa539fbc",
-      "name": "é cliente1",
+      "id": "f97ed6bf-677f-4955-91a3-6f6a3ece31c9",
+      "name": "é cliente5",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -437,16 +437,16 @@
         "descriptionType": "manual",
         "toolDescription": "deleta o historio do chat",
         "operation": "delete",
-        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
+        "key": "={{ $('Edit Fields2').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redisTool",
       "typeVersion": 1,
       "position": [
-        3616,
-        384
+        896,
+        7488
       ],
-      "id": "cd981555-eb23-4079-8044-0fd25f37a4ad",
-      "name": "delete historioco1",
+      "id": "a91e55e2-9661-42be-938c-47e0fb010c79",
+      "name": "delete historioco",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -459,16 +459,16 @@
         "descriptionType": "manual",
         "toolDescription": "deletar status do chat ",
         "operation": "delete",
-        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
+        "key": "={{ \"status:\" + $('Edit Fields2').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redisTool",
       "typeVersion": 1,
       "position": [
-        3792,
-        384
+        1072,
+        7488
       ],
-      "id": "bfab5566-77d0-4e40-9243-54acd7c2ef24",
-      "name": "redis delete status1",
+      "id": "ba1aabdb-f3cd-4c06-a963-19aa4a941c59",
+      "name": "redis delete status",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -490,11 +490,11 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        3360,
-        384
+        640,
+        7488
       ],
-      "id": "138f6c57-60ef-47b4-8378-443a8757d0d1",
-      "name": "OpenAI Chat Model1",
+      "id": "81af1371-a516-46a8-a422-43db3d03145d",
+      "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
           "id": "5Ry0SNqau8MTO5Yv",
@@ -510,17 +510,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($json.output) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($json.output) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        3968,
-        48
+        1248,
+        7152
       ],
-      "id": "5295e03f-c35e-43b0-badb-acb662dde4cb",
-      "name": "confirma cnpnj/cpf2",
+      "id": "f88b291e-0612-4886-bb06-4e406f3e5504",
+      "name": "confirma cnpnj/cpf3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -539,7 +539,7 @@
           "parameters": [
             {
               "name": "searchParam",
-              "value": "={{ $('Edit Fields').item.json.conversation }}"
+              "value": "={{ $('Edit Fields2').item.json.conversation }}"
             }
           ]
         },
@@ -548,11 +548,11 @@
       "type": "n8n-nodes-base.httpRequestTool",
       "typeVersion": 4.4,
       "position": [
-        3968,
-        368
+        1248,
+        7472
       ],
-      "id": "a4c1e5ac-8378-4437-accb-a34889461443",
-      "name": "buscar_cliente1",
+      "id": "b40b23a8-b431-4a14-9470-07e0a1cf21a8",
+      "name": "buscar_cliente",
       "credentials": {
         "httpBearerAuth": {
           "id": "0BSHO15UgWj1dH8O",
@@ -563,37 +563,37 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('Edit Fields').item.json.conversation }}",
+        "text": "={{ $('Edit Fields2').item.json.conversation }}",
         "options": {
-          "systemMessage": "=# PERSONA\nVocê é o assistente inteligente da Alpha Software. Atue de forma humanizada, educada e direta, e principalmente textos curtos.\n\n# CONTEXTO DO CLIENTE\nNome: \nStatus: {{ $('Redis').item.json.dados_sessao.parseJson().autenticado ? 'Autenticado' : 'Visitante' }}\nEtapa: {{ $('Redis').item.json.dados_sessao.parseJson().estado_anterior }}\n\n# REGRAS DE NEGÓCIO\n1. TRATAMENTO DE DOCUMENTOS: Se o usuário enviar um CPF ou CNPJ (números longos), use IMEDIATAMENTE a ferramenta 'buscar_cliente'. Nunca repita o documento no chat.\n2. MENUS NUMÉRICOS: Se o usuário digitar \"1\", \"2\", \"3\" ou \"0\", execute a opção correspondente:\n   [1] Ver Faturas (ainda nao implementado - de uma mensagem para o usuario)\n   [2] Meu CCR (ainda nao implementado - de uma mensagem para o usuario)\n   [3] Meus Contratos (ainda nao implementado - de uma mensagem para o usuario)\n   [0] Sair\n3. DÚVIDAS: Se o usuário fizer uma pergunta geral, responda de forma humanizada e, ao final, ofereça o menu numérico acima.\n4. se o usaurio querer ver os dados dele use a ferramente buscar_cliente, peça o cpf/cnpj para ele novamente por segurança, ai asim busque os dados dele e mostre\n\n5.qualque mensagem que possa parecer com alguma das opções do menu tente chamar a opção responsaval\n\n6.se o usuario quizer sair e usar o muno ou mandar uma mensagem relacionada chame as tools de redis delete status e o delete historico \n# RESTRIÇÃO DE SAÍDA\nResponda apenas com o texto que será enviado ao WhatsApp, sem metadados ou explicações internas.",
+          "systemMessage": "=# PERSONA\nVocê é o assistente inteligente da Alpha Software. Atue de forma humanizada, educada e direta, e principalmente textos curtos.\n\n# CONTEXTO DO CLIENTE\nNome: \nStatus: {{ $('Redis5').item.json.dados_sessao.parseJson().autenticado ? 'Autenticado' : 'Visitante' }}\nEtapa: {{ $('Redis5').item.json.dados_sessao.parseJson().estado_anterior }}\n\n# REGRAS DE NEGÓCIO\n1. TRATAMENTO DE DOCUMENTOS: Se o usuário enviar um CPF ou CNPJ (números longos), use IMEDIATAMENTE a ferramenta 'buscar_cliente'. Nunca repita o documento no chat.\n2. MENUS NUMÉRICOS: Se o usuário digitar \"1\", \"2\", \"3\" ou \"0\", execute a opção correspondente:\n   [1] Ver Faturas (ainda nao implementado - de uma mensagem para o usuario)\n   [2] Meu CCR (ainda nao implementado - de uma mensagem para o usuario)\n   [3] Meus Contratos (ainda nao implementado - de uma mensagem para o usuario)\n   [0] Sair\n3. DÚVIDAS: Se o usuário fizer uma pergunta geral, responda de forma humanizada e, ao final, ofereça o menu numérico acima.\n4. se o usaurio querer ver os dados dele use a ferramente buscar_cliente, peça o cpf/cnpj para ele novamente por segurança, ai asim busque os dados dele e mostre\n\n5.qualque mensagem que possa parecer com alguma das opções do menu tente chamar a opção responsaval\n\n6.se o usuario quizer sair e usar o muno ou mandar uma mensagem relacionada chame as tools de redis delete status e o delete historico \n# RESTRIÇÃO DE SAÍDA\nResponda apenas com o texto que será enviado ao WhatsApp, sem metadados ou explicações internas.",
           "maxIterations": 4
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        3472,
-        -64
+        752,
+        7040
       ],
-      "id": "3c9bb913-b70e-4cb8-8d28-a70fd18577e2",
-      "name": "AI Agent1"
+      "id": "dc0da508-1b69-483e-a861-5a6cc6f42afa",
+      "name": "AI Agent"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      },\n    \"message\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().message,\n        \"text\":$('Edit Fields').item.json.conversation,\n        \"type\":$('Edit Fields').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields2').item.json.horario\n      },\n    \"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('Edit Fields2').item.json.conversation,\n        \"type\":$('Edit Fields2').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1552,
-        -464
+        -4272,
+        6640
       ],
-      "id": "90e35b90-ab87-462a-87a8-efc77289dc04",
-      "name": "SET CLIENTE3",
+      "id": "e6ba81c0-dbfb-4ade-96f5-ec59110aa20d",
+      "name": "SET CLIENTE4",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -688,11 +688,11 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1744,
-        464
+        -4464,
+        7568
       ],
-      "id": "50e7593b-0cc3-4e6d-b4c8-5c30dd3e178d",
-      "name": "Switch1"
+      "id": "73149b4d-6a9e-4c3e-b631-1290d5be024d",
+      "name": "Switch6"
     },
     {
       "parameters": {
@@ -709,7 +709,7 @@
                 "conditions": [
                   {
                     "id": "541cb187-62c0-4f6d-ae0b-367f2621a5d4",
-                    "leftValue": "={{ $('Edit Fields').item.json.conversation.toLowerCase() }}",
+                    "leftValue": "={{ $('Edit Fields2').item.json.conversation.toLowerCase() }}",
                     "rightValue": "sair",
                     "operator": {
                       "type": "string",
@@ -880,11 +880,11 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2864,
-        -112
+        -5584,
+        6992
       ],
-      "id": "ae9390c5-b08f-473a-9797-14defcda46cc",
-      "name": "Switch"
+      "id": "41a5f5d2-9526-4ffa-9d2e-f631130c8951",
+      "name": "Switch7"
     },
     {
       "parameters": {
@@ -894,17 +894,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\":`*${$json.auth.nome}*👋\n\nPercebemos que você ainda *não é cliente*\nda Preserva.\n\nPara direcionarmos seu atendimento ao\nsetor comercial, por favor informe os \ndados abaixo:\n\n📄 *_CPF/CNPJ_*\n👤 *_Nome completo ou Razão Social_*\n📍 *_Cidade_*\n\nAssim que recebermos as informações, \num de nossos atendentes continuará\nseu atendimento. 😊\n`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\":`*${$json.auth.nome}*👋\n\nPercebemos que você ainda *não é cliente*\nda Preserva.\n\nPara direcionarmos seu atendimento ao\nsetor comercial, por favor informe os \ndados abaixo:\n\n📄 *_CPF/CNPJ_*\n👤 *_Nome completo ou Razão Social_*\n📍 *_Cidade_*\n\nAssim que recebermos as informações, \num de nossos atendentes continuará\nseu atendimento. 😊\n`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1920,
-        -1120
+        -4640,
+        5984
       ],
-      "id": "e5ac827f-049b-4bbb-bd06-01a6bef25b1d",
-      "name": "transferencia",
+      "id": "9c19da44-0dd9-4b7c-9f88-745adb53ffa1",
+      "name": "transferencia1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -915,16 +915,16 @@
     {
       "parameters": {
         "operation": "delete",
-        "key": "={{ $('Edit Fields').item.json.remoteJid }}"
+        "key": "={{ $('Edit Fields2').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2624,
-        -480
+        -5344,
+        6624
       ],
-      "id": "5982ac6d-32af-4027-9c05-fa56d1b4441a",
-      "name": "Redis2",
+      "id": "fc90fa3b-4c38-4d13-8375-0470a910d227",
+      "name": "Redis3",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -935,16 +935,16 @@
     {
       "parameters": {
         "operation": "delete",
-        "key": "={{ \"status:\" + $('Edit Fields').item.json.remoteJid }}"
+        "key": "={{ \"status:\" + $('Edit Fields2').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2624,
-        -688
+        -5344,
+        6416
       ],
-      "id": "38d79e25-353d-4ee6-b4de-95ce5849f841",
-      "name": "Redis1",
+      "id": "44cb858a-8818-4e14-9d7f-c60061500ab8",
+      "name": "Redis4",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -963,11 +963,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3184,
-        144
+        -5904,
+        7248
       ],
-      "id": "d9517e87-4fa4-4299-95fc-29e4d1310bdb",
-      "name": "data_redis",
+      "id": "fb2e403c-374b-4ee8-adc2-a2d85e74e1cd",
+      "name": "data_redis1",
       "onError": "continueRegularOutput"
     },
     {
@@ -977,7 +977,7 @@
             {
               "id": "937ba465-25bb-4929-b775-f1dfd76949e8",
               "name": "message.conversation",
-              "value": "={{ $('Edit Fields').item.json.conversation.replace(/\\D/g, '') }}",
+              "value": "={{ $('Edit Fields2').item.json.conversation.replace(/\\D/g, '') }}",
               "type": "string"
             }
           ]
@@ -987,11 +987,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2528,
-        736
+        -5248,
+        7840
       ],
-      "id": "454e1d65-b548-48be-9219-56df83b9e794",
-      "name": "get_data"
+      "id": "d3859234-3b78-4d47-ae79-736eaa3cc4d3",
+      "name": "get_data1"
     },
     {
       "parameters": {
@@ -1005,11 +1005,11 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3456,
-        144
+        -6176,
+        7248
       ],
-      "id": "8c0f60f2-05b6-457f-a979-dba1c2974450",
-      "name": "Redis",
+      "id": "0c955eca-c0ed-426b-b71c-6777dae92579",
+      "name": "Redis5",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1040,25 +1040,25 @@
             {
               "id": "047c36a7-3a45-4f80-bc07-c5d3dc1b4002",
               "leftValue": "={{ $json.remoteJid }}",
-              "rightValue": "@g.us",
+              "rightValue": "=556933169350@s.whatsapp.net",
               "operator": {
                 "type": "string",
                 "operation": "endsWith"
               }
             }
           ],
-          "combinator": "and"
+          "combinator": "or"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3632,
-        -208
+        -6352,
+        6896
       ],
-      "id": "a1a3b1c1-3900-48ed-ac04-4978d57c35c3",
-      "name": "If"
+      "id": "2e051bc7-231d-4b2b-9397-41b2b8717efd",
+      "name": "If3"
     },
     {
       "parameters": {
@@ -1069,11 +1069,11 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -3936,
-        -192
+        -6656,
+        6912
       ],
-      "id": "bd1582f2-9d37-4943-bcca-e50304ce0a95",
-      "name": "Webhook",
+      "id": "24cea768-e410-410f-9721-aa9a5fb7ebce",
+      "name": "Webhook1",
       "webhookId": "2e0a6e59-af26-4d95-b572-cf3c5568b51d"
     },
     {
@@ -1129,11 +1129,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3808,
-        144
+        -6528,
+        7248
       ],
-      "id": "b551dcd7-c0d5-4909-9527-407924609a25",
-      "name": "Edit Fields"
+      "id": "1d18ad46-7814-4561-bec9-6063feccf7e4",
+      "name": "Edit Fields2"
     },
     {
       "parameters": {
@@ -1143,17 +1143,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": 'chat finalizado',\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": 'chat finalizado',\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -976,
-        -624
+        -3696,
+        6480
       ],
-      "id": "1cbd4341-126d-43fd-9cdb-c9c42e5545a4",
-      "name": "recusa",
+      "id": "b9d8d7f5-8116-4a5d-8471-6d08283498a5",
+      "name": "recusa1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1169,17 +1169,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✅ *CADASTRO LOCALIZADO!*\n━━━━━━━━━━━━━━━━━━\\n\nTudo certo, seu cadastro foi encontrado em nosso sistema.\\n\nPara sua segurança, informe os *4 primeiros dígitos* do CPF do responsável pela empresa:\\n\nExemplo: \\`1234\\`\\n\n ━━━━━━━━━━━━━━━━━━\n_Apenas números, por favor._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `✅ *CADASTRO LOCALIZADO!*\n━━━━━━━━━━━━━━━━━━\\n\nTudo certo, seu cadastro foi encontrado em nosso sistema.\\n\nPara sua segurança, informe os *4 primeiros dígitos* do CPF do responsável pela empresa:\\n\nExemplo: \\`1234\\`\\n\n ━━━━━━━━━━━━━━━━━━\n_Apenas números, por favor._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2528,
-        1536
+        -5248,
+        8640
       ],
-      "id": "c5a691ca-b13c-44b9-be6a-c4c7bf212ed6",
-      "name": "valido",
+      "id": "6ecf48fc-c857-4091-b19e-a88f4c70605a",
+      "name": "valido1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1190,19 +1190,19 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('Edit Fields').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n          \"bloqueado\":$json.bloqueado,\n          \"Inativo\":$json.inativo,\n          \"cpf_responsavel\":$json.cpf_responsavel,\n          \"email\":$json.email,\n          \"senha\":$json.senha\n      }, \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().message,\n        \"text\":$('Edit Fields').item.json.conversation,\n        \"type\":$('Edit Fields').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('Edit Fields2').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n          \"bloqueado\":$json.bloqueado,\n          \"Inativo\":$json.inativo,\n          \"cpf_responsavel\":$json.cpf_responsavel,\n          \"email\":$json.email,\n          \"senha\":$json.senha\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('Edit Fields2').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('Edit Fields2').item.json.conversation,\n        \"type\":$('Edit Fields2').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2144,
-        1536
+        -4864,
+        8640
       ],
-      "id": "031b69d7-b0ed-4910-9fe2-b681ae408749",
-      "name": "SET AGUARDANDO_CONFIRMAR",
+      "id": "c0f62854-7b0c-499e-b238-03641a9ded8b",
+      "name": "SET AGUARDANDO_CONFIRMAR1",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1218,17 +1218,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"❌ não foi possivel autenticar tente novamente\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"❌ não foi possivel autenticar tente novamente\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1328,
-        1040
+        -4048,
+        8144
       ],
-      "id": "26c89c34-ca87-4dbf-ba46-cf4b50c5c016",
-      "name": "invalido1",
+      "id": "3c4e3150-8b3c-424f-abfb-e265b27149c7",
+      "name": "invalido3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1244,17 +1244,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$json.auth.nome}\n*Empresa:* ${$json.cliente.empresa}\n*Cidade:* ${$json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$json.auth.nome}\n*Empresa:* ${$json.cliente.empresa}\n*Cidade:* ${$json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1536,
-        1168
+        -4256,
+        8272
       ],
-      "id": "c5e12b63-024e-4a73-8d0c-80fcb49ca498",
-      "name": "confirma cnpnj/cpf",
+      "id": "641adffc-bff6-4218-af3f-3f0e19eb2ac5",
+      "name": "confirma cnpnj/cpf1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1273,28 +1273,28 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -3312,
-        -192
+        -6032,
+        6912
       ],
-      "id": "5b0d0fc7-a073-4048-98d1-c224521f5f94",
-      "name": "Merge"
+      "id": "f804c62e-c736-415d-b605-ee8f6c3f2a1c",
+      "name": "Merge1"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('Edit Fields').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": \"PR-\"+$('Edit Fields').item.json.remoteJid+Date.now()\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"ultima_interacao\": $('Edit Fields').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  message:{\n  text:$('Edit Fields').item.json.conversation,\n  type:$('Edit Fields').item.json.messageType\n  }\n  })\n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('Edit Fields2').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": \"PR-\"+$('Edit Fields2').item.json.remoteJid+Date.now()\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"ultima_interacao\": $('Edit Fields2').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  message:{\n  text:$('Edit Fields2').item.json.conversation,\n  type:$('Edit Fields2').item.json.messageType\n  }\n  })\n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2256,
-        -976
+        -4976,
+        6128
       ],
-      "id": "e73fb28b-a453-41fc-afe9-05ab24aa21ce",
-      "name": "SET CLIENTE2",
+      "id": "72aca2af-ce1e-4b96-bb95-79208495870b",
+      "name": "SET CLIENTE5",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1310,17 +1310,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($('menu1').item.json.mensagem_texto) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify($('menu3').item.json.mensagem_texto) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -96,
-        -480
+        -2816,
+        6624
       ],
-      "id": "16787f80-fe05-42c3-8dd4-33f5654166e4",
-      "name": "HTTP Request11",
+      "id": "8d800ebf-53ea-411f-8f0e-c4cb832ca9d8",
+      "name": "HTTP Request24",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1336,17 +1336,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"sessão encerrada, até mais 👋\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"sessão encerrada, até mais 👋\" ,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2624,
-        -864
+        -5344,
+        6240
       ],
-      "id": "cec4713c-538e-4ee0-bef4-193ebc15fe63",
-      "name": "logof",
+      "id": "3db4c8fe-c1e9-46da-b9c9-499febce60ba",
+      "name": "logof1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1357,19 +1357,19 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('Edit Fields').item.json.horario,\n      \"logado\":true,\n      \"estado_anterior\": \"autenticado_autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().navegacao,\n        \"menu_atual\":\"Menu_Principal\",\n        \"ultima_interacao\":$('Edit Fields').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge\"].json.dados_sessao.parseJson().message,\n        \"text\":\"Login Realizado\",\n        \"type\":$('Edit Fields').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('Edit Fields2').item.json.horario,\n      \"logado\":true,\n      \"estado_anterior\": \"autenticado_autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"menu_atual\":\"Menu_Principal\",\n        \"ultima_interacao\":$('Edit Fields2').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"Login Realizado\",\n        \"type\":$('Edit Fields2').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1536,
-        1424
+        -4256,
+        8528
       ],
-      "id": "8af239fc-1756-438c-902e-1c0d108d7479",
-      "name": "DADOS_COMPLETOS1",
+      "id": "f898b82f-6968-4433-aced-3b2d0e1a85e1",
+      "name": "DADOS_COMPLETOS",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1385,17 +1385,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"*_Menu Inicial_*\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"*_Menu Inicial_*\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1520,
-        1632
+        -4240,
+        8736
       ],
-      "id": "9b27e912-6d39-43a0-8a63-3769b521067c",
-      "name": "menu",
+      "id": "cb723287-ced8-41e6-bba6-2618c41aa0c4",
+      "name": "menu2",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1405,33 +1405,33 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('Edit Fields').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"abrir_menu\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"abrir_menu\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
+        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('Edit Fields2').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"menu_ccr\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"menu_contrato\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -464,
-        -16
+        -3184,
+        7088
       ],
-      "id": "031cbd84-4581-4279-99b8-ecbd38792ed0",
-      "name": "menu1"
+      "id": "4f055761-91bd-4c6f-be39-41f70671cb96",
+      "name": "menu3"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json, // Puxamos tudo que o Code cuspiu (auth, cliente, etc)\n    \"navegacao\": {\n      \"menu_atual\": $node[\"menu1\"].json.proximo_estado, // O novo menu\n      \"ultima_interacao\": $('Edit Fields').item.json.horario\n    },\n    \"auth\": {\n      ...$node[\"menu1\"].json.auth,\n      \"estado_anterior\": $node[\"menu1\"].json.limpar_login ? \"\" : ($node[\"menu1\"].json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('Edit Fields').item.json.conversation,\n      \"type\": $('Edit Fields').item.json.messageType\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json, // Puxamos tudo que o Code cuspiu (auth, cliente, etc)\n    \"navegacao\": {\n      \"menu_atual\": $node[\"menu3\"].json.proximo_estado, // O novo menu\n      \"ultima_interacao\": $('Edit Fields2').item.json.horario\n    },\n    \"auth\": {\n      ...$node[\"menu3\"].json.auth,\n      \"estado_anterior\": $node[\"menu3\"].json.limpar_login ? \"\" : ($node[\"menu3\"].json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('Edit Fields2').item.json.conversation,\n      \"type\": $('Edit Fields2').item.json.messageType\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -112,
-        -656
+        -2832,
+        6448
       ],
-      "id": "02b214cc-e28e-47b5-a311-da7196598b1e",
-      "name": "estados_menus",
+      "id": "bbaa248c-2f93-4716-b90b-ac857f0a643d",
+      "name": "estados_menus1",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1447,17 +1447,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"_*Protocolo:*_ _`{{ $('data_redis').item.json.auth.protocolo }}`_\\n━━━━━━━━━━━━━━━━━━\\n\\nOlá, *{{ $('data_redis').item.json.auth.nome }}*! 👋\\nMenu Principal\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR*\\n3️⃣ - *MTR*\\n4️⃣ - *Meus contratos*\\n5️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"_*Protocolo:*_ _`{{ $('data_redis1').item.json.auth.protocolo }}`_\\n━━━━━━━━━━━━━━━━━━\\n\\nOlá, *{{ $('data_redis1').item.json.auth.nome }}*! 👋\\nMenu Principal\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR*\\n3️⃣ - *MTR*\\n4️⃣ - *Meus contratos*\\n5️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1264,
-        1632
+        -3984,
+        8736
       ],
-      "id": "c3871fc2-7443-4eed-b4b1-532630d70783",
-      "name": "menu principal",
+      "id": "8b4e4901-81ce-47b6-b92a-45de2f775429",
+      "name": "menu principal1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1473,17 +1473,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -96,
-        -288
+        -2816,
+        6816
       ],
-      "id": "9a75d094-2237-4038-9960-e5be0a1b43ea",
-      "name": "HTTP Request",
+      "id": "d3f7bd80-36a7-4886-ac5f-abf733cfceaa",
+      "name": "HTTP Request3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1499,17 +1499,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"⌛... Estamos buscando suas faturas\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"⌛... Estamos buscando suas faturas\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        -608
+        -2304,
+        6496
       ],
-      "id": "21b0431d-b1cb-42b9-8cd2-27888c6b64b0",
-      "name": "HTTP Request1",
+      "id": "32a1d2de-fc18-4f0a-b24b-7ec6ed4c6db9",
+      "name": "HTTP Request25",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1524,19 +1524,19 @@
             {
               "id": "fb3ed8ad-0f7d-43fc-b1a7-37f515eb4582",
               "name": "idCliente",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.idCliente }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.idCliente }}",
               "type": "number"
             },
             {
               "id": "53070489-f720-420a-8160-50c9e30eb2ba",
               "name": "responsavel",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.nomeResponsavel }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.nomeResponsavel }}",
               "type": "string"
             },
             {
               "id": "cec9d65f-ccc2-4cc8-93f7-a20e0c64a2a8",
               "name": "empresa",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.empresa }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.empresa }}",
               "type": "string"
             },
             {
@@ -1548,19 +1548,19 @@
             {
               "id": "d7c9f06f-e065-47a4-876b-41676b82a97b",
               "name": "cidade",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.cidade }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.cidade }}",
               "type": "string"
             },
             {
               "id": "5ce6adaa-c4f0-4dbe-a4ea-5b4e86f428ed",
               "name": "inativo",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.inativo }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.inativo }}",
               "type": "string"
             },
             {
               "id": "1f69d41d-07c6-435d-a626-d4223c68a2ae",
               "name": "bloqueado",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.bloqueado }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.bloqueado }}",
               "type": "string"
             },
             {
@@ -1572,13 +1572,13 @@
             {
               "id": "12edb63c-2edd-4ac5-b25b-3c27aeb2b07d",
               "name": "cpf_responsavel",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.cpfresponsavel }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.cpfresponsavel }}",
               "type": "string"
             },
             {
               "id": "dd33eb97-f146-416d-84ca-f9abb2e1ae06",
               "name": "email",
-              "value": "={{ $('API_ALPHA(auth)').item.json.client.email }}",
+              "value": "={{ $('API_ALPHA(auth)1').item.json.client.email }}",
               "type": "string"
             },
             {
@@ -1594,11 +1594,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2320,
-        1536
+        -5040,
+        8640
       ],
-      "id": "29cc43d2-bd59-4848-aa3e-7fec1fdf3a76",
-      "name": "Edit Fields1"
+      "id": "a2dcd4fd-8831-4a24-9380-965a9d942da8",
+      "name": "Edit Fields3"
     },
     {
       "parameters": {
@@ -1608,17 +1608,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        -432
+        -2304,
+        6672
       ],
-      "id": "8eaef02c-0d7d-4b0e-b82c-0bf6df39eda4",
-      "name": "HTTP Request4",
+      "id": "6b6845c8-7c2a-4546-8f82-ddc6ed31c833",
+      "name": "HTTP Request26",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1634,17 +1634,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        928,
-        -944
+        -1792,
+        6160
       ],
-      "id": "0baf5999-9bcc-46ea-a91c-310a7ad31a94",
-      "name": "HTTP Request5",
+      "id": "e80fc7ae-e7cf-4168-8484-dcd8725ad5b0",
+      "name": "HTTP Request27",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1660,17 +1660,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"📄 Você também pode acessar seus certificados de coleta pela plataforma:\\n\\n👇 CERTIFICADOS DE COLETAS 👇\\nhttps://documentos-alphasoftware.premiumasp.net/\\n\\n🔐 Dados de acesso:\\n• Domínio: preservasolucoes\\n• E-mail: {{ $('menu1').item.json.cliente.email }}\\n• Senha: os 4 primeiros dígitos do CPF/CNPJ\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"📄 Você também pode acessar seus certificados de coleta pela plataforma:\\n\\n👇 CERTIFICADOS DE COLETAS 👇\\nhttps://documentos-alphasoftware.premiumasp.net/\\n\\n🔐 Dados de acesso:\\n• Domínio: preservasolucoes\\n• E-mail: {{ $('menu3').item.json.cliente.email }}\\n• Senha: os 4 primeiros dígitos do CPF/CNPJ\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        928,
-        -1104
+        -1792,
+        6000
       ],
-      "id": "9f9762ea-4c60-442e-bf2e-0e9269c22d24",
-      "name": "HTTP Request6",
+      "id": "c4787c43-937f-4d0b-926d-c567b00b743c",
+      "name": "HTTP Request28",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1686,17 +1686,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"📦 *CCR DISPONÍVEIS*\\n\\nEncontramos 6 CCRs vinculados ao seu cadastro.\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n\\n0️⃣ - *Voltar ao menu*\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"📦 *CCR DISPONÍVEIS*\\n\\nEncontramos 6 CCRs vinculados ao seu cadastro.\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n\\n0️⃣ - *Voltar ao menu*\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        928,
-        -1264
+        -1792,
+        5840
       ],
-      "id": "aff043ae-434d-401d-99cb-d96f581604bb",
-      "name": "HTTP Request7",
+      "id": "d42104de-52c1-4ad9-b97b-ac315a4e61dc",
+      "name": "HTTP Request29",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1707,19 +1707,19 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        928,
-        -1408
+        -1792,
+        5696
       ],
-      "id": "3ed4f23e-d11e-41c7-b6bb-5606d4070b64",
-      "name": "estados_menus2",
+      "id": "bfb4de06-f525-4c00-abbf-3d4a821086de",
+      "name": "estados_menus4",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1729,7 +1729,7 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/fatura/cliente/{{ $('Switch-menu').item.json.cliente.idCliente }}",
+        "url": "=http://host.docker.internal:5080/fatura/cliente/{{ $('Switch-menu1').item.json.cliente.idCliente }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "options": {}
@@ -1737,11 +1737,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        -752
+        -2304,
+        6352
       ],
-      "id": "b1482070-ac35-4a62-9b0d-630ecc7ee097",
-      "name": "API_ALPHA(Boletos)",
+      "id": "31355bf0-86fd-468a-bb03-b031e094b4ab",
+      "name": "API_ALPHA(Boletos)2",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1756,11 +1756,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        416,
-        -896
+        -2304,
+        6208
       ],
-      "id": "5303cebd-823f-41c4-93ff-8c50e6fd5392",
-      "name": "Code in JavaScript"
+      "id": "82d87a61-a510-48b9-a3b5-c81c4a15c218",
+      "name": "Code in JavaScript3"
     },
     {
       "parameters": {
@@ -1770,17 +1770,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.texto_final,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": $json.texto_final,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        -1072
+        -2304,
+        6032
       ],
-      "id": "0b7691c7-04d6-4a2e-a65c-4e66b002a7ff",
-      "name": "HTTP Request2",
+      "id": "680cbb9a-0a5d-47da-8792-b870e4805819",
+      "name": "HTTP Request30",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1796,17 +1796,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\n\n━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  \"delay\": 600,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\n\n━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  \"delay\": 600,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        416,
-        -1296
+        -2304,
+        5808
       ],
-      "id": "58ff33b8-72fa-4fdf-97cb-c328ae0d8c76",
-      "name": "HTTP Request8",
+      "id": "038105c4-1aa2-42a2-a745-660d18688b02",
+      "name": "HTTP Request31",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1817,19 +1817,19 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json, \n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\",\n      \"faturas_disponiveis\": $(\"Code in JavaScript\").item.json.faturas_mapeadas, \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json, \n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\",\n      \"faturas_disponiveis\": $(\"Code in JavaScript3\").item.json.faturas_mapeadas, \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        416,
-        -1440
+        -2304,
+        5664
       ],
-      "id": "d602c6a4-45d9-4cd5-bd93-377c462bf43e",
-      "name": "estados_menus3",
+      "id": "4bac92b0-b9c4-4d32-afcf-48fd68263397",
+      "name": "estados_menus6",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -1839,7 +1839,7 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/fatura/{{ $('Switch-menu').item.json.idFatura }}",
+        "url": "=http://host.docker.internal:5080/fatura/{{ $('Switch-menu1').item.json.idFatura }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "options": {}
@@ -1847,11 +1847,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1200,
-        -768
+        -1520,
+        6336
       ],
-      "id": "c2454f55-cfc8-4b0f-8da1-156b7dcf05b3",
-      "name": "API_ALPHA(Boletos)1",
+      "id": "8d876f30-a626-482e-99ef-ed615b94ea9e",
+      "name": "API_ALPHA(Boletos)3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1867,17 +1867,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"✅ *FATURA LOCALIZADA*\\n━━━━━━━━━━━━━━━━━━\\n\\n📄 *Boleto:* {{ $json.fatura.num_bol }}\\n🗓️ *Vencimento:* {{ new Date($json.fatura.dt_fechamento).toLocaleDateString('pt-BR') }}\\n💰 *Valor total:* {{ $json.fatura.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}\\n\\n🔗 *Copia e Cola:*\\n```{{ $json.fatura.linha_dgt.replace(/\\\\s+/g, '') }}```\\n\\n━━━━━━━━━━━━━━━━━━\\n_O arquivo PDF está sendo gerado e será enviado abaixo._ ⏳\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"✅ *FATURA LOCALIZADA*\\n━━━━━━━━━━━━━━━━━━\\n\\n📄 *Boleto:* {{ $json.fatura.num_bol }}\\n🗓️ *Vencimento:* {{ new Date($json.fatura.dt_fechamento).toLocaleDateString('pt-BR') }}\\n💰 *Valor total:* {{ $json.fatura.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}\\n\\n🔗 *Copia e Cola:*\\n```{{ $json.fatura.linha_dgt.replace(/\\\\s+/g, '') }}```\\n\\n━━━━━━━━━━━━━━━━━━\\n_O arquivo PDF está sendo gerado e será enviado abaixo._ ⏳\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1200,
-        -992
+        -1520,
+        6112
       ],
-      "id": "17d49090-1f5b-4f16-b74b-4eb43faceaf2",
-      "name": "HTTP Request9",
+      "id": "37291ae6-7eab-4dd8-9ff3-4a2eb108ed11",
+      "name": "HTTP Request32",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1900,7 +1900,7 @@
           "parameters": [
             {
               "name": "documento",
-              "value": "={{ $('Edit Fields').item.json.conversation }}"
+              "value": "={{ $('Edit Fields2').item.json.conversation }}"
             }
           ]
         },
@@ -1909,11 +1909,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2528,
-        1136
+        -5248,
+        8240
       ],
-      "id": "497f8dcc-7ef3-42b9-b9ab-2795350f7dda",
-      "name": "API_ALPHA(auth)",
+      "id": "e4a277b9-bfa3-46e6-a16a-d24dd6897615",
+      "name": "API_ALPHA(auth)1",
       "onError": "continueErrorOutput"
     },
     {
@@ -1924,17 +1924,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"⌛ um momento {{ $('Edit Fields').item.json.pushName }}, estamos buscando seu cadastro ⌛...\" ,\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"⌛ um momento {{ $('Edit Fields2').item.json.pushName }}, estamos buscando seu cadastro ⌛...\" ,\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2528,
-        944
+        -5248,
+        8048
       ],
-      "id": "93f8c04e-88eb-4df7-8ef5-4e59e15839cf",
-      "name": "buscando1",
+      "id": "72a61a10-092c-4200-a8d7-48eec15bda56",
+      "name": "buscando",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1950,17 +1950,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1200,
-        -544
+        -1520,
+        6560
       ],
-      "id": "c228cd76-ba82-4440-b45d-78c521de3738",
-      "name": "HTTP Request10",
+      "id": "288ee194-336e-4738-8498-1ddb8807fa9f",
+      "name": "HTTP Request33",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -1976,17 +1976,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera trasnferido aguarde\",\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": \"seu chat sera trasnferido aguarde\",\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -208,
-        -848
+        -2928,
+        6256
       ],
-      "id": "59c0bc96-1a48-42dd-9f8b-197a7e8aaf46",
-      "name": "HTTP Request12",
+      "id": "b1cb6a82-6da5-49fa-9df5-456892d728cc",
+      "name": "HTTP Request34",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2002,17 +2002,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        608,
-        816
+        -2112,
+        7920
       ],
-      "id": "d19c791d-b94e-4436-af3a-580f2dae46b2",
-      "name": "HTTP Request13",
+      "id": "500799a4-4986-4fc3-a760-3fc6178e501d",
+      "name": "HTTP Request35",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2028,17 +2028,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"📄 *PLATAFORMA DE CERTIFICADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nVocê pode acessar seus certificados de coleta diretamente pela nossa plataforma:\\n\\n🌐 *Acesse aqui:*\\nhttps://documentos-alphasoftware.premiumasp.net/\\n\\n🔐 *DADOS DE ACESSO*\\n\\n• *Domínio:* `preservasolucoes` \\n• *E-mail:* `\" + ($('menu1').item.json.cliente.email || \"não encontrado\") + \"`\\n• *Senha:* _Os 4 primeiros dígitos do seu CPF/CNPJ_\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Dica: Clique no link acima para fazer o login._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": \"📄 *PLATAFORMA DE CERTIFICADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nVocê pode acessar seus certificados de coleta diretamente pela nossa plataforma:\\n\\n🌐 *Acesse aqui:*\\nhttps://documentos-alphasoftware.premiumasp.net/\\n\\n🔐 *DADOS DE ACESSO*\\n\\n• *Domínio:* `preservasolucoes` \\n• *E-mail:* `\" + ($('menu3').item.json.cliente.email || \"não encontrado\") + \"`\\n• *Senha:* _Os 4 primeiros dígitos do seu CPF/CNPJ_\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Dica: Clique no link acima para fazer o login._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        640,
-        1040
+        -2080,
+        8144
       ],
-      "id": "09b9fef0-6178-4bda-a9e7-2d8c5769e3c5",
-      "name": "HTTP Request14",
+      "id": "7e90d152-045e-46b4-a36c-16acce3490a5",
+      "name": "HTTP Request36",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2054,17 +2054,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        64
+        -1984,
+        7168
       ],
-      "id": "5f251313-2d09-42de-b9dd-0707998c13d1",
-      "name": "HTTP Request15",
+      "id": "02bc3584-744d-4f55-bdd6-ac305a9952f4",
+      "name": "HTTP Request37",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2213,7 +2213,7 @@
                   {
                     "id": "c3c1833f-1620-468a-a34b-63c556914a9a",
                     "leftValue": "={{ $json.rota_destino }}",
-                    "rightValue": "nenu_ccr",
+                    "rightValue": "menu_ccr",
                     "operator": {
                       "type": "string",
                       "operation": "equals",
@@ -2308,11 +2308,11 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -80,
-        16
+        -2800,
+        7120
       ],
-      "id": "78ad7168-7779-47ad-9004-d658a1e5390b",
-      "name": "Switch-menu"
+      "id": "4bc228b9-0b27-4ace-a400-0aefe58b8058",
+      "name": "Switch-menu1"
     },
     {
       "parameters": {
@@ -2322,17 +2322,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"📦 *CCRs DISPONÍVEIS*\\n━━━━━━━━━━━━━━━━━━\\nEncontramos *6 CCRs* vinculados ao seu cadastro.\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n━━━━━━━━━━━━━━━━━━\\n\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*\\n_💡 Digite a opção desejada._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": \"📦 *CCRs DISPONÍVEIS*\\n━━━━━━━━━━━━━━━━━━\\nEncontramos *6 CCRs* vinculados ao seu cadastro.\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n━━━━━━━━━━━━━━━━━━\\n\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*\\n_💡 Digite a opção desejada._\",\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        656,
-        1248
+        -2064,
+        8352
       ],
-      "id": "8d863f48-32c4-4bdf-ada0-db1c9d4b5306",
-      "name": "HTTP Request16",
+      "id": "1ea244bb-b1a0-4f16-833a-2bfdc4cbf49d",
+      "name": "HTTP Request38",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2343,19 +2343,19 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"buscar_ccr\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"buscar_ccr\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        672,
-        1488
+        -2048,
+        8592
       ],
-      "id": "b3b57b0d-d226-48bd-adfa-35fb5eb92daf",
-      "name": "estados_menus5",
+      "id": "4a6935a2-2450-4c7e-921a-a60081c8593f",
+      "name": "estados_menus7",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -2371,17 +2371,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": \"{{ $json.mensagem_texto }}\",\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": $json.mensagem_texto,\n  \"delay\": 600,\n  \"linkPreview\": true\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        256,
-        640
+        -2464,
+        7744
       ],
-      "id": "d4c86c1a-90ac-42bc-ad88-edfad430411d",
-      "name": "HTTP Request17",
+      "id": "baf571b5-c4ec-405f-89bf-6b9c4385e84d",
+      "name": "HTTP Request39",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2391,7 +2391,7 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/ccr/cliente/{{ $('Switch-menu').item.json.cliente.idCliente }}/{{ $('Switch-menu').item.json.quantidade_ccr }}",
+        "url": "=http://host.docker.internal:5080/ccr/cliente/{{ $('Switch-menu1').item.json.cliente.idCliente }}/{{ $('Switch-menu1').item.json.quantidade_ccr }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "options": {}
@@ -2399,11 +2399,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        288,
-        848
+        -2432,
+        7952
       ],
-      "id": "a653ef99-65dc-451e-b491-855f915abb7c",
-      "name": "API_ALPHA(Ccr)",
+      "id": "88a1e8d2-8265-4573-ac8b-569e5a5518df",
+      "name": "API_ALPHA(Ccr)1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2419,17 +2419,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.texto_ccr,\n  \"delay\": 1200,\n  \"linkPreview\": false\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": $json.texto_ccr,\n  \"delay\": 1200,\n  \"linkPreview\": false\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        336,
-        1232
+        -2416,
+        8416
       ],
-      "id": "ed41324d-2bb0-4fe2-a121-aeb2bd1b6563",
-      "name": "HTTP Request18",
+      "id": "fbd93ddc-4fc5-41aa-91ff-439cbe12e534",
+      "name": "HTTP Request40",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2440,19 +2440,19 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('Edit Fields').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu1\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"fluxo_finalizado\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('Edit Fields2').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"fluxo_finalizado\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1984,
-        32
+        -736,
+        7136
       ],
-      "id": "ac55a4b9-1710-4401-ab69-4c2ad880abf3",
-      "name": "finalizado",
+      "id": "c8f236fd-0714-4979-a159-0d9effa21ac7",
+      "name": "finalizado2",
       "credentials": {
         "redis": {
           "id": "Nlx2xipOfGaXNmN3",
@@ -2468,17 +2468,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": \"✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._\",\n  \"delay\": 2400,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": \"✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._\",\n  \"delay\": 2400,\n  \"linkPreview\": true\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2416,
-        32
+        -304,
+        7136
       ],
-      "id": "8012a301-6e14-4857-91db-369024cc8181",
-      "name": "finalizado1",
+      "id": "0cd7fd44-3def-4aa0-bcfa-b972346e6634",
+      "name": "finalizado3",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2493,11 +2493,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        304,
-        1040
+        -2416,
+        8160
       ],
-      "id": "5ef3c138-969d-48d8-a07e-906e43a33dab",
-      "name": "Code in JavaScript1"
+      "id": "c29d0745-4f8b-4f1a-8cdf-858a4240ec2a",
+      "name": "Code in JavaScript4"
     },
     {
       "parameters": {
@@ -2507,17 +2507,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": $json.texto_final,\n  \"delay\": 1200,\n  \"linkPreview\": false\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": $json.texto_final,\n  \"delay\": 1200,\n  \"linkPreview\": false\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1184,
-        1568
+        -1536,
+        8672
       ],
-      "id": "ac51cad1-2cc1-42b2-8bc2-6cbeb82d913d",
-      "name": "HTTP Request20",
+      "id": "be0d8a41-03b9-4368-89dc-50755467d710",
+      "name": "HTTP Request41",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2532,11 +2532,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1152,
-        1328
+        -1568,
+        8432
       ],
-      "id": "f862188c-b2a2-4643-a141-80eaf77d8c6b",
-      "name": "Code in JavaScript2"
+      "id": "124b20f5-f576-476e-84ff-94c2dc5c569f",
+      "name": "Code in JavaScript5"
     },
     {
       "parameters": {
@@ -2546,17 +2546,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
+        "jsonBody": "={\n  \"number\": \"{{ $('Edit Fields2').item.json.remoteJid }}\",\n  \"text\": {{ JSON.stringify(($json.mensagem_confirmacao)) }},\n  \"delay\": 600,\n  \"linkPreview\": true\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1152,
-        928
+        -1568,
+        8032
       ],
-      "id": "2c5b93f3-fea3-4673-b3cc-c6c878627485",
-      "name": "HTTP Request21",
+      "id": "e3cf856c-5d0b-4c13-9d7a-259275e20b3b",
+      "name": "HTTP Request42",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2566,7 +2566,7 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/contrato/cliente/{{ $('Switch-menu').item.json.cliente.idCliente }}",
+        "url": "=http://host.docker.internal:5080/contrato/cliente/{{ $('Switch-menu1').item.json.cliente.idCliente }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "options": {}
@@ -2574,37 +2574,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1152,
-        1152
+        -1568,
+        8256
       ],
-      "id": "e7cfcc78-94da-46a3-bfc6-7ddf13e51b15",
-      "name": "API_ALPHA(Contratos)",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "58e8GuLLt0IjtaTT",
-          "name": "Header Auth account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://evolution_api:8080/message/sendText/App",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid, \n  \"text\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu1').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu').item.json.cliente.razao_social || $('Switch-menu').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu1').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('Edit Fields').item.json.remoteJid.replace('@s.whatsapp.net', '')}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"delay\": 600,\n  \"linkPreview\": false\n}\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        1152,
-        64
-      ],
-      "id": "7338105a-e655-49e8-aa85-310ab2079b48",
-      "name": "HTTP Request19",
+      "id": "5c20f9af-137a-4bb0-9a8c-4db36462076d",
+      "name": "API_ALPHA(Contratos)1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2620,17 +2594,17 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "=={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `⚠️ *AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. ❌\n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. 🎧`,\n  \"delay\": 1200\n}\n}}",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid, \n  \"text\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu3').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu3').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('Edit Fields2').item.json.remoteJid.replace('@s.whatsapp.net', '')}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"delay\": 600,\n  \"linkPreview\": false\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        304
+        -1568,
+        7168
       ],
-      "id": "e142479f-b1c7-4628-b264-729bf9c2f0d9",
-      "name": "HTTP Request22",
+      "id": "fe8fe0b1-15c2-43f4-a19d-feed2e87b402",
+      "name": "HTTP Request43",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2646,17 +2620,43 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields').item.json.remoteJid,\n  \"text\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "jsonBody": "=={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `⚠️ *AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. ❌\n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. 🎧`,\n  \"delay\": 1200\n}\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1088,
-        304
+        -1984,
+        7408
       ],
-      "id": "35ac7c9f-1e10-4f69-9c83-640091e01c6f",
-      "name": "HTTP Request23",
+      "id": "56cb02d2-1eaa-4d43-aaa4-86c67d9c4417",
+      "name": "HTTP Request44",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "58e8GuLLt0IjtaTT",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution_api:8080/message/sendText/App",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n{\n  \"number\": $('Edit Fields2').item.json.remoteJid,\n  \"text\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"delay\": 1200,\n  \"linkPreview\": true\n}\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1632,
+        7408
+      ],
+      "id": "271800dd-f92a-4c29-96f6-06038e9bd0a2",
+      "name": "HTTP Request45",
       "credentials": {
         "httpHeaderAuth": {
           "id": "58e8GuLLt0IjtaTT",
@@ -2667,893 +2667,868 @@
   ],
   "pinData": {},
   "connections": {
-    "encontrado": {
+    "If2": {
       "main": [
         [
           {
-            "node": "valido",
+            "node": "confirma cnpnj/cpf1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "login invalido",
+            "node": "invalido3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "login invalido": {
-      "main": [
-        []
-      ]
-    },
-    "é cliente": {
+    "encontrado1": {
       "main": [
         [
           {
-            "node": "é cliente2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Preparar Fallback": {
-      "main": [
-        [
-          {
-            "node": "invalido",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch3": {
-      "main": [
-        [
-          {
-            "node": "SET CLIENTE3",
+            "node": "valido1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request15",
+            "node": "login invalido1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é cliente3": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "é cliente4": {
+      "main": [
+        [
+          {
+            "node": "é cliente3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Fallback1": {
+      "main": [
+        [
+          {
+            "node": "invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch4": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE4",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Preparar Fallback",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "aceite2": {
-      "main": [
-        [
-          {
-            "node": "SET CLIENTE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch2": {
-      "main": [
-        [
-          {
-            "node": "aceite2",
+            "node": "HTTP Request37",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "transferencia",
+            "node": "Preparar Fallback1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aceite3": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch5": {
+      "main": [
+        [
+          {
+            "node": "aceite3",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Preparar Fallback",
+            "node": "transferencia1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Fallback1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "é cliente2": {
+    "é cliente5": {
       "main": [
         [
           {
-            "node": "SET CLIENTE2",
+            "node": "é cliente4",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "é cliente1": {
-      "main": [
-        [
-          {
-            "node": "é cliente",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "delete historioco1": {
+    "delete historioco": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent1",
+            "node": "AI Agent",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "redis delete status1": {
+    "redis delete status": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent1",
+            "node": "AI Agent",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "OpenAI Chat Model1": {
+    "OpenAI Chat Model": {
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent1",
+            "node": "AI Agent",
             "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "buscar_cliente1": {
+    "buscar_cliente": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent1",
+            "node": "AI Agent",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "AI Agent1": {
+    "AI Agent": {
       "main": [
         [
           {
-            "node": "confirma cnpnj/cpf2",
+            "node": "confirma cnpnj/cpf3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "SET CLIENTE3": {
+    "SET CLIENTE4": {
       "main": [
         [
           {
-            "node": "aceite",
+            "node": "aceite1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Switch1": {
+    "Switch6": {
       "main": [
         [
           {
-            "node": "valido",
+            "node": "valido1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "get_data",
+            "node": "get_data1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "If1",
+            "node": "If2",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Preparar Fallback",
+            "node": "Preparar Fallback1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Switch": {
+    "Switch7": {
       "main": [
         [
           {
-            "node": "Redis2",
+            "node": "Redis3",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Switch2",
+            "node": "Switch5",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "menu1",
+            "node": "menu3",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Switch3",
+            "node": "Switch4",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Switch1",
+            "node": "Switch6",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Switch1",
+            "node": "Switch6",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Switch1",
+            "node": "Switch6",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "é cliente1",
+            "node": "é cliente5",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Redis2": {
+    "Redis3": {
       "main": [
         [
           {
-            "node": "Redis1",
+            "node": "Redis4",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "data_redis": {
+    "Redis4": {
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "logof1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "get_data": {
+    "data_redis1": {
       "main": [
         [
           {
-            "node": "buscando1",
+            "node": "Switch7",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Redis": {
+    "get_data1": {
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "buscando",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If": {
+    "Redis5": {
       "main": [
         [
           {
-            "node": "Redis",
+            "node": "Merge1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Webhook": {
+    "If3": {
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Redis5",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Edit Fields": {
+    "Webhook1": {
       "main": [
         [
           {
-            "node": "If",
+            "node": "Edit Fields2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "valido": {
+    "Edit Fields2": {
       "main": [
         [
           {
-            "node": "Edit Fields1",
+            "node": "If3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If1": {
+    "valido1": {
       "main": [
         [
           {
-            "node": "confirma cnpnj/cpf",
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "confirma cnpnj/cpf1": {
+      "main": [
+        [
+          {
+            "node": "DADOS_COMPLETOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "data_redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request24": {
+      "main": [
+        [
+          {
+            "node": "estados_menus1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DADOS_COMPLETOS": {
+      "main": [
+        [
+          {
+            "node": "menu2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "menu2": {
+      "main": [
+        [
+          {
+            "node": "menu principal1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "menu3": {
+      "main": [
+        [
+          {
+            "node": "Switch-menu1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request25": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Boletos)2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "SET AGUARDANDO_CONFIRMAR1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request26": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request25",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request27": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request28",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request28": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request29",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request29": {
+      "main": [
+        [
+          {
+            "node": "estados_menus4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Boletos)2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request30",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request30": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request31",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request31": {
+      "main": [
+        [
+          {
+            "node": "estados_menus6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Boletos)3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request32",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request32": {
+      "main": [
+        [
+          {
+            "node": "finalizado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(auth)1": {
+      "main": [
+        [
+          {
+            "node": "encontrado1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "invalido1",
+            "node": "login invalido1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "SET AGUARDANDO_CONFIRMAR": {
-      "main": [
-        []
-      ]
-    },
-    "invalido1": {
-      "main": [
-        []
-      ]
-    },
-    "Redis1": {
+    "buscando": {
       "main": [
         [
           {
-            "node": "logof",
+            "node": "API_ALPHA(auth)1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "confirma cnpnj/cpf": {
+    "HTTP Request33": {
       "main": [
         [
           {
-            "node": "DADOS_COMPLETOS1",
+            "node": "API_ALPHA(Boletos)3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Merge": {
+    "HTTP Request35": {
       "main": [
         [
           {
-            "node": "data_redis",
+            "node": "HTTP Request36",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "recusa": {
-      "main": [
-        []
-      ]
-    },
-    "transferencia": {
-      "main": [
-        []
-      ]
-    },
-    "DADOS_COMPLETOS1": {
+    "HTTP Request36": {
       "main": [
         [
           {
-            "node": "menu",
+            "node": "HTTP Request38",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request11": {
+    "HTTP Request37": {
       "main": [
         [
           {
-            "node": "estados_menus",
+            "node": "HTTP Request43",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "menu": {
+    "Switch-menu1": {
       "main": [
         [
           {
-            "node": "menu principal",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "menu1": {
-      "main": [
-        [
-          {
-            "node": "Switch-menu",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request11",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request1": {
-      "main": [
-        [
-          {
-            "node": "API_ALPHA(Boletos)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "SET AGUARDANDO_CONFIRMAR",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request4": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request5": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request6",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request6": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request7",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request7": {
-      "main": [
-        [
-          {
-            "node": "estados_menus2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "API_ALPHA(Boletos)": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request2": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request8",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request8": {
-      "main": [
-        [
-          {
-            "node": "estados_menus3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "API_ALPHA(Boletos)1": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request9",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request9": {
-      "main": [
-        [
-          {
-            "node": "finalizado",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "API_ALPHA(auth)": {
-      "main": [
-        [
-          {
-            "node": "encontrado",
+            "node": "HTTP Request3",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "login invalido",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "buscando1": {
-      "main": [
-        [
-          {
-            "node": "API_ALPHA(auth)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request10": {
-      "main": [
-        [
-          {
-            "node": "API_ALPHA(Boletos)1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request13": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request14",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Switch-menu": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
+            "node": "HTTP Request26",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request4",
+            "node": "HTTP Request33",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request10",
+            "node": "HTTP Request37",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request15",
+            "node": "Preparar Fallback1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Preparar Fallback",
+            "node": "HTTP Request35",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request13",
+            "node": "HTTP Request39",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request17",
+            "node": "HTTP Request42",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "HTTP Request21",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "HTTP Request22",
+            "node": "HTTP Request44",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request14": {
+    "HTTP Request38": {
       "main": [
         [
           {
-            "node": "HTTP Request16",
+            "node": "estados_menus7",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request16": {
+    "HTTP Request39": {
       "main": [
         [
           {
-            "node": "estados_menus5",
+            "node": "API_ALPHA(Ccr)1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request17": {
+    "API_ALPHA(Ccr)1": {
       "main": [
         [
           {
-            "node": "API_ALPHA(Ccr)",
+            "node": "Code in JavaScript4",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "API_ALPHA(Ccr)": {
+    "HTTP Request40": {
       "main": [
         [
           {
-            "node": "Code in JavaScript1",
+            "node": "finalizado2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request18": {
+    "finalizado2": {
       "main": [
         [
           {
-            "node": "finalizado",
+            "node": "finalizado3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "finalizado": {
+    "Code in JavaScript4": {
       "main": [
         [
           {
-            "node": "finalizado1",
+            "node": "HTTP Request40",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Code in JavaScript1": {
+    "HTTP Request41": {
       "main": [
         [
           {
-            "node": "HTTP Request18",
+            "node": "finalizado2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Code in JavaScript2": {
+    "Code in JavaScript5": {
       "main": [
         [
           {
-            "node": "HTTP Request20",
+            "node": "HTTP Request41",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request21": {
+    "HTTP Request42": {
       "main": [
         [
           {
-            "node": "API_ALPHA(Contratos)",
+            "node": "API_ALPHA(Contratos)1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "API_ALPHA(Contratos)": {
+    "API_ALPHA(Contratos)1": {
       "main": [
         [
           {
-            "node": "Code in JavaScript2",
+            "node": "Code in JavaScript5",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request20": {
+    "HTTP Request44": {
       "main": [
         [
           {
-            "node": "finalizado",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request15": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request19",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request22": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request23",
+            "node": "HTTP Request45",
             "type": "main",
             "index": 0
           }
@@ -3566,7 +3541,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "02856334-dc39-4112-a931-dc3c1b89565a",
+  "versionId": "a5d235f5-f151-467a-98a2-79fbad1eaaa3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c425f9728479861f1217166238a147243d1b7f1668a3e6818799d9a9b025087a"
