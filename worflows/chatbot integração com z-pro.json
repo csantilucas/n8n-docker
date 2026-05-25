@@ -1808,6 +1808,31 @@
               },
               "renameOutput": true,
               "outputKey": "cliente_bloquado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d58154d5-b97d-4d97-9490-5aa935ad8c98",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "ir_atendimento",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "atendimento com humano"
             }
           ]
         },
@@ -1968,8 +1993,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1568,
-        1472
+        2144,
+        1536
       ],
       "id": "ff0a3ed2-b366-4df0-a5a5-dc8715d4e4ab",
       "name": "finalizado2",
@@ -1994,8 +2019,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2000,
-        1472
+        2400,
+        1536
       ],
       "id": "64c2160e-1980-4aaa-9556-0c30e30fd0c8",
       "name": "finalizado3",
@@ -2188,7 +2213,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        672,
+        656,
         1744
       ],
       "id": "def13744-196a-4a8a-86ec-09d79f426b7e",
@@ -2927,6 +2952,58 @@
       ],
       "id": "8a9a8c01-4793-4be2-a15a-03c57a47eecd",
       "name": "If4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        1728
+      ],
+      "id": "1ae8a07e-6ff1-48a4-a1cc-dbbd45337b74",
+      "name": "Transferencia de atendimento",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu3').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu3').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('webhook').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        592,
+        2000
+      ],
+      "id": "aa94818e-22c0-4a0c-91f3-1f259886dbf3",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -3504,6 +3581,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -3709,7 +3793,7 @@
       "main": [
         [
           {
-            "node": "mudar fila",
+            "node": "Transferencia de atendimento",
             "type": "main",
             "index": 0
           }
@@ -3899,6 +3983,28 @@
           }
         ]
       ]
+    },
+    "HTTP Request45": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -3907,7 +4013,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "2dd56406-b8db-4862-8f95-2a4f200691dd",
+  "versionId": "3f0f8899-df3e-4237-bc9a-e2bd3e3e5507",
   "meta": {
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
   },
