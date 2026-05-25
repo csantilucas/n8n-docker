@@ -2388,32 +2388,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2096,
-        320
-      ],
-      "id": "288cf0d8-a436-4481-a9f8-97448cd3c4bf",
-      "name": "mudar fila",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "nswwbCwDsRkJlzLO",
-          "name": "auth z-pro"
-        }
-      }
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -2895,32 +2869,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -688,
-        2368
-      ],
-      "id": "4e475088-23a5-469c-859e-89ae64620571",
-      "name": "ir_Atendente",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "nswwbCwDsRkJlzLO",
-          "name": "auth z-pro"
-        }
-      }
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -2998,6 +2946,98 @@
       ],
       "id": "aa94818e-22c0-4a0c-91f3-1f259886dbf3",
       "name": "HTTP Request",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('webhook').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        1600
+      ],
+      "id": "b59c6a1e-40c0-480d-a55e-4ffce3e8976c",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('webhook').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        1424
+      ],
+      "id": "9b55cb29-eee9-49f5-8d50-85d2282fb13e",
+      "name": "Redis6",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2096,
+        320
+      ],
+      "id": "288cf0d8-a436-4481-a9f8-97448cd3c4bf",
+      "name": "transferencia de atendimneto1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -688,
+        2368
+      ],
+      "id": "4e475088-23a5-469c-859e-89ae64620571",
+      "name": "transferencia de atendimento2",
       "credentials": {
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
@@ -3760,7 +3800,7 @@
       "main": [
         [
           {
-            "node": "mudar fila",
+            "node": "transferencia de atendimneto1",
             "type": "main",
             "index": 0
           }
@@ -3772,17 +3812,6 @@
         [
           {
             "node": "Redis5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "mudar fila": {
-      "main": [
-        [
-          {
-            "node": "Redis3",
             "type": "main",
             "index": 0
           }
@@ -3966,7 +3995,7 @@
       "main": [
         [
           {
-            "node": "ir_Atendente",
+            "node": "transferencia de atendimento2",
             "type": "main",
             "index": 0
           }
@@ -4005,6 +4034,50 @@
           }
         ]
       ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Redis6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transferencia de atendimento": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia de atendimneto1": {
+      "main": [
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia de atendimento2": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -4013,7 +4086,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "3f0f8899-df3e-4237-bc9a-e2bd3e3e5507",
+  "versionId": "c5b24cda-f64a-4282-b7dc-96b7b9ee7e02",
   "meta": {
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
   },
