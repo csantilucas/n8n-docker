@@ -142,8 +142,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -368,
-        2032
+        -880,
+        2080
       ],
       "id": "fbfa00f3-46ce-4441-be80-b5e526953d75",
       "name": "invalido2",
@@ -357,8 +357,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        3552,
-        1488
+        3664,
+        1408
       ],
       "id": "f15c33b0-9d5b-43c5-9530-8db4f6f514d1",
       "name": "confirma cnpnj/cpf3"
@@ -2430,8 +2430,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1184,
-        2048
+        -1376,
+        2064
       ],
       "id": "05832fee-3c5c-48de-b6dc-1d12c5811e44",
       "name": "estados_menus",
@@ -2469,8 +2469,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -928,
-        2096
+        -1104,
+        2064
       ],
       "id": "3a25f91a-e582-4876-a4ee-b0a72d5eae7b",
       "name": "If1"
@@ -2835,8 +2835,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1440,
-        2032
+        -1632,
+        2064
       ],
       "id": "9249276b-8478-4809-ac21-b1c3af35d88d",
       "name": "Code in JavaScript"
@@ -2855,7 +2855,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -896,
+        -1104,
         2368
       ],
       "id": "8db3334a-cf03-4c7f-99d3-c1cd9a01686d",
@@ -3033,7 +3033,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -688,
+        -880,
         2368
       ],
       "id": "4e475088-23a5-469c-859e-89ae64620571",
@@ -4086,7 +4086,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "c5b24cda-f64a-4282-b7dc-96b7b9ee7e02",
+  "versionId": "33110a56-7c54-4c4b-b2db-8b3e0cb71743",
   "meta": {
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
   },
