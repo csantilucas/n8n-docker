@@ -12,41 +12,8 @@
           },
           "conditions": [
             {
-              "id": "8288279c-5c3c-40b6-b547-f59da0831121",
-              "leftValue": "={{ $('webhook').item.json.conversation.replace(/\\D/g,'') }}",
-              "rightValue": "={{ $json.cliente.cpf_responsavel.slice(0,4) }}",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -2160,
-        2688
-      ],
-      "id": "82adb708-b3ec-4f40-9ad6-2c4de3eb2f61",
-      "name": "If2"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
               "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
-              "leftValue": "={{ $('API_ALPHA(auth)1').item.json.clienteEncontrado }}",
+              "leftValue": "={{ $json.sucesso }}",
               "rightValue": "0",
               "operator": {
                 "type": "boolean",
@@ -519,29 +486,6 @@
     },
     {
       "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n          \"bloqueado\":$json.bloqueado,\n          \"Inativo\":$json.inativo,\n          \"cpf_responsavel\":$json.cpf_responsavel,\n          \"email\":$json.email,\n          \"senha\":$json.senha\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -2576,
-        3264
-      ],
-      "id": "a68ee3d7-a189-4a38-9c5e-31ae971df378",
-      "name": "SET AGUARDANDO_CONFIRMAR1",
-      "credentials": {
-        "redis": {
-          "id": "3uOkOfPT1A3idWhS",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
         "authentication": "genericCredentialType",
@@ -554,8 +498,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1952,
-        2704
+        -1840,
+        2560
       ],
       "id": "83917203-a764-4093-b94d-ed07bd32a9b2",
       "name": "invalido3",
@@ -578,7 +522,7 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.remoteJid,\n  \"body\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$json.auth.nome}\n*Empresa:* ${$json.cliente.empresa}\n*Cidade:* ${$json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.remoteJid,\n  \"body\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$('switch-auth').item.json.cliente.nomeResponsavel}\n*Empresa:* ${$('switch-auth').item.json.cliente.empresa}\n*Cidade:* ${$('switch-auth').item.json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -621,7 +565,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('webhook').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": $('Webhook1').item.json.body.ticket.protocol,\n      \"ticket\":$('Webhook1').item.json.body.ticket.id\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"contagem_erro\":0,\n      \"ultima_interacao\": $('webhook').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  message:{\n  text:$('webhook').item.json.conversation,\n  type:$('webhook').item.json.messageType\n  }\n  })\n}}",
+        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('webhook').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": $('Webhook1').item.json.body.ticket.protocol,\n      \"ticket\":$('Webhook1').item.json.body.ticket.id,\n      \"token\":\"\"\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"contagem_erro\":0,\n      \"ultima_interacao\": $('webhook').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cnpj\":\"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  message:{\n  text:$('webhook').item.json.conversation,\n  type:$('webhook').item.json.messageType\n  }\n  })\n}}",
         "expire": true,
         "ttl": 1800
       },
@@ -704,7 +648,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"logado\":true,\n      \"estado_anterior\": \"autenticado_autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"menu_atual\":\"Menu_Principal\",\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"Login Realizado\",\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"logado\":true,\n      \"estado_anterior\": \"autenticado_autorizado\",\n      \"token\":$('If2').item.json.token\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"menu_atual\":\"Menu_Principal\",\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"Login Realizado\",\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
@@ -886,67 +830,61 @@
             {
               "id": "fb3ed8ad-0f7d-43fc-b1a7-37f515eb4582",
               "name": "idCliente",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.idCliente }}",
+              "value": "={{ $('encontrado1').item.json.dados.idCliente }}",
               "type": "number"
             },
             {
               "id": "53070489-f720-420a-8160-50c9e30eb2ba",
               "name": "responsavel",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.nomeResponsavel }}",
+              "value": "={{ $('encontrado1').item.json.dados.nomeResponsavel }}",
               "type": "string"
             },
             {
               "id": "cec9d65f-ccc2-4cc8-93f7-a20e0c64a2a8",
               "name": "empresa",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.empresa }}",
+              "value": "={{ $('encontrado1').item.json.dados.empresa }}",
               "type": "string"
             },
             {
               "id": "3464d2b2-c69b-4041-8bd0-6b2c5fc2c364",
-              "name": "name",
-              "value": "=",
+              "name": "cnpj",
+              "value": "={{ $('webhook').item.json.conversation }}",
               "type": "string"
             },
             {
               "id": "d7c9f06f-e065-47a4-876b-41676b82a97b",
               "name": "cidade",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.cidade }}",
+              "value": "={{ $('encontrado1').item.json.dados.cidade }}",
               "type": "string"
             },
             {
               "id": "5ce6adaa-c4f0-4dbe-a4ea-5b4e86f428ed",
               "name": "inativo",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.inativo }}",
+              "value": "={{ $('encontrado1').item.json.dados.inativo }}",
               "type": "string"
             },
             {
               "id": "1f69d41d-07c6-435d-a626-d4223c68a2ae",
               "name": "bloqueado",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.bloqueado }}",
-              "type": "string"
-            },
-            {
-              "id": "2fb56671-478f-47c6-9484-973e3d3d918f",
-              "name": "number",
-              "value": "=",
+              "value": "={{ $('encontrado1').item.json.dados.bloqueado }}",
               "type": "string"
             },
             {
               "id": "12edb63c-2edd-4ac5-b25b-3c27aeb2b07d",
               "name": "cpf_responsavel",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.cpfresponsavel }}",
+              "value": "={{ $('encontrado1').item.json.dados.cpfresponsavel }}",
               "type": "string"
             },
             {
               "id": "dd33eb97-f146-416d-84ca-f9abb2e1ae06",
               "name": "email",
-              "value": "={{ $('API_ALPHA(auth)1').item.json.client.email }}",
+              "value": "={{ $('encontrado1').item.json.dados.email }}",
               "type": "string"
             },
             {
               "id": "65f826bc-03a6-4731-98d3-27aa99aead12",
               "name": "senha",
-              "value": "",
+              "value": "={{ $('encontrado1').item.json.dados.senha }}",
               "type": "string"
             }
           ]
@@ -994,7 +932,16 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/fatura/cliente/{{ $('Switch-menu1').item.json.cliente.idCliente }}",
+        "url": "=http://host.docker.internal:5001/api/chatbot/fatura?limite=3",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Switch-menu1').item.json.auth.token }}"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1004,11 +951,12 @@
         688
       ],
       "id": "b2e0fbe4-a861-4ace-9a7c-577e54f3eed8",
-      "name": "API_ALPHA(Boletos)2"
+      "name": "API_ALPHA(Boletos)2",
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\n\n// VERIFICAÇÃO: Se não houver boletos ou a API retornar false\nif (resposta.boletosEncontrado === false || !resposta.fatura || resposta.fatura.length === 0) {\n  return {\n    texto_final: \"📄 *CONSULTA DE FATURAS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNenhuma fatura pendente foi encontrada no seu cadastro no momento. ✅\\n\\n━━━━━━━━━━━━━━━━━━\\n_Deseja consultar outra coisa? Digite *0* para voltar ao menu._\",\n    faturas_mapeadas: [],\n    nenhum_boleto: true // Flag extra caso queira usar num Switch depois\n  };\n}\n\nconst faturas = resposta.fatura;\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; \n  const dataFormatada = new Date(item.dt_fechamento).toLocaleDateString('pt-BR');\n  const valorFormatado = item.vlr_bol.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n  \n  // Limpa a linha digitável (sem espaços) com Regex\n  const linhaLimpa = item.linha_dgt.replace(/\\s+/g, '');\n\n  listaFormatada += `${opcao}️⃣ *Boleto:* ${item.num_bol}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  \n  // USANDO BLOCO DE CÓDIGO (```) PARA FACILITAR A CÓPIA NO WHATSAPP\n  listaFormatada += `🔗 *Copia e Cola:*\\n\\`\\`\\`${linhaLimpa}\\`\\`\\`\\n\\n`;\n\n  // Guarda no mapeamento para o Redis ou próximo nó\n  faturasMapeadas.push({\n      indice: opcao,\n      boleto_id: item.id_boleto, \n      numero_boleto: item.num_bol,\n      linha: linhaLimpa\n    });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"👉 Digite o *número da opção* para baixar o PDF.\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas,\n  nenhum_boleto: false\n};"
+        "jsCode": "// 1. Captura a resposta da API (acessando a primeira posição do array retornado)\nconst resposta = $input.first().json;\n\n// Busca o array de faturas dentro do campo 'dados'\nconst faturas = resposta.dados || [];\n\n// VERIFICAÇÃO: Se a API retornou sucesso = false ou se a lista de dados veio vazia\nif (resposta.sucesso === false || faturas.length === 0) {\n  return {\n    texto_final: \"📄 *CONSULTA DE FATURAS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNenhuma fatura pendente foi encontrada no seu cadastro no momento. ✅\\n\\n━━━━━━━━━━━━━━━━━━\\n_Deseja consultar outra coisa? Digite *0* para voltar ao menu._\",\n    faturas_mapeadas: [],\n    nenhum_boleto: true\n  };\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; \n  \n  // Trata a data de vencimento no padrão ISO da nova API\n  const dataFormatada = new Date(item.vencimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  \n  // Formata o valor numérico para Moeda Real (BRL)\n  const valorFormatado = item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n  listaFormatada += `${opcao}️⃣ *Boleto:* ${item.numeroDocumento}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  listaFormatada += `📝 *Descrição:* ${item.descricao || 'Fatura em aberto'}\\n\\n`;\n\n  // Guarda no mapeamento para o Redis usar na hora de baixar o PDF selecionado\n  faturasMapeadas.push({\n    indice: opcao,\n    boleto_id: item.idBoleto, \n    numero_boleto: item.numeroDocumento\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"👉 Digite o *número da opção* para baixar o PDF.\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas,\n  nenhum_boleto: false\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1101,37 +1049,6 @@
           "name": "Redis account"
         }
       }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://host.docker.internal:5080/data/cliente/buscar",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "documento",
-              "value": "={{ $('webhook').item.json.conversation }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2960,
-        2864
-      ],
-      "id": "481dd514-d983-4e23-ae4e-54e14513b1ea",
-      "name": "API_ALPHA(auth)1",
-      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -1605,7 +1522,16 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/ccr/cliente/{{ $('Switch-menu1').item.json.cliente.idCliente }}/{{ $('Switch-menu1').item.json.quantidade_ccr }}",
+        "url": "=http://host.docker.internal:5001/api/chatbot/ccr?limite={{ $('Switch-menu1').item.json.quantidade_ccr }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('menu3').item.json.auth.token }}"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1615,7 +1541,8 @@
         2480
       ],
       "id": "5f73b551-086b-4f82-ba41-fc1a8554be70",
-      "name": "API_ALPHA(Ccr)1"
+      "name": "API_ALPHA(Ccr)1",
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -1658,7 +1585,7 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2144,
+        1840,
         1536
       ],
       "id": "ff0a3ed2-b366-4df0-a5a5-dc8715d4e4ab",
@@ -1702,7 +1629,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a resposta da API (considerando que vem dentro de um array [0])\nconst resposta = $input.first().json;\nconst listaCcr = resposta.ccr || [];\n\nif (listaCcr.length === 0) {\n    return { texto_ccr: \"⚠️ Nenhuma coleta foi localizada para o seu cadastro.\" };\n}\n\n// 2. Monta o cabeçalho\nlet mensagem = `📄 *CCRs LOCALIZADOS (${listaCcr.length})*\\n`;\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\\n\";\n\n// 3. Percorre a lista e adiciona cada item\nlistaCcr.forEach((item, index) => {\n    const data = new Date(item.dt_coleta).toLocaleDateString('pt-BR');\n    const quantidade = item.quant_coleta > 0 ? `${item.quant_coleta} un/kg` : \"Consulte no PDF\";\n    \n    mensagem += `${index + 1}️⃣ *Coleta em ${data}*\\n`;\n    mensagem += `📦 *Qtd:* ${quantidade}\\n`;\n    mensagem += `🔗 *Link:* ${item.link}\\n\\n`;\n});\n\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\";\nmensagem += \"_💡 Clique nos links acima para visualizar os documentos._\";\n\nreturn {\n    texto_ccr: mensagem\n};"
+        "jsCode": "// 1. Captura a resposta da API (acessando a primeira posição do array retornado)\nconst resposta = $input.first().json;\n\n// Busca o array de coletas dentro do campo 'dados' da nova API\nconst listaCcr = resposta.dados || [];\n\n// VERIFICAÇÃO: Se a API retornou sucesso = false ou se a lista de dados veio vazia\nif (resposta.sucesso === false || listaCcr.length === 0) {\n  return { \n    texto_ccr: \"⚠️ Nenhuma coleta foi localizada para o seu cadastro no momento.\" \n  };\n}\n\n// 2. Monta o cabeçalho\nlet mensagem = `📄 *CCRs LOCALIZADOS (${listaCcr.length})*\\n`;\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\\n\";\n\n// 3. Percorre a lista e adiciona cada item formatado\nlistaCcr.forEach((item, index) => {\n    // Formata a data convertendo o padrão ISO da nova API\n    const data = new Date(item.datacoleta).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n    \n    // Verifica a quantidade usando o novo nome da propriedade\n    const quantidade = item.quantidade > 0 ? `${item.quantidade} un/kg` : \"Consulte no PDF\";\n    \n    mensagem += `${index + 1}️⃣ *Coleta em ${data}*\\n`;\n    mensagem += `📦 *Qtd:* ${quantidade}\\n`;\n    mensagem += `🔗 *Link:* ${item.link}\\n\\n`;\n});\n\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\";\nmensagem += \"_💡 Clique nos links acima para visualizar os documentos._\";\n\nreturn {\n    texto_ccr: mensagem\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1745,7 +1672,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\n\n// VERIFICAÇÃO: Se não houver contratos ou a API retornar contratoEncontrado como false\nif (resposta.contratoEncontrado === false || !resposta.contratos || resposta.contratos.length === 0) {\n  return {\n    texto_final: \"📜 *CONSULTA DE CONTRATOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNão localizamos contratos ativos ou anteriores vinculados ao seu cadastro no momento. 📂\\n\\n━━━━━━━━━━━━━━━━━━\\n_Digite *0* para voltar ao menu principal._\",\n    contratos_mapeados: [],\n    sucesso_busca: false\n  };\n}\n\nconst contratos = resposta.contratos;\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📜 *CONTRATOS LOCALIZADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet contratosMapeados = [];\n\ncontratos.forEach((item, index) => {\n  const opcao = index + 1; // 1, 2, 3...\n  \n  // Formata a data de validade\n  const dataValidade = new Date(item.dt_validade).toLocaleDateString('pt-BR');\n  \n  // Verifica se o contrato está vencido (comparando com a data de hoje)\n  const hoje = new Date();\n  const dataVenc = new Date(item.dt_validade);\n  const status = dataVenc < hoje ? \"🔴 *Expirado*\" : \"🟢 *Ativo*\";\n\n  listaFormatada += `${opcao}️⃣ *Contrato:* ${item.number}\\n`;\n  listaFormatada += `📅 *Validade:* ${dataValidade}\\n`;\n  listaFormatada += `📌 *Status:* ${status}\\n\\n`;\n\n  // Guarda no mapeamento para identificação posterior\n  contratosMapeados.push({\n      indice: opcao,\n      numero_contrato: item.number,\n      validade: dataValidade\n    });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\n\n\nreturn {\n  texto_final: listaFormatada,\n  contratos_mapeados: contratosMapeados,\n  sucesso_busca: true\n};"
+        "jsCode": "// 1. Captura a entrada do n8n\nconst entrada = $input.first().json;\n\nlet faturas = [];\nlet sucesso = false;\n\n// BLINDAGEM: Testa se a estrutura veio envelopada em array ou como objeto direto\nif (Array.isArray(entrada)) {\n  sucesso = entrada[0]?.sucesso;\n  faturas = entrada[0]?.dados || [];\n} else if (entrada.dados) {\n  sucesso = entrada.sucesso;\n  faturas = entrada.dados || [];\n} else if (entrada.body && entrada.body.dados) { // Caso venha dentro do 'body' do HTTP Request\n  sucesso = entrada.body.sucesso;\n  faturas = entrada.body.dados || [];\n}\n\n// VERIFICAÇÃO: Se a esteira falhou ou o array de dados reais está zerado\nif (sucesso === false || faturas.length === 0) {\n  return [{\n    json: {\n      texto_final: \"📜 *CONSULTA DE CONTRATOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNão localizamos contratos ativos ou anteriores vinculados ao seu cadastro no momento. 📂\\n\\n━━━━━━━━━━━━━━━━━━\\n_Digite *0* para voltar ao menu principal._\",\n      contratos_mapeados: [],\n      sucesso_busca: false\n    }\n  }];\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📜 *CONTRATOS LOCALIZADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet contratosMapeados = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1;\n  \n  const dataValidade = new Date(item.validade).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  const situacaoAtual = item.situacao || \"\";\n  const statusIcon = situacaoAtual.toLowerCase() === \"ativo\" ? \"🟢\" : \"🔴\";\n  const statusTexto = `*${situacaoAtual}*`;\n\n  listaFormatada += `${opcao}️⃣ *Contrato:* ${item.numeroContrato}\\n`;\n  listaFormatada += `📅 *Validade:* ${dataValidade}\\n`;\n  listaFormatada += `📌 *Status:* ${statusIcon} ${statusTexto}\\n\\n`;\n\n  contratosMapeados.push({\n    indice: opcao,\n    contrato_id: item.idContrato,\n    numero_contrato: item.numeroContrato,\n    validade: dataValidade\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"_Digite *0* para voltar ao menu principal._\";\n\nreturn [{\n  json: {\n    texto_final: listaFormatada,\n    contratos_mapeados: contratosMapeados,\n    sucesso_busca: true\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1788,7 +1715,16 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/contrato/cliente/{{ $('Switch-menu1').item.json.cliente.idCliente }}",
+        "url": "=http://host.docker.internal:5001/api/chatbot/contrato",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Switch-menu1').item.json.auth.token }}"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1798,7 +1734,8 @@
         2592
       ],
       "id": "d5938d65-2b48-4779-805c-6ba14dd9a86a",
-      "name": "API_ALPHA(Contratos)1"
+      "name": "API_ALPHA(Contratos)1",
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -2308,6 +2245,31 @@
               },
               "renameOutput": true,
               "outputKey": "aguardando_confirmar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c88377b4-2902-418d-b457-020214ba4a96",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "token_invalido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "token invalido"
             }
           ]
         },
@@ -2401,6 +2363,31 @@
               },
               "renameOutput": true,
               "outputKey": "confirmar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9f4a1a20-31fd-4d61-9be6-50bfe3af685e",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "token_invalido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "token invalido"
             }
           ]
         },
@@ -2411,8 +2398,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -3040,
-        1904
+        -2816,
+        1696
       ],
       "id": "89e4cbd4-035f-4e29-b029-adce7ef0ee49",
       "name": "switch-auth"
@@ -2704,7 +2691,16 @@
     },
     {
       "parameters": {
-        "url": "=http://host.docker.internal:5080/fatura/download/{{ $('Switch-menu1').item.json.idFatura }}",
+        "url": "=http://host.docker.internal:5001/api/chatbot/arquivo?id_boleto={{ $('Switch-menu1').item.json.idFatura }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Switch-menu1').item.json.auth.token }}"
+            }
+          ]
+        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2714,7 +2710,8 @@
         688
       ],
       "id": "82e53c49-2aaa-438d-aac3-eebf9fee2b14",
-      "name": "API_ALPHA(Boletos)"
+      "name": "API_ALPHA(Boletos)",
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -2808,28 +2805,250 @@
       ],
       "id": "0d84b263-460a-484f-bb4a-c8ee725c95e9",
       "name": "base64 to file"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5001/api/chatbot/identificacao/localizar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $('webhook').item.json.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2960,
+        2864
+      ],
+      "id": "481dd514-d983-4e23-ae4e-54e14513b1ea",
+      "name": "Api_alpha localizar",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5001/api/chatbot/identificacao/token",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $json.cliente.cnpj }}"
+            },
+            {
+              "name": "senha",
+              "value": "={{ $('webhook').item.json.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2320,
+        2544
+      ],
+      "id": "e13b848a-107c-417c-a3c6-fbcdc5205bb3",
+      "name": "Apia_alpha autenticar"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d734dac-a60e-4063-b084-c5a36c35ccef",
+              "name": "status_erro",
+              "value": "={{ $json.error?.response?.status || $json.error?.status || 500 }}",
+              "type": "string"
+            },
+            {
+              "id": "bfbd9bb9-afe8-4fc5-aaec-f71bb8f1154c",
+              "name": "menssage",
+              "value": "={{ $json.error?.response?.data?.message || $json.error?.message || \"Erro interno na requisição\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3248,
+        1520
+      ],
+      "id": "b167a0f1-109d-422d-be76-63d8ab239d9d",
+      "name": "captura de erro"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura o status padronizado do nó anterior\nconst status = $input.first().json.status_erro;\nconst mensagem = $input.first().json.mensagem_erro;\n\nlet rotaDestino = 'erro_geral';\nlet textoAviso = 'Desculpe, ocorreu uma instabilidade temporária no sistema. Por favor, tente novamente em alguns instantes.';\n\n// 2. Verifica se o erro é de autenticação (Token Inválido / Expirado)\nif (status === 401 || status === 403 || mensagem.toLowerCase().includes('unauthorized')) {\n  rotaDestino = 'token_expirado';\n  textoAviso = `⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSinto muito, você atingiu o tempo limite da sua sessão por motivos de segurança. ⏳\\n\\nPor favor, envie qualquer mensagem para iniciar uma nova autenticação.`;\n}\n\n// 3. Retorna os dados organizados para o Switch/Redis seguinte\nreturn [{\n  json: {\n    rota_erro: rotaDestino,\n    texto_erro: textoAviso\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3456,
+        1520
+      ],
+      "id": "6c59c518-5aef-4e1b-b807-16b1d3770073",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "934899da-60e2-4d17-8082-3b71d5b80dff"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        3664,
+        1520
+      ],
+      "id": "7681a084-d61f-4ac5-a084-311cb42aaeeb",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSinto muito, você atingiu o tempo limite da sua sessão por motivos de segurança. ⏳\\n\\nPor favor, envie qualquer mensagem para iniciar uma nova autenticação.`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"aviso-sessao-expirada\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3904,
+        1520
+      ],
+      "id": "b2b6e964-fac5-43eb-a178-e703ba04b16f",
+      "name": "token expirado",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"logado\":false,\n      \"estado_anterior\": \"token_invalido\"\n    },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"secção invalida\",\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4128,
+        1520
+      ],
+      "id": "532dabee-1666-4229-8b75-4bbbde726980",
+      "name": "finalizado",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"cnpj\":$json.cnpj,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n          \"bloqueado\":$json.bloqueado,\n          \"Inativo\":$json.inativo,\n          \"cpf_responsavel\":$json.cpf_responsavel,\n          \"email\":$json.email,\n          \"senha\":$json.senha\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2576,
+        3264
+      ],
+      "id": "a68ee3d7-a189-4a38-9c5e-31ae971df378",
+      "name": "SET AGUARDANDO_CONFIRMAR",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "707f48ae-350d-4a1a-a3c9-7c1fdf8dd51e",
+              "leftValue": "={{ $json.sucesso }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2064,
+        2544
+      ],
+      "id": "92e787d6-ad51-4eab-ac10-798e995aa687",
+      "name": "If2"
     }
   ],
   "pinData": {},
   "connections": {
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "confirma cnpnj/cpf1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "invalido3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "encontrado1": {
       "main": [
         [
@@ -3076,7 +3295,7 @@
       "main": [
         [
           {
-            "node": "SET AGUARDANDO_CONFIRMAR1",
+            "node": "SET AGUARDANDO_CONFIRMAR",
             "type": "main",
             "index": 0
           }
@@ -3099,6 +3318,13 @@
         [
           {
             "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "captura de erro",
             "type": "main",
             "index": 0
           }
@@ -3138,29 +3364,11 @@
         ]
       ]
     },
-    "API_ALPHA(auth)1": {
-      "main": [
-        [
-          {
-            "node": "encontrado1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "login invalido1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "buscando": {
       "main": [
         [
           {
-            "node": "API_ALPHA(auth)1",
+            "node": "Api_alpha localizar",
             "type": "main",
             "index": 0
           }
@@ -3301,6 +3509,13 @@
         [
           {
             "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "captura de erro",
             "type": "main",
             "index": 0
           }
@@ -3548,6 +3763,13 @@
         ],
         [
           {
+            "node": "switch-auth",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "apresentecao",
             "type": "main",
             "index": 0
@@ -3573,11 +3795,12 @@
         ],
         [
           {
-            "node": "If2",
+            "node": "Apia_alpha autenticar",
             "type": "main",
             "index": 0
           }
         ],
+        [],
         [
           {
             "node": "Code in JavaScript",
@@ -3730,6 +3953,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "captura de erro",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -3765,6 +3995,108 @@
           }
         ]
       ]
+    },
+    "Api_alpha localizar": {
+      "main": [
+        [
+          {
+            "node": "encontrado1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "login invalido1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "captura de erro": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "token expirado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "token expirado": {
+      "main": [
+        [
+          {
+            "node": "finalizado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SET AGUARDANDO_CONFIRMAR": {
+      "main": [
+        []
+      ]
+    },
+    "finalizado": {
+      "main": [
+        []
+      ]
+    },
+    "Apia_alpha autenticar": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "confirma cnpnj/cpf1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "invalido3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -3773,7 +4105,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "bd8dce94-4a07-4a3a-8e77-dfd5686e5922",
+  "versionId": "5f08910b-6139-409a-a253-f32f9c32f34d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"

@@ -1,0 +1,198 @@
+{
+  "name": "Folha pgto - recebimento",
+  "nodes": [
+    {
+      "parameters": {
+        "mailbox": "=INBOX",
+        "format": "raw",
+        "options": {
+          "forceReconnect": 10,
+          "trackLastMessageId": true
+        }
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        -144,
+        -128
+      ],
+      "id": "649b8635-bc7f-4272-bbc1-a6e58016b659",
+      "name": "Email Trigger (IMAP)",
+      "retryOnFail": false,
+      "executeOnce": false,
+      "credentials": {
+        "imap": {
+          "id": "nNS4Ufuz2q6bj7Wf",
+          "name": "IMAP account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a571c84-7f78-4c89-b146-85187a7d460f",
+              "name": "textPlain",
+              "value": "={{ $json.textPlain }}",
+              "type": "string"
+            },
+            {
+              "id": "d404c782-ec47-4aeb-ad3c-4a6551600801",
+              "name": "pdf",
+              "value": "attachment_0",
+              "type": "binary"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        -128
+      ],
+      "id": "bd3eccc6-8964-4588-ae7a-b6e72ff24bec",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "41f1a96a-ccfa-4d0f-b672-8c38b7e66b3e",
+              "leftValue": "={{ $json.sucesso }}",
+              "rightValue": "=true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        512,
+        -128
+      ],
+      "id": "e90bb7ac-22b1-40fc-9669-ad147f12a6d5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "const promises = $input.all().map(async (item, itemIndex) => {\n  \n  // 1. Extração do IDGUID via Regex\n  const regexGuid = /Ref-ID:\\s*([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})/;\n  const textoEmail = item.json.textPlain || item.json.text || \"\";\n  const match = textoEmail.match(regexGuid);\n  const idguid = match ? match[1] : null;\n\n  let pdfBase64Sucedido = null;\n  let sucesso = false;\n  let mensagem = \"\";\n\n  // Validação 1: Verifica se encontrou o IDGUID\n  if (!idguid) {\n    sucesso = false;\n    mensagem = \"Não foi possível localizar o IDGUID no texto do e-mail.\";\n    return { json: { sucesso, mensagem, idguid, pdfBase64Sucedido } };\n  }\n\n  // Validação 2: Verifica se existem anexos e se há algum PDF\n  let temPdf = false;\n  let chavePdf = null;\n\n  if (item.binary) {\n    for (const key of Object.keys(item.binary)) {\n      if (item.binary[key] && item.binary[key].mimeType === 'application/pdf') {\n        temPdf = true;\n        chavePdf = key;\n        break; \n      }\n    }\n  }\n\n  if (!temPdf) {\n    sucesso = false;\n    mensagem = \"Nenhum arquivo PDF foi encontrado em anexo.\";\n    return { json: { sucesso, mensagem, idguid, pdfBase64Sucedido } };\n  }\n\n  // 2. Conversão do PDF para Base64 se passou nos testes acima\n  try {\n    const binaryBuffer = await this.helpers.getBinaryDataBuffer(itemIndex, chavePdf);\n    pdfBase64Sucedido = binaryBuffer.toString('base64');\n    \n    // Se chegou aqui, deu tudo certo\n    sucesso = true;\n    mensagem = \"Processado com sucesso. IDGUID extraído e PDF convertido.\";\n  } catch (err) {\n    sucesso = false;\n    mensagem = `Não foi possível converter o PDF para Base64: ${err.message}`;\n  }\n\n  // Retorna a estrutura limpa com o status\n  return {\n    json: {\n      sucesso: sucesso,\n      mensagem: mensagem,\n      idguid: idguid,\n      pdfBase64Sucedido: pdfBase64Sucedido\n    }\n  };\n});\n\nreturn await Promise.all(promises);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -128
+      ],
+      "id": "287116ed-f760-4ad4-b2ef-2691e76d10bb",
+      "name": "Filtro"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5002/api/folha_pagamento/receber_resposta_email",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "pdfAssinado",
+              "value": "={{ $json.pdfBase64Sucedido }}"
+            },
+            {
+              "name": "guid",
+              "value": "={{ $json.idguid }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        768,
+        -144
+      ],
+      "id": "b2694701-b19e-44a1-b799-7e359eef1122",
+      "name": "Api_alpha receber resposta"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Filtro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Api_alpha receber resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtro": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "02ee3794-00e5-427d-972e-546f78ec1354",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
+  },
+  "id": "1KQyrLMe0AUHfCgm",
+  "tags": []
+}

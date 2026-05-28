@@ -1,0 +1,366 @@
+{
+  "name": "Folha pgto - envios",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "801f7d93-814d-4b37-bb2a-90bdb0b687c8",
+              "name": "nome",
+              "value": "={{ $json['dados.registros'].NOME }}",
+              "type": "string"
+            },
+            {
+              "id": "2555fe4f-52a9-4474-ac41-c020541425dc",
+              "name": "email",
+              "value": "={{ $json['dados.registros'].EMAIL }}",
+              "type": "string"
+            },
+            {
+              "id": "93556844-4c83-43b9-89ec-65c481aa4eb1",
+              "name": "empresa",
+              "value": "={{ $json['dados.registros'].EMPRESA }}",
+              "type": "string"
+            },
+            {
+              "id": "94b13cc6-2e21-4a13-a6e5-a770811cf7fc",
+              "name": "data",
+              "value": "={{ $json['dados.registros'].MES_ANO }}",
+              "type": "string"
+            },
+            {
+              "id": "bcc02f1b-0bb8-40ad-87ca-81be863a4070",
+              "name": "idguid",
+              "value": "={{ $json['dados.registros'].IDGUID }}",
+              "type": "string"
+            },
+            {
+              "id": "76621266-0449-4931-b51c-d9aa51ce11e2",
+              "name": "pdf_base64",
+              "value": "={{ $json['dados.registros'].PDF_HOLERITE }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        896,
+        16
+      ],
+      "id": "7deff4e3-f174-4a5e-a67c-d18e5f5034f3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "dados.registros",
+        "include": "=",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "3947b5c2-64c6-44d7-acbc-99df79d73dc5",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "fe5677ff-a9bd-437b-906d-3ac03c72a32a",
+              "leftValue": "={{ $json.pdf_base64 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1104,
+        16
+      ],
+      "id": "1c69d69c-c661-420a-9113-ccee1fed9c1c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fromEmail": "alphatestes09@gmail.com",
+        "toEmail": "={{ $json.email }}",
+        "subject": "={{ $json.data }}",
+        "html": "=<div style=\"font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #e5e7eb; padding: 40px 20px; color: #333333; line-height: 1.6;\">\n  <div style=\"max-width: 550px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05); border: 1px solid #d1d5db;\">\n    \n    <div style=\"background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 35px 30px; color: #ffffff;\">\n      <span style=\"font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #93c5fd; display: block; margin-bottom: 8px;\">\n        {{ $json.empresa }}\n      </span>\n      <h2 style=\"margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.5px;\">\n        Seu holerite está disponível\n      </h2>\n    </div>\n\n    <div style=\"padding: 35px 30px;\">\n      <p style=\"margin-top: 0; font-size: 16px; color: #1f2937;\">\n        Olá, <strong style=\"color: #111827;\">{{ $json.nome }}</strong>,\n      </p>\n      \n      <p style=\"font-size: 15px; color: #4b5563; margin-bottom: 25px;\">\n        O documento referente ao <strong>{{ $json.data }}</strong> foi processado e já está pronto para visualização.\n      </p>\n\n      <div style=\"background-color: #ffffff; border-left: 4px solid #2563eb; padding: 20px; border-radius: 4px 8px 8px 4px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border: 1px solid #e5e7eb;\">\n        <table style=\"width: 100%; border-collapse: collapse; font-size: 14px;\">\n          <tr>\n            <td style=\"color: #6b7280; padding-bottom: 8px; width: 35%;\">Empresa:</td>\n            <td style=\"color: #111827; font-weight: 600; padding-bottom: 8px;\">{{ $json.empresa }}</td>\n          </tr>\n          <tr>\n            <td style=\"color: #6b7280;\">Competência:</td>\n            <td style=\"color: #111827; font-weight: 600;\">{{ $json.data }}</td>\n          </tr>\n        </table>\n      </div>\n\n      <div style=\"border: 1px dashed #cbd5e1; border-radius: 8px; padding: 15px; text-align: center; background-color: #fafafa; margin-bottom: 25px;\">\n        <span style=\"font-size: 14px; color: #374151; font-weight: 500;\">\n          📎 O arquivo oficial segue anexado em formato <strong>PDF</strong>\n        </span>\n      </div>\n\n      <div style=\"background-color: #fffbeb; border: 1px solid #fef3c7; padding: 12px 15px; border-radius: 8px; font-size: 13px; color: #b45309;\">\n        <strong>Aviso de Segurança (LGPD):</strong> Este documento contém dados sensíveis. Recomendamos não compartilhar o arquivo com terceiros.\n      </div>\n    </div>\n\n    <div style=\"background-color: #f8fafc; padding: 20px 30px; border-top: 1px solid #e5e7eb; text-align: center;\">\n      <p style=\"margin: 0; font-size: 11px; color: #94a3b8; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;\">\n        Ref-ID: {{ $json.idguid }}\n      </p>\n    </div>\n\n  </div>\n</div>",
+        "options": {
+          "attachments": "data"
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "738f6388-5b1b-4816-99a4-7da64fe884bf",
+      "name": "Send an Email",
+      "webhookId": "6de5073f-3c74-4931-adc7-97ac113eef07",
+      "credentials": {
+        "smtp": {
+          "id": "VaWTPBDaG2Eg9TPF",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.item;\nconst name = $input.first().json.nome;\nconst data = $input.first().json.data;\n\nlet base64Data = item.json.pdf_base64; \nconst fileName = item.json.nome_arquivo || `recibo ${name}, ${data}.pdf`;\n\n\nif (base64Data && base64Data.includes(',')) {\n  base64Data = base64Data.split(',')[1];\n}\n\nreturn [{\n  json: item.json,\n  binary: {\n    data: {\n      data: base64Data,\n      mimeType: 'application/pdf',\n      fileName: fileName,\n      fileExtension: 'pdf',\n      encoding: 'base64' \n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1392,
+        0
+      ],
+      "id": "53dcc037-5028-419a-8c69-b24017f7cfa9",
+      "name": "base64 to file"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -256,
+        0
+      ],
+      "id": "a1ec0fcf-5097-438b-b993-19643ad6aa7b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoje = new Date();\nconst diaDoMes = hoje.getDate();\n\n// 1. Verifica se está na primeira semana do mês (Dias 1 a 7)\nconst isPrimeiraSemana = diaDoMes <= 7;\n\n// 2. Verifica se está na última semana do mês\nconst amanha = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);\nconst ultimoDiaDoMes = amanha.getDate();\nconst isUltimaSemana = (ultimoDiaDoMes - diaDoMes) < 7;\n\n// Se estiver em uma das duas janelas, permite a execução\nif (isPrimeiraSemana || isUltimaSemana) {\n  return [{ json: { executar: true, motivo: isPrimeiraSemana ? \"Primeira semana do mês\" : \"Última semana do mês\" } }];\n}\n\n// Se não estiver na janela de dias, retorna um array vazio (o n8n para o fluxo aqui)\nreturn [];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "d1c42fc9-df37-4281-95bf-74a19789fc1e",
+      "name": "limite de tempo"
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:5000/api/folha_pagamento/pendentes",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d9805c6e-2550-4ed0-8628-b64f6b28ded1",
+      "name": "API_alpha Pendentes"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        624,
+        0
+      ],
+      "id": "0e043561-3ed7-4872-af96-5568d6c0762d",
+      "name": "Loop"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5000/api/folha_pagamento/marcar_processado",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "guid",
+              "value": "={{ $('Edit Fields').item.json.idguid }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1824,
+        0
+      ],
+      "id": "f72f15e5-f35e-4e40-a13c-baee9d69f755",
+      "name": "Api_alpha marcar processado"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "base64 to file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "base64 to file": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        [
+          {
+            "node": "Api_alpha marcar processado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "limite de tempo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "limite de tempo": {
+      "main": [
+        [
+          {
+            "node": "API_alpha Pendentes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_alpha Pendentes": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Api_alpha marcar processado": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "d7c904f9-737e-4a8f-bdf8-60cf32ec81cb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
+  },
+  "id": "XPPSXWvohIZMPVjJ",
+  "tags": []
+}
