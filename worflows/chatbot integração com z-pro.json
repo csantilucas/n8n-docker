@@ -374,8 +374,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2960,
-        2464
+        -2944,
+        2160
       ],
       "id": "04f1dc71-8bcc-47ed-924d-d83b2208b01e",
       "name": "get_data1"
@@ -498,41 +498,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1840,
-        2560
+        -1696,
+        2416
       ],
       "id": "83917203-a764-4093-b94d-ed07bd32a9b2",
       "name": "invalido3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
-        "httpBearerAuth": {
-          "id": "nswwbCwDsRkJlzLO",
-          "name": "auth z-pro"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.remoteJid,\n  \"body\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$('switch-auth').item.json.cliente.nomeResponsavel}\n*Empresa:* ${$('switch-auth').item.json.cliente.empresa}\n*Cidade:* ${$('switch-auth').item.json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2160,
-        2832
-      ],
-      "id": "6954072a-c776-478a-99f0-580cd499b786",
-      "name": "confirma cnpnj/cpf1",
       "credentials": {
         "httpHeaderAuth": {
           "id": "b2mIsOjxwQhYSjAD",
@@ -646,29 +616,6 @@
     },
     {
       "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"logado\":true,\n      \"estado_anterior\": \"autenticado_autorizado\",\n      \"token\":$('If2').item.json.token\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"menu_atual\":\"Menu_Principal\",\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"Login Realizado\",\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        -2160,
-        3088
-      ],
-      "id": "e0bd91d8-c046-48cb-a1a6-4ca9f97fea9e",
-      "name": "DADOS_COMPLETOS",
-      "credentials": {
-        "redis": {
-          "id": "3uOkOfPT1A3idWhS",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
         "authentication": "genericCredentialType",
@@ -714,14 +661,14 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json, // Puxamos tudo que o Code cuspiu (auth, cliente, etc)\n    \"navegacao\": {\n      \"menu_atual\": $node[\"menu3\"].json.proximo_estado, // O novo menu\n      \"ultima_interacao\": $('webhook').item.json.horario\n    },\n    \"auth\": {\n      ...$node[\"menu3\"].json.auth,\n      \"estado_anterior\": $node[\"menu3\"].json.limpar_login ? \"\" : ($node[\"menu3\"].json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('webhook').item.json.conversation,\n      \"type\": $('webhook').item.json.messageType\n    }\n  }) \n}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$('menu3').item.json, \n    \"navegacao\": {\n      \"menu_atual\": $('menu3').item.json.proximo_estado, \n      \"ultima_interacao\": $('webhook').item.json.horario\n    },\n    \"auth\": {\n      ...$('menu3').item.json.auth,\n      \"estado_anterior\": $('menu3').item.json.limpar_login ? \"\" : ($('menu3').item.json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('webhook').item.json.conversation,\n      \"type\": $('webhook').item.json.messageType\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -528,
+        -512,
         784
       ],
       "id": "7b9100ba-d741-4f79-8f03-0d7d5cfe3dad",
@@ -828,12 +775,6 @@
         "assignments": {
           "assignments": [
             {
-              "id": "fb3ed8ad-0f7d-43fc-b1a7-37f515eb4582",
-              "name": "idCliente",
-              "value": "={{ $('encontrado1').item.json.dados.idCliente }}",
-              "type": "number"
-            },
-            {
               "id": "53070489-f720-420a-8160-50c9e30eb2ba",
               "name": "responsavel",
               "value": "={{ $('encontrado1').item.json.dados.nomeResponsavel }}",
@@ -855,36 +796,6 @@
               "id": "d7c9f06f-e065-47a4-876b-41676b82a97b",
               "name": "cidade",
               "value": "={{ $('encontrado1').item.json.dados.cidade }}",
-              "type": "string"
-            },
-            {
-              "id": "5ce6adaa-c4f0-4dbe-a4ea-5b4e86f428ed",
-              "name": "inativo",
-              "value": "={{ $('encontrado1').item.json.dados.inativo }}",
-              "type": "string"
-            },
-            {
-              "id": "1f69d41d-07c6-435d-a626-d4223c68a2ae",
-              "name": "bloqueado",
-              "value": "={{ $('encontrado1').item.json.dados.bloqueado }}",
-              "type": "string"
-            },
-            {
-              "id": "12edb63c-2edd-4ac5-b25b-3c27aeb2b07d",
-              "name": "cpf_responsavel",
-              "value": "={{ $('encontrado1').item.json.dados.cpfresponsavel }}",
-              "type": "string"
-            },
-            {
-              "id": "dd33eb97-f146-416d-84ca-f9abb2e1ae06",
-              "name": "email",
-              "value": "={{ $('encontrado1').item.json.dados.email }}",
-              "type": "string"
-            },
-            {
-              "id": "65f826bc-03a6-4731-98d3-27aa99aead12",
-              "name": "senha",
-              "value": "={{ $('encontrado1').item.json.dados.senha }}",
               "type": "string"
             }
           ]
@@ -956,7 +867,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a resposta da API (acessando a primeira posição do array retornado)\nconst resposta = $input.first().json;\n\n// Busca o array de faturas dentro do campo 'dados'\nconst faturas = resposta.dados || [];\n\n// VERIFICAÇÃO: Se a API retornou sucesso = false ou se a lista de dados veio vazia\nif (resposta.sucesso === false || faturas.length === 0) {\n  return {\n    texto_final: \"📄 *CONSULTA DE FATURAS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNenhuma fatura pendente foi encontrada no seu cadastro no momento. ✅\\n\\n━━━━━━━━━━━━━━━━━━\\n_Deseja consultar outra coisa? Digite *0* para voltar ao menu._\",\n    faturas_mapeadas: [],\n    nenhum_boleto: true\n  };\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; \n  \n  // Trata a data de vencimento no padrão ISO da nova API\n  const dataFormatada = new Date(item.vencimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  \n  // Formata o valor numérico para Moeda Real (BRL)\n  const valorFormatado = item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n  listaFormatada += `${opcao}️⃣ *Boleto:* ${item.numeroDocumento}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  listaFormatada += `📝 *Descrição:* ${item.descricao || 'Fatura em aberto'}\\n\\n`;\n\n  // Guarda no mapeamento para o Redis usar na hora de baixar o PDF selecionado\n  faturasMapeadas.push({\n    indice: opcao,\n    boleto_id: item.idBoleto, \n    numero_boleto: item.numeroDocumento\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"👉 Digite o *número da opção* para baixar o PDF.\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas,\n  nenhum_boleto: false\n};"
+        "jsCode": "// 1. Captura a resposta da API (acessando a primeira posição do array retornado)\nconst resposta = $input.first().json;\n\n// Busca o array de faturas dentro do campo 'dados'\nconst faturas = resposta.dados || [];\n\n// VERIFICAÇÃO: Se a API retornou sucesso = false ou se a lista de dados veio vazia\nif (resposta.sucesso === false || faturas.length === 0) {\n  return {\n    texto_final: \"📄 *CONSULTA DE FATURAS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNenhuma fatura pendente foi encontrada no seu cadastro no momento. ✅\\n\\n━━━━━━━━━━━━━━━━━━\\n_Deseja consultar outra coisa? Digite *0* para voltar ao menu._\",\n    faturas_mapeadas: [],\n    nenhum_boleto: true\n  };\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📄 *FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1; \n  \n  // Trata a data de vencimento no padrão ISO da nova API\n  const dataFormatada = new Date(item.vencimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  \n  // Formata o valor numérico para Moeda Real (BRL)\n  const valorFormatado = item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n  listaFormatada += `${opcao}️⃣ *Boleto:* ${item.numeroDocumento}\\n`;\n  listaFormatada += `📅 *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `💵 *Valor:* ${valorFormatado}\\n`;\n  listaFormatada += `📝 *Descrição:* ${item.descricao || 'Fatura em aberto'}\\n\\n`;\n\n  // Guarda no mapeamento para o Redis usar na hora de baixar o PDF selecionado\n  faturasMapeadas.push({\n    indice: opcao,\n    boleto_id: item.idBoleto, \n    numero_boleto: item.numeroDocumento\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\n\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas,\n  nenhum_boleto: false\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1672,7 +1583,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura a entrada do n8n\nconst entrada = $input.first().json;\n\nlet faturas = [];\nlet sucesso = false;\n\n// BLINDAGEM: Testa se a estrutura veio envelopada em array ou como objeto direto\nif (Array.isArray(entrada)) {\n  sucesso = entrada[0]?.sucesso;\n  faturas = entrada[0]?.dados || [];\n} else if (entrada.dados) {\n  sucesso = entrada.sucesso;\n  faturas = entrada.dados || [];\n} else if (entrada.body && entrada.body.dados) { // Caso venha dentro do 'body' do HTTP Request\n  sucesso = entrada.body.sucesso;\n  faturas = entrada.body.dados || [];\n}\n\n// VERIFICAÇÃO: Se a esteira falhou ou o array de dados reais está zerado\nif (sucesso === false || faturas.length === 0) {\n  return [{\n    json: {\n      texto_final: \"📜 *CONSULTA DE CONTRATOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNão localizamos contratos ativos ou anteriores vinculados ao seu cadastro no momento. 📂\\n\\n━━━━━━━━━━━━━━━━━━\\n_Digite *0* para voltar ao menu principal._\",\n      contratos_mapeados: [],\n      sucesso_busca: false\n    }\n  }];\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📜 *CONTRATOS LOCALIZADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet contratosMapeados = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1;\n  \n  const dataValidade = new Date(item.validade).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  const situacaoAtual = item.situacao || \"\";\n  const statusIcon = situacaoAtual.toLowerCase() === \"ativo\" ? \"🟢\" : \"🔴\";\n  const statusTexto = `*${situacaoAtual}*`;\n\n  listaFormatada += `${opcao}️⃣ *Contrato:* ${item.numeroContrato}\\n`;\n  listaFormatada += `📅 *Validade:* ${dataValidade}\\n`;\n  listaFormatada += `📌 *Status:* ${statusIcon} ${statusTexto}\\n\\n`;\n\n  contratosMapeados.push({\n    indice: opcao,\n    contrato_id: item.idContrato,\n    numero_contrato: item.numeroContrato,\n    validade: dataValidade\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\nlistaFormatada += \"_Digite *0* para voltar ao menu principal._\";\n\nreturn [{\n  json: {\n    texto_final: listaFormatada,\n    contratos_mapeados: contratosMapeados,\n    sucesso_busca: true\n  }\n}];"
+        "jsCode": "// 1. Captura a entrada do n8n\nconst entrada = $input.first().json;\n\nlet faturas = [];\nlet sucesso = false;\n\n// BLINDAGEM: Testa se a estrutura veio envelopada em array ou como objeto direto\nif (Array.isArray(entrada)) {\n  sucesso = entrada[0]?.sucesso;\n  faturas = entrada[0]?.dados || [];\n} else if (entrada.dados) {\n  sucesso = entrada.sucesso;\n  faturas = entrada.dados || [];\n} else if (entrada.body && entrada.body.dados) { // Caso venha dentro do 'body' do HTTP Request\n  sucesso = entrada.body.sucesso;\n  faturas = entrada.body.dados || [];\n}\n\n// VERIFICAÇÃO: Se a esteira falhou ou o array de dados reais está zerado\nif (sucesso === false || faturas.length === 0) {\n  return [{\n    json: {\n      texto_final: \"📜 *CONSULTA DE CONTRATOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNão localizamos contratos ativos ou anteriores vinculados ao seu cadastro no momento. 📂\\n\\n━━━━━━━━━━━━━━━━━━\\n_Digite *0* para voltar ao menu principal._\",\n      contratos_mapeados: [],\n      sucesso_busca: false\n    }\n  }];\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📜 *CONTRATOS LOCALIZADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet contratosMapeados = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1;\n  \n  const dataValidade = new Date(item.validade).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  const situacaoAtual = item.situacao || \"\";\n  const statusIcon = situacaoAtual.toLowerCase() === \"ativo\" ? \"🟢\" : \"🔴\";\n  const statusTexto = `*${situacaoAtual}*`;\n\n  listaFormatada += `${opcao}️⃣ *Contrato:* ${item.numeroContrato}\\n`;\n  listaFormatada += `📅 *Validade:* ${dataValidade}\\n`;\n  listaFormatada += `📌 *Status:* ${statusIcon} ${statusTexto}\\n\\n`;\n\n  contratosMapeados.push({\n    indice: opcao,\n    contrato_id: item.idContrato,\n    numero_contrato: item.numeroContrato,\n    validade: dataValidade\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\n\n\nreturn [{\n  json: {\n    texto_final: listaFormatada,\n    contratos_mapeados: contratosMapeados,\n    sucesso_busca: true\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1772,7 +1683,7 @@
         "method": "POST",
         "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
         "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
+        "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `⚠️ *AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. ❌\n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. 🎧`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"aviso-pendencia-administrativa\",\n  \"isClosed\": false\n})\n}}",
@@ -1790,6 +1701,10 @@
         "httpHeaderAuth": {
           "id": "b2mIsOjxwQhYSjAD",
           "name": "Header Auth account"
+        },
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
         }
       }
     },
@@ -1852,12 +1767,6 @@
               "type": "string"
             },
             {
-              "id": "8ea65964-30d1-41fc-b795-09f1aa52e5c0",
-              "name": "messageType",
-              "value": "={{ $json.body.method }}",
-              "type": "string"
-            },
-            {
               "id": "e7829727-2d92-4fff-ba2c-8e7c0643bc1b",
               "name": "remoteJid",
               "value": "={{ $json.body.msg.key.sender_pn }}",
@@ -1902,7 +1811,7 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `ola ${$('webhook').item.json.pushName}, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*.`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `ola *${$('webhook').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*\n\n━━━━━━━━━━━━━━━\nEscolha uma das _opções_ _abaixo_`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1939,36 +1848,6 @@
       ],
       "id": "f008ee09-9504-44c0-bb7f-86dfe33094e0",
       "name": "apresentação 3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
-        "httpBearerAuth": {
-          "id": "nswwbCwDsRkJlzLO",
-          "name": "auth z-pro"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `*${$('webhook').item.json.pushName}*, Escolha uma das _opções_ _abaixo_`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"menu-opcoes\",\n  \"isClosed\": false\n})\n}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2672,
-        784
-      ],
-      "id": "c1fc72ed-7286-4693-845c-6648c1059cf7",
-      "name": "apresentação 2",
       "credentials": {
         "httpHeaderAuth": {
           "id": "b2mIsOjxwQhYSjAD",
@@ -2049,7 +1928,7 @@
             {
               "id": "322f422a-b1df-4743-852d-f867181b9ce9",
               "leftValue": "={{ $('data_redis1').item.json.navegacao.contagem_erro.toString() }}",
-              "rightValue": "=3",
+              "rightValue": "=2",
               "operator": {
                 "type": "string",
                 "operation": "equals"
@@ -2474,7 +2353,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Acessa a primeira execução do nó Edit Fields chamado 'webhook' de forma global\nconst dadosSessao = $('webhook').first().json;\n\nlet estado = 'inicio';\n\ntry {\n  // Pega o estado atual de dentro da navegação do nó webhook\n  estado = dadosSessao?.navegacao?.menu_atual || 'inicio';\n} catch (e) {\n  estado = 'inicio';\n}\n\nlet mensagem = '';\n\n// 1. Validação do tipo de mensagem baseada nos dados do seu nó 'webhook'\nif (dadosSessao?.body?.data?.messageType !== \"textMessage\") { \n  mensagem = \"Opa, não consigo identificar esse tipo de mensagem, somente texto. 😕\";\n} \n// 2. Mapeamento de mensagens por estado administrativo\nelse if (estado === 'cliente_novo') {\n  mensagem = 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n} else if (estado === 'autorizado') {\n  mensagem = 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n} else if (estado === 'AGUARDANDO_CPF') {\n  mensagem = 'Desculpe, o CPF ou CNPJ informado parece inválido. Por favor, envie apenas os *números* do seu cadastro.';\n} else if (estado === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n} else {\n  // Mensagem padrão de fallback\n  mensagem = 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n}\n\n// Retorna apenas um único item JSON puro, matando o loop das múltiplas entradas\nreturn [{\n  json: {\n    \"texto_erro\": mensagem\n  }\n}];"
+        "jsCode": "// 1. CAPTURA FIXA DO MERGE: Substitua 'Merge1' pelo nome exato do seu nó de Merge\nconst dadosMerge = $('Merge1').first().json.dados_sessao; \n\nlet estadoAuth = 'inicio';\nlet menuAtual = 'inicio';\n\ntry {\n  // Pega a string da sessão que veio fixa do Merge\n  const sessaoRaw = dadosMerge;\n  \n  // Converte a string do Redis em um objeto JavaScript real\n  const sessaoObjeto = typeof sessaoRaw === 'string' \n    ? JSON.parse(sessaoRaw) \n    : (sessaoRaw || {});\n\n  // Captura os estados reais de dentro da sessão parseada\n  estadoAuth = sessaoObjeto?.auth?.estado_anterior || 'inicio';\n  menuAtual = sessaoObjeto?.navegacao?.menu_atual || 'inicio';\n} catch (e) {\n  // Prevenção de erro caso o JSON venha corrompido\n  estadoAuth = 'inicio';\n  menuAtual = 'inicio';\n}\n\nlet mensagem = '';\n\n// 2. Mapeamento de mensagens por estado da FSM (Máquina de Estados)\nif (estadoAuth === 'cliente_novo') {\n  mensagem = 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n} else if (estadoAuth === 'autorizado') {\n  mensagem = 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n} else if (estadoAuth === 'AGUARDANDO_CPF') {\n  mensagem = 'Desculpe, o CPF ou CNPJ informado parece inválido ou não foi encontrado. ⚠️\\n\\nPor favor, envie apenas os *números* do documento cadastrado.';\n} else if (estadoAuth === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n} else if (estadoAuth === 'TOKEN_EXPIRADO') {\n  mensagem = 'Sua sessão expirou por tempo limite. Por favor, envie qualquer texto para reiniciar o seu login de acesso.';\n} else {\n  // Mensagem padrão de fallback para quando já está navegando nos menus principais\n  mensagem = 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n}\n\n// Retorna o payload estruturado para o n8n prosseguir na esteira\nreturn [{\n  json: {\n    texto_erro: mensagem,\n    estado_validado: estadoAuth,\n    menu_validado: menuAtual,\n    dados:dadosMerge\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -2599,46 +2478,6 @@
     },
     {
       "parameters": {
-        "operation": "delete",
-        "key": "={{ $('webhook').item.json.remoteJid }}"
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        1312,
-        1600
-      ],
-      "id": "b59c6a1e-40c0-480d-a55e-4ffce3e8976c",
-      "name": "Redis",
-      "credentials": {
-        "redis": {
-          "id": "3uOkOfPT1A3idWhS",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "delete",
-        "key": "={{ \"status:\" + $('webhook').item.json.remoteJid }}"
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        1312,
-        1424
-      ],
-      "id": "9b55cb29-eee9-49f5-8d50-85d2282fb13e",
-      "name": "Redis6",
-      "credentials": {
-        "redis": {
-          "id": "3uOkOfPT1A3idWhS",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
         "authentication": "genericCredentialType",
@@ -2716,7 +2555,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/base64",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2724,9 +2563,8 @@
         "bodyParameters": {
           "parameters": [
             {
-              "parameterType": "formBinaryData",
-              "name": "media",
-              "inputDataFieldName": "data"
+              "name": "base64Data",
+              "value": "={{ $json.dados }}"
             },
             {
               "name": "body",
@@ -2747,6 +2585,14 @@
             {
               "name": "isClosed",
               "value": "false"
+            },
+            {
+              "name": "fileName",
+              "value": "fatura"
+            },
+            {
+              "name": "mimeType",
+              "value": "application/pdf"
             }
           ]
         },
@@ -2755,8 +2601,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        784,
-        288
+        1024,
+        368
       ],
       "id": "a96383e4-8204-4ff2-8206-dec16714f16d",
       "name": "HTTP Request34",
@@ -2795,19 +2641,6 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Pega o item atual que veio da entrada\nconst item = $input.item;\n\n// 2. Retorna o item exatamente com o mesmo arquivo PDF físico que entrou\nreturn [{\n  json: {}, // Deixa o JSON vazio se quiser limpar os textos anteriores\n  binary: item.binary // Repassa o PDF (data) idêntico para a saída\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        784,
-        496
-      ],
-      "id": "0d84b263-460a-484f-bb4a-c8ee725c95e9",
-      "name": "base64 to file"
-    },
-    {
-      "parameters": {
         "method": "POST",
         "url": "http://host.docker.internal:5001/api/chatbot/identificacao/localizar",
         "sendBody": true,
@@ -2830,34 +2663,6 @@
       "id": "481dd514-d983-4e23-ae4e-54e14513b1ea",
       "name": "Api_alpha localizar",
       "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "http://host.docker.internal:5001/api/chatbot/identificacao/token",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "documento",
-              "value": "={{ $json.cliente.cnpj }}"
-            },
-            {
-              "name": "senha",
-              "value": "={{ $('webhook').item.json.conversation }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        -2320,
-        2544
-      ],
-      "id": "e13b848a-107c-417c-a3c6-fbcdc5205bb3",
-      "name": "Apia_alpha autenticar"
     },
     {
       "parameters": {
@@ -2993,7 +2798,7 @@
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"cnpj\":$json.cnpj,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n          \"bloqueado\":$json.bloqueado,\n          \"Inativo\":$json.inativo,\n          \"cpf_responsavel\":$json.cpf_responsavel,\n          \"email\":$json.email,\n          \"senha\":$json.senha\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"cnpj\":$json.cnpj,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
@@ -3014,6 +2819,46 @@
     },
     {
       "parameters": {
+        "operation": "delete",
+        "key": "={{ $('webhook').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        1600
+      ],
+      "id": "b59c6a1e-40c0-480d-a55e-4ffce3e8976c",
+      "name": "deletar sessao",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('webhook').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        1424
+      ],
+      "id": "9b55cb29-eee9-49f5-8d50-85d2282fb13e",
+      "name": "deleta registro da sessao",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -3023,12 +2868,12 @@
           },
           "conditions": [
             {
-              "id": "707f48ae-350d-4a1a-a3c9-7c1fdf8dd51e",
-              "leftValue": "={{ $json.sucesso }}",
+              "id": "77ba767b-ca37-4153-8946-f256a0f7b332",
+              "leftValue": "={{ $json.message.conversation }}",
               "rightValue": "",
               "operator": {
-                "type": "boolean",
-                "operation": "true",
+                "type": "string",
+                "operation": "notEmpty",
                 "singleValue": true
               }
             }
@@ -3040,11 +2885,257 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2064,
-        2544
+        -2736,
+        2160
       ],
-      "id": "92e787d6-ad51-4eab-ac10-798e995aa687",
+      "id": "4215b737-db92-447d-a52b-ea3e0062e841",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.error.status }}",
+                    "rightValue": 401,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "0ac2e274-ca4b-4529-8c92-107625269eff"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "credenciais invalidas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "73062c6b-1643-45bf-8847-a1ea095af2b3",
+                    "leftValue": "={{ $json.error.status }}",
+                    "rightValue": "=500",
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "erro do servidor"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2000,
+        2432
+      ],
+      "id": "786e54e6-6cf1-4b8b-a745-713841198c05",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"Sinto muito, o nosso servidor nnão esta funcionando no momento. ⚙️\\n\\nVou te transferir para um atendente agora mesmo.\",\n  \"whatsappId\": $('webhook').item.json.whatsappId || 1,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1728,
+        2704
+      ],
+      "id": "96635c7d-7551-4995-91df-c589bf0d0985",
+      "name": "invalido4",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a resposta da API do nó anterior\nconst respostaApi = $input.first().json;\n\n// Extrai o token usando a chave exata do seu retorno (\"token\")\nconst token = respostaApi.token; \n\nif (!token) {\n  return [{ \n    json: { \n      sucesso_decode: false, \n      erro: \"Token não encontrado na resposta da API.\" \n    } \n  }];\n}\n\ntry {\n  // Isola o payload (segunda parte do JWT)\n  const base64Url = token.split('.')[1];\n  \n  // Normaliza o padrão Base64Url para Base64 tradicional\n  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');\n  \n  // Decodifica o Base64 para string UTF-8 Puro\n  const payloadTexto = Buffer.from(base64, 'base64').toString('utf-8');\n  \n  // Converte a string em objeto real\n  const dadosDecodificados = JSON.parse(payloadTexto);\n\n  // 2. Retorna os dados mastigados para o fluxo do n8n\n  return [{\n    json: {\n      sucesso_decode: true,\n      tipo_token: respostaApi.tipo || \"Bearer\",\n      expira_em_minutos: respostaApi.expiraEmMinutos || 15,\n      cliente: {\n        id: dadosDecodificados.id_client || dadosDecodificados.id_cliente,\n        nome_responsavel: dadosDecodificados.responsavel,\n        cpf: dadosDecodificados.cpf,\n        email: dadosDecodificados.email,\n        senha: dadosDecodificados.senha,\n        bloqueado: dadosDecodificados.bloqueado,\n        inativo: dadosDecodificados.inativo\n      },\n      exp_timestamp: dadosDecodificados.exp\n    }\n  }];\n\n} catch (error) {\n  return [{ \n    json: { \n      sucesso_decode: false, \n      erro: \"Falha ao decodificar o token JWT: \" + error.message \n    } \n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2320,
+        2672
+      ],
+      "id": "7b5eda05-13c6-495e-b336-0670a43fab91",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.remoteJid,\n  \"body\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$('switch-auth').item.json.cliente.nomeResponsavel}\n*Empresa:* ${$('switch-auth').item.json.cliente.empresa}\n*Cidade:* ${$('switch-auth').item.json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2208,
+        3072
+      ],
+      "id": "6954072a-c776-478a-99f0-580cd499b786",
+      "name": "encontrado",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "b2mIsOjxwQhYSjAD",
+          "name": "Header Auth account"
+        },
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
+        "value": "={{ \nJSON.stringify({\n  ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\"), \n  \n  \"auth\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").auth,\n    \"data_login\": new Date().toISOString(),\n    \"logado\": true,\n    \"estado_anterior\": \"autenticado_autorizado\",\n    \"token\": $('Api_alpha autenticar').item.json.token\n  },\n\n  \"cliente\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").cliente,\n    \"idCliente\": $('Code in JavaScript2').item.json.cliente.id,\n    \"nomeResponsavel\": $('Code in JavaScript2').item.json.cliente.nome_responsavel,\n    \"cpf_responsavel\": $('Code in JavaScript2').item.json.cliente.cpf,\n    \"email\": $('Code in JavaScript2').item.json.cliente.email,\n    \"senha\":$json.cliente.senha,\n    \"Inativo\":$json.cliente.inativo ,\n    \"bloqueado\": $('Code in JavaScript2').item.json.cliente.bloqueado\n  },\n\n  \"navegacao\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").navegacao,\n    \"menu_atual\": \"Menu_Principal\",\n    \"ultima_interacao\": $('webhook').item.json.horario,\n    \"contagem_erro\":0\n  },\n\n  \"message\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").message,\n    \"text\": \"Login Realizado\",\n    \"type\": $('webhook').item.json.messageType\n  }\n}) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2320,
+        2880
+      ],
+      "id": "e0bd91d8-c046-48cb-a1a6-4ca9f97fea9e",
+      "name": "DADOS_COMPLETOS",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:5001/api/chatbot/identificacao/token",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $json.cliente.cnpj }}"
+            },
+            {
+              "name": "senha",
+              "value": "={{ $('webhook').item.json.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2304,
+        2416
+      ],
+      "id": "e13b848a-107c-417c-a3c6-fbcdc5205bb3",
+      "name": "Api_alpha autenticar",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "26b3f664-822b-4451-a9c1-2cb97d898f94",
+              "leftValue": "={{ $json.dados }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        784,
+        512
+      ],
+      "id": "d380017a-ba09-4ece-b75b-8c6215f7f784",
       "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"Desculpe o transtorno! 😔\\n\\nNão conseguimos gerar o PDF do seu boleto neste momento.\\n\\nPor favor, *entre em constato com suporte* para que possamos te ajudar. 🛡️\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1008,
+        560
+      ],
+      "id": "69feb819-05f6-46fc-94e1-765f7d08a6df",
+      "name": "HTTP Request47",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -3078,7 +3169,7 @@
         ],
         [
           {
-            "node": "HTTP Request37",
+            "node": "Transferencia de atendimento",
             "type": "main",
             "index": 0
           }
@@ -3151,7 +3242,7 @@
       "main": [
         [
           {
-            "node": "buscando",
+            "node": "If5",
             "type": "main",
             "index": 0
           }
@@ -3203,17 +3294,6 @@
         ]
       ]
     },
-    "confirma cnpnj/cpf1": {
-      "main": [
-        [
-          {
-            "node": "DADOS_COMPLETOS",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Merge1": {
       "main": [
         [
@@ -3230,17 +3310,6 @@
         [
           {
             "node": "estados_menus1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "DADOS_COMPLETOS": {
-      "main": [
-        [
-          {
-            "node": "menu2",
             "type": "main",
             "index": 0
           }
@@ -3596,6 +3665,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "captura de erro",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -3625,7 +3701,7 @@
       "main": [
         [
           {
-            "node": "apresentação 2",
+            "node": "apresentação 3",
             "type": "main",
             "index": 0
           }
@@ -3637,17 +3713,6 @@
         [
           {
             "node": "SET CLIENTE5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "apresentação 2": {
-      "main": [
-        [
-          {
-            "node": "apresentação 3",
             "type": "main",
             "index": 0
           }
@@ -3795,7 +3860,7 @@
         ],
         [
           {
-            "node": "Apia_alpha autenticar",
+            "node": "Api_alpha autenticar",
             "type": "main",
             "index": 0
           }
@@ -3901,22 +3966,11 @@
         ]
       ]
     },
-    "Redis": {
-      "main": [
-        [
-          {
-            "node": "Redis6",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Transferencia de atendimento": {
       "main": [
         [
           {
-            "node": "Redis",
+            "node": "deletar sessao",
             "type": "main",
             "index": 0
           }
@@ -3938,7 +3992,7 @@
       "main": [
         [
           {
-            "node": "Redis",
+            "node": "deletar sessao",
             "type": "main",
             "index": 0
           }
@@ -3949,7 +4003,7 @@
       "main": [
         [
           {
-            "node": "base64 to file",
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -3979,17 +4033,6 @@
         [
           {
             "node": "finalizado2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "base64 to file": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request34",
             "type": "main",
             "index": 0
           }
@@ -4068,30 +4111,165 @@
         []
       ]
     },
-    "Apia_alpha autenticar": {
+    "deletar sessao": {
       "main": [
         [
           {
-            "node": "If2",
+            "node": "deleta registro da sessao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "buscando",
             "type": "main",
             "index": 0
           }
         ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "invalido3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "invalido4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "DADOS_COMPLETOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "encontrado": {
+      "main": [
+        [
+          {
+            "node": "menu2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DADOS_COMPLETOS": {
+      "main": [
+        [
+          {
+            "node": "encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "login invalido1": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "invalido3": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "menu principal1": {
+      "main": [
         []
+      ]
+    },
+    "invalido4": {
+      "main": [
+        [
+          {
+            "node": "transferencia de atendimento2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Api_alpha autenticar": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "If2": {
       "main": [
         [
           {
-            "node": "confirma cnpnj/cpf1",
+            "node": "HTTP Request34",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "invalido3",
+            "node": "HTTP Request47",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request47": {
+      "main": [
+        [
+          {
+            "node": "finalizado2",
             "type": "main",
             "index": 0
           }
@@ -4105,7 +4283,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "5f08910b-6139-409a-a253-f32f9c32f34d",
+  "versionId": "36f61247-c6f8-454b-b547-565598fd2cb0",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
