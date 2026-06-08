@@ -29,16 +29,16 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2224,
-        2944
+        2640,
+        6640
       ],
-      "id": "b90900d5-99d7-4f29-9869-ee6492c8bc8e",
+      "id": "dbe80e5c-03e8-487c-b278-a6e843c019d1",
       "name": "encontrado1"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -49,10 +49,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1840,
-        2960
+        3024,
+        6656
       ],
-      "id": "45510827-5fb8-40ae-a568-6fb65939825d",
+      "id": "54ec513d-286b-49a8-b29d-e3c5f899a596",
       "name": "login invalido1",
       "credentials": {
         "httpBearerAuth": {
@@ -64,7 +64,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -75,10 +75,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1232,
-        672
+        3632,
+        4368
       ],
-      "id": "586f4837-9451-44a4-8cc7-76a62d3f041f",
+      "id": "a12bdbdb-7624-449b-b177-41e25b5293b9",
       "name": "aceite1",
       "credentials": {
         "httpBearerAuth": {
@@ -90,7 +90,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -101,10 +101,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        96,
-        2016
+        5104,
+        5808
       ],
-      "id": "90cbe807-2e9f-446c-b3a5-09240729a65d",
+      "id": "01af01dc-3ffc-460c-814c-5017943b1944",
       "name": "invalido2",
       "credentials": {
         "httpBearerAuth": {
@@ -175,10 +175,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -608,
-        896
+        4256,
+        4592
       ],
-      "id": "cea77a66-9d7c-47e8-99c8-4b6b9d2f9ffc",
+      "id": "069d5234-9c35-41cd-bfaa-7677f288f57d",
       "name": "Switch4"
     },
     {
@@ -192,10 +192,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1600,
-        400
+        3264,
+        4096
       ],
-      "id": "b4f17770-5141-4305-9eb6-be262b805e94",
+      "id": "7f60b2fe-bcd9-474b-8d4a-bd884219792a",
       "name": "SET CLIENTE1",
       "credentials": {
         "redis": {
@@ -207,7 +207,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -218,10 +218,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1600,
-        576
+        3264,
+        4272
       ],
-      "id": "aa0251e1-1d28-4a70-8f16-63c90e58e33b",
+      "id": "e65225a8-d872-43d7-9816-f1a372537b39",
       "name": "aceite3",
       "credentials": {
         "httpBearerAuth": {
@@ -241,10 +241,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1232,
-        864
+        3632,
+        4560
       ],
-      "id": "d054f92e-be8a-4113-b7f2-9c2bb2980506",
+      "id": "b076dd6f-d31c-499e-87e1-6d9b5fb44a8c",
       "name": "SET CLIENTE4",
       "credentials": {
         "redis": {
@@ -267,10 +267,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1600,
-        208
+        3264,
+        3904
       ],
-      "id": "6bac64b9-656a-4d6f-82c5-2b4577511a0e",
+      "id": "7e0a2941-10d8-4438-86c9-1036e01d0e93",
       "name": "transferencia1",
       "credentials": {
         "httpBearerAuth": {
@@ -287,10 +287,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2304,
-        848
+        2560,
+        4544
       ],
-      "id": "0291b753-c36d-4452-a8a2-77072e539758",
+      "id": "5aebbc1e-b0b7-4de1-9b1a-7fba4f7477e8",
       "name": "Redis3",
       "credentials": {
         "redis": {
@@ -307,10 +307,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2304,
-        640
+        2560,
+        4336
       ],
-      "id": "068fbee2-7996-4de6-a8bf-2bfefad24a99",
+      "id": "2f2851eb-0bf8-4dfb-88a6-101f23937dfd",
       "name": "Redis4",
       "credentials": {
         "redis": {
@@ -330,10 +330,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2816,
-        1408
+        2048,
+        5104
       ],
-      "id": "5e7fd131-0a8a-4a12-8e0b-789d19576f91",
+      "id": "459f6f89-ade1-4c1b-9e0e-bb4dd029824b",
       "name": "data_redis1",
       "onError": "continueRegularOutput"
     },
@@ -354,10 +354,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2208,
-        2048
+        2656,
+        5744
       ],
-      "id": "a3bdf5a4-8896-4264-8b7e-990f860cdae9",
+      "id": "c04aef0c-6caf-476f-8329-c3dead37995c",
       "name": "get_data1"
     },
     {
@@ -372,10 +372,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3168,
-        1504
+        1696,
+        5200
       ],
-      "id": "4a3968b0-7b95-4a83-b502-ab3b9963c487",
+      "id": "a338737d-365b-48c7-86cc-e82041a99797",
       "name": "Redis5",
       "credentials": {
         "redis": {
@@ -412,10 +412,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3776,
-        1168
+        1088,
+        4864
       ],
-      "id": "f4b761ee-9abe-4e61-9464-8acb087cce8c",
+      "id": "03e55697-3038-4169-9723-bdb56e0f5913",
       "name": "If3"
     },
     {
@@ -427,17 +427,17 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -4208,
-        1184
+        656,
+        4880
       ],
-      "id": "625d5481-8d09-454b-a165-ee158a8f28d8",
+      "id": "6d636cb2-77d7-4253-a35f-bdabc6b842fd",
       "name": "Webhook1",
       "webhookId": "e39bacd9-7b82-42f5-9e2c-7fdac5837c2b"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -448,10 +448,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2224,
-        3152
+        2640,
+        6848
       ],
-      "id": "5c9de1a7-f289-4c07-9eb7-bd6bf621013d",
+      "id": "6bc26fce-4422-4727-bb3c-3a1259832052",
       "name": "valido1",
       "credentials": {
         "httpBearerAuth": {
@@ -463,21 +463,21 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Desculpe, o CPF ou CNPJ informado parece inválido ou não foi encontrado. ⚠️\\n\\nPor favor, envie apenas os *números* do documento cadastrado.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Desculpe, os números informados *não* correspondem ao *CPF* vinculado ao cadastro da empresa.\\nPor favor, verifique o número informado e encaminhe novamente.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -960,
-        2304
+        3904,
+        6000
       ],
-      "id": "8dbd727d-e453-41df-8446-e23caf743696",
+      "id": "bc361405-a864-4a0c-9552-b3860cb93720",
       "name": "invalido3",
       "credentials": {
         "httpBearerAuth": {
@@ -497,10 +497,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -3008,
-        1312
+        1856,
+        5008
       ],
-      "id": "e9474972-4748-4ff0-b802-142272a658e6",
+      "id": "461c55ad-905f-4ff1-89eb-930f6329318f",
       "name": "Merge1"
     },
     {
@@ -514,10 +514,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1936,
-        352
+        2928,
+        4048
       ],
-      "id": "e3c021e5-59aa-412f-9427-9714865f6822",
+      "id": "2a4982a6-8c54-4ae2-862b-9c3172fefe9a",
       "name": "SET CLIENTE5",
       "credentials": {
         "redis": {
@@ -529,7 +529,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -540,10 +540,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        224,
-        848
+        5088,
+        4544
       ],
-      "id": "f98f01d6-57fb-4206-aa2c-ccf8e1c47926",
+      "id": "d436e91b-9e6f-4a42-a4cd-c702efa96789",
       "name": "HTTP Request24",
       "credentials": {
         "httpBearerAuth": {
@@ -555,7 +555,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -566,10 +566,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2304,
-        464
+        2560,
+        4160
       ],
-      "id": "94d9eebf-eb2b-4dd7-90dd-245e40c80e43",
+      "id": "bb6a9936-d8f4-4970-97d9-a28df046ba2e",
       "name": "logof1",
       "credentials": {
         "httpBearerAuth": {
@@ -581,7 +581,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -592,10 +592,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1408,
-        3184
+        3456,
+        6880
       ],
-      "id": "16918f03-cf2e-41fb-a0d6-4e0ea8f08c92",
+      "id": "d74b7d26-3f0f-4294-8132-384b8c1f916a",
       "name": "menu2",
       "credentials": {
         "httpBearerAuth": {
@@ -606,15 +606,15 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('get_data').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"menu_ccr\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"menu_contrato\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
+        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('get_data').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"menu_ccr\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"menu_contrato\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }  else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuCCR.msg}`,\n    proximo_estado: \"buscar_ccr\",\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}\n    \n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -144,
-        1312
+        4720,
+        5008
       ],
-      "id": "76c5650f-75f9-472c-b4d3-f9143eaf2481",
+      "id": "05a22ff4-0587-4e2e-9ea5-cef1756a1206",
       "name": "menu3"
     },
     {
@@ -628,10 +628,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        224,
-        672
+        5088,
+        4368
       ],
-      "id": "4372d78c-b4ac-487f-b7d3-09774f3e8ff5",
+      "id": "4ed3fa6f-5883-40f8-b605-d899fe141bef",
       "name": "estados_menus1",
       "credentials": {
         "redis": {
@@ -643,7 +643,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -654,10 +654,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1152,
-        3184
+        3712,
+        6880
       ],
-      "id": "58908a9c-ef02-4657-b59a-02c618415623",
+      "id": "2eaeb09f-9da4-4367-ab13-3b4430758828",
       "name": "menu principal1",
       "credentials": {
         "httpBearerAuth": {
@@ -669,7 +669,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -680,10 +680,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        224,
-        1040
+        5088,
+        4736
       ],
-      "id": "1cb227a9-6904-43b8-bda1-25e15e73d459",
+      "id": "25e8a868-e1f0-477d-ad1d-c979b070b0a8",
       "name": "HTTP Request3",
       "credentials": {
         "httpBearerAuth": {
@@ -695,7 +695,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -706,10 +706,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        720
+        5600,
+        4416
       ],
-      "id": "3576a434-26dd-4492-a2ef-8474a2dc5231",
+      "id": "526a9ef4-b550-435a-8ccb-faee3a2bf51b",
       "name": "HTTP Request25",
       "credentials": {
         "httpBearerAuth": {
@@ -753,16 +753,16 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2016,
-        3152
+        2848,
+        6848
       ],
-      "id": "e1102f9f-4299-46cd-a5f5-0dca5bb3153d",
+      "id": "a3bbee5c-dee4-41a5-9153-214d6ce189f0",
       "name": "Edit Fields3"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -773,10 +773,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        928
+        5600,
+        4624
       ],
-      "id": "0e10ea12-f2fa-45ac-a992-af559167b6e6",
+      "id": "d84bd2d1-ca3e-4c35-8ecc-23b8062042c9",
       "name": "HTTP Request26",
       "credentials": {
         "httpBearerAuth": {
@@ -802,10 +802,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        576
+        5600,
+        4272
       ],
-      "id": "c8fe1e1a-17b1-4f73-9149-189bc1116369",
+      "id": "90710851-0097-4003-83f7-2c81b3714740",
       "name": "API_ALPHA(Boletos)2",
       "onError": "continueErrorOutput"
     },
@@ -816,16 +816,16 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        736,
-        432
+        5600,
+        4128
       ],
-      "id": "5035a872-6d8e-4077-a260-5d94bee1abef",
+      "id": "60b69b86-a23d-45dc-bb94-4fa036ddb67f",
       "name": "Code in JavaScript3"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -836,10 +836,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        256
+        5600,
+        3952
       ],
-      "id": "fbe0e29f-71c6-4f39-8e83-b8e9bca5f359",
+      "id": "d9d9a814-8a1a-46b3-9fde-4d151a2abb1c",
       "name": "HTTP Request30",
       "credentials": {
         "httpBearerAuth": {
@@ -851,7 +851,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -862,10 +862,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        32
+        5600,
+        3728
       ],
-      "id": "4d6849ad-e818-41ee-aebf-6c274dab8c16",
+      "id": "45c13380-896f-4f59-b40a-5a9a94b89be0",
       "name": "HTTP Request31",
       "credentials": {
         "httpBearerAuth": {
@@ -885,10 +885,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        736,
-        -112
+        5600,
+        3584
       ],
-      "id": "d57755e0-48b5-4541-a6bf-ee1a46abd9e6",
+      "id": "640c344e-42ef-4f8c-b7dd-bcdc0151600f",
       "name": "estados_menus6",
       "credentials": {
         "redis": {
@@ -900,7 +900,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -911,10 +911,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2224,
-        2560
+        2640,
+        6256
       ],
-      "id": "d9f76330-6a81-4c83-9922-ebbb3a96527e",
+      "id": "bc08777c-1b72-409c-a67d-81460b4f8725",
       "name": "buscando",
       "credentials": {
         "httpBearerAuth": {
@@ -926,7 +926,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -937,10 +937,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        800,
-        1952
+        5664,
+        5648
       ],
-      "id": "a2e72407-b038-4949-a984-a1087febe8ec",
+      "id": "14764e7b-5f2f-4436-8e17-1d343bae3221",
       "name": "HTTP Request35",
       "credentials": {
         "httpBearerAuth": {
@@ -952,7 +952,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -963,10 +963,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        832,
-        2176
+        5696,
+        5872
       ],
-      "id": "0326776f-4664-45cf-9802-2e38b6702ab3",
+      "id": "af8f10e2-4d0e-4106-9e6d-3c1bc5a3e366",
       "name": "HTTP Request36",
       "credentials": {
         "httpBearerAuth": {
@@ -978,7 +978,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -989,10 +989,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1056,
-        1392
+        5920,
+        5088
       ],
-      "id": "7ffe3233-3a58-4b36-a48e-e96eb1dbeea6",
+      "id": "e47069a9-9bbb-4753-986d-684d6bc75e0b",
       "name": "HTTP Request37",
       "credentials": {
         "httpBearerAuth": {
@@ -1262,16 +1262,16 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        240,
-        1344
+        5104,
+        5040
       ],
-      "id": "8ce15c3f-13fd-49a6-a3c5-8477a65e9120",
+      "id": "f2877ed1-a6ff-42ae-b678-c688de08f451",
       "name": "Switch-menu1"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1282,10 +1282,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        848,
-        2384
+        5712,
+        6080
       ],
-      "id": "7b9b157f-ceb1-4856-8599-85ee32984ff2",
+      "id": "3e569a6f-9a9b-46db-9f8b-bc016c7de1d8",
       "name": "HTTP Request38",
       "credentials": {
         "httpBearerAuth": {
@@ -1305,10 +1305,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        864,
-        2624
+        5728,
+        6320
       ],
-      "id": "ce528268-d9a9-458c-a20e-7baa94f96638",
+      "id": "b46a2217-6d70-4d8f-b522-cd4314905022",
       "name": "estados_menus7",
       "credentials": {
         "redis": {
@@ -1320,7 +1320,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1331,10 +1331,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        624,
-        2160
+        5488,
+        5856
       ],
-      "id": "ca3a5088-5c8f-43bf-9c15-4a14a0173728",
+      "id": "9913a260-25e3-47ff-97b2-5acf6dc1e781",
       "name": "HTTP Request39",
       "credentials": {
         "httpBearerAuth": {
@@ -1360,17 +1360,17 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        656,
-        2368
+        5520,
+        6064
       ],
-      "id": "8e3790f8-bd21-41f2-bca3-0d393698503d",
+      "id": "ef7bc1c3-5d9e-4c04-8f0c-48847cbd6e2c",
       "name": "API_ALPHA(Ccr)1",
       "onError": "continueErrorOutput"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1381,10 +1381,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        672,
-        2832
+        5536,
+        6528
       ],
-      "id": "f5de6c68-1d5d-4e09-a614-68b120d9c46a",
+      "id": "11104bad-b465-4af1-ac19-4d2178ae090c",
       "name": "HTTP Request40",
       "credentials": {
         "httpBearerAuth": {
@@ -1404,10 +1404,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2576,
-        1424
+        7440,
+        5120
       ],
-      "id": "6cedc3cf-0c5b-4bc0-9f38-3cf7e1ef8f83",
+      "id": "08851bd9-f5e7-4940-90e8-f3588639ebdd",
       "name": "finalizado2",
       "credentials": {
         "redis": {
@@ -1419,21 +1419,21 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"atendimento-finalizado\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender\", 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"atendimento-finalizado\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        3136,
-        1424
+        8000,
+        5120
       ],
-      "id": "886a3f19-49c3-4471-b3d7-75cf7152003a",
+      "id": "ccfbe163-8aa6-4c9e-a4ec-a18c37ebeb10",
       "name": "finalizado3",
       "credentials": {
         "httpBearerAuth": {
@@ -1449,16 +1449,16 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        672,
-        2576
+        5536,
+        6272
       ],
-      "id": "9d4cad62-6216-46b7-8bef-9417c873db0a",
+      "id": "47162555-2459-4f00-8ff5-d7d7d13436de",
       "name": "Code in JavaScript4"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1469,10 +1469,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1504,
-        2896
+        6368,
+        6592
       ],
-      "id": "31edd6d4-156c-4683-9fe2-35e296e608fa",
+      "id": "9d8f6872-2215-476c-9fef-ad34433e7960",
       "name": "HTTP Request41",
       "credentials": {
         "httpBearerAuth": {
@@ -1488,16 +1488,16 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1472,
-        2656
+        6336,
+        6352
       ],
-      "id": "991188ec-9071-402c-901f-53710112898f",
+      "id": "b259be03-a2a2-4fab-b156-2710347ffa06",
       "name": "Code in JavaScript5"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1508,10 +1508,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1472,
-        2256
+        6336,
+        5952
       ],
-      "id": "26fd35be-232a-4cb9-a8a8-3ac3f70c054c",
+      "id": "9b7605a3-5182-4dbb-bee3-2ccb55aa963c",
       "name": "HTTP Request42",
       "credentials": {
         "httpBearerAuth": {
@@ -1537,17 +1537,17 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1472,
-        2480
+        6336,
+        6176
       ],
-      "id": "8b4468c9-0ef9-465b-9caf-da0055aa1108",
+      "id": "6c6b4bd7-e157-454e-9c58-5b172363560f",
       "name": "API_ALPHA(Contratos)1",
       "onError": "continueErrorOutput"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1558,10 +1558,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1472,
-        1392
+        6336,
+        5088
       ],
-      "id": "ccf6f2ce-4065-4ae8-a86a-93edab9d00d8",
+      "id": "9cb9df16-14ed-456f-86bb-458c210f8b05",
       "name": "HTTP Request43",
       "credentials": {
         "httpBearerAuth": {
@@ -1573,7 +1573,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1584,10 +1584,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1056,
-        1632
+        5920,
+        5328
       ],
-      "id": "df44ae2b-325e-463d-8a1d-0c51a2aa280f",
+      "id": "462ffb05-6254-477f-941f-173cfd5ef92e",
       "name": "HTTP Request44",
       "credentials": {
         "httpBearerAuth": {
@@ -1599,7 +1599,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -1610,10 +1610,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1392,
-        1632
+        6256,
+        5328
       ],
-      "id": "d3b6e739-79af-4d6f-b04a-048944641dbd",
+      "id": "f8a2d510-5ec7-4838-9f5a-562f8e33e7ca",
       "name": "HTTP Request45",
       "credentials": {
         "httpBearerAuth": {
@@ -1636,10 +1636,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1936,
-        864
+        2928,
+        4560
       ],
-      "id": "684447c2-a493-4c95-a1d7-1d607935f8fa",
+      "id": "27162af9-ea45-4e2f-ad83-f44e9bfffca5",
       "name": "apresentecao",
       "credentials": {
         "httpBearerAuth": {
@@ -1662,10 +1662,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1936,
-        512
+        2928,
+        4208
       ],
-      "id": "c7791dec-ec86-44f8-b1e2-b525849f2ce7",
+      "id": "e619b465-0901-41b1-bde9-69321b799fe9",
       "name": "apresentação 3",
       "credentials": {
         "httpBearerAuth": {
@@ -1701,10 +1701,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3392,
-        1216
+        1472,
+        4912
       ],
-      "id": "e91a3b85-4e99-419a-94a0-deee5f4a58d5",
+      "id": "40b585b0-b2aa-46b5-995b-3946dbf8e0f3",
       "name": "If"
     },
     {
@@ -1718,10 +1718,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -624,
-        1952
+        4240,
+        5648
       ],
-      "id": "7126e461-98d0-442f-bd37-7951ffcd0536",
+      "id": "a269389b-7f01-4252-a0d6-17e3443359a8",
       "name": "estados_menus",
       "credentials": {
         "redis": {
@@ -1758,10 +1758,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -448,
-        1984
+        4416,
+        5680
       ],
-      "id": "8d188f60-ce89-4623-8ae5-4d5f278390a0",
+      "id": "e8c7cefb-e142-4c84-88b6-00daa3fbc6f3",
       "name": "If1"
     },
     {
@@ -1975,10 +1975,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2544,
-        1216
+        2320,
+        4912
       ],
-      "id": "d949ac78-04f7-4a02-809b-99bce3e19867",
+      "id": "aaca0534-00e2-4f69-b2f0-1dba607ed991",
       "name": "Switch-menu"
     },
     {
@@ -2093,10 +2093,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2080,
-        1584
+        2784,
+        5280
       ],
-      "id": "be5dda26-add8-4667-8bfe-ef454da1ced8",
+      "id": "6252868d-5c90-4aa8-8b2b-6a0c7731a432",
       "name": "switch-auth"
     },
     {
@@ -2161,29 +2161,29 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1600,
-        848
+        3264,
+        4544
       ],
-      "id": "dfe18342-c9f0-41ce-b8b8-2742b6dfc188",
+      "id": "16397bbc-ffcb-43a8-a5c5-c096a6e73d65",
       "name": "Switch-aceite"
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA FIXA DO MERGE\nconst dadosMerge = $('Merge1').first().json.dados_sessao;\n\nlet estadoAuth = 'inicio';\nlet menuAtual = '';\n\ntry {\n  const sessaoObjeto = typeof dadosMerge === 'string'\n    ? JSON.parse(dadosMerge)\n    : (dadosMerge || {});\n\n  estadoAuth = sessaoObjeto?.auth?.estado_anterior || 'inicio';\n  menuAtual = sessaoObjeto?.navegacao?.menu_atual ?? '';\n} catch (e) {\n  estadoAuth = 'inicio';\n  menuAtual = '';\n}\n\n// Prioridade: mensagem contextual gerada pelo menu3 no fallback de menu\nlet menu3Data = null;\ntry {\n  menu3Data = $('menu3').first().json;\n  if (menu3Data?.rota_destino === 'fallback' && menu3Data?.mensagem_texto) {\n    return [{\n      json: {\n        texto_erro: menu3Data.mensagem_texto,\n        estado_validado: estadoAuth,\n        menu_validado: menuAtual\n      }\n    }];\n  }\n} catch (e) {}\n\nconst menuPrincipalMsg = `*MENU PRINCIPAL* 👋\\n━━━━━━━━━━━━━━━━━━\\nComo posso te ajudar hoje?\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR* (Comprovantes)\\n3️⃣ - *MTR* (Manifestos)\\n4️⃣ - *Meus contratos*\\n9️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._`;\n\nconst menuCCRMsg = `📦 *MEUS COMPROVANTES (CCR)*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja visualizar suas últimas coletas?\\n\\n1️⃣ - *Último CCR*\\n2️⃣ - *Últimos 3 CCRs*\\n3️⃣ - *Últimos 6 CCRs*\\n\\n━━━━━━━━━━━━━━━━━━\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu anterior*`;\n\nconst menuBuscarCCRMsg = `📦 *CCRs DISPONÍVEIS*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n━━━━━━━━━━━━━━━━━━\\n\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*`;\n\nconst menuBoletoMsg = `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\\n\\n━━━━━━━━━━━━━━━━━━\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*`;\n\nlet mensagem = '';\n\nif (estadoAuth === 'cliente_novo' || (menuAtual === '' && estadoAuth !== 'autenticado_autorizado')) {\n  mensagem = 'Ops! 😕 Não consegui compreender sua resposta.\\n\\nPor favor, responda apenas *1* para SIM ou *2* para NÃO para nos informar se você já possui cadastro conosco.';\n} else if (estadoAuth === 'autorizado') {\n  mensagem = '⚠️ Opção inválida.\\n\\nPor favor, digite apenas *1* se deseja confirmar a validação dos seus dados ou *2* caso queira cancelar.';\n} else if (estadoAuth === 'AGUARDANDO_CPF') {\n  mensagem = 'Desculpe, o CPF ou CNPJ informado não foi localizado em nosso sistema ou está inconsistente. ⚠️\\n\\nPor favor, certifique-se de enviar *apenas os números* do documento cadastrado na plataforma.';\n} else if (estadoAuth === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = '🔒 *Confirmação de Segurança*\\n\\nO dado informado não confere com o CPF do responsável pela empresa.\\n\\nPor favor, digite apenas os *4 primeiros dígitos* do CPF do titular do cadastro para liberar o acesso.';\n} else if (menuAtual === 'selecione_boleto') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuBoletoMsg}`;\n} else if (menuAtual === 'buscar_ccr') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuBuscarCCRMsg}`;\n} else if (menuAtual === 'Meus_CCR' || menuAtual === 'nenu_ccr') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuCCRMsg}`;\n} else if (menuAtual === 'Menu_Principal' || estadoAuth === 'autenticado_autorizado') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuPrincipalMsg}`;\n} else if (menuAtual === 'fluxo_finalizado') {\n  mensagem = '⚠️ *Opção inválida.*\\n\\nDigite *1* para voltar ao menu principal ou *2* para falar com atendente.';\n} else if (estadoAuth === 'token_invalido' || estadoAuth === 'TOKEN_EXPIRADO') {\n  mensagem = '⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSua sessão de segurança expirou por tempo limite. ⏳\\n\\nPor favor, envie qualquer mensagem de texto para reiniciar o seu processo de identificação.';\n} else {\n  mensagem = 'Poxa, não consegui localizar essa opção no menu. 🤔\\n\\nPor favor, envie apenas o *número* correspondente à opção desejada ou digite *Sair* a qualquer momento para finalizar.';\n}\n\nreturn [{\n  json: {\n    texto_erro: mensagem,\n    estado_validado: estadoAuth,\n    menu_validado: menuAtual\n  }\n}];"
+        "jsCode": "// 1. CAPTURA FIXA DO MERGE\nconst dadosMerge = $('Merge1').first().json.dados_sessao;\n\nlet estadoAuth = 'inicio';\nlet menuAtual = '';\n\ntry {\n  const sessaoObjeto = typeof dadosMerge === 'string'\n    ? JSON.parse(dadosMerge)\n    : (dadosMerge || {});\n\n  estadoAuth = sessaoObjeto?.auth?.estado_anterior || 'inicio';\n  menuAtual = sessaoObjeto?.navegacao?.menu_atual ?? '';\n} catch (e) {\n  estadoAuth = 'inicio';\n  menuAtual = '';\n}\n\n// Prioridade: mensagem contextual gerada pelo menu3 no fallback de menu\nlet menu3Data = null;\ntry {\n  menu3Data = $('menu3').first().json;\n  if (menu3Data?.rota_destino === 'fallback' && menu3Data?.mensagem_texto) {\n    return [{\n      json: {\n        texto_erro: menu3Data.mensagem_texto,\n        estado_validado: estadoAuth,\n        menu_validado: menuAtual\n      }\n    }];\n  }\n} catch (e) {}\n\nconst menuPrincipalMsg = `*MENU PRINCIPAL* 👋\\n━━━━━━━━━━━━━━━━━━\\nComo posso te ajudar hoje?\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR* (Comprovantes)\\n3️⃣ - *MTR* (Manifestos)\\n4️⃣ - *Meus contratos*\\n9️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._`;\n\nconst menuCCRMsg = `📦 *MEUS COMPROVANTES (CCR)*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja visualizar suas últimas coletas?\\n\\n1️⃣ - *Último CCR*\\n2️⃣ - *Últimos 3 CCRs*\\n3️⃣ - *Últimos 6 CCRs*\\n\\n━━━━━━━━━━━━━━━━━━\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu anterior*`;\n\nconst menuBuscarCCRMsg = `📦 *CCRs DISPONÍVEIS*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n━━━━━━━━━━━━━━━━━━\\n\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*`;\n\nconst menuBoletoMsg = `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\\n\\n━━━━━━━━━━━━━━━━━━\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*`;\n\nlet mensagem = '';\n\nif (estadoAuth === 'cliente_novo' || (menuAtual === '' && estadoAuth !== 'autenticado_autorizado')) {\n  mensagem = 'Ops! 😕 Não consegui compreender sua resposta.\\n\\nPor favor, responda apenas *1* para SIM ou *2* para NÃO para nos informar se você já possui cadastro conosco.';\n} else if (estadoAuth === 'token_invalido' || estadoAuth === 'TOKEN_EXPIRADO') {\n  mensagem = '⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSua seção expirou por tempo limite atingido. ⏳\\n\\nPor favor, envie qualquer mensagem de texto para reiniciar o seu processo de identificação.';} \n\nelse if (estadoAuth === 'autorizado') {\n  mensagem = '⚠️ Opção inválida.\\n\\nPor favor, digite apenas *1* se deseja confirmar a validação dos seus dados ou *2* caso queira cancelar.';\n} else if (estadoAuth === 'AGUARDANDO_CPF') {\n  mensagem = 'Desculpe, o CPF ou CNPJ informado não foi localizado em nosso sistema ou está inconsistente. ⚠️\\n\\nPor favor, certifique-se de enviar *apenas os números* do documento cadastrado na plataforma.';\n} else if (estadoAuth === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = '🔒 *Confirmação de Segurança*\\n\\nO dado informado não confere com o CPF do responsável pela empresa.\\n\\nPor favor, digite apenas os *4 primeiros dígitos* do CPF do titular do cadastro para liberar o acesso.';\n} else if (menuAtual === 'selecione_boleto') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuBoletoMsg}`;\n} else if (menuAtual === 'buscar_ccr') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuBuscarCCRMsg}`;\n} else if (menuAtual === 'Meus_CCR' || menuAtual === 'nenu_ccr') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuCCRMsg}`;\n} else if (menuAtual === 'Menu_Principal' || estadoAuth === 'autenticado_autorizado') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuPrincipalMsg}`;\n} else if (menuAtual === 'fluxo_finalizado') {\n  mensagem = '⚠️ *Opção inválida.*\\n\\nDigite *1* para voltar ao menu principal ou *2* para falar com atendente.';\n\n} else {\n  mensagem = 'Poxa, não consegui localizar essa opção no menu. 🤔\\n\\nPor favor, envie apenas o *número* correspondente à opção desejada ou digite *Sair* a qualquer momento para finalizar.';\n}\n\nreturn [{\n  json: {\n    texto_erro: mensagem,\n    estado_validado: estadoAuth,\n    menu_validado: menuAtual\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -944,
-        1952
+        3920,
+        5648
       ],
-      "id": "3679de83-b865-49ec-b3e9-6f65c496765d",
+      "id": "5a7a8936-2a47-46ff-9fd4-2ee369b5c823",
       "name": "Code in JavaScript"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2194,10 +2194,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -368,
-        2256
+        4496,
+        5952
       ],
-      "id": "8fa77644-9dec-473b-bbbd-1e19abe9995d",
+      "id": "d554f08c-ba9f-4dc8-9efb-7e56b77e85d3",
       "name": "invalido",
       "credentials": {
         "httpBearerAuth": {
@@ -2219,7 +2219,7 @@
             {
               "id": "fe60b9c3-7bb2-411a-9731-1bb5239b57b9",
               "leftValue": "={{ $('get_data').item.json.remoteJid }}",
-              "rightValue": "556933169350@s.whatsapp.net",
+              "rightValue": "556993639524@s.whatsapp.net",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -2234,16 +2234,16 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3568,
-        1600
+        1296,
+        5296
       ],
-      "id": "6515f965-59aa-4419-8c04-13da167aed3f",
+      "id": "3b99ce36-2185-49ec-bb20-1a7b310f69bd",
       "name": "If4"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/updatequeue",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2254,10 +2254,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1856,
-        1616
+        6720,
+        5312
       ],
-      "id": "06f1a29c-2db0-4867-9fab-e3b53de68394",
+      "id": "e8f9dc35-a834-49a3-a67a-cce874432bc0",
       "name": "Transferencia de atendimento",
       "credentials": {
         "httpBearerAuth": {
@@ -2269,7 +2269,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2280,10 +2280,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1328,
-        1888
+        6192,
+        5584
       ],
-      "id": "47d5968f-38ca-4fb2-bfc7-c6818be424fb",
+      "id": "185bacb6-2131-43c0-9116-0eb3deefe648",
       "name": "HTTP Request",
       "credentials": {
         "httpBearerAuth": {
@@ -2306,10 +2306,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1360,
-        208
+        3504,
+        3904
       ],
-      "id": "46e4a392-344a-4340-a399-f4628d22e135",
+      "id": "dfbddbb2-c22f-49cb-a029-5c8e30ca89ce",
       "name": "transferencia de atendimneto1",
       "credentials": {
         "httpBearerAuth": {
@@ -2321,7 +2321,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/updatequeue",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2332,10 +2332,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -128,
-        2272
+        4736,
+        5968
       ],
-      "id": "8a681a71-cbd8-4dec-a607-1a89e96acbf6",
+      "id": "10b42277-2ca7-4acd-ab2a-d470435fba54",
       "name": "transferencia de atendimento2",
       "credentials": {
         "httpBearerAuth": {
@@ -2361,17 +2361,17 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1520,
-        576
+        6384,
+        4272
       ],
-      "id": "f8c6b66a-3cbc-476b-a365-43a30a0a09a8",
+      "id": "8dee3775-78a4-4884-8c3a-3c306124df0e",
       "name": "API_ALPHA(Boletos)",
       "onError": "continueErrorOutput"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/base64",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/base64",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2417,10 +2417,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1760,
-        256
+        6624,
+        3952
       ],
-      "id": "4be1d42a-eab4-4d1d-8380-6aa4164b6ff9",
+      "id": "d2defbf8-bfa2-47ec-94c9-2dddedd52803",
       "name": "HTTP Request34",
       "credentials": {
         "httpBearerAuth": {
@@ -2432,7 +2432,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2443,10 +2443,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1520,
-        784
+        6384,
+        4480
       ],
-      "id": "a698f995-4ccb-45d1-9ca8-2d6008acca34",
+      "id": "66b44829-ac6d-4766-b501-490260b4e039",
       "name": "HTTP Request46",
       "credentials": {
         "httpBearerAuth": {
@@ -2464,7 +2464,7 @@
           "parameters": [
             {
               "name": "documento",
-              "value": "={{ $('get_data').item.json.conversation }}"
+              "value": "={{ $('get_data1').item.json.message.conversation }}"
             }
           ]
         },
@@ -2473,10 +2473,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2224,
-        2752
+        2640,
+        6448
       ],
-      "id": "9f99663f-006d-4a64-9f6a-54e6d4f9150c",
+      "id": "aba127f7-2d55-45e4-b28a-2662470a0e18",
       "name": "Api_alpha localizar",
       "onError": "continueErrorOutput"
     },
@@ -2503,10 +2503,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3984,
-        1408
+        8848,
+        5104
       ],
-      "id": "38beb800-08c5-4ae9-9b97-f82f910b3118",
+      "id": "a0868621-9c4c-4c3d-b968-f4371ce2b1e0",
       "name": "captura de erro"
     },
     {
@@ -2516,10 +2516,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4192,
-        1408
+        9056,
+        5104
       ],
-      "id": "2bdff0cf-0f2e-46a0-b708-26b9e9cda016",
+      "id": "f8519d41-2a27-4bcc-b569-422e1ae6ada9",
       "name": "Code in JavaScript1"
     },
     {
@@ -2583,16 +2583,16 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        4400,
-        1408
+        9264,
+        5104
       ],
-      "id": "fadbc192-f8e3-4c62-8751-0113a85dd967",
+      "id": "40307a9f-d0c0-494f-8041-da02916a4024",
       "name": "Switch"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2603,10 +2603,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        4640,
-        1408
+        9504,
+        5104
       ],
-      "id": "1381f2ab-a6db-4c14-a738-4f6cf226a123",
+      "id": "71681940-dd68-4726-8ace-0b74a6022d1a",
       "name": "token expirado",
       "credentials": {
         "httpBearerAuth": {
@@ -2626,10 +2626,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        4864,
-        1408
+        9728,
+        5104
       ],
-      "id": "4e45dea9-f8c2-4883-ac1d-6698d676609f",
+      "id": "492013dc-450f-48f3-a443-5c655dd0e057",
       "name": "finalizado",
       "credentials": {
         "redis": {
@@ -2649,10 +2649,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1840,
-        3152
+        3024,
+        6848
       ],
-      "id": "05331bd9-da3e-4779-a0e7-3b287681e822",
+      "id": "fb842a6c-3cc1-488c-8d42-403344a60542",
       "name": "SET AGUARDANDO_CONFIRMAR",
       "credentials": {
         "redis": {
@@ -2669,10 +2669,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2096,
-        1664
+        6960,
+        5360
       ],
-      "id": "0219d05a-3d75-4533-a831-772f04dfc8ae",
+      "id": "7e9dbf8b-64c9-4d50-b887-3fd82a8ad170",
       "name": "deletar sessao",
       "credentials": {
         "redis": {
@@ -2689,10 +2689,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2384,
-        1632
+        7248,
+        5328
       ],
-      "id": "5a956ee2-d0a0-411a-b1c5-934e10815f44",
+      "id": "f92f1d3d-9740-4e9d-ae32-9efd7d6cfc13",
       "name": "deleta registro da sessao",
       "credentials": {
         "redis": {
@@ -2729,10 +2729,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2000,
-        2048
+        2864,
+        5744
       ],
-      "id": "3ce82239-5e64-45c7-8178-954663b01669",
+      "id": "362ef554-4e7b-4f00-a4aa-b670a992d1f4",
       "name": "If5"
     },
     {
@@ -2794,16 +2794,16 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1264,
-        2320
+        3600,
+        6016
       ],
-      "id": "2eb60f20-24d9-4f50-8fee-b66eef5622bf",
+      "id": "641fd2e8-bf27-4086-b65b-96928ee77f2f",
       "name": "Switch1"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2814,10 +2814,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -992,
-        2592
+        3872,
+        6288
       ],
-      "id": "eba6bbdb-2ec6-4436-be9c-64cd7abda196",
+      "id": "55897e0f-9c14-4529-aa04-06f1945ca8d0",
       "name": "invalido4",
       "credentials": {
         "httpBearerAuth": {
@@ -2833,16 +2833,16 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1584,
-        2560
+        3280,
+        6256
       ],
-      "id": "3fb09ce3-8dea-480b-8704-5b2cc2f46663",
+      "id": "31462d24-0b67-4b8c-8823-2b94eea33b3e",
       "name": "Code in JavaScript2"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2853,10 +2853,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1472,
-        2960
+        3392,
+        6656
       ],
-      "id": "698413be-3273-42cf-8031-d23231612945",
+      "id": "d120fc47-2b9c-4542-964a-839a6be51945",
       "name": "encontrado",
       "credentials": {
         "httpBearerAuth": {
@@ -2876,10 +2876,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1584,
-        2768
+        3280,
+        6464
       ],
-      "id": "f406a1df-25f3-43ea-a49c-c44e9e56f3e2",
+      "id": "984bd341-bc50-4e86-9484-632e0684ccb7",
       "name": "DADOS_COMPLETOS",
       "credentials": {
         "redis": {
@@ -2910,10 +2910,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1568,
-        2304
+        3296,
+        6000
       ],
-      "id": "ba0c88ca-b12b-433e-88d6-8edc7cef4533",
+      "id": "7d2fc00e-b43a-4f5a-bbd8-db6eff2a06b5",
       "name": "Api_alpha autenticar",
       "onError": "continueErrorOutput"
     },
@@ -2945,16 +2945,16 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1520,
-        400
+        6384,
+        4096
       ],
-      "id": "0c3d6c5d-1c4a-4a6f-8dce-680f57a368a4",
+      "id": "cccc494a-1f40-4382-ae03-638e3c384fbb",
       "name": "If2"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
@@ -2965,10 +2965,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1744,
-        448
+        6608,
+        4144
       ],
-      "id": "ccd0e55d-b895-4ccd-8bbd-f70aedd4927d",
+      "id": "64bd3c08-c0d2-4edf-bbce-eda8a267f0ea",
       "name": "HTTP Request47",
       "credentials": {
         "httpBearerAuth": {
@@ -2994,10 +2994,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        16,
-        1088
+        4880,
+        4784
       ],
-      "id": "4642ea7e-e3df-49a2-86e9-b5c065c3f82c",
+      "id": "26444eb5-40b9-491e-87ca-b04f01e98038",
       "name": "marca erro menu"
     },
     {
@@ -3037,16 +3037,38 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        432,
-        672
+        5296,
+        4368
       ],
-      "id": "05d66791-a720-42b3-888d-15e9d5decbb8",
+      "id": "d8ede6c3-4e5a-4dbd-a734-c80e441827ad",
       "name": "Switch-apos-menu24"
     },
     {
       "parameters": {
         "rules": {
           "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fb6bceb9-ade3-408e-892a-4eaf22253165",
+                    "leftValue": "={{ $json.estado_validado }}",
+                    "rightValue": "token_invalido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
             {
               "conditions": {
                 "options": {
@@ -3080,10 +3102,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -208,
-        2000
+        4656,
+        5696
       ],
-      "id": "924f69ba-487e-4f79-b293-240040d15449",
+      "id": "99cffb0a-3b02-4006-8662-d5bfec829be7",
       "name": "Switch-pos-if1"
     },
     {
@@ -3145,11 +3167,54 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3984,
-        1664
+        880,
+        5360
       ],
-      "id": "bedbb017-1c4d-495b-ace8-8e343ad5d697",
+      "id": "9f35b71b-7684-4363-84fd-a5f78bfb7bcb",
       "name": "get_data"
+    },
+    {
+      "parameters": {
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `*TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. \n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"transferencia-atendimento\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4464,
+        4592
+      ],
+      "id": "03935116-c4ba-4b58-846a-9c1cde62a9ee",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":$json.texto_erro,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4816,
+        5600
+      ],
+      "id": "04a47ba9-5a53-4e43-97b0-ff003c1301c3",
+      "name": "invalido5",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -3183,7 +3248,7 @@
         ],
         [
           {
-            "node": "Transferencia de atendimento",
+            "node": "HTTP Request1",
             "type": "main",
             "index": 0
           }
@@ -3360,6 +3425,13 @@
     },
     "Switch-pos-if1": {
       "main": [
+        [
+          {
+            "node": "invalido5",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [],
         [
           {
@@ -4329,14 +4401,36 @@
           }
         ]
       ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "invalido5": {
+      "main": [
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "0a50e43f-aaa1-42bc-83e3-7a7a1072a94f",
+  "versionId": "661b1f27-f05e-45f2-a3bf-daaa0dea4496",
   "meta": {
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
   },
