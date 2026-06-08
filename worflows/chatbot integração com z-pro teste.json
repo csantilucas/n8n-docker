@@ -1,5 +1,5 @@
 {
-  "name": "chatbot integração com z-pro",
+  "name": "chatbot integração com z-pro teste",
   "nodes": [
     {
       "parameters": {
@@ -29,10 +29,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2960,
-        3056
+        -2224,
+        2944
       ],
-      "id": "3c66a49d-2acf-45d1-b613-4ab301ac585f",
+      "id": "b90900d5-99d7-4f29-9869-ee6492c8bc8e",
       "name": "encontrado1"
     },
     {
@@ -43,22 +43,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `❌ desculpe *${$('webhook').item.json.pushName}*, mas não encontramos seu cadastro, nos forneça outro`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"cadastro-nao-encontrado\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Não encontrei um cadastro vinculado ao CPF ou CNPJ informado. Por favor, confira os dados e informe outro documento para continuar.`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-nao-encontrado\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2576,
-        3072
+        -1840,
+        2960
       ],
-      "id": "0952b014-8423-45f3-a3a8-c6f5194d876c",
+      "id": "45510827-5fb8-40ae-a568-6fb65939825d",
       "name": "login invalido1",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -73,22 +69,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `✅ *VALIDAÇÃO DE ACESSO*\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n\\n` +\n          `Por favor, informe o *CPF* ou *CNPJ* do cadastro.\\n\\n` +\n          `_Digite apenas os números._\\n\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n` +\n          `🛡️ _Seus dados estão protegidos e criptografados._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"solicitacao-cpf-cnpj\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `✅ *VALIDAÇÃO DE ACESSO*\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n\\n` +\n          `Por favor, informe o *CPF* ou *CNPJ* do cadastro.\\n\\n` +\n          `_Digite apenas os números._\\n\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n` +\n          `🛡️ _Seus dados estão protegidos e criptografados._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"solicitacao-cpf-cnpj\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1968,
-        784
+        -1232,
+        672
       ],
-      "id": "85ffa8fc-5898-413c-b0f9-975bfb488325",
+      "id": "586f4837-9451-44a4-8cc7-76a62d3f041f",
       "name": "aceite1",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -103,22 +95,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\":$json.texto_erro,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":$json.texto_erro,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -880,
-        2080
+        96,
+        2016
       ],
-      "id": "fbfa00f3-46ce-4441-be80-b5e526953d75",
+      "id": "90cbe807-2e9f-446c-b3a5-09240729a65d",
       "name": "invalido2",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -139,7 +127,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('webhook').item.json.conversation }}",
+                    "leftValue": "={{ $('get_data').item.json.conversation }}",
                     "rightValue": "1",
                     "operator": {
                       "type": "string",
@@ -187,27 +175,27 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1344,
-        1008
+        -608,
+        896
       ],
-      "id": "95591a23-a430-42bf-af2a-4f114cb04e68",
+      "id": "cea77a66-9d7c-47e8-99c8-4b6b9d2f9ffc",
       "name": "Switch4"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('get_data').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('get_data').item.json.conversation,\n        \"type\":$('get_data').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2336,
-        512
+        -1600,
+        400
       ],
-      "id": "0b19c1f1-e40b-4852-bd27-f6e451ddfd00",
+      "id": "b4f17770-5141-4305-9eb6-be262b805e94",
       "name": "SET CLIENTE1",
       "credentials": {
         "redis": {
@@ -224,22 +212,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `*${$('webhook').item.json.pushName}*, Para continuar, precisamos validar seus *dados*.\n_Deseja continuar?_\n\n  1️⃣ - _sim_\n  2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"validacao-dados\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `*${$('get_data').item.json.pushName}*, Para continuar, precisamos validar seus *dados*.\n_Deseja continuar?_\n\n  1️⃣ - _sim_\n  2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"validacao-dados\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2336,
-        688
+        -1600,
+        576
       ],
-      "id": "d00f977c-a7c6-4251-af60-4ceb8bb26a64",
+      "id": "aa0251e1-1d28-4a70-8f16-63c90e58e33b",
       "name": "aceite3",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -249,18 +233,18 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n    \"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('get_data').item.json.horario\n      },\n    \"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('get_data').item.json.conversation,\n        \"type\":$('get_data').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1968,
-        976
+        -1232,
+        864
       ],
-      "id": "fa0880e7-ce27-44fe-a7cb-f3350b73058d",
+      "id": "d054f92e-be8a-4113-b7f2-9c2bb2980506",
       "name": "SET CLIENTE4",
       "credentials": {
         "redis": {
@@ -272,27 +256,23 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `*${$json.auth.nome}*👋\n\nPercebemos que você ainda *não é cliente*\nda Preserva.\n\nPara direcionarmos seu atendimento ao\nsetor comercial, por favor informe os \ndados abaixo:\n\n📄 *_CPF/CNPJ_*\n👤 *_Nome completo ou Razão Social_*\n📍 *_Cidade_*\n\nAssim que recebermos as informações, \num de nossos atendentes continuará\nseu atendimento. 😊`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"captacao-dados\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `*${$json.auth.nome}*👋\n\nPercebemos que você ainda *não é cliente*\nda Preserva.\n\nPara direcionarmos seu atendimento ao\nsetor comercial, por favor informe os \ndados abaixo:\n\n📄 *_CPF/CNPJ_*\n👤 *_Nome completo ou Razão Social_*\n📍 *_Cidade_*\n\nAssim que recebermos as informações, \num de nossos atendentes continuará\nseu atendimento. 😊`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"captacao-dados\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2336,
-        320
+        -1600,
+        208
       ],
-      "id": "6ebb1c2a-af8a-4c13-b97d-9e6fe77a9cda",
+      "id": "6bac64b9-656a-4d6f-82c5-2b4577511a0e",
       "name": "transferencia1",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -302,15 +282,15 @@
     {
       "parameters": {
         "operation": "delete",
-        "key": "={{ $('webhook').item.json.remoteJid }}"
+        "key": "={{ $('get_data').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3040,
-        960
+        -2304,
+        848
       ],
-      "id": "054ffc0f-5f8a-418f-b1c4-bd0af553d4d3",
+      "id": "0291b753-c36d-4452-a8a2-77072e539758",
       "name": "Redis3",
       "credentials": {
         "redis": {
@@ -322,15 +302,15 @@
     {
       "parameters": {
         "operation": "delete",
-        "key": "={{ \"status:\" + $('webhook').item.json.remoteJid }}"
+        "key": "={{ \"status:\" + $('get_data').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3040,
-        752
+        -2304,
+        640
       ],
-      "id": "fd13c624-f002-43df-9968-01e872285363",
+      "id": "068fbee2-7996-4de6-a8bf-2bfefad24a99",
       "name": "Redis4",
       "credentials": {
         "redis": {
@@ -350,10 +330,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3552,
-        1520
+        -2816,
+        1408
       ],
-      "id": "8d0e3b9c-1912-42e4-902e-205d540f8112",
+      "id": "5e7fd131-0a8a-4a12-8e0b-789d19576f91",
       "name": "data_redis1",
       "onError": "continueRegularOutput"
     },
@@ -364,7 +344,7 @@
             {
               "id": "937ba465-25bb-4929-b775-f1dfd76949e8",
               "name": "message.conversation",
-              "value": "={{ $('webhook').item.json.conversation.replace(/\\D/g, '') }}",
+              "value": "={{ $('get_data').item.json.conversation.replace(/\\D/g, '') }}",
               "type": "string"
             }
           ]
@@ -374,10 +354,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2944,
-        2160
+        -2208,
+        2048
       ],
-      "id": "04f1dc71-8bcc-47ed-924d-d83b2208b01e",
+      "id": "a3bdf5a4-8896-4264-8b7e-990f860cdae9",
       "name": "get_data1"
     },
     {
@@ -392,10 +372,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3904,
-        1616
+        -3168,
+        1504
       ],
-      "id": "7ec5cc0a-dead-4a09-8aee-3dad6140ea67",
+      "id": "4a3968b0-7b95-4a83-b502-ab3b9963c487",
       "name": "Redis5",
       "credentials": {
         "redis": {
@@ -432,10 +412,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -4512,
-        1280
+        -3776,
+        1168
       ],
-      "id": "5ee122e6-3b58-42c7-bfe3-f75bcde5c447",
+      "id": "f4b761ee-9abe-4e61-9464-8acb087cce8c",
       "name": "If3"
     },
     {
@@ -447,10 +427,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -4848,
+        -4208,
         1184
       ],
-      "id": "8181ea1c-9028-49cf-8ae4-87d030136da0",
+      "id": "625d5481-8d09-454b-a165-ee158a8f28d8",
       "name": "Webhook1",
       "webhookId": "e39bacd9-7b82-42f5-9e2c-7fdac5837c2b"
     },
@@ -462,22 +442,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `✅ *CADASTRO LOCALIZADO!*\n━━━━━━━━━━━━━━━━━━\\n\nTudo certo, seu cadastro foi encontrado em nosso sistema.\\n\nPara sua segurança, informe os *4 primeiros dígitos* do CPF do responsável pela empresa:\\n\nExemplo: \\`1234\\`\\n\n ━━━━━━━━━━━━━━━━━━\n_Apenas números, por favor._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"cadastro-localizado\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `✅ *CADASTRO LOCALIZADO!*\n━━━━━━━━━━━━━━━━━━\\n\nTudo certo, seu cadastro foi encontrado em nosso sistema.\\n\nPara sua segurança, informe os *4 primeiros dígitos* do CPF do responsável pela empresa:\n ━━━━━━━━━━━━━━━━━━\n_Apenas números, por favor._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-localizado\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2960,
-        3264
+        -2224,
+        3152
       ],
-      "id": "28100e3d-1498-45ad-8d1e-5675394ee23e",
+      "id": "5c9de1a7-f289-4c07-9eb7-bd6bf621013d",
       "name": "valido1",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -492,22 +468,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"❌ não foi possivel autenticar tente novamente\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Desculpe, o CPF ou CNPJ informado parece inválido ou não foi encontrado. ⚠️\\n\\nPor favor, envie apenas os *números* do documento cadastrado.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1696,
-        2416
+        -960,
+        2304
       ],
-      "id": "83917203-a764-4093-b94d-ed07bd32a9b2",
+      "id": "8dbd727d-e453-41df-8446-e23caf743696",
       "name": "invalido3",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -525,27 +497,27 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -3744,
-        1424
+        -3008,
+        1312
       ],
-      "id": "74aeffea-4452-4ef0-a0f4-90fc93376314",
+      "id": "e9474972-4748-4ff0-b802-142272a658e6",
       "name": "Merge1"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('webhook').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": $('Webhook1').item.json.body.ticket.protocol,\n      \"ticket\":$('Webhook1').item.json.body.ticket.id,\n      \"token\":\"\"\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"contagem_erro\":0,\n      \"ultima_interacao\": $('webhook').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cnpj\":\"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  message:{\n  text:$('webhook').item.json.conversation,\n  type:$('webhook').item.json.messageType\n  }\n  })\n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('get_data').item.json.pushName,\n      \"logado\": false,\n      \"data_login\":\"\",\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\": $('Webhook1').item.json.body.ticket.protocol,\n      \"ticket\":$('Webhook1').item.json.body.ticket.id,\n      \"token\":\"\"\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"contagem_erro\":0,\n      \"ultima_interacao\": $('get_data').item.json.horario\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cnpj\":\"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  message:{\n  text:$('get_data').item.json.conversation,\n  type:$('get_data').item.json.messageType\n  }\n  })\n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2672,
-        464
+        -1936,
+        352
       ],
-      "id": "5626f564-7ba7-4bb9-8a8d-b78c88cb0830",
+      "id": "e3c021e5-59aa-412f-9427-9714865f6822",
       "name": "SET CLIENTE5",
       "credentials": {
         "redis": {
@@ -562,22 +534,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $('menu3').item.json.mensagem_texto,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-menu3\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $('menu3').item.json.mensagem_texto,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-menu3\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -512,
-        960
+        224,
+        848
       ],
-      "id": "7651d373-6b98-45d5-9f7a-2b6e140b2df7",
+      "id": "f98f01d6-57fb-4206-aa2c-ccf8e1c47926",
       "name": "HTTP Request24",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -592,22 +560,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"sessão encerrada, até mais 👋\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"encerrar-sessao\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": \"sessão encerrada, até mais 👋\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"encerrar-sessao\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -3040,
-        576
+        -2304,
+        464
       ],
-      "id": "ed993acd-1ac3-48d4-8f06-b805a9528d5f",
+      "id": "94d9eebf-eb2b-4dd7-90dd-245e40c80e43",
       "name": "logof1",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -622,22 +586,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"*_Menu Inicial_*\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"menu-inicial\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": \"*_Menu Inicial_*\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"menu-inicial\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2144,
-        3296
+        -1408,
+        3184
       ],
-      "id": "3365be94-c9c3-480e-82f5-c1e65454df46",
+      "id": "16918f03-cf2e-41fb-a0d6-4e0ea8f08c92",
       "name": "menu2",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -646,32 +606,32 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('webhook').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"menu_ccr\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"menu_contrato\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
+        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\n// Consideramos que os campos retornam booleano (true/false) ou strings (\"Sim\"/\"Não\")\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"⚠️ Atenção\",\n        mensagem_texto: `Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.`,\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\", // NOVA PERNA PARA O SEU SWITCH\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\"\nconst msgWebhook = $('get_data').first().json.conversation || \"\";\nconst rawMsg = msgWebhook.toLowerCase().trim();\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL* 👋\n━━━━━━━━━━━━━━━━━━\nOlá, *${nomeUsuario}*! \nComo posso te ajudar hoje?\n\n1️⃣ - *Minhas faturas*\n2️⃣ - *Meus CCR* (Comprovantes)\n3️⃣ - *MTR* (Manifestos)\n4️⃣ - *Meus contratos*\n9️⃣ - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" }, \n    \"2\": { prox: \"Meus_CCR\", rota: \"menu_ccr\" }, // Rota padrão para abrir o submenu de CCR\n    \"3\": { prox: \"Menu_MTR\", rota: \"abrir_menu\" }, // Ajustado para MTR conforme a opção 3\n    \"4\": { prox: \"Meus_Contratos\", rota: \"menu_contrato\" }, // Rota padrão para abrir o submenu de Contratos\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `📦 *MEUS COMPROVANTES (CCR)* ━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1️⃣ - *Último CCR*\n2️⃣ - *Últimos 3 CCRs*\n3️⃣ - *Últimos 6 CCRs*\n\n ━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu anterior*`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR, // Adicionado para evitar erro de navegação\n  \"selecione_boleto\": { opcoes: { \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } },\n  \"fluxo_finalizado\": { opcoes: { \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }, \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" } } }\n};\n\n// --- 5. LÓGICA DE NAVEGAÇÃO ---\n\n// --- 5.1 LÓGICA ESPECÍFICA PARA O MENU DE CCR ---\n// Só entra aqui se NÃO for 0 ou 9, pois 0 e 9 devem ser tratados pelo mapaMenus (navegação)\nif ((menuSalvo === \"buscar_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Opção *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Estou localizando os seus últimos *${qtdSelecionada}* CCRs. Um momento...`,\n            quantidade_ccr: qtdSelecionada, \n            rota_destino: \"buscar_ccr\", \n            sucesso: true\n        };\n    }\n}\n\n// --- 5.2 LÓGICA ESPECÍFICA PARA O MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `✅ Boleto *${msgNum}* selecionada.`,\n            mensagem_texto: `⏳ Localizei o boleto *${faturaAchada.numero_boleto}*. Estou gerando o arquivo para você...`,\n            idFatura: faturaAchada.boleto_id, \n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL (MENUS ESTÁTICOS) ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: `✅ Você selecionou: *Minhas Faturas*`,\n      mensagem_texto: \"⏳ *Aguarde...* Buscando faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"✅ Processando...\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n} else {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"⚠️ Opção inválida\",\n    mensagem_texto: `⚠️ *Opção inválida.*\\n\\n${menuAtual.msg || \"\"}`,\n    proximo_estado: menuSalvo,\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -880,
-        1424
+        -144,
+        1312
       ],
-      "id": "47a2ec46-1ce5-49a6-923a-339f6a6c6f1d",
+      "id": "76c5650f-75f9-472c-b4d3-f9143eaf2481",
       "name": "menu3"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$('menu3').item.json, \n    \"navegacao\": {\n      \"menu_atual\": $('menu3').item.json.proximo_estado, \n      \"ultima_interacao\": $('webhook').item.json.horario\n    },\n    \"auth\": {\n      ...$('menu3').item.json.auth,\n      \"estado_anterior\": $('menu3').item.json.limpar_login ? \"\" : ($('menu3').item.json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('webhook').item.json.conversation,\n      \"type\": $('webhook').item.json.messageType\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$('menu3').item.json, \n    \"navegacao\": {\n      \"menu_atual\": $('menu3').item.json.proximo_estado, \n      \"ultima_interacao\": $('get_data').item.json.horario\n    },\n    \"auth\": {\n      ...$('menu3').item.json.auth,\n      \"estado_anterior\": $('menu3').item.json.limpar_login ? \"\" : ($('menu3').item.json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('get_data').item.json.conversation,\n      \"type\": $('get_data').item.json.messageType\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -512,
-        784
+        224,
+        672
       ],
-      "id": "7b9100ba-d741-4f79-8f03-0d7d5cfe3dad",
+      "id": "4372d78c-b4ac-487f-b7d3-09774f3e8ff5",
       "name": "estados_menus1",
       "credentials": {
         "redis": {
@@ -688,22 +648,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `_*Protocolo:*_ _\\`${$('data_redis1').item.json.auth.protocolo}\\`_\\n━━━━━━━━━━━━━━━━━━\\n\\nOlá, *${$('data_redis1').item.json.auth.nome}*! 👋\\nMenu Principal\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR*\\n3️⃣ - *MTR*\\n4️⃣ - *Meus contratos*\\n5️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"menu-principal\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `_*Protocolo:*_ _\\`${$('data_redis1').item.json.auth.protocolo}\\`_\\n━━━━━━━━━━━━━━━━━━\\n\\nOlá, *${$('data_redis1').item.json.auth.nome}*! 👋\\nMenu Principal\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR*\\n3️⃣ - *MTR*\\n4️⃣ - *Meus contratos*\\n5️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"menu-principal\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1888,
-        3296
+        -1152,
+        3184
       ],
-      "id": "43377d52-8f0d-4844-8cc4-4ea7cd71dff5",
+      "id": "58908a9c-ef02-4657-b59a-02c618415623",
       "name": "menu principal1",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -718,22 +674,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -512,
-        1152
+        224,
+        1040
       ],
-      "id": "a2d5647d-c839-4acd-87e9-653854fd0290",
+      "id": "1cb227a9-6904-43b8-bda1-25e15e73d459",
       "name": "HTTP Request3",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -748,22 +700,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"⌛... Estamos buscando suas faturas\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-faturas\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": \"⌛... Estamos buscando suas faturas\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"busca-faturas\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        0,
-        832
+        736,
+        720
       ],
-      "id": "8265f3db-214d-4071-8aff-c1834bead598",
+      "id": "3576a434-26dd-4492-a2ef-8474a2dc5231",
       "name": "HTTP Request25",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -789,7 +737,7 @@
             {
               "id": "3464d2b2-c69b-4041-8bd0-6b2c5fc2c364",
               "name": "cnpj",
-              "value": "={{ $('webhook').item.json.conversation }}",
+              "value": "={{ $('get_data').item.json.conversation }}",
               "type": "string"
             },
             {
@@ -805,10 +753,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2752,
-        3264
+        -2016,
+        3152
       ],
-      "id": "9ed90f10-4895-4809-afb1-baab11ecb0ae",
+      "id": "e1102f9f-4299-46cd-a5f5-0dca5bb3153d",
       "name": "Edit Fields3"
     },
     {
@@ -819,22 +767,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        0,
-        1008
+        736,
+        928
       ],
-      "id": "aabc47fa-0808-4b42-812d-9c4b54b6153b",
+      "id": "0e10ea12-f2fa-45ac-a992-af559167b6e6",
       "name": "HTTP Request26",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -858,10 +802,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        0,
-        688
+        736,
+        576
       ],
-      "id": "b2e0fbe4-a861-4ace-9a7c-577e54f3eed8",
+      "id": "c8fe1e1a-17b1-4f73-9149-189bc1116369",
       "name": "API_ALPHA(Boletos)2",
       "onError": "continueErrorOutput"
     },
@@ -872,10 +816,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        0,
-        544
+        736,
+        432
       ],
-      "id": "846c4fa5-f013-4222-ad8a-73b790795f9b",
+      "id": "5035a872-6d8e-4077-a260-5d94bee1abef",
       "name": "Code in JavaScript3"
     },
     {
@@ -886,22 +830,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.texto_final,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-final\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.texto_final,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-final\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        0,
-        368
+        736,
+        256
       ],
-      "id": "a263d9b2-473a-448d-8a5e-da972ed36c5a",
+      "id": "fbe0e29f-71c6-4f39-8e83-b8e9bca5f359",
       "name": "HTTP Request30",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -916,22 +856,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\n\n━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"menu-faturas-pdf\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\n\n━━━━━━━━━━━━━━━━━━\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"menu-faturas-pdf\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        0,
-        144
+        736,
+        32
       ],
-      "id": "78854810-f597-43b4-a2df-f22298fe9c02",
+      "id": "4d6849ad-e818-41ee-aebf-6c274dab8c16",
       "name": "HTTP Request31",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -941,7 +877,7 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
         "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json, \n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\",\n      \"faturas_disponiveis\": $(\"Code in JavaScript3\").item.json.faturas_mapeadas, \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
@@ -949,10 +885,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        736,
+        -112
       ],
-      "id": "a8cca887-f8f1-426e-be16-4148e7f8bc55",
+      "id": "d57755e0-48b5-4541-a6bf-ee1a46abd9e6",
       "name": "estados_menus6",
       "credentials": {
         "redis": {
@@ -969,22 +905,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `⌛ um momento *${$('webhook').item.json.pushName}*, estamos buscando seu cadastro ⌛...`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `⌛ um momento, estamos buscando seu cadastro`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2960,
-        2672
+        -2224,
+        2560
       ],
-      "id": "0351e60b-b816-43fe-885b-8786a5bc431c",
+      "id": "d9f76330-6a81-4c83-9922-ebbb3a96527e",
       "name": "buscando",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -999,22 +931,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"confirmacao-mensagem-certificados\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"confirmacao-mensagem-certificados\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        64,
-        2064
+        800,
+        1952
       ],
-      "id": "d2a35dfb-8a39-45d7-a194-a6154fcb4156",
+      "id": "a2e72407-b038-4949-a984-a1087febe8ec",
       "name": "HTTP Request35",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1029,22 +957,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `📄 *PLATAFORMA DE CERTIFICADOS*\n━━━━━━━━━━━━━━━━━━\n\nVocê pode acessar seus certificados de coleta diretamente pela nossa plataforma:\n\n🌐 *Acesse aqui:*\nhttps://documentos-alphasoftware.premiumasp.net/\n\n🔐 *DADOS DE ACESSO*\n\n• *Domínio:* \\`preservasolucoes\\` \n• *E-mail:* ${$('menu3').item.json.cliente.email || \"não encontrado\"}\n• *Senha:* _Os 4 primeiros dígitos do seu CPF/CNPJ_\n\n━━━━━━━━━━━━━━━━━━\n_💡 Dica: Clique no link acima para fazer o login._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"plataforma-certificados\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `📄 *PLATAFORMA DE CERTIFICADOS*\n━━━━━━━━━━━━━━━━━━\n\nVocê pode acessar seus certificados de coleta diretamente pela nossa plataforma:\n\n🌐 *Acesse aqui:*\nhttps://documentos-alphasoftware.premiumasp.net/\n\n🔐 *DADOS DE ACESSO*\n\n• *Domínio:* \\`preservasolucoes\\` \n• *E-mail:* ${$('menu3').item.json.cliente.email || \"não encontrado\"}\n• *Senha:* _Os 4 primeiros dígitos do seu CPF/CNPJ_\n\n━━━━━━━━━━━━━━━━━━\n_💡 Dica: Clique no link acima para fazer o login._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"plataforma-certificados\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        96,
-        2288
+        832,
+        2176
       ],
-      "id": "5b56dd5d-9532-42a2-98b9-28a412cb029f",
+      "id": "0326776f-4664-45cf-9802-2e38b6702ab3",
       "name": "HTTP Request36",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1059,22 +983,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"transferencia-atendimento\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"transferencia-atendimento\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        320,
-        1504
+        1056,
+        1392
       ],
-      "id": "011ec45b-a9b1-4e13-8dfb-722c7b1f903b",
+      "id": "7ffe3233-3a58-4b36-a48e-e96eb1dbeea6",
       "name": "HTTP Request37",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1342,10 +1262,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -496,
-        1456
+        240,
+        1344
       ],
-      "id": "b9779056-77bd-46c4-9a08-f8eb7e8010fb",
+      "id": "8ce15c3f-13fd-49a6-a3c5-8477a65e9120",
       "name": "Switch-menu1"
     },
     {
@@ -1356,22 +1276,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `📦 *CCRs DISPONÍVEIS*\n━━━━━━━━━━━━━━━━━━\nEncontramos *6 CCRs* vinculados ao seu cadastro.\nComo deseja receber?\n\n1️⃣ - Último CCR\n2️⃣ - Últimos 3 CCRs\n3️⃣ - Últimos 6 CCRs\n━━━━━━━━━━━━━━━━━━\n\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*\n_💡 Digite a opção desejada._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"menu-ccrs-disponiveis\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `📦 *CCRs DISPONÍVEIS*\n━━━━━━━━━━━━━━━━━━\nEncontramos *6 CCRs* vinculados ao seu cadastro.\nComo deseja receber?\n\n1️⃣ - Último CCR\n2️⃣ - Últimos 3 CCRs\n3️⃣ - Últimos 6 CCRs\n━━━━━━━━━━━━━━━━━━\n\n9️⃣ - *Falar com atendente*\n0️⃣ - *Voltar ao menu*\n_💡 Digite a opção desejada._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"menu-ccrs-disponiveis\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        112,
-        2496
+        848,
+        2384
       ],
-      "id": "9fb7e13f-3e04-4372-a035-da5a1b65b88b",
+      "id": "7b9b157f-ceb1-4856-8599-85ee32984ff2",
       "name": "HTTP Request38",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1381,7 +1297,7 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
         "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"buscar_ccr\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
@@ -1389,10 +1305,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        128,
-        2736
+        864,
+        2624
       ],
-      "id": "f8f83721-307f-43e1-a3cc-f0f8dd025fd4",
+      "id": "ce528268-d9a9-458c-a20e-7baa94f96638",
       "name": "estados_menus7",
       "credentials": {
         "redis": {
@@ -1409,22 +1325,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.mensagem_texto,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-dinamica\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_texto,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-dinamica\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -112,
-        2272
+        624,
+        2160
       ],
-      "id": "9010bd1a-d863-48db-a3dd-ddeec367913e",
+      "id": "ca3a5088-5c8f-43bf-9c15-4a14a0173728",
       "name": "HTTP Request39",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1448,10 +1360,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -80,
-        2480
+        656,
+        2368
       ],
-      "id": "5f73b551-086b-4f82-ba41-fc1a8554be70",
+      "id": "8e3790f8-bd21-41f2-bca3-0d393698503d",
       "name": "API_ALPHA(Ccr)1",
       "onError": "continueErrorOutput"
     },
@@ -1463,22 +1375,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.texto_ccr,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-ccr\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.texto_ccr,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-ccr\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -64,
-        2944
+        672,
+        2832
       ],
-      "id": "c20ac186-fcbd-4b0d-a271-0e2ff216e083",
+      "id": "f5de6c68-1d5d-4e09-a614-68b120d9c46a",
       "name": "HTTP Request40",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1488,7 +1396,7 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
         "value": "={{ \n  JSON.stringify({\n    ...$node[\"menu3\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"fluxo_finalizado\", \n      \"ultima_interacao\": $now\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
@@ -1496,10 +1404,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1840,
-        1536
+        2576,
+        1424
       ],
-      "id": "ff0a3ed2-b366-4df0-a5a5-dc8715d4e4ab",
+      "id": "6cedc3cf-0c5b-4bc0-9f38-3cf7e1ef8f83",
       "name": "finalizado2",
       "credentials": {
         "redis": {
@@ -1516,22 +1424,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"atendimento-finalizado\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `✅ *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender, *Lucas*! 😊\\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1️⃣ - Iniciar novo atendimento\\n2️⃣ - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_💡 Digite *Sair* para encerrar a sessão._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"atendimento-finalizado\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        2400,
-        1536
+        3136,
+        1424
       ],
-      "id": "64c2160e-1980-4aaa-9556-0c30e30fd0c8",
+      "id": "886a3f19-49c3-4471-b3d7-75cf7152003a",
       "name": "finalizado3",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1545,10 +1449,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -64,
-        2688
+        672,
+        2576
       ],
-      "id": "61e7d84f-715a-4ebe-807f-05ec82f2b5da",
+      "id": "9d4cad62-6216-46b7-8bef-9417c873db0a",
       "name": "Code in JavaScript4"
     },
     {
@@ -1559,22 +1463,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.texto_final,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-final\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.texto_final,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-final\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        768,
-        3008
+        1504,
+        2896
       ],
-      "id": "e09f84e5-ed25-4e40-a420-ffc275ebe666",
+      "id": "31edd6d4-156c-4683-9fe2-35e296e608fa",
       "name": "HTTP Request41",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1588,10 +1488,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        736,
-        2768
+        1472,
+        2656
       ],
-      "id": "3a1b6e5a-e214-4b6e-953d-fb037f3b6715",
+      "id": "991188ec-9071-402c-901f-53710112898f",
       "name": "Code in JavaScript5"
     },
     {
@@ -1602,22 +1502,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"confirmacao-final\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"confirmacao-final\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        2368
+        1472,
+        2256
       ],
-      "id": "7f653c4c-7f5d-478f-8518-d0406f582d8f",
+      "id": "26fd35be-232a-4cb9-a8a8-3ac3f70c054c",
       "name": "HTTP Request42",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1641,10 +1537,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        2592
+        1472,
+        2480
       ],
-      "id": "d5938d65-2b48-4779-805c-6ba14dd9a86a",
+      "id": "8b4468c9-0ef9-465b-9caf-da0055aa1108",
       "name": "API_ALPHA(Contratos)1",
       "onError": "continueErrorOutput"
     },
@@ -1656,22 +1552,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu3').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu3').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('webhook').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu3').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu3').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('get_data').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        736,
-        1504
+        1472,
+        1392
       ],
-      "id": "db1cd450-2dc3-4105-b120-ce959c414c2a",
+      "id": "ccf6f2ce-4065-4ae8-a86a-93edab9d00d8",
       "name": "HTTP Request43",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1686,22 +1578,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `⚠️ *AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. ❌\n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. 🎧`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"aviso-pendencia-administrativa\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `⚠️ *AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. ❌\n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. 🎧`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"aviso-pendencia-administrativa\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        320,
-        1744
+        1056,
+        1632
       ],
-      "id": "31e85bab-fde6-406b-936b-dd672ab07736",
+      "id": "df44ae2b-325e-463d-8a1d-0c51a2aa280f",
       "name": "HTTP Request44",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1716,22 +1604,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"transferencia-consultor\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `🎧 *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. ⏳\n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"transferencia-consultor\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        656,
-        1744
+        1392,
+        1632
       ],
-      "id": "def13744-196a-4a8a-86ec-09d79f426b7e",
+      "id": "d3b6e739-79af-4d6f-b04a-048944641dbd",
       "name": "HTTP Request45",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1740,87 +1624,22 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "89152dcd-cb87-4373-8a45-7ce1e7e9cbf8",
-              "name": "fromMe",
-              "value": "={{ $json.body.msg.key.fromMe }}",
-              "type": "boolean"
-            },
-            {
-              "id": "957202d4-39c6-4772-9576-7aea39a89b42",
-              "name": "Number",
-              "value": "={{ $json.body.ticket.contact.number }}",
-              "type": "string"
-            },
-            {
-              "id": "249dc942-ef6e-4c08-9505-de0544484b6e",
-              "name": "conversation",
-              "value": "={{ $json.body.msg.message.conversation }}",
-              "type": "string"
-            },
-            {
-              "id": "123533f4-4711-4276-b3d7-eb11f4b5493d",
-              "name": "pushName",
-              "value": "={{ $json.body.msg.pushName }}",
-              "type": "string"
-            },
-            {
-              "id": "e7829727-2d92-4fff-ba2c-8e7c0643bc1b",
-              "name": "remoteJid",
-              "value": "={{ $json.body.msg.key.sender_pn }}",
-              "type": "string"
-            },
-            {
-              "id": "66bf2c8c-0983-41ca-9ce6-237311917a4d",
-              "name": "whatsappId",
-              "value": "={{ $json.body.ticket.whatsappId }}",
-              "type": "number"
-            },
-            {
-              "id": "dc0f644a-dd53-44f3-8f9c-17fee861088d",
-              "name": "ticketID",
-              "value": "={{ $json.body.ticket.id }}",
-              "type": "number"
-            },
-            {
-              "id": "45ccb972-3313-4ef4-bb71-60b26329147c",
-              "name": "queueId",
-              "value": "={{ $json.body.ticket.queueId }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -4720,
-        1776
-      ],
-      "id": "6818caf7-a4dd-4f3c-8b0d-099c5bf1afbd",
-      "name": "webhook"
-    },
-    {
-      "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `ola *${$('webhook').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*\n\n━━━━━━━━━━━━━━━\nEscolha uma das _opções_ _abaixo_`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `ola *${$('get_data').item.json.pushName}*, seja bem-vindo(a)! 👋\\nSou o assistente virtual da *Preserva*\n\n━━━━━━━━━━━━━━━\nEscolha uma das _opções_ _abaixo_`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2672,
-        976
+        -1936,
+        864
       ],
-      "id": "5eeb3e6a-8105-4d70-9813-19266307dd45",
+      "id": "684447c2-a493-4c95-a1d7-1d607935f8fa",
       "name": "apresentecao",
       "credentials": {
         "httpBearerAuth": {
@@ -1832,27 +1651,23 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `Você já é nosso *cliente*?\n\n1️⃣ - _sim_\n2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"menu-cliente\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Você já é nosso *cliente*?\n\n1️⃣ - _sim_\n2️⃣ - _não_\n━━━━━━━━━━━━━━━\nDigite apenas o numero:`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"menu-cliente\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2672,
-        624
+        -1936,
+        512
       ],
-      "id": "f008ee09-9504-44c0-bb7f-86dfe33094e0",
+      "id": "c7791dec-ec86-44f8-b1e2-b525849f2ce7",
       "name": "apresentação 3",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -1886,34 +1701,35 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -4128,
-        1328
+        -3392,
+        1216
       ],
-      "id": "8b63227f-7ed7-4908-b318-70cd5a141bda",
+      "id": "e91a3b85-4e99-419a-94a0-deee5f4a58d5",
       "name": "If"
     },
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n      \"contagem_erro\": (($node[\"Merge1\"].json.dados_sessao.parseJson().navegacao?.contagem_erro || 0) + 1),\n      \"ultima_interacao\": $('webhook').item.json.horario\n    }\n  }) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n      \"contagem_erro\": (($node[\"Merge1\"].json.dados_sessao.parseJson().navegacao?.contagem_erro || 0) + 1),\n      \"ultima_interacao\": $('get_data').item.json.horario\n    }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1376,
-        2064
+        -624,
+        1952
       ],
-      "id": "05832fee-3c5c-48de-b6dc-1d12c5811e44",
+      "id": "7126e461-98d0-442f-bd37-7951ffcd0536",
       "name": "estados_menus",
       "credentials": {
         "redis": {
           "id": "3uOkOfPT1A3idWhS",
           "name": "Redis account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1942,10 +1758,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1104,
-        2064
+        -448,
+        1984
       ],
-      "id": "3a25f91a-e582-4876-a4ee-b0a72d5eae7b",
+      "id": "8d188f60-ce89-4623-8ae5-4d5f278390a0",
       "name": "If1"
     },
     {
@@ -1963,7 +1779,7 @@
                 "conditions": [
                   {
                     "id": "541cb187-62c0-4f6d-ae0b-367f2621a5d4",
-                    "leftValue": "={{ $('webhook').item.json.conversation.toLowerCase() }}",
+                    "leftValue": "={{ $('get_data').item.json.conversation.toLowerCase() }}",
                     "rightValue": "sair",
                     "operator": {
                       "type": "string",
@@ -2159,10 +1975,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -3280,
-        1328
+        -2544,
+        1216
       ],
-      "id": "55b0192e-9b85-4f92-b770-05da5acd0f9a",
+      "id": "d949ac78-04f7-4a02-809b-99bce3e19867",
       "name": "Switch-menu"
     },
     {
@@ -2277,10 +2093,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2816,
-        1696
+        -2080,
+        1584
       ],
-      "id": "89e4cbd4-035f-4e29-b029-adce7ef0ee49",
+      "id": "be5dda26-add8-4667-8bfe-ef454da1ced8",
       "name": "switch-auth"
     },
     {
@@ -2297,7 +2113,7 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $('webhook').item.json.conversation }}",
+                    "leftValue": "={{ $('get_data').item.json.conversation }}",
                     "rightValue": "1",
                     "operator": {
                       "type": "string",
@@ -2322,7 +2138,7 @@
                 "conditions": [
                   {
                     "id": "061cb7a7-fcf9-4d3d-bd3d-b43493383e9b",
-                    "leftValue": "={{ $('webhook').item.json.conversation }}",
+                    "leftValue": "={{ $('get_data').item.json.conversation }}",
                     "rightValue": "2",
                     "operator": {
                       "type": "string",
@@ -2345,23 +2161,23 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2336,
-        960
+        -1600,
+        848
       ],
-      "id": "7b84827f-3d2b-45bd-b467-c8a5dfab9adb",
+      "id": "dfe18342-c9f0-41ce-b8b8-2742b6dfc188",
       "name": "Switch-aceite"
     },
     {
       "parameters": {
-        "jsCode": "// 1. CAPTURA FIXA DO MERGE: Substitua 'Merge1' pelo nome exato do seu nó de Merge\nconst dadosMerge = $('Merge1').first().json.dados_sessao; \n\nlet estadoAuth = 'inicio';\nlet menuAtual = 'inicio';\n\ntry {\n  // Pega a string da sessão que veio fixa do Merge\n  const sessaoRaw = dadosMerge;\n  \n  // Converte a string do Redis em um objeto JavaScript real\n  const sessaoObjeto = typeof sessaoRaw === 'string' \n    ? JSON.parse(sessaoRaw) \n    : (sessaoRaw || {});\n\n  // Captura os estados reais de dentro da sessão parseada\n  estadoAuth = sessaoObjeto?.auth?.estado_anterior || 'inicio';\n  menuAtual = sessaoObjeto?.navegacao?.menu_atual || 'inicio';\n} catch (e) {\n  // Prevenção de erro caso o JSON venha corrompido\n  estadoAuth = 'inicio';\n  menuAtual = 'inicio';\n}\n\nlet mensagem = '';\n\n// 2. Mapeamento de mensagens por estado da FSM (Máquina de Estados)\nif (estadoAuth === 'cliente_novo') {\n  mensagem = 'Ops! 😕 Não entendi. Por favor, responda apenas *1* para SIM ou *2* para NÃO para sabermos se você já é nosso cliente.';\n} else if (estadoAuth === 'autorizado') {\n  mensagem = 'Para prosseguir com a validação, preciso que você responda *1* para SIM ou *2* para NÃO.';\n} else if (estadoAuth === 'AGUARDANDO_CPF') {\n  mensagem = 'Desculpe, o CPF ou CNPJ informado parece inválido ou não foi encontrado. ⚠️\\n\\nPor favor, envie apenas os *números* do documento cadastrado.';\n} else if (estadoAuth === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = 'Para sua segurança, informe apenas os *4 primeiros dígitos* do CPF do responsável pela empresa.';\n} else if (estadoAuth === 'TOKEN_EXPIRADO') {\n  mensagem = 'Sua sessão expirou por tempo limite. Por favor, envie qualquer texto para reiniciar o seu login de acesso.';\n} else {\n  // Mensagem padrão de fallback para quando já está navegando nos menus principais\n  mensagem = 'Poxa, não consegui entender essa opção. 🤔\\n\\nPor favor, escolha uma das opções do menu ou digite *Sair* para reiniciar o atendimento.';\n}\n\n// Retorna o payload estruturado para o n8n prosseguir na esteira\nreturn [{\n  json: {\n    texto_erro: mensagem,\n    estado_validado: estadoAuth,\n    menu_validado: menuAtual,\n    dados:dadosMerge\n  }\n}];"
+        "jsCode": "// 1. CAPTURA FIXA DO MERGE\nconst dadosMerge = $('Merge1').first().json.dados_sessao;\n\nlet estadoAuth = 'inicio';\nlet menuAtual = '';\n\ntry {\n  const sessaoObjeto = typeof dadosMerge === 'string'\n    ? JSON.parse(dadosMerge)\n    : (dadosMerge || {});\n\n  estadoAuth = sessaoObjeto?.auth?.estado_anterior || 'inicio';\n  menuAtual = sessaoObjeto?.navegacao?.menu_atual ?? '';\n} catch (e) {\n  estadoAuth = 'inicio';\n  menuAtual = '';\n}\n\n// Prioridade: mensagem contextual gerada pelo menu3 no fallback de menu\nlet menu3Data = null;\ntry {\n  menu3Data = $('menu3').first().json;\n  if (menu3Data?.rota_destino === 'fallback' && menu3Data?.mensagem_texto) {\n    return [{\n      json: {\n        texto_erro: menu3Data.mensagem_texto,\n        estado_validado: estadoAuth,\n        menu_validado: menuAtual\n      }\n    }];\n  }\n} catch (e) {}\n\nconst menuPrincipalMsg = `*MENU PRINCIPAL* 👋\\n━━━━━━━━━━━━━━━━━━\\nComo posso te ajudar hoje?\\n\\n1️⃣ - *Minhas faturas*\\n2️⃣ - *Meus CCR* (Comprovantes)\\n3️⃣ - *MTR* (Manifestos)\\n4️⃣ - *Meus contratos*\\n9️⃣ - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\n💡 _Digite *Sair* para encerrar o atendimento._`;\n\nconst menuCCRMsg = `📦 *MEUS COMPROVANTES (CCR)*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja visualizar suas últimas coletas?\\n\\n1️⃣ - *Último CCR*\\n2️⃣ - *Últimos 3 CCRs*\\n3️⃣ - *Últimos 6 CCRs*\\n\\n━━━━━━━━━━━━━━━━━━\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu anterior*`;\n\nconst menuBuscarCCRMsg = `📦 *CCRs DISPONÍVEIS*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja receber?\\n\\n1️⃣ - Último CCR\\n2️⃣ - Últimos 3 CCRs\\n3️⃣ - Últimos 6 CCRs\\n━━━━━━━━━━━━━━━━━━\\n\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*`;\n\nconst menuBoletoMsg = `📄 Digite o *número da opção* (1, 2, 3...) para receber o PDF da fatura desejada.\\n\\n━━━━━━━━━━━━━━━━━━\\n9️⃣ - *Falar com atendente*\\n0️⃣ - *Voltar ao menu*`;\n\nlet mensagem = '';\n\nif (estadoAuth === 'cliente_novo' || (menuAtual === '' && estadoAuth !== 'autenticado_autorizado')) {\n  mensagem = 'Ops! 😕 Não consegui compreender sua resposta.\\n\\nPor favor, responda apenas *1* para SIM ou *2* para NÃO para nos informar se você já possui cadastro conosco.';\n} else if (estadoAuth === 'autorizado') {\n  mensagem = '⚠️ Opção inválida.\\n\\nPor favor, digite apenas *1* se deseja confirmar a validação dos seus dados ou *2* caso queira cancelar.';\n} else if (estadoAuth === 'AGUARDANDO_CPF') {\n  mensagem = 'Desculpe, o CPF ou CNPJ informado não foi localizado em nosso sistema ou está inconsistente. ⚠️\\n\\nPor favor, certifique-se de enviar *apenas os números* do documento cadastrado na plataforma.';\n} else if (estadoAuth === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = '🔒 *Confirmação de Segurança*\\n\\nO dado informado não confere com o CPF do responsável pela empresa.\\n\\nPor favor, digite apenas os *4 primeiros dígitos* do CPF do titular do cadastro para liberar o acesso.';\n} else if (menuAtual === 'selecione_boleto') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuBoletoMsg}`;\n} else if (menuAtual === 'buscar_ccr') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuBuscarCCRMsg}`;\n} else if (menuAtual === 'Meus_CCR' || menuAtual === 'nenu_ccr') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuCCRMsg}`;\n} else if (menuAtual === 'Menu_Principal' || estadoAuth === 'autenticado_autorizado') {\n  mensagem = `⚠️ *Opção inválida.*\\n\\n${menuPrincipalMsg}`;\n} else if (menuAtual === 'fluxo_finalizado') {\n  mensagem = '⚠️ *Opção inválida.*\\n\\nDigite *1* para voltar ao menu principal ou *2* para falar com atendente.';\n} else if (estadoAuth === 'token_invalido' || estadoAuth === 'TOKEN_EXPIRADO') {\n  mensagem = '⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSua sessão de segurança expirou por tempo limite. ⏳\\n\\nPor favor, envie qualquer mensagem de texto para reiniciar o seu processo de identificação.';\n} else {\n  mensagem = 'Poxa, não consegui localizar essa opção no menu. 🤔\\n\\nPor favor, envie apenas o *número* correspondente à opção desejada ou digite *Sair* a qualquer momento para finalizar.';\n}\n\nreturn [{\n  json: {\n    texto_erro: mensagem,\n    estado_validado: estadoAuth,\n    menu_validado: menuAtual\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1632,
-        2064
+        -944,
+        1952
       ],
-      "id": "9249276b-8478-4809-ac21-b1c3af35d88d",
+      "id": "3679de83-b865-49ec-b3e9-6f65c496765d",
       "name": "Code in JavaScript"
     },
     {
@@ -2372,16 +2188,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\":\"muitas tentativas ⚠️\\nseu chat sera transferido a um atendente... aguarde\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":\"muitas tentativas ⚠️\\nseu chat sera transferido a um atendente... aguarde\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1104,
-        2368
+        -368,
+        2256
       ],
-      "id": "8db3334a-cf03-4c7f-99d3-c1cd9a01686d",
+      "id": "8fa77644-9dec-473b-bbbd-1e19abe9995d",
       "name": "invalido",
       "credentials": {
         "httpBearerAuth": {
@@ -2402,7 +2218,7 @@
           "conditions": [
             {
               "id": "fe60b9c3-7bb2-411a-9731-1bb5239b57b9",
-              "leftValue": "={{ $('webhook').item.json.remoteJid }}",
+              "leftValue": "={{ $('get_data').item.json.remoteJid }}",
               "rightValue": "556933169350@s.whatsapp.net",
               "operator": {
                 "type": "string",
@@ -2418,10 +2234,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -4304,
-        1712
+        -3568,
+        1600
       ],
-      "id": "8a9a8c01-4793-4be2-a15a-03c57a47eecd",
+      "id": "6515f965-59aa-4419-8c04-13da167aed3f",
       "name": "If4"
     },
     {
@@ -2432,16 +2248,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1120,
-        1728
+        1856,
+        1616
       ],
-      "id": "1ae8a07e-6ff1-48a4-a1cc-dbbd45337b74",
+      "id": "06f1a29c-2db0-4867-9fab-e3b53de68394",
       "name": "Transferencia de atendimento",
       "credentials": {
         "httpBearerAuth": {
@@ -2458,16 +2274,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu3').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu3').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('webhook').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `👨‍💻 *NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('menu3').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"🔴 Inativo\" : \"🟢 Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"⚠️ Sim\" : \"✅ Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('menu3').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('get_data').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        592,
-        2000
+        1328,
+        1888
       ],
-      "id": "aa94818e-22c0-4a0c-91f3-1f259886dbf3",
+      "id": "47d5968f-38ca-4fb2-bfc7-c6818be424fb",
       "name": "HTTP Request",
       "credentials": {
         "httpBearerAuth": {
@@ -2479,21 +2295,21 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.alphasoftware.com.br/v2/api/external/423aabcf-0f2d-4947-8bb3-22993f20f6e7/updatequeue",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/0d01754a-451d-4440-aa03-faea5563b94e/",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2096,
-        320
+        -1360,
+        208
       ],
-      "id": "288cf0d8-a436-4481-a9f8-97448cd3c4bf",
+      "id": "46e4a392-344a-4340-a399-f4628d22e135",
       "name": "transferencia de atendimneto1",
       "credentials": {
         "httpBearerAuth": {
@@ -2510,16 +2326,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('webhook').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -880,
-        2368
+        -128,
+        2272
       ],
-      "id": "4e475088-23a5-469c-859e-89ae64620571",
+      "id": "8a681a71-cbd8-4dec-a607-1a89e96acbf6",
       "name": "transferencia de atendimento2",
       "credentials": {
         "httpBearerAuth": {
@@ -2545,10 +2361,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        784,
-        688
+        1520,
+        576
       ],
-      "id": "82e53c49-2aaa-438d-aac3-eebf9fee2b14",
+      "id": "f8c6b66a-3cbc-476b-a365-43a30a0a09a8",
       "name": "API_ALPHA(Boletos)",
       "onError": "continueErrorOutput"
     },
@@ -2572,11 +2388,11 @@
             },
             {
               "name": "number",
-              "value": "={{ $('webhook').item.json.Number }}"
+              "value": "={{ $('get_data').item.json.Number }}"
             },
             {
               "name": "whatsappId",
-              "value": "={{ $('webhook').item.json.whatsappId }}"
+              "value": "={{ $('get_data').item.json.whatsappId }}"
             },
             {
               "name": "externalKey",
@@ -2601,10 +2417,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1024,
-        368
+        1760,
+        256
       ],
-      "id": "a96383e4-8204-4ff2-8206-dec16714f16d",
+      "id": "4be1d42a-eab4-4d1d-8380-6aa4164b6ff9",
       "name": "HTTP Request34",
       "credentials": {
         "httpBearerAuth": {
@@ -2621,16 +2437,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        784,
-        896
+        1520,
+        784
       ],
-      "id": "20522817-626a-45b2-8c88-cd7814f32697",
+      "id": "a698f995-4ccb-45d1-9ca8-2d6008acca34",
       "name": "HTTP Request46",
       "credentials": {
         "httpBearerAuth": {
@@ -2648,7 +2464,7 @@
           "parameters": [
             {
               "name": "documento",
-              "value": "={{ $('webhook').item.json.conversation }}"
+              "value": "={{ $('get_data').item.json.conversation }}"
             }
           ]
         },
@@ -2657,10 +2473,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2960,
-        2864
+        -2224,
+        2752
       ],
-      "id": "481dd514-d983-4e23-ae4e-54e14513b1ea",
+      "id": "9f99663f-006d-4a64-9f6a-54e6d4f9150c",
       "name": "Api_alpha localizar",
       "onError": "continueErrorOutput"
     },
@@ -2676,7 +2492,7 @@
             },
             {
               "id": "bfbd9bb9-afe8-4fc5-aaec-f71bb8f1154c",
-              "name": "menssage",
+              "name": "mensagem_erro",
               "value": "={{ $json.error?.response?.data?.message || $json.error?.message || \"Erro interno na requisição\" }}",
               "type": "string"
             }
@@ -2687,23 +2503,23 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3248,
-        1520
+        3984,
+        1408
       ],
-      "id": "b167a0f1-109d-422d-be76-63d8ab239d9d",
+      "id": "38beb800-08c5-4ae9-9b97-f82f910b3118",
       "name": "captura de erro"
     },
     {
       "parameters": {
-        "jsCode": "// 1. Captura o status padronizado do nó anterior\nconst status = $input.first().json.status_erro;\nconst mensagem = $input.first().json.mensagem_erro;\n\nlet rotaDestino = 'erro_geral';\nlet textoAviso = 'Desculpe, ocorreu uma instabilidade temporária no sistema. Por favor, tente novamente em alguns instantes.';\n\n// 2. Verifica se o erro é de autenticação (Token Inválido / Expirado)\nif (status === 401 || status === 403 || mensagem.toLowerCase().includes('unauthorized')) {\n  rotaDestino = 'token_expirado';\n  textoAviso = `⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSinto muito, você atingiu o tempo limite da sua sessão por motivos de segurança. ⏳\\n\\nPor favor, envie qualquer mensagem para iniciar uma nova autenticação.`;\n}\n\n// 3. Retorna os dados organizados para o Switch/Redis seguinte\nreturn [{\n  json: {\n    rota_erro: rotaDestino,\n    texto_erro: textoAviso\n  }\n}];"
+        "jsCode": "// 1. Captura o status padronizado do nó anterior\nconst status = Number($input.first().json.status_erro) || 500;\nconst mensagem = $input.first().json.mensagem_erro || '';\n\nlet rotaDestino = 'erro_geral';\nlet textoAviso = 'Desculpe, ocorreu uma instabilidade temporária no sistema. Por favor, tente novamente em alguns instantes.';\n\n// 2. Verifica se o erro é de autenticação (Token Inválido / Expirado)\nif (status === 401 || status === 403 || (mensagem && mensagem.toLowerCase().includes('unauthorized'))) {\n  rotaDestino = 'token_expirado';\n  textoAviso = `⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSinto muito, você atingiu o tempo limite da sua sessão por motivos de segurança. ⏳\\n\\nPor favor, envie qualquer mensagem para iniciar uma nova autenticação.`;\n}\n\n// 3. Retorna os dados organizados para o Switch/Redis seguinte\nreturn [{\n  json: {\n    rota_erro: rotaDestino,\n    texto_erro: textoAviso\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3456,
-        1520
+        4192,
+        1408
       ],
-      "id": "6c59c518-5aef-4e1b-b807-16b1d3770073",
+      "id": "2bdff0cf-0f2e-46a0-b708-26b9e9cda016",
       "name": "Code in JavaScript1"
     },
     {
@@ -2720,8 +2536,8 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "",
-                    "rightValue": "",
+                    "leftValue": "={{ $json.rota_erro }}",
+                    "rightValue": "token_expirado",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -2730,19 +2546,47 @@
                   }
                 ],
                 "combinator": "and"
-              }
+              },
+              "renameOutput": true,
+              "outputKey": "token_expirado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota_erro }}",
+                    "rightValue": "erro_geral",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "erro_geral"
             }
           ]
         },
-        "options": {}
+        "options": {
+          "fallbackOutput": "extra"
+        }
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        3664,
-        1520
+        4400,
+        1408
       ],
-      "id": "7681a084-d61f-4ac5-a084-311cb42aaeeb",
+      "id": "fadbc192-f8e3-4c62-8751-0113a85dd967",
       "name": "Switch"
     },
     {
@@ -2753,16 +2597,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": `⚠️ *SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSinto muito, você atingiu o tempo limite da sua sessão por motivos de segurança. ⏳\\n\\nPor favor, envie qualquer mensagem para iniciar uma nova autenticação.`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"aviso-sessao-expirada\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.texto_erro,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"aviso-sessao-expirada\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        3904,
-        1520
+        4640,
+        1408
       ],
-      "id": "b2b6e964-fac5-43eb-a178-e703ba04b16f",
+      "id": "1381f2ab-a6db-4c14-a738-4f6cf226a123",
       "name": "token expirado",
       "credentials": {
         "httpBearerAuth": {
@@ -2774,18 +2618,18 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid}}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"logado\":false,\n      \"estado_anterior\": \"token_invalido\"\n    },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"secção invalida\",\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"logado\":false,\n      \"estado_anterior\": \"token_invalido\"\n    },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":\"secção invalida\",\n        \"type\":$('get_data').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        4128,
-        1520
+        4864,
+        1408
       ],
-      "id": "532dabee-1666-4229-8b75-4bbbde726980",
+      "id": "4e45dea9-f8c2-4883-ac1d-6698d676609f",
       "name": "finalizado",
       "credentials": {
         "redis": {
@@ -2797,18 +2641,18 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('webhook').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"cnpj\":$json.cnpj,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('webhook').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('webhook').item.json.conversation,\n        \"type\":$('webhook').item.json.messageType\n      }\n  }) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"data_login\":$('get_data').item.json.horario,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"cnpj\":$json.cnpj,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"ultima_interacao\":$('get_data').item.json.horario\n      },\n\"message\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().message,\n        \"text\":$('get_data').item.json.conversation,\n        \"type\":$('get_data').item.json.messageType\n      }\n  }) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2576,
-        3264
+        -1840,
+        3152
       ],
-      "id": "a68ee3d7-a189-4a38-9c5e-31ae971df378",
+      "id": "05331bd9-da3e-4779-a0e7-3b287681e822",
       "name": "SET AGUARDANDO_CONFIRMAR",
       "credentials": {
         "redis": {
@@ -2820,15 +2664,15 @@
     {
       "parameters": {
         "operation": "delete",
-        "key": "={{ $('webhook').item.json.remoteJid }}"
+        "key": "={{ $('get_data').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1312,
-        1600
+        2096,
+        1664
       ],
-      "id": "b59c6a1e-40c0-480d-a55e-4ffce3e8976c",
+      "id": "0219d05a-3d75-4533-a831-772f04dfc8ae",
       "name": "deletar sessao",
       "credentials": {
         "redis": {
@@ -2840,15 +2684,15 @@
     {
       "parameters": {
         "operation": "delete",
-        "key": "={{ \"status:\" + $('webhook').item.json.remoteJid }}"
+        "key": "={{ \"status:\" + $('get_data').item.json.remoteJid }}"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1312,
-        1424
+        2384,
+        1632
       ],
-      "id": "9b55cb29-eee9-49f5-8d50-85d2282fb13e",
+      "id": "5a956ee2-d0a0-411a-b1c5-934e10815f44",
       "name": "deleta registro da sessao",
       "credentials": {
         "redis": {
@@ -2885,10 +2729,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2736,
-        2160
+        -2000,
+        2048
       ],
-      "id": "4215b737-db92-447d-a52b-ea3e0062e841",
+      "id": "3ce82239-5e64-45c7-8178-954663b01669",
       "name": "If5"
     },
     {
@@ -2905,10 +2749,10 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.error.status }}",
-                    "rightValue": 401,
+                    "leftValue": "={{ $json.error.status.toString() }}",
+                    "rightValue": "401",
                     "operator": {
-                      "type": "number",
+                      "type": "string",
                       "operation": "equals"
                     },
                     "id": "0ac2e274-ca4b-4529-8c92-107625269eff"
@@ -2930,10 +2774,10 @@
                 "conditions": [
                   {
                     "id": "73062c6b-1643-45bf-8847-a1ea095af2b3",
-                    "leftValue": "={{ $json.error.status }}",
+                    "leftValue": "={{ $json.error.status.toString() }}",
                     "rightValue": "=500",
                     "operator": {
-                      "type": "number",
+                      "type": "string",
                       "operation": "equals"
                     }
                   }
@@ -2950,10 +2794,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -2000,
-        2432
+        -1264,
+        2320
       ],
-      "id": "786e54e6-6cf1-4b8b-a745-713841198c05",
+      "id": "2eb60f20-24d9-4f50-8fee-b66eef5622bf",
       "name": "Switch1"
     },
     {
@@ -2964,16 +2808,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"Sinto muito, o nosso servidor nnão esta funcionando no momento. ⚙️\\n\\nVou te transferir para um atendente agora mesmo.\",\n  \"whatsappId\": $('webhook').item.json.whatsappId || 1,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "=\n\n{{\nJSON.stringify({\n  \"number\": $('If').item.json.Number,\n  \"body\": `🤖 Ops! Parece que tive um probleminha técnico por aqui e não consegui concluir sua solicitação.\nvou te tranferir para um atendente`,\n  \"whatsappId\": $('If').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1728,
-        2704
+        -992,
+        2592
       ],
-      "id": "96635c7d-7551-4995-91df-c589bf0d0985",
+      "id": "eba6bbdb-2ec6-4436-be9c-64cd7abda196",
       "name": "invalido4",
       "credentials": {
         "httpBearerAuth": {
@@ -2989,10 +2833,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -2320,
-        2672
+        -1584,
+        2560
       ],
-      "id": "7b5eda05-13c6-495e-b336-0670a43fab91",
+      "id": "3fb09ce3-8dea-480b-8704-5b2cc2f46663",
       "name": "Code in JavaScript2"
     },
     {
@@ -3003,22 +2847,18 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.remoteJid,\n  \"body\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$('switch-auth').item.json.cliente.nomeResponsavel}\n*Empresa:* ${$('switch-auth').item.json.cliente.empresa}\n*Cidade:* ${$('switch-auth').item.json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.remoteJid,\n  \"body\": `✅ *CADASTRO ENCONTRADO*\n━━━━━━━━━━━━━━━━━━\n\n*Nome:* ${$('switch-auth').item.json.cliente.nomeResponsavel}\n*Empresa:* ${$('switch-auth').item.json.cliente.empresa}\n*Cidade:* ${$('switch-auth').item.json.cliente.cidade}📍\n\n━━━━━━━━━━━━━━━━━━`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2208,
-        3072
+        -1472,
+        2960
       ],
-      "id": "6954072a-c776-478a-99f0-580cd499b786",
+      "id": "698413be-3273-42cf-8031-d23231612945",
       "name": "encontrado",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "b2mIsOjxwQhYSjAD",
-          "name": "Header Auth account"
-        },
         "httpBearerAuth": {
           "id": "nswwbCwDsRkJlzLO",
           "name": "auth z-pro"
@@ -3028,18 +2868,18 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "={{\"status:\" + $('webhook').item.json.remoteJid }}",
-        "value": "={{ \nJSON.stringify({\n  ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\"), \n  \n  \"auth\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").auth,\n    \"data_login\": new Date().toISOString(),\n    \"logado\": true,\n    \"estado_anterior\": \"autenticado_autorizado\",\n    \"token\": $('Api_alpha autenticar').item.json.token\n  },\n\n  \"cliente\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").cliente,\n    \"idCliente\": $('Code in JavaScript2').item.json.cliente.id,\n    \"nomeResponsavel\": $('Code in JavaScript2').item.json.cliente.nome_responsavel,\n    \"cpf_responsavel\": $('Code in JavaScript2').item.json.cliente.cpf,\n    \"email\": $('Code in JavaScript2').item.json.cliente.email,\n    \"senha\":$json.cliente.senha,\n    \"Inativo\":$json.cliente.inativo ,\n    \"bloqueado\": $('Code in JavaScript2').item.json.cliente.bloqueado\n  },\n\n  \"navegacao\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").navegacao,\n    \"menu_atual\": \"Menu_Principal\",\n    \"ultima_interacao\": $('webhook').item.json.horario,\n    \"contagem_erro\":0\n  },\n\n  \"message\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").message,\n    \"text\": \"Login Realizado\",\n    \"type\": $('webhook').item.json.messageType\n  }\n}) \n}}",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \nJSON.stringify({\n  ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\"), \n  \n  \"auth\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").auth,\n    \"data_login\": new Date().toISOString(),\n    \"logado\": true,\n    \"estado_anterior\": \"autenticado_autorizado\",\n    \"token\": $('Api_alpha autenticar').item.json.token\n  },\n\n  \"cliente\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").cliente,\n    \"idCliente\": $('Code in JavaScript2').item.json.cliente.id,\n    \"nomeResponsavel\": $('Code in JavaScript2').item.json.cliente.nome_responsavel,\n    \"cpf_responsavel\": $('Code in JavaScript2').item.json.cliente.cpf,\n    \"email\": $('Code in JavaScript2').item.json.cliente.email,\n    \"senha\":$json.cliente.senha,\n    \"Inativo\":$json.cliente.inativo ,\n    \"bloqueado\": $('Code in JavaScript2').item.json.cliente.bloqueado\n  },\n\n  \"navegacao\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").navegacao,\n    \"menu_atual\": \"Menu_Principal\",\n    \"ultima_interacao\": $('get_data').item.json.horario,\n    \"contagem_erro\":0\n  },\n\n  \"message\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").message,\n    \"text\": \"Login Realizado\",\n    \"type\": $('get_data').item.json.messageType\n  }\n}) \n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -2320,
-        2880
+        -1584,
+        2768
       ],
-      "id": "e0bd91d8-c046-48cb-a1a6-4ca9f97fea9e",
+      "id": "f406a1df-25f3-43ea-a49c-c44e9e56f3e2",
       "name": "DADOS_COMPLETOS",
       "credentials": {
         "redis": {
@@ -3061,7 +2901,7 @@
             },
             {
               "name": "senha",
-              "value": "={{ $('webhook').item.json.conversation }}"
+              "value": "={{ $('get_data').item.json.conversation }}"
             }
           ]
         },
@@ -3070,10 +2910,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -2304,
-        2416
+        -1568,
+        2304
       ],
-      "id": "e13b848a-107c-417c-a3c6-fbcdc5205bb3",
+      "id": "ba0c88ca-b12b-433e-88d6-8edc7cef4533",
       "name": "Api_alpha autenticar",
       "onError": "continueErrorOutput"
     },
@@ -3105,10 +2945,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        784,
-        512
+        1520,
+        400
       ],
-      "id": "d380017a-ba09-4ece-b75b-8c6215f7f784",
+      "id": "0c3d6c5d-1c4a-4a6f-8dce-680f57a368a4",
       "name": "If2"
     },
     {
@@ -3119,16 +2959,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('webhook').item.json.Number,\n  \"body\": \"Desculpe o transtorno! 😔\\n\\nNão conseguimos gerar o PDF do seu boleto neste momento.\\n\\nPor favor, *entre em constato com suporte* para que possamos te ajudar. 🛡️\",\n  \"whatsappId\": $('webhook').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": \"Desculpe o transtorno! 😔\\n\\nNão conseguimos gerar o PDF do seu boleto neste momento.\\n\\nPor favor, *entre em constato com suporte* para que possamos te ajudar. 🛡️\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1008,
-        560
+        1744,
+        448
       ],
-      "id": "69feb819-05f6-46fc-94e1-765f7d08a6df",
+      "id": "ccd0e55d-b895-4ccd-8bbd-f70aedd4927d",
       "name": "HTTP Request47",
       "credentials": {
         "httpBearerAuth": {
@@ -3136,6 +2976,180 @@
           "name": "auth z-pro"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1e2d3c4-b5a6-7890-cdef-123456789abc",
+              "name": "erro_tipo",
+              "value": "menu_fallback",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        1088
+      ],
+      "id": "4642ea7e-e3df-49a2-86e9-b5c065c3f82c",
+      "name": "marca erro menu"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('marca erro menu').isExecuted ? 'menu_fallback' : '' }}",
+                    "rightValue": "menu_fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "b2c3d4e5-f6a7-8901-bcde-234567890abc"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fallback_menu"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        432,
+        672
+      ],
+      "id": "05d66791-a720-42b3-888d-15e9d5decbb8",
+      "name": "Switch-apos-menu24"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('marca erro menu').isExecuted ? 'menu_fallback' : '' }}",
+                    "rightValue": "menu_fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c3d4e5f6-a7b8-9012-cdef-345678901abc"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ja_enviado"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -208,
+        2000
+      ],
+      "id": "924f69ba-487e-4f79-b293-240040d15449",
+      "name": "Switch-pos-if1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "89152dcd-cb87-4373-8a45-7ce1e7e9cbf8",
+              "name": "fromMe",
+              "value": "={{ $json.body.msg.key.fromMe }}",
+              "type": "boolean"
+            },
+            {
+              "id": "957202d4-39c6-4772-9576-7aea39a89b42",
+              "name": "Number",
+              "value": "={{ $json.body.ticket.contact.number }}",
+              "type": "string"
+            },
+            {
+              "id": "249dc942-ef6e-4c08-9505-de0544484b6e",
+              "name": "conversation",
+              "value": "={{ $json.body.msg.message.conversation || $json.body.msg.message.extendedTextMessage.text}}",
+              "type": "string"
+            },
+            {
+              "id": "123533f4-4711-4276-b3d7-eb11f4b5493d",
+              "name": "pushName",
+              "value": "={{ $json.body.msg.pushName }}",
+              "type": "string"
+            },
+            {
+              "id": "e7829727-2d92-4fff-ba2c-8e7c0643bc1b",
+              "name": "remoteJid",
+              "value": "={{ $json.body.msg.key.sender_pn }}",
+              "type": "string"
+            },
+            {
+              "id": "66bf2c8c-0983-41ca-9ce6-237311917a4d",
+              "name": "whatsappId",
+              "value": "={{ $json.body.ticket.whatsappId }}",
+              "type": "number"
+            },
+            {
+              "id": "dc0f644a-dd53-44f3-8f9c-17fee861088d",
+              "name": "ticketID",
+              "value": "={{ $json.body.ticket.id }}",
+              "type": "number"
+            },
+            {
+              "id": "45ccb972-3313-4ef4-bb71-60b26329147c",
+              "name": "queueId",
+              "value": "={{ $json.body.ticket.queueId }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3984,
+        1664
+      ],
+      "id": "bedbb017-1c4d-495b-ace8-8e343ad5d697",
+      "name": "get_data"
     }
   ],
   "pinData": {},
@@ -3268,15 +3282,14 @@
             "type": "main",
             "index": 0
           }
-        ],
-        []
+        ]
       ]
     },
     "Webhook1": {
       "main": [
         [
           {
-            "node": "webhook",
+            "node": "get_data",
             "type": "main",
             "index": 0
           }
@@ -3309,7 +3322,48 @@
       "main": [
         [
           {
+            "node": "Switch-apos-menu24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-apos-menu24": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "estados_menus1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "marca erro menu": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-pos-if1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "invalido2",
             "type": "main",
             "index": 0
           }
@@ -3509,7 +3563,7 @@
         ],
         [
           {
-            "node": "Code in JavaScript",
+            "node": "marca erro menu",
             "type": "main",
             "index": 0
           }
@@ -3686,17 +3740,6 @@
         ]
       ]
     },
-    "webhook": {
-      "main": [
-        [
-          {
-            "node": "If3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "apresentecao": {
       "main": [
         [
@@ -3752,11 +3795,6 @@
         ]
       ]
     },
-    "invalido2": {
-      "main": [
-        []
-      ]
-    },
     "If1": {
       "main": [
         [
@@ -3768,7 +3806,7 @@
         ],
         [
           {
-            "node": "invalido2",
+            "node": "Switch-pos-if1",
             "type": "main",
             "index": 0
           }
@@ -3865,7 +3903,13 @@
             "index": 0
           }
         ],
-        [],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Code in JavaScript",
@@ -4087,6 +4131,20 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "invalido2",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -4099,16 +4157,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "SET AGUARDANDO_CONFIRMAR": {
-      "main": [
-        []
-      ]
-    },
-    "finalizado": {
-      "main": [
-        []
       ]
     },
     "deletar sessao": {
@@ -4213,11 +4261,6 @@
         ]
       ]
     },
-    "menu principal1": {
-      "main": [
-        []
-      ]
-    },
     "invalido4": {
       "main": [
         [
@@ -4275,19 +4318,28 @@
           }
         ]
       ]
+    },
+    "get_data": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
+    "binaryMode": "separate"
   },
-  "versionId": "36f61247-c6f8-454b-b547-565598fd2cb0",
+  "versionId": "0a50e43f-aaa1-42bc-83e3-7a7a1072a94f",
   "meta": {
-    "templateCredsSetupCompleted": true,
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
   },
-  "id": "SaWwBb3dR7KwhhiD",
+  "id": "4jFdGcVMGNqIyc7C",
   "tags": []
 }
