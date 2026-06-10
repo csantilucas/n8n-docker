@@ -1,0 +1,3191 @@
+[
+  {
+    "success": true,
+    "data": [
+      {
+        "id": 1,
+        "name": "Administrador",
+        "email": "admin@zpro.io",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "isDark": false
+        },
+        "customProfileId": null,
+        "queues": [],
+        "whatsappAllowed": [],
+        "customProfile": null
+      },
+      {
+        "id": 14,
+        "name": "Felipe",
+        "email": "felipe@alphaagrotech.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          }
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 4,
+            "queue": "AgroTech",
+            "UsersQueues": {
+              "id": 11,
+              "queueId": 4,
+              "userId": 14,
+              "createdAt": "2026-05-08T14:17:43.121Z",
+              "updatedAt": "2026-05-08T14:17:43.121Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 105,
+              "userId": 14,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.228Z",
+              "updatedAt": "2026-05-21T13:46:06.228Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 106,
+              "userId": 14,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.230Z",
+              "updatedAt": "2026-05-21T13:46:06.230Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 104,
+              "userId": 14,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.227Z",
+              "updatedAt": "2026-05-21T13:46:06.227Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 101,
+              "userId": 14,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.224Z",
+              "updatedAt": "2026-05-21T13:46:06.224Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 102,
+              "userId": 14,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.225Z",
+              "updatedAt": "2026-05-21T13:46:06.225Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 103,
+              "userId": 14,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.226Z",
+              "updatedAt": "2026-05-21T13:46:06.226Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 13,
+        "name": "Fernando",
+        "email": "fernando.silva@alphasoftware.com.br",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "chatPrivado": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [
+              3
+            ],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "compact",
+            "dateFrom": "",
+            "dateTo": ""
+          }
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 3,
+            "queue": "Vendas",
+            "UsersQueues": {
+              "id": 12,
+              "queueId": 3,
+              "userId": 13,
+              "createdAt": "2026-05-08T14:19:10.729Z",
+              "updatedAt": "2026-05-08T14:19:10.729Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 98,
+              "userId": 13,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.078Z",
+              "updatedAt": "2026-05-21T13:22:00.078Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 100,
+              "userId": 13,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.077Z",
+              "updatedAt": "2026-05-21T13:22:00.077Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 99,
+              "userId": 13,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.079Z",
+              "updatedAt": "2026-05-21T13:22:00.079Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 97,
+              "userId": 13,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.078Z",
+              "updatedAt": "2026-05-21T13:22:00.078Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 96,
+              "userId": 13,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.077Z",
+              "updatedAt": "2026-05-21T13:22:00.077Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 95,
+              "userId": 13,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.076Z",
+              "updatedAt": "2026-05-21T13:22:00.076Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 5,
+        "name": "Gabriel",
+        "email": "gabriel@alphasoftware.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "kanban": true,
+          "equipes": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "protocolos": true,
+          "relatorios": true,
+          "chatPrivado": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "configuracoes": true,
+          "google-calendar": true,
+          "mensagens-rapidas": true,
+          "horarioAtendimento": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "pinnedTickets": []
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 6,
+            "queue": "N1-Suporte",
+            "UsersQueues": {
+              "id": 41,
+              "queueId": 6,
+              "userId": 5,
+              "createdAt": "2026-05-19T13:05:25.286Z",
+              "updatedAt": "2026-05-19T13:05:25.286Z"
+            }
+          },
+          {
+            "id": 1,
+            "queue": "Suporte",
+            "UsersQueues": {
+              "id": 40,
+              "queueId": 1,
+              "userId": 5,
+              "createdAt": "2026-05-19T13:05:25.285Z",
+              "updatedAt": "2026-05-19T13:05:25.285Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 107,
+              "userId": 5,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.176Z",
+              "updatedAt": "2026-05-21T13:46:11.176Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 112,
+              "userId": 5,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.178Z",
+              "updatedAt": "2026-05-21T13:46:11.178Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 108,
+              "userId": 5,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.176Z",
+              "updatedAt": "2026-05-21T13:46:11.176Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 109,
+              "userId": 5,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.175Z",
+              "updatedAt": "2026-05-21T13:46:11.175Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 110,
+              "userId": 5,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.177Z",
+              "updatedAt": "2026-05-21T13:46:11.177Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 111,
+              "userId": 5,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.177Z",
+              "updatedAt": "2026-05-21T13:46:11.177Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 9,
+        "name": "Geneses",
+        "email": "geneses@alphasoftware.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          }
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 7,
+            "queue": "N2-Suporte",
+            "UsersQueues": {
+              "id": 53,
+              "queueId": 7,
+              "userId": 9,
+              "createdAt": "2026-05-19T13:08:34.981Z",
+              "updatedAt": "2026-05-19T13:08:34.981Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 114,
+              "userId": 9,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.475Z",
+              "updatedAt": "2026-05-21T13:46:16.475Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 118,
+              "userId": 9,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.477Z",
+              "updatedAt": "2026-05-21T13:46:16.477Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 117,
+              "userId": 9,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.476Z",
+              "updatedAt": "2026-05-21T13:46:16.476Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 116,
+              "userId": 9,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.476Z",
+              "updatedAt": "2026-05-21T13:46:16.476Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 115,
+              "userId": 9,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.476Z",
+              "updatedAt": "2026-05-21T13:46:16.476Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 113,
+              "userId": 9,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.475Z",
+              "updatedAt": "2026-05-21T13:46:16.475Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 10,
+        "name": "Guilherme",
+        "email": "guilherme@alphasoftware.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "pending",
+              "open",
+              "closed"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [
+              1
+            ],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "pinnedTickets": []
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 1,
+            "queue": "Suporte",
+            "UsersQueues": {
+              "id": 52,
+              "queueId": 1,
+              "userId": 10,
+              "createdAt": "2026-05-19T13:08:29.577Z",
+              "updatedAt": "2026-05-19T13:08:29.577Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 120,
+              "userId": 10,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.892Z",
+              "updatedAt": "2026-05-21T13:46:20.892Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 121,
+              "userId": 10,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.892Z",
+              "updatedAt": "2026-05-21T13:46:20.892Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 122,
+              "userId": 10,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.893Z",
+              "updatedAt": "2026-05-21T13:46:20.893Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 119,
+              "userId": 10,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.891Z",
+              "updatedAt": "2026-05-21T13:46:20.891Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 123,
+              "userId": 10,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.893Z",
+              "updatedAt": "2026-05-21T13:46:20.893Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 124,
+              "userId": 10,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.893Z",
+              "updatedAt": "2026-05-21T13:46:20.893Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 7,
+        "name": "Gustavo",
+        "email": "gustavo@alphasoftware.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "pinnedTickets": [
+            3339
+          ],
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          }
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 7,
+            "queue": "N2-Suporte",
+            "UsersQueues": {
+              "id": 51,
+              "queueId": 7,
+              "userId": 7,
+              "createdAt": "2026-05-19T13:08:24.685Z",
+              "updatedAt": "2026-05-19T13:08:24.685Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 128,
+              "userId": 7,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.966Z",
+              "updatedAt": "2026-05-21T13:46:51.966Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 125,
+              "userId": 7,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.964Z",
+              "updatedAt": "2026-05-21T13:46:51.964Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 126,
+              "userId": 7,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.964Z",
+              "updatedAt": "2026-05-21T13:46:51.964Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 127,
+              "userId": 7,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.966Z",
+              "updatedAt": "2026-05-21T13:46:51.966Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 130,
+              "userId": 7,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.965Z",
+              "updatedAt": "2026-05-21T13:46:51.965Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 129,
+              "userId": 7,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.965Z",
+              "updatedAt": "2026-05-21T13:46:51.965Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 18,
+        "name": "Julia",
+        "email": "julia.santos@alphasoftware.com.br",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {},
+        "customProfileId": null,
+        "queues": [],
+        "whatsappAllowed": [],
+        "customProfile": null
+      },
+      {
+        "id": 8,
+        "name": "Junior",
+        "email": "junior@alphasoftware.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {},
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 8,
+            "queue": "N3-Suporte",
+            "UsersQueues": {
+              "id": 50,
+              "queueId": 8,
+              "userId": 8,
+              "createdAt": "2026-05-19T13:08:18.016Z",
+              "updatedAt": "2026-05-19T13:08:18.016Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 132,
+              "userId": 8,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.958Z",
+              "updatedAt": "2026-05-21T13:46:56.958Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 133,
+              "userId": 8,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.958Z",
+              "updatedAt": "2026-05-21T13:46:56.958Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 131,
+              "userId": 8,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.958Z",
+              "updatedAt": "2026-05-21T13:46:56.958Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 135,
+              "userId": 8,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.959Z",
+              "updatedAt": "2026-05-21T13:46:56.959Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 136,
+              "userId": 8,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.959Z",
+              "updatedAt": "2026-05-21T13:46:56.959Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 134,
+              "userId": 8,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.959Z",
+              "updatedAt": "2026-05-21T13:46:56.959Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 4,
+        "name": "Kariny",
+        "email": "sac@alphasoftware.com.br",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "kanban": true,
+          "equipes": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "protocolos": true,
+          "relatorios": true,
+          "chatPrivado": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "configuracoes": false,
+          "google-calendar": true,
+          "mensagens-rapidas": true,
+          "horarioAtendimento": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "pending",
+              "open"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "supervisorViewDept": "disabled",
+          "pinnedTickets": [
+            581,
+            2351
+          ]
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 5,
+            "queue": "Prioridade",
+            "UsersQueues": {
+              "id": 58,
+              "queueId": 5,
+              "userId": 4,
+              "createdAt": "2026-05-21T13:48:35.600Z",
+              "updatedAt": "2026-05-21T13:48:35.600Z"
+            }
+          },
+          {
+            "id": 4,
+            "queue": "AgroTech",
+            "UsersQueues": {
+              "id": 54,
+              "queueId": 4,
+              "userId": 4,
+              "createdAt": "2026-05-21T13:48:35.599Z",
+              "updatedAt": "2026-05-21T13:48:35.599Z"
+            }
+          },
+          {
+            "id": 2,
+            "queue": "Financeiro",
+            "UsersQueues": {
+              "id": 55,
+              "queueId": 2,
+              "userId": 4,
+              "createdAt": "2026-05-21T13:48:35.600Z",
+              "updatedAt": "2026-05-21T13:48:35.600Z"
+            }
+          },
+          {
+            "id": 1,
+            "queue": "Suporte",
+            "UsersQueues": {
+              "id": 56,
+              "queueId": 1,
+              "userId": 4,
+              "createdAt": "2026-05-21T13:48:35.599Z",
+              "updatedAt": "2026-05-21T13:48:35.599Z"
+            }
+          },
+          {
+            "id": 6,
+            "queue": "N1-Suporte",
+            "UsersQueues": {
+              "id": 57,
+              "queueId": 6,
+              "userId": 4,
+              "createdAt": "2026-05-21T13:48:35.598Z",
+              "updatedAt": "2026-05-21T13:48:35.598Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 142,
+              "userId": 4,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:01.177Z",
+              "updatedAt": "2026-05-21T13:47:01.177Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 137,
+              "userId": 4,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:01.175Z",
+              "updatedAt": "2026-05-21T13:47:01.175Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 138,
+              "userId": 4,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:01.176Z",
+              "updatedAt": "2026-05-21T13:47:01.176Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 139,
+              "userId": 4,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:01.177Z",
+              "updatedAt": "2026-05-21T13:47:01.177Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 141,
+              "userId": 4,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:01.176Z",
+              "updatedAt": "2026-05-21T13:47:01.176Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 140,
+              "userId": 4,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:01.177Z",
+              "updatedAt": "2026-05-21T13:47:01.177Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 12,
+        "name": "Lucas",
+        "email": "lucas@alphasoftware.com.br",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "pinnedTickets": [
+            587
+          ]
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 6,
+            "queue": "N1-Suporte",
+            "UsersQueues": {
+              "id": 66,
+              "queueId": 6,
+              "userId": 12,
+              "createdAt": "2026-06-10T17:02:44.430Z",
+              "updatedAt": "2026-06-10T17:02:44.430Z"
+            }
+          },
+          {
+            "id": 1,
+            "queue": "Suporte",
+            "UsersQueues": {
+              "id": 67,
+              "queueId": 1,
+              "userId": 12,
+              "createdAt": "2026-06-10T17:02:44.430Z",
+              "updatedAt": "2026-06-10T17:02:44.430Z"
+            }
+          },
+          {
+            "id": 17,
+            "queue": "fila_n8n",
+            "UsersQueues": {
+              "id": 68,
+              "queueId": 17,
+              "userId": 12,
+              "createdAt": "2026-06-10T17:02:44.431Z",
+              "updatedAt": "2026-06-10T17:02:44.431Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 169,
+              "userId": 12,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:21.576Z",
+              "updatedAt": "2026-06-10T16:59:21.576Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 168,
+              "userId": 12,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:21.575Z",
+              "updatedAt": "2026-06-10T16:59:21.575Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 170,
+              "userId": 12,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:21.576Z",
+              "updatedAt": "2026-06-10T16:59:21.576Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 172,
+              "userId": 12,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:21.577Z",
+              "updatedAt": "2026-06-10T16:59:21.577Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 171,
+              "userId": 12,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:21.576Z",
+              "updatedAt": "2026-06-10T16:59:21.576Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 167,
+              "userId": 12,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:21.575Z",
+              "updatedAt": "2026-06-10T16:59:21.575Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 6,
+        "name": "Pedro",
+        "email": "pedro@alphasoftware.com.br",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "kanban": true,
+          "equipes": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "protocolos": true,
+          "relatorios": true,
+          "chatPrivado": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "configuracoes": true,
+          "google-calendar": true,
+          "mensagens-rapidas": true,
+          "horarioAtendimento": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "pinnedTickets": []
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 7,
+            "queue": "N2-Suporte",
+            "UsersQueues": {
+              "id": 69,
+              "queueId": 7,
+              "userId": 6,
+              "createdAt": "2026-06-10T17:08:20.903Z",
+              "updatedAt": "2026-06-10T17:08:20.903Z"
+            }
+          },
+          {
+            "id": 1,
+            "queue": "Suporte",
+            "UsersQueues": {
+              "id": 71,
+              "queueId": 1,
+              "userId": 6,
+              "createdAt": "2026-06-10T17:08:20.903Z",
+              "updatedAt": "2026-06-10T17:08:20.903Z"
+            }
+          },
+          {
+            "id": 5,
+            "queue": "Prioridade",
+            "UsersQueues": {
+              "id": 70,
+              "queueId": 5,
+              "userId": 6,
+              "createdAt": "2026-06-10T17:08:20.903Z",
+              "updatedAt": "2026-06-10T17:08:20.903Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 176,
+              "userId": 6,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:27.800Z",
+              "updatedAt": "2026-06-10T16:59:27.800Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 175,
+              "userId": 6,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:27.799Z",
+              "updatedAt": "2026-06-10T16:59:27.799Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 174,
+              "userId": 6,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:27.799Z",
+              "updatedAt": "2026-06-10T16:59:27.799Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 179,
+              "userId": 6,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:27.801Z",
+              "updatedAt": "2026-06-10T16:59:27.801Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 178,
+              "userId": 6,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:27.801Z",
+              "updatedAt": "2026-06-10T16:59:27.801Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 177,
+              "userId": 6,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-06-10T16:59:27.800Z",
+              "updatedAt": "2026-06-10T16:59:27.800Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 3,
+        "name": "Tainara",
+        "email": "tainara@alphasoftware.com.br",
+        "profile": "admin",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "kanban": true,
+          "equipes": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "protocolos": true,
+          "relatorios": true,
+          "chatPrivado": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "configuracoes": false,
+          "google-calendar": true,
+          "mensagens-rapidas": true,
+          "horarioAtendimento": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {
+          "filtrosAtendimento": {
+            "showAll": false,
+            "includeClosed": false,
+            "status": [
+              "open",
+              "pending"
+            ],
+            "withUnreadMessages": false,
+            "orderAsc": false,
+            "queuesIds": [],
+            "whatsappIds": [],
+            "selectedUsers": [],
+            "selectedTagIds": [],
+            "selectedKanbanIds": [],
+            "isReversed": false,
+            "sortByAnswered": false,
+            "density": "comfortable",
+            "dateFrom": "",
+            "dateTo": ""
+          },
+          "supervisorViewDept": "disabled"
+        },
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 2,
+            "queue": "Financeiro",
+            "UsersQueues": {
+              "id": 61,
+              "queueId": 2,
+              "userId": 3,
+              "createdAt": "2026-05-21T13:48:48.281Z",
+              "updatedAt": "2026-05-21T13:48:48.281Z"
+            }
+          },
+          {
+            "id": 6,
+            "queue": "N1-Suporte",
+            "UsersQueues": {
+              "id": 63,
+              "queueId": 6,
+              "userId": 3,
+              "createdAt": "2026-05-21T13:48:48.281Z",
+              "updatedAt": "2026-05-21T13:48:48.281Z"
+            }
+          },
+          {
+            "id": 4,
+            "queue": "AgroTech",
+            "UsersQueues": {
+              "id": 59,
+              "queueId": 4,
+              "userId": 3,
+              "createdAt": "2026-05-21T13:48:48.280Z",
+              "updatedAt": "2026-05-21T13:48:48.280Z"
+            }
+          },
+          {
+            "id": 1,
+            "queue": "Suporte",
+            "UsersQueues": {
+              "id": 60,
+              "queueId": 1,
+              "userId": 3,
+              "createdAt": "2026-05-21T13:48:48.280Z",
+              "updatedAt": "2026-05-21T13:48:48.280Z"
+            }
+          },
+          {
+            "id": 5,
+            "queue": "Prioridade",
+            "UsersQueues": {
+              "id": 62,
+              "queueId": 5,
+              "userId": 3,
+              "createdAt": "2026-05-21T13:48:48.281Z",
+              "updatedAt": "2026-05-21T13:48:48.281Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 155,
+              "userId": 3,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:21.323Z",
+              "updatedAt": "2026-05-21T13:47:21.323Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 156,
+              "userId": 3,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:21.324Z",
+              "updatedAt": "2026-05-21T13:47:21.324Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 157,
+              "userId": 3,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:21.324Z",
+              "updatedAt": "2026-05-21T13:47:21.324Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 158,
+              "userId": 3,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:21.324Z",
+              "updatedAt": "2026-05-21T13:47:21.324Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 159,
+              "userId": 3,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:21.325Z",
+              "updatedAt": "2026-05-21T13:47:21.325Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 160,
+              "userId": 3,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:21.325Z",
+              "updatedAt": "2026-05-21T13:47:21.325Z"
+            }
+          }
+        ],
+        "customProfile": null
+      },
+      {
+        "id": 11,
+        "name": "Thiago",
+        "email": "thiago@alphasoftware.com.br",
+        "profile": "user",
+        "blockWavoip": false,
+        "menuPermissions": {
+          "filas": true,
+          "funil": true,
+          "grupo": true,
+          "massa": true,
+          "notas": true,
+          "agenda": true,
+          "kanban": true,
+          "wavoip": true,
+          "equipes": true,
+          "galeria": true,
+          "sessoes": true,
+          "tarefas": true,
+          "contatos": true,
+          "usuarios": true,
+          "audit-log": true,
+          "campanhas": true,
+          "chat-flow": true,
+          "dashboard": true,
+          "etiquetas": true,
+          "avaliacoes": true,
+          "fechamento": true,
+          "logligacao": true,
+          "protocolos": true,
+          "relatorios": true,
+          "api-service": true,
+          "agendamentos": true,
+          "aniversarios": true,
+          "chat-privado": true,
+          "auto-resposta": true,
+          "google-calendar": true,
+          "instagramMencoes": true,
+          "mensagens-rapidas": true,
+          "tiktokComentarios": true,
+          "horarioAtendimento": true,
+          "youtubeComentarios": true,
+          "facebookComentarios": true,
+          "painel-atendimentos": true,
+          "instagramComentarios": true,
+          "woocommerce-produtos": true
+        },
+        "isOnline": true,
+        "sipEnabled": false,
+        "sipStatus": "offline",
+        "sipUsername": "",
+        "sipPassword": "",
+        "sipServer": "",
+        "sipPort": 8089,
+        "sipTransport": null,
+        "businessHours": [
+          {
+            "day": 0,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Domingo"
+          },
+          {
+            "day": 1,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Segunda-Feira"
+          },
+          {
+            "day": 2,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Terça-Feira"
+          },
+          {
+            "day": 3,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quarta-Feira"
+          },
+          {
+            "day": 4,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Quinta-Feira"
+          },
+          {
+            "day": 5,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sexta-Feira"
+          },
+          {
+            "day": 6,
+            "hr1": "08:00",
+            "hr2": "12:00",
+            "hr3": "14:00",
+            "hr4": "18:00",
+            "type": "O",
+            "label": "Sábado"
+          }
+        ],
+        "restrictedUser": "disabled",
+        "phone": "6933169350",
+        "inactive": false,
+        "profilePicture": null,
+        "configs": {},
+        "customProfileId": null,
+        "queues": [
+          {
+            "id": 8,
+            "queue": "N3-Suporte",
+            "UsersQueues": {
+              "id": 46,
+              "queueId": 8,
+              "userId": 11,
+              "createdAt": "2026-05-19T13:06:22.934Z",
+              "updatedAt": "2026-05-19T13:06:22.934Z"
+            }
+          }
+        ],
+        "whatsappAllowed": [
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 166,
+              "userId": 11,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:24.895Z",
+              "updatedAt": "2026-05-21T13:47:24.895Z"
+            }
+          },
+          {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 165,
+              "userId": 11,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:24.895Z",
+              "updatedAt": "2026-05-21T13:47:24.895Z"
+            }
+          },
+          {
+            "id": 9,
+            "name": "WABA-SUPORTE",
+            "UserWhatsapp": {
+              "id": 164,
+              "userId": 11,
+              "whatsappId": 9,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:24.895Z",
+              "updatedAt": "2026-05-21T13:47:24.895Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 163,
+              "userId": 11,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:24.894Z",
+              "updatedAt": "2026-05-21T13:47:24.894Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 162,
+              "userId": 11,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:24.894Z",
+              "updatedAt": "2026-05-21T13:47:24.894Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 161,
+              "userId": 11,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:47:24.893Z",
+              "updatedAt": "2026-05-21T13:47:24.893Z"
+            }
+          }
+        ],
+        "customProfile": null
+      }
+    ],
+    "pagination": {
+      "total": 14,
+      "hasMore": false
+    }
+  }
+]
