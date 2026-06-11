@@ -1,5 +1,4 @@
 {
-  "name": "chat_alpha",
   "nodes": [
     {
       "parameters": {
@@ -10,10 +9,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -4288,
-        -1056
+        1472,
+        464
       ],
-      "id": "3d83eb83-d158-469f-8589-88ce9a93cd90",
+      "id": "a66c3543-931f-4ca0-87d5-2fcc19b33667",
       "name": "Webhook1",
       "webhookId": "e39bacd9-7b82-42f5-9e2c-7fdac5837c2b"
     },
@@ -118,10 +117,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -3856,
-        -1056
+        2352,
+        480
       ],
-      "id": "96311ddc-3796-4204-bcc7-aa6ce167af8c",
+      "id": "76638824-8aa9-4cd5-9a7c-f4786269916d",
       "name": "get_data"
     },
     {
@@ -136,10 +135,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -3120,
-        -1072
+        3136,
+        464
       ],
-      "id": "8c9f8c28-c680-4666-901c-23e1d17907b0",
+      "id": "305f8868-8e63-42b5-ba6c-adaeed070656",
       "name": "Redis",
       "credentials": {
         "redis": {
@@ -159,10 +158,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -2912,
-        -1056
+        3344,
+        480
       ],
-      "id": "69c29103-7cc8-40e4-9858-346641f6c20d",
+      "id": "a73ad2d2-0610-4641-b461-86b2d369f5a9",
       "name": "Merge"
     },
     {
@@ -176,10 +175,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2720,
-        -1056
+        3536,
+        480
       ],
-      "id": "f6f938ad-46be-4edc-9900-a4c77ec8e4d2",
+      "id": "b2f34194-5591-4dda-9316-42f8681014ea",
       "name": "data_redis",
       "onError": "continueRegularOutput"
     },
@@ -210,27 +209,27 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3376,
-        -1056
+        2880,
+        480
       ],
-      "id": "3a18ad25-315c-4370-b6d7-908d25b8240a",
+      "id": "58027bf4-5491-41ce-a52f-091ec41c7fb2",
       "name": "if_queue"
     },
     {
       "parameters": {
         "operation": "set",
         "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"menu_cadastro\",\n      \"cliente\": \"\"\n    }\n  })\n}}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"menu_cadastro\",\n      \"apresentacao\":1,\n      \"cliente\": \"\"\n    }\n  })\n}}",
         "expire": true,
         "ttl": 1800
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -1376,
-        -1696
+        4880,
+        -160
       ],
-      "id": "d6d0fc7e-0ffb-403a-b435-824107e7c2f1",
+      "id": "07dd0c68-d52c-4d07-a6a1-8961291a16f1",
       "name": "new_cliente",
       "credentials": {
         "redis": {
@@ -266,10 +265,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2304,
-        -1040
+        3952,
+        496
       ],
-      "id": "3f16d293-278d-485f-9a23-329ad48c90d5",
+      "id": "e7ec4bf0-305b-47af-bcc5-33d6e8a5b961",
       "name": "If"
     },
     {
@@ -334,10 +333,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -944,
-        -1184
+        5312,
+        352
       ],
-      "id": "76bb0d4e-79e5-4f2c-88fc-aaf5d56647e7",
+      "id": "a1d1441e-5827-40f4-858c-04037d466377",
       "name": "resposta_apresentação"
     },
     {
@@ -354,10 +353,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -384,
-        -1200
+        5872,
+        336
       ],
-      "id": "a8e50d84-f13d-430d-bfe5-6ae57f37572e",
+      "id": "f822d551-e5b5-445f-a0d9-46461135ca86",
       "name": "msg_transferencia",
       "credentials": {
         "httpBearerAuth": {
@@ -380,10 +379,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1664,
-        -1680
+        7920,
+        -144
       ],
-      "id": "392d74b1-10d2-4bc6-b7c0-b5b9885cf297",
+      "id": "f5bc0290-60cd-4f44-9a1f-230719f0dbae",
       "name": "Transferencia de fila de atendimento",
       "credentials": {
         "httpBearerAuth": {
@@ -406,10 +405,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1520,
-        -1552
+        4736,
+        16
       ],
-      "id": "715ceb70-9c25-4ff6-8f9a-8f3d17166552",
+      "id": "e2c105d4-7568-4ff8-be3c-02e623d087b3",
       "name": "msg_cliente_novo",
       "credentials": {
         "httpBearerAuth": {
@@ -446,10 +445,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        240,
-        -1664
+        6496,
+        -128
       ],
-      "id": "737f1531-ee81-454b-9a02-8459acc6fdd9",
+      "id": "e3976af7-0ebb-41a2-8344-132fe19e9afa",
       "name": "encontrado1"
     },
     {
@@ -466,10 +465,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        576,
-        -1488
+        6832,
+        48
       ],
-      "id": "d80694ab-a73d-4c22-9fda-c07ae562e0ea",
+      "id": "36942dbd-e463-436b-b9e5-0657e0b26d2a",
       "name": "login invalido1",
       "credentials": {
         "httpBearerAuth": {
@@ -492,10 +491,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -208,
-        -1648
+        6048,
+        -112
       ],
-      "id": "a8e63f5d-5561-4b29-b8a0-82bbedf6446f",
+      "id": "d2739d68-6d7a-4384-9936-65b3aec8b77f",
       "name": "buscando",
       "credentials": {
         "httpBearerAuth": {
@@ -507,25 +506,16 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://host.docker.internal:5001/api/chatbot/identificacao/localizar",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "documento",
-              "value": "={{ $('get_documento').item.json.message.conversation }}"
-            }
-          ]
-        },
+        "url": " http://192.168.1.9:5001/api/chatbot/identificacao/id-cliente?documento={{ $('get_documento').item.json.message.conversation }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        0,
-        -1648
+        6256,
+        -112
       ],
-      "id": "f587318a-5254-424f-8a1c-98c8d0221ab1",
+      "id": "a24889fa-5280-4c36-b65a-eee6ca4102fc",
       "name": "Api_alpha localizar",
       "onError": "continueErrorOutput"
     },
@@ -546,10 +536,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -416,
-        -1648
+        5840,
+        -112
       ],
-      "id": "791959fd-982c-4661-a0e8-d8035d44c956",
+      "id": "35ea23f8-8d23-4ecc-9e19-e28123d44936",
       "name": "get_documento"
     },
     {
@@ -560,10 +550,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2336,
-        -1680
+        9120,
+        -144
       ],
-      "id": "d948562d-f5b3-4e91-9ca8-040cbc784c30",
+      "id": "6eb0c908-85bc-4905-9fab-14bb027a8351",
       "name": "Redis4",
       "credentials": {
         "redis": {
@@ -586,10 +576,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -1728,
-        -1424
+        4512,
+        224
       ],
-      "id": "a93aa345-21ba-43a5-b34b-66073a2933f3",
+      "id": "098df24b-29f6-45f0-a1bd-74448dd12be2",
       "name": "update_cliente",
       "credentials": {
         "httpBearerAuth": {
@@ -612,10 +602,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        768,
-        -1680
+        7024,
+        -144
       ],
-      "id": "97501bf5-c89b-47d9-b561-64daacadc27d",
+      "id": "721bb549-51f2-42a9-8d2e-f04f5289d315",
       "name": "update_nosso_cliente",
       "credentials": {
         "httpBearerAuth": {
@@ -639,10 +629,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1072,
-        -1696
+        7328,
+        -160
       ],
-      "id": "88c9d683-dc70-4504-8704-a522c14a0029",
+      "id": "9772b54e-843e-465d-85a8-63cb410eb7d8",
       "name": "update_data_cliente",
       "credentials": {
         "httpBearerAuth": {
@@ -665,10 +655,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -624,
-        -1200
+        5632,
+        336
       ],
-      "id": "29179cbf-e171-47d6-993f-f759e0d1e4b9",
+      "id": "b9a4b622-ba0e-4a1a-a0bc-634f551d094c",
       "name": "update_cliente_novo",
       "credentials": {
         "httpBearerAuth": {
@@ -690,7 +680,7 @@
             {
               "id": "erro-api-localizar-msg",
               "name": "erro",
-              "value": "Não foi possível consultar seu cadastro no momento. Por favor, envie novamente o CPF/CNPJ (apenas números).",
+              "value": "Por favor, envie um documento valido, *CPF/CNPJ* do seu cadastro (apenas números).",
               "type": "string"
             }
           ]
@@ -700,10 +690,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        256,
-        -1488
+        6512,
+        48
       ],
-      "id": "e93244dc-06b7-4ab6-9b16-38aae7691a55",
+      "id": "645233b1-569a-4da2-b5ab-71e78d7d56ca",
       "name": "erro_api_localizar"
     },
     {
@@ -720,10 +710,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -432,
-        -1408
+        5824,
+        128
       ],
-      "id": "b5b237d9-495c-4b76-934c-c05c25574921",
+      "id": "86321054-709d-4f4c-bcb5-6ece3dd224c7",
       "name": "msg_documento_vazio",
       "credentials": {
         "httpBearerAuth": {
@@ -740,16 +730,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": ' *CNPJ/CPF* do seu cadastro',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Por favor informe os *CNPJ/CPF* da empresa, *apenas os numeros*.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -96,
-        -1072
+        6160,
+        464
       ],
-      "id": "95ec02b7-fc2d-45c6-afd3-0927c190c2c2",
+      "id": "0dfa9205-5f51-46df-93ab-59ccd077e39e",
       "name": "msg_cadastro",
       "credentials": {
         "httpBearerAuth": {
@@ -766,16 +756,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Desculpe não entendi a sua mensagem, por favor selecione uma das opções do menu',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'selecione uma das opções do menu',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -272,
-        -352
+        5984,
+        1184
       ],
-      "id": "4d8f277a-cff3-48bf-a608-0fcf4e38b5ba",
+      "id": "bb6f1f10-69a8-4f60-8e71-56d9679050bd",
       "name": "msg_erro",
       "credentials": {
         "httpBearerAuth": {
@@ -871,10 +861,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1968,
-        -1136
+        4288,
+        400
       ],
-      "id": "403dda61-c6e3-44eb-a0d1-2deac5f7bc30",
+      "id": "e0588391-52ff-4ce2-a065-45cbb11b3e48",
       "name": "gerenciar_clientes"
     },
     {
@@ -905,10 +895,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -656,
-        -1632
+        5600,
+        -96
       ],
-      "id": "d190c53f-59f5-414a-9bf8-9882e2a634b3",
+      "id": "e7f11e99-4c76-4d09-9c35-de04c0684cbf",
       "name": "mensagem_vazia"
     },
     {
@@ -1021,10 +1011,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1424,
-        -1168
+        4832,
+        368
       ],
-      "id": "5a919ae5-7090-483e-8441-b4b9c6ea2449",
+      "id": "e969fd00-66a5-4d48-8380-b43ffcbc162e",
       "name": "estados_redis"
     },
     {
@@ -1136,10 +1126,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -1152,
-        -640
+        5104,
+        896
       ],
-      "id": "1235b931-d9c1-4c68-bbef-79d188298732",
+      "id": "2595a044-08af-4160-99e8-a4c61d2a4a60",
       "name": "estados_menus"
     },
     {
@@ -1156,10 +1146,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1248,
-        -1520
+        7504,
+        16
       ],
-      "id": "ed85beca-36c0-4c24-a709-bc5c7f0449f5",
+      "id": "98fe32be-91a4-4aa3-acbc-9fcb727da10a",
       "name": "msg_transferencia1",
       "credentials": {
         "httpBearerAuth": {
@@ -1178,10 +1168,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        -4032,
-        -1056
+        2176,
+        480
       ],
-      "id": "7399a704-8a4d-47b8-9746-53c265ceed4a",
+      "id": "444bd145-40f1-4bce-b6b2-8c95aa60843b",
       "name": "busca_cliente_z-pro",
       "credentials": {
         "httpBearerAuth": {
@@ -1201,10 +1191,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        208,
-        -1072
+        6464,
+        464
       ],
-      "id": "78d0cb78-a41d-4c2e-afc0-98a7488dbf77",
+      "id": "6a2d0411-825a-40a8-87e8-bb16065b46cf",
       "name": "aguardando_cadastro",
       "credentials": {
         "redis": {
@@ -1227,10 +1217,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1920,
-        -1680
+        8176,
+        -144
       ],
-      "id": "8ddd280b-4651-4b59-873e-283900fe10cc",
+      "id": "75fa6d52-6997-40be-9e54-54cfabffa932",
       "name": "localizado1",
       "credentials": {
         "httpBearerAuth": {
@@ -1247,10 +1237,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2160,
-        -1680
+        8416,
+        -144
       ],
-      "id": "95516a74-4ac6-495e-b308-cfadb45a1971",
+      "id": "876ff47a-cc8c-40a2-ae80-0d3e4535b03b",
       "name": "Redis5",
       "credentials": {
         "redis": {
@@ -1305,10 +1295,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -2544,
-        -1056
+        3712,
+        480
       ],
-      "id": "babac9db-09d6-4cb6-bb76-465fd9002b18",
+      "id": "15beeb30-accd-43c8-9eb3-01f011ef352c",
       "name": "if_handoff"
     },
     {
@@ -1322,34 +1312,11 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1728,
-        -512
+        8944,
+        1040
       ],
-      "id": "c1d2e3f4-a5b6-4789-c012-3456789abcde",
+      "id": "f35d633f-a1f0-4955-b5fc-dd4aa08fb9bd",
       "name": "set_atendimento_humano",
-      "credentials": {
-        "redis": {
-          "id": "3uOkOfPT1A3idWhS",
-          "name": "Redis account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "set",
-        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
-        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"chatflow_ativo\",\n      \"cliente\": \"\"\n    }\n  })\n}}",
-        "expire": true,
-        "ttl": 1800
-      },
-      "type": "n8n-nodes-base.redis",
-      "typeVersion": 1,
-      "position": [
-        1728,
-        -688
-      ],
-      "id": "89a964d1-23ab-4409-93c6-73138765f78b",
-      "name": "set_chatflow_ativo",
       "credentials": {
         "redis": {
           "id": "3uOkOfPT1A3idWhS",
@@ -1385,10 +1352,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -3632,
-        -1056
+        2560,
+        480
       ],
-      "id": "bd80ac21-f46b-4e6a-8ecc-d5d15a0360b5",
+      "id": "026c9c26-5760-4ae0-b506-b0f508243c02",
       "name": "if_fromMe"
     },
     {
@@ -1399,16 +1366,16 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"message\": \"*Olá!* Para atendermos você com mais agilidade, escolha o departamento:\",\n  \"button1\": \"Suporte\",\n  \"button2\": \"Financeiro e Com.\",\n  \"button3\": \"Agrotech\",\n  \"ticketId\": $('get_data').item.json.ticketID\n})\n}}",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"message\": \"Para atendermos você com mais agilidade, escolha um departamento:\",\n  \"button1\": \"Suporte\",\n  \"button2\": \"Financeiro e Com.\",\n  \"button3\": \"Agrotech\",\n  \"ticketId\": $('get_data').item.json.ticketID\n})\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1808,
-        -1216
+        8064,
+        320
       ],
-      "id": "afdda29b-989c-40a0-a664-17d2f835cf90",
+      "id": "b4b0a184-ed55-4eb4-94a6-70b84e2cee49",
       "name": "msg_menu_principal",
       "credentials": {
         "httpBearerAuth": {
@@ -1428,10 +1395,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2096,
-        -1216
+        8352,
+        320
       ],
-      "id": "ce5dc58f-cee5-408e-b91f-529a806be201",
+      "id": "aa9eaf67-a102-4b0a-b474-f521bce80db4",
       "name": "set_menu_principal",
       "credentials": {
         "redis": {
@@ -1454,10 +1421,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1008,
-        -352
+        7088,
+        1504
       ],
-      "id": "40fdef76-7493-4459-8d5a-0fb2af04a702",
+      "id": "d0c8b095-e4a3-41ae-9fb1-4aa17cd96c10",
       "name": "msg_menu_suporte",
       "credentials": {
         "httpBearerAuth": {
@@ -1477,10 +1444,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1360,
-        -352
+        7360,
+        1504
       ],
-      "id": "28bda9df-7cb7-4ef5-998b-4a7df30a1caa",
+      "id": "62626217-f21d-4714-a01a-41be9388bd4d",
       "name": "set_menu_suporte",
       "credentials": {
         "redis": {
@@ -1496,23 +1463,23 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -432,
-        -720
+        5824,
+        816
       ],
-      "id": "f05311f2-8795-49ab-a437-fe856af09cf7",
+      "id": "4dc107c2-54ed-449f-adcd-59a9b79ab055",
       "name": "parse_menu_principal"
     },
     {
       "parameters": {
-        "jsCode": "const conv = ($('get_data').first().json.conversation || '').toString().toLowerCase().trim();\nconst btn = ($('get_data').first().json.btn_data || '').toString().toLowerCase().trim();\nconst raw = conv || btn;\n\nconst opcoes = {\n  '1': 'fiscal', 'btn1': 'fiscal', 'fiscal': 'fiscal',\n  '2': 'financeiro', 'btn2': 'financeiro', 'financeiro': 'financeiro',\n  '3': 'operacional', 'btn3': 'operacional', 'operacional': 'operacional'\n};\n\nconst opcao = opcoes[raw] || 'erro';\n\nreturn [{ json: { rota: opcao, departamento: opcao === 'erro' ? '' : `suporte_${opcao}` } }];"
+        "jsCode": "const conv = ($('get_data').first().json.conversation || '').toString().toLowerCase().trim();\nconst btn = ($('get_data').first().json.btn_data || '').toString().toLowerCase().trim();\nconst raw = conv || btn;\n\n// 1. Mapeia a entrada do utilizador para uma chave padrão\nlet chave = '';\nif (['1', 'btn1', 'fiscal'].includes(raw)) chave = 'fiscal';\nelse if (['2', 'btn2', 'financeiro'].includes(raw)) chave = 'financeiro';\nelse if (['3', 'btn3', 'operacional'].includes(raw)) chave = 'operacional';\n\n// 2. Define o departamento e a fila para cada chave\nconst config = {\n  'fiscal': { departamento: 'suporte_fiscal', fila: 'N2-Suporte' },\n  'financeiro': { departamento: 'Financeiro', fila: 'Financeiro' },\n  'operacional': { departamento: 'suporte_operacional', fila: 'N1-Suporte' }\n};\n\n// 3. Obtém o resultado ou retorna erro\nconst resultado = config[chave];\n\nreturn [{\n  json: {\n    input_recebido: raw,\n    rota: resultado ? 'sucesso' : 'erro',\n    departamento: resultado ? resultado.departamento : '',\n    fila: resultado ? resultado.fila : ''\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        304,
-        -800
+        6560,
+        736
       ],
-      "id": "2458330f-f363-42f0-bed7-6955115191e9",
+      "id": "7b00ef61-2b48-4f1c-b1c1-710ea4157833",
       "name": "parse_menu_suporte"
     },
     {
@@ -1600,10 +1567,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        560,
-        -512
+        6816,
+        1024
       ],
-      "id": "b6255a98-63ac-46ae-8a23-42d9a9aaca84",
+      "id": "f0223732-8553-422c-9a07-29b9d06c5319",
       "name": "rotear_menu_principal"
     },
     {
@@ -1620,8 +1587,8 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.rota }}",
-                    "rightValue": "fiscal",
+                    "leftValue": "={{ $json.departamento }}",
+                    "rightValue": "suporte_fiscal",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -1644,8 +1611,8 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.rota }}",
-                    "rightValue": "financeiro",
+                    "leftValue": "={{ $json.departamento }}",
+                    "rightValue": "Financeiro",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -1668,8 +1635,8 @@
                 },
                 "conditions": [
                   {
-                    "leftValue": "={{ $json.rota }}",
-                    "rightValue": "operacional",
+                    "leftValue": "={{ $json.departamento }}",
+                    "rightValue": "suporte_operacional",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -1691,23 +1658,23 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        544,
-        -832
+        6800,
+        704
       ],
-      "id": "378aa8fa-d1aa-4034-94a0-acfd6ab7e7ba",
+      "id": "759de9bd-f4ef-4fee-94cc-e9a7681c1b1b",
       "name": "rotear_menu_suporte"
     },
     {
       "parameters": {
-        "jsCode": "const DEPTO_PARA_FILA = {\n  financeiro: 2,\n  agrotech: 4,\n  suporte_fiscal: 6,\n  suporte_financeiro: 2,\n  suporte_operacional: 8,\n};\n\nconst DEPTO_PREFERIDOS = {\n  suporte_fiscal: [9, 7],\n  suporte_financeiro: [4, 5],\n  financeiro: [4, 5],\n  suporte_operacional: [10, 5],\n  agrotech: [],\n};\n\nconst FILA_FALLBACK_ID = 1;\nconst FILA_FALLBACK_NOME = 'Suporte';\n\nlet departamento = '';\ntry { departamento = $('parse_menu_principal').first().json.departamento || ''; } catch (e) {}\nif (!departamento) {\n  try { departamento = $('parse_menu_suporte').first().json.departamento || ''; } catch (e) {}\n}\n\nconst apiResp = $input.first().json;\nconst usuarios = apiResp.data || apiResp.body?.data || [];\nconst filasCatalogo = {};\nconst usuariosPorId = {};\n\nfor (const usuario of usuarios) {\n  if (usuario.profile === 'admin') continue;\n\n  usuariosPorId[usuario.id] = {\n    userId: usuario.id,\n    name: usuario.name,\n    email: usuario.email,\n    isOnline: usuario.isOnline === true,\n  };\n\n  if (!usuario?.queues?.length) continue;\n\n  for (const fila of usuario.queues) {\n    const queueId = fila.id;\n    if (!filasCatalogo[queueId]) {\n      filasCatalogo[queueId] = { queueId, queueName: fila.queue, usuarios: [] };\n    }\n    filasCatalogo[queueId].usuarios.push({\n      userId: usuario.id,\n      name: usuario.name,\n      email: usuario.email,\n      isOnline: usuario.isOnline === true,\n    });\n  }\n}\n\nfunction escolherAtendente(queueId, preferidosIds = []) {\n  const fila = filasCatalogo[queueId];\n  const onlineNaFila = (fila?.usuarios || []).filter((u) => u.isOnline);\n\n  for (const prefId of preferidosIds) {\n    const preferido = usuariosPorId[prefId];\n    if (preferido?.isOnline) {\n      return { atendente: preferido, modo: 'preferido' };\n    }\n  }\n\n  const proximo = onlineNaFila.find((u) => !preferidosIds.includes(u.userId));\n  if (proximo) return { atendente: proximo, modo: 'proximo_online' };\n\n  return { atendente: null, modo: 'somente_fila' };\n}\n\nconst filas = Object.values(filasCatalogo)\n  .sort((a, b) => a.queueId - b.queueId)\n  .map((f) => ({\n    queueId: f.queueId,\n    queueName: f.queueName,\n    usuarios: f.usuarios.map((u) => ({\n      userId: u.userId,\n      usuario: u.name,\n      online: u.isOnline ? 1 : 0,\n    })),\n  }));\n\nconst queueId = DEPTO_PARA_FILA[departamento] || FILA_FALLBACK_ID;\nconst preferidos = DEPTO_PREFERIDOS[departamento] || [];\nconst { atendente, modo } = escolherAtendente(queueId, preferidos);\nconst filaDestino = filasCatalogo[queueId];\nconst queueName = filaDestino?.queueName || FILA_FALLBACK_NOME;\nconst userId = atendente?.userId ?? null;\n\nreturn [{\n  json: {\n    departamento,\n    queueId,\n    queueName,\n    userId,\n    atendenteNome: atendente?.name || null,\n    atendenteOnline: userId !== null,\n    modoDistribuicao: modo,\n    preferidos,\n    filas,\n    ticketId: $('get_data').first().json.ticketID,\n  },\n}];"
+        "jsCode": "// ==========================================\n// CONFIGURAÇÃO\n// ==========================================\nconst ALLOW_OFFLINE_FALLBACK = false; // nunca escolher usuários offline\n\nconst DEPTO_PARA_FILA = {\n  suporte: 6,\n  suporte_fiscal: 7,\n  suporte_operacional: 6,\n  financeiro: 2,\n  suporte_financeiro: 2,\n  agrotech: 4,\n};\n\nconst NOME_FILA_PARA_ID = {\n  'n1-suporte': 6,\n  'n2-suporte': 7,\n  'n3-suporte': 8,\n  'suporte': 1,\n  'financeiro': 2,\n  'agrotech': 4,\n  'vendas': 3\n};\n\nconst DEPTO_PREFERIDOS = {\n  suporte_fiscal: [9, 7],\n  suporte_financeiro: [4, 5],\n  financeiro: [4, 5],\n  suporte_operacional: [5, 4, 10],\n  agrotech: [],\n  suporte: []\n};\n\nconst FILA_FALLBACK_ID = 6;\nconst FILA_FALLBACK_NOME = 'N1-Suporte';\n\n// DEBUG: habilite para ver logs no n8n\nconst DEBUG = false;\n\n// ==========================================\n// HELPERS\n// ==========================================\nfunction obterDepartamentoAtual() {\n  let depto = '';\n  try { depto = $('parse_menu_principal').first().json.departamento || ''; } catch (e) {}\n  if (!depto) {\n    try { depto = $('parse_menu_suporte').first().json.departamento || ''; } catch (e) {}\n  }\n  return String(depto || '').trim().toLowerCase();\n}\n\nfunction mapearUsuariosEFilas(usuariosRaw) {\n  const filasCatalogo = {};\n  const usuariosPorId = {};\n\n  // Permitir apenas este admin específico (Kariny). Ajuste se quiser incluir outros admins.\n  const ADMIN_ALLOWLIST = [4];\n\n  for (const usuario of usuariosRaw) {\n    // pula admins, exceto os que estão na allowlist\n    if (usuario.profile === 'admin' && !ADMIN_ALLOWLIST.includes(usuario.id)) continue;\n\n    usuariosPorId[String(usuario.id)] = {\n      userId: usuario.id,\n      name: usuario.name,\n      isOnline: usuario.isOnline === true,\n      qtdAtendimentos: 0,\n      filas: []\n    };\n\n    if (!usuario?.queues?.length) continue;\n\n    for (const fila of usuario.queues) {\n      const queueId = fila.id;\n      const queueName = fila.queue;\n\n      usuariosPorId[String(usuario.id)].filas.push({ queueId, queueName });\n\n      const key = String(queueId);\n      if (!filasCatalogo[key]) {\n        filasCatalogo[key] = { queueId, queueName, usuarios: [] };\n      }\n      if (!filasCatalogo[key].usuarios.includes(usuario.id)) {\n        filasCatalogo[key].usuarios.push(usuario.id);\n      }\n    }\n  }\n\n  return { filasCatalogo, usuariosPorId };\n}\n\nfunction findQueueKeyByName(filasCatalogo, queueName) {\n  if (!queueName) return null;\n  const target = String(queueName).trim().toLowerCase();\n  for (const key in filasCatalogo) {\n    const qName = String(filasCatalogo[key].queueName || '').trim().toLowerCase();\n    if (qName && qName === target) return key;\n  }\n  return null;\n}\n\n// Resolve chave de fila a partir de queueId (numérico/string) ou nome (departamento)\nfunction resolveQueueKey(queueId, filasCatalogo, departamento) {\n  if (queueId === undefined || queueId === null) return null;\n\n  // 1) chave direta (numérica ou string)\n  if (filasCatalogo[String(queueId)]) return String(queueId);\n\n  // 2) procura por entrada cujo queueId interno seja igual (caso a chave seja string)\n  for (const key in filasCatalogo) {\n    if (String(filasCatalogo[key].queueId) === String(queueId)) return key;\n  }\n\n  // 3) tenta achar por nome usando departamento (departamento já vem normalizado)\n  if (departamento) {\n    for (const key in filasCatalogo) {\n      const qName = String(filasCatalogo[key].queueName || '').trim().toLowerCase();\n      if (qName === departamento) return key;\n    }\n  }\n\n  // 4) tenta mapear queueId para nome via NOME_FILA_PARA_ID (inversa)\n  for (const name in NOME_FILA_PARA_ID) {\n    if (String(NOME_FILA_PARA_ID[name]) === String(queueId)) {\n      for (const key in filasCatalogo) {\n        const qName = String(filasCatalogo[key].queueName || '').trim().toLowerCase();\n        if (qName === name) return key;\n      }\n      return String(queueId);\n    }\n  }\n\n  // 5) fallback: procura pelo nome padrão da fila fallback\n  for (const key in filasCatalogo) {\n    const qName = String(filasCatalogo[key].queueName || '').trim().toLowerCase();\n    if (qName === FILA_FALLBACK_NOME.toLowerCase()) return key;\n  }\n\n  // 6) se nada encontrado, retorna queueId como string\n  return String(queueId);\n}\n\n// Resolve chave por nome (tenta catálogo, depois dicionário NOME_FILA_PARA_ID)\nfunction resolveQueueKeyByName(filasCatalogo, queueName) {\n  if (!queueName) return null;\n  const normalized = String(queueName).trim().toLowerCase();\n\n  // 1) procura por nome no catálogo\n  const byName = findQueueKeyByName(filasCatalogo, normalized);\n  if (byName) return byName;\n\n  // 2) tenta mapear via dicionário NOME_FILA_PARA_ID\n  const mappedId = NOME_FILA_PARA_ID[normalized];\n  if (mappedId !== undefined) {\n    const key = String(mappedId);\n    if (!filasCatalogo[key]) {\n      filasCatalogo[key] = { queueId: mappedId, queueName: queueName, usuarios: [] };\n    }\n    return key;\n  }\n\n  return null;\n}\n\n// ==========================================\n// PROCESSAMENTO DOS LOGS DO BANCO\n// ==========================================\nfunction processarCargaDeAtendimentos(itensInput, usuariosPorId, filasCatalogo, departamento) {\n  let logsFlat = [];\n\n  for (const item of itensInput) {\n    if (Array.isArray(item.json)) logsFlat.push(...item.json);\n    else logsFlat.push(item.json);\n  }\n  if (logsFlat.length === 0) return;\n\n  const departamentoNorm = String(departamento || '').trim().toLowerCase();\n\n  // Agrupa por id_user somando contagem_transferencia e mantendo último nome/fila/depto\n  const agregados = {};\n  for (const log of logsFlat) {\n    const uid = Number(log.id_user);\n    if (!uid) continue;\n    const cont = Number(log.contagem_transferencia || 0);\n    const nome = log.atendente_nome || `user_${uid}`;\n    const filaNome = log.fila ? String(log.fila).trim() : null;\n    const logDepto = log.depto ? String(log.depto).trim().toLowerCase() : null;\n\n    if (!agregados[uid]) agregados[uid] = { uid, contagem: 0, nome, filaNome, logDepto };\n    agregados[uid].contagem += cont;\n    agregados[uid].nome = nome;\n    if (filaNome) agregados[uid].filaNome = filaNome;\n    if (logDepto) agregados[uid].logDepto = logDepto;\n  }\n\n  for (const k in agregados) {\n    const a = agregados[k];\n    const uid = Number(a.uid);\n\n    // Atualiza ou cria placeholder do usuário\n    if (usuariosPorId[String(uid)]) {\n      usuariosPorId[String(uid)].qtdAtendimentos = a.contagem;\n      if (!usuariosPorId[String(uid)].name) usuariosPorId[String(uid)].name = a.nome;\n    } else {\n      usuariosPorId[String(uid)] = {\n        userId: uid,\n        name: a.nome,\n        isOnline: false,\n        qtdAtendimentos: a.contagem,\n        filas: []\n      };\n    }\n\n    // 1) Injeta por fila do log (se houver)\n    if (a.filaNome) {\n      let queueKey = findQueueKeyByName(filasCatalogo, a.filaNome);\n\n      if (!queueKey) {\n        const normalized = a.filaNome.trim().toLowerCase().replace(/\\s+/g, '-');\n        const mappedId = NOME_FILA_PARA_ID[normalized];\n        if (mappedId !== undefined) {\n          const key = String(mappedId);\n          if (!filasCatalogo[key]) filasCatalogo[key] = { queueId: mappedId, queueName: a.filaNome, usuarios: [] };\n          queueKey = key;\n        }\n      }\n\n      if (!queueKey) {\n        const fakeKey = `bank_${a.filaNome.replace(/\\s+/g, '_').toLowerCase()}`;\n        if (!filasCatalogo[fakeKey]) filasCatalogo[fakeKey] = { queueId: fakeKey, queueName: a.filaNome, usuarios: [] };\n        queueKey = fakeKey;\n      }\n\n      if (queueKey) {\n        if (!filasCatalogo[queueKey].usuarios.includes(uid)) filasCatalogo[queueKey].usuarios.push(uid);\n        if (!usuariosPorId[String(uid)].filas.find(f => String(f.queueName || '').trim().toLowerCase() === String(filasCatalogo[queueKey].queueName || '').trim().toLowerCase())) {\n          usuariosPorId[String(uid)].filas.push({ queueId: filasCatalogo[queueKey].queueId, queueName: filasCatalogo[queueKey].queueName });\n        }\n      }\n    }\n\n    // 2) Injeta por depto (se log.depto corresponde ao departamento atual)\n    if (a.logDepto && departamentoNorm && a.logDepto === departamentoNorm) {\n      let deptQueueKey = findQueueKeyByName(filasCatalogo, departamentoNorm);\n\n      if (!deptQueueKey) {\n        const mappedId = NOME_FILA_PARA_ID[departamentoNorm];\n        if (mappedId !== undefined) {\n          const key = String(mappedId);\n          if (!filasCatalogo[key]) filasCatalogo[key] = { queueId: mappedId, queueName: departamentoNorm, usuarios: [] };\n          deptQueueKey = key;\n        }\n      }\n\n      if (!deptQueueKey) {\n        const fakeDeptKey = `bank_${departamentoNorm.replace(/\\s+/g, '_')}`;\n        if (!filasCatalogo[fakeDeptKey]) filasCatalogo[fakeDeptKey] = { queueId: fakeDeptKey, queueName: departamentoNorm, usuarios: [] };\n        deptQueueKey = fakeDeptKey;\n      }\n\n      if (!filasCatalogo[deptQueueKey].usuarios.includes(uid)) filasCatalogo[deptQueueKey].usuarios.push(uid);\n      if (!usuariosPorId[String(uid)].filas.find(f => String(f.queueName || '').trim().toLowerCase() === String(filasCatalogo[deptQueueKey].queueName || '').trim().toLowerCase())) {\n        usuariosPorId[String(uid)].filas.push({ queueId: filasCatalogo[deptQueueKey].queueId, queueName: filasCatalogo[deptQueueKey].queueName });\n      }\n    }\n  }\n}\n\n// ==========================================\n// ESCOLHA DE ATENDENTE (NUNCA ESCOLHER OFFLINE)\n// ==========================================\nfunction escolherAtendentePorCarga(targetQueueKey, preferidosIds, filasCatalogo, usuariosPorId, allowOffline = false) {\n  if (!targetQueueKey && targetQueueKey !== 0) return { atendente: null, modo: 'somente_fila', usuariosDaFila: [] };\n\n  const fila = filasCatalogo[String(targetQueueKey)];\n  const todosIdsDaFila = (fila?.usuarios || []);\n\n  if (todosIdsDaFila.length === 0) {\n    return { atendente: null, modo: 'somente_fila', usuariosDaFila: [] };\n  }\n\n  const listaAtendentes = todosIdsDaFila.map(id => usuariosPorId[String(id)]).filter(Boolean);\n\n  const usuariosDaFila = listaAtendentes.map(u => ({\n    userId: u.userId,\n    name: u.name,\n    isOnline: u.isOnline,\n    qtdAtendimentos: u.qtdAtendimentos\n  }));\n\n  // 1) tenta entre online apenas\n  const listaOnline = listaAtendentes.filter(u => u.isOnline);\n  if (listaOnline.length > 0) {\n    const preferidosOnline = listaOnline.filter(u => preferidosIds.includes(u.userId));\n    if (preferidosOnline.length > 0) {\n      preferidosOnline.sort((a, b) => a.qtdAtendimentos - b.qtdAtendimentos || Math.random() - 0.5);\n      return { atendente: preferidosOnline[0], modo: 'preferido_menor_carga', usuariosDaFila };\n    }\n    listaOnline.sort((a, b) => a.qtdAtendimentos - b.qtdAtendimentos || Math.random() - 0.5);\n    return { atendente: listaOnline[0], modo: 'fila_menor_carga', usuariosDaFila };\n  }\n\n  // 2) se não houver online, sinaliza para transferir à próxima fila (escalonamento)\n  return { atendente: null, modo: 'transfer_next', usuariosDaFila };\n}\n\n// ==========================================\n// EXECUÇÃO PRINCIPAL COM ESCALONAMENTO ROBUSTO\n// ==========================================\nconst itensDoBanco = $input.all();\nconst apiResp = $('buscar por usuarios online').first().json;\nconst usuariosRaw = apiResp.data || apiResp.body?.data || [];\n\nconst departamento = obterDepartamentoAtual();\nconst { filasCatalogo, usuariosPorId } = mapearUsuariosEFilas(usuariosRaw);\n\n// Integra o banco ao catálogo (cria placeholders e buckets 'bank_*' quando necessário)\nprocessarCargaDeAtendimentos(itensDoBanco, usuariosPorId, filasCatalogo, departamento);\n\nif (DEBUG) {\n  console.log('filasCatalogo (after processing):', JSON.stringify(filasCatalogo, null, 2));\n  console.log('usuariosPorId (after processing):', JSON.stringify(usuariosPorId, null, 2));\n}\n\n// Resolve fila alvo\nconst queueId = DEPTO_PARA_FILA[departamento] || FILA_FALLBACK_ID;\nconst preferidos = DEPTO_PREFERIDOS[departamento] || [];\nlet targetQueueKey = resolveQueueKey(queueId, filasCatalogo, departamento);\nif (!targetQueueKey) targetQueueKey = resolveQueueKeyByName(filasCatalogo, departamento) || String(queueId);\n\n// === Construção robusta de queueKeysToTry ===\n// Ordem nominal de escalonamento (nomes preferenciais)\nconst escalationNames = [\n  null, // placeholder para fila alvo\n  'n1-suporte',\n  'n2-suporte',\n  'n3-suporte',\n  'financeiro'\n];\n\n// Constrói lista inicial com target\nconst triedKeys = new Set();\nconst queueKeysToTry = [];\nif (targetQueueKey !== null && targetQueueKey !== undefined) {\n  queueKeysToTry.push(String(targetQueueKey));\n  triedKeys.add(String(targetQueueKey));\n}\n\n// 1) adiciona filas explicitamente mapeadas por nome (se existirem no catálogo)\nfor (const name of escalationNames.slice(1)) {\n  const key = resolveQueueKeyByName(filasCatalogo, name);\n  if (key && !triedKeys.has(String(key))) {\n    queueKeysToTry.push(String(key));\n    triedKeys.add(String(key));\n  }\n}\n\n// 2) varre filasCatalogo e inclui filas cujo nome case com padrões comuns de suporte (N1/N2/N3) ou financeiro\nconst patterns = [\n  /\\bn1\\b/i,\n  /\\bn2\\b/i,\n  /\\bn3\\b/i,\n  /\\bn1[-\\s]?suporte\\b/i,\n  /\\bn2[-\\s]?suporte\\b/i,\n  /\\bn3[-\\s]?suporte\\b/i,\n  /\\bsuporte\\b/i,\n  /\\bfinanceiro\\b/i\n];\n\nfor (const key in filasCatalogo) {\n  if (triedKeys.has(String(key))) continue;\n  const qName = String(filasCatalogo[key].queueName || '').trim();\n  if (!qName) continue;\n  const qNameNorm = qName.toLowerCase();\n  const matches = patterns.some(rx => rx.test(qNameNorm));\n  if (matches) {\n    queueKeysToTry.push(String(key));\n    triedKeys.add(String(key));\n  }\n}\n\n// 3) se ainda vazio, adiciona fallback id como última tentativa\nif (queueKeysToTry.length === 0) {\n  const fallbackKey = resolveQueueKeyByName(filasCatalogo, FILA_FALLBACK_NOME) || String(FILA_FALLBACK_ID);\n  queueKeysToTry.push(String(fallbackKey));\n  triedKeys.add(String(fallbackKey));\n}\n\nif (DEBUG) console.log('queueKeysToTry:', queueKeysToTry.map(k => ({ key: k, name: filasCatalogo[k]?.queueName || k })));\n\n// tentativa sequencial: para cada fila, tenta escolher atendente apenas entre online\nlet chosen = null;\nlet chosenModo = null;\nlet chosenUsuariosDaFila = [];\nlet chosenQueueKey = null;\nlet chosenQueueId = null;\nlet chosenQueueName = null;\n\nfor (const qKey of queueKeysToTry) {\n  const preferidosForThis = (String(qKey) === String(targetQueueKey)) ? preferidos : (DEPTO_PREFERIDOS['suporte'] || []);\n  const res = escolherAtendentePorCarga(qKey, preferidosForThis, filasCatalogo, usuariosPorId, false);\n  if (res.atendente) {\n    chosen = res.atendente;\n    chosenModo = res.modo;\n    chosenUsuariosDaFila = res.usuariosDaFila;\n    chosenQueueKey = qKey;\n    chosenQueueId = filasCatalogo[qKey]?.queueId ?? qKey;\n    chosenQueueName = filasCatalogo[qKey]?.queueName ?? (typeof qKey === 'string' ? qKey : String(qKey));\n    break;\n  }\n  // continua para próxima fila se res.atendente == null\n}\n\n// Se não encontrou em nenhuma fila escalonada, transfere para fila fallback e NÃO atribui usuário (userId = null)\nlet redirectedToFallback = false;\nif (!chosen) {\n  redirectedToFallback = true;\n  const fallbackKey = resolveQueueKeyByName(filasCatalogo, FILA_FALLBACK_NOME) || resolveQueueKeyByName(filasCatalogo, 'n1-suporte') || String(FILA_FALLBACK_ID);\n  const fallbackPreferidos = DEPTO_PREFERIDOS['suporte'] || [];\n\n  // tenta escolher na fallback apenas entre online\n  const fallbackRes = escolherAtendentePorCarga(fallbackKey, fallbackPreferidos, filasCatalogo, usuariosPorId, false);\n\n  if (fallbackRes.atendente) {\n    chosen = fallbackRes.atendente;\n    chosenModo = `redirected_${fallbackRes.modo}`;\n    chosenUsuariosDaFila = fallbackRes.usuariosDaFila;\n    chosenQueueKey = fallbackKey;\n    chosenQueueId = filasCatalogo[fallbackKey]?.queueId ?? fallbackKey;\n    chosenQueueName = filasCatalogo[fallbackKey]?.queueName ?? FILA_FALLBACK_NOME;\n  } else {\n    // fallback também não tem online: retorna fila fallback com userId = null (sem atribuir usuário offline)\n    chosen = null;\n    chosenModo = 'fallback_no_online';\n    chosenUsuariosDaFila = fallbackRes.usuariosDaFila || [];\n    chosenQueueKey = fallbackKey;\n    chosenQueueId = filasCatalogo[fallbackKey]?.queueId ?? fallbackKey;\n    chosenQueueName = filasCatalogo[fallbackKey]?.queueName ?? FILA_FALLBACK_NOME;\n  }\n}\n\n// monta retorno final\nconst userId = chosen?.userId ?? null;\n\nreturn [{\n  json: {\n    departamento,\n    queueId: chosenQueueId ?? queueId,\n    queueKey: chosenQueueKey,\n    queueName: chosenQueueName,\n    userId,\n    atendenteNome: chosen?.name || null,\n    atendenteOnline: chosen ? chosen.isOnline === true : false,\n    modoDistribuicao: chosenModo,\n    preferidos,\n    usuarios_da_fila: chosenUsuariosDaFila,\n    contagem_transferencia: chosen ? chosen.qtdAtendimentos : 0,\n    redirectedToFallback,\n    ticketId: $('get_data').first().json.ticketID,\n    clienteID: $('get_data').first().json.clienteID\n  }\n}];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1280,
-        -672
+        7744,
+        864
       ],
-      "id": "24a84375-abfd-413a-a2d3-ae12bcb04d0f",
+      "id": "cf528635-6e5c-48d3-9884-71936323478f",
       "name": "distribuição"
     },
     {
@@ -1720,10 +1687,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1072,
-        -672
+        7328,
+        864
       ],
-      "id": "1fbf62d0-bde0-4e99-aa6d-c1a5ede1abe5",
+      "id": "69f5d055-61ef-4c72-ad34-48ea19a7e7f9",
       "name": "buscar por usuarios online",
       "credentials": {
         "httpBearerAuth": {
@@ -1746,10 +1713,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1472,
-        -688
+        8656,
+        864
       ],
-      "id": "67adcfec-719c-41c3-8f66-e8a514f81458",
+      "id": "a2f3b940-89a6-4d41-aaf4-123e4b677a7d",
       "name": "trasnfere fila e atendente",
       "credentials": {
         "httpBearerAuth": {
@@ -1757,15 +1724,417 @@
           "name": "auth z-pro"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE IF NOT EXISTS log_atendimentos (\n    id SERIAL PRIMARY KEY, -- ◄ Adicionada a vírgula necessária aqui\n    id_user INT, \n    atendente_nome VARCHAR(100),\n    contagem_transferencia INT DEFAULT 1,\n    fila VARCHAR(100),\n    depto VARCHAR(100)\n);\n\n\nTRUNCATE TABLE log_atendimentos;\n\n\n-- -- Felipe \n\n-- INSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \n-- VALUES (14, 'Felipe', 1, 'AgroTech', 'agrotech');\n\n-- -- Gabriel \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (5, 'Gabriel', 1, 'N1-Suporte', 'suporte_operacional');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (5, 'Gabriel', 1, 'Financeiro', 'Financeiro');\n\n\n-- Kariny\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'Financeiro', 'Financeiro');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'AgroTech', 'suporte_operacional');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'Suporte', 'suporte_operacional');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'N1-Suporte', 'suporte_operacional');\n\n-- Geneses \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (9, 'Geneses', 1, 'N2-Suporte', 'suporte_fiscal');\n\n-- Guilherme \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (10, 'Guilherme', 1, 'N1-Suporte', 'suporte_operacional');\n\n-- Gustavo \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (7, 'Gustavo', 1, 'N2-Suporte', 'suporte_fiscal');\n\n-- Junior \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (8, 'Junior', 1, 'N3-Suporte', 'suporte');\n\n-- Thiago \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (11, 'Thiago', 1, 'N3-Suporte', 'suporte');\n\n-- Pedro\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (9, 'Pedro', 1, 'N2-Suporte', 'suporte_fiscal');\n\n\n\n\n\n\n\n\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        7952,
+        864
+      ],
+      "id": "8ca66acd-2002-4e75-a9fc-48f7c4b9c0e2",
+      "name": "Execute a SQL query",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "CBtsVsjtRAlB8Qbm",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from log_atendimentos where depto = '{{ $('rotear_menu_suporte').item.json.departamento }}'\nand fila = '{{ $('parse_menu_suporte').item.json.fila }}'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        7552,
+        864
+      ],
+      "id": "509f39e5-1286-455a-ae87-e54a71c71c59",
+      "name": "Execute a SQL query1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "CBtsVsjtRAlB8Qbm",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE log_atendimentos \nSET contagem_transferencia = contagem_transferencia + 1 \nWHERE id_user = {{ $('distribuição').item.json.userId }} \n  AND depto = '{{ $('distribuição').item.json.departamento }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        8160,
+        864
+      ],
+      "id": "0210b884-6ae3-42f5-900c-de7c5850c369",
+      "name": "Execute a SQL query2",
+      "credentials": {
+        "postgres": {
+          "id": "CBtsVsjtRAlB8Qbm",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/2551c9b5-cae9-4dde-9b19-961a44b5af82/sendVcard",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('get_data').item.json.Number }}\",\n  \"contact\": [\n    {\n      \"fullName\": \"Canal Financeiro - Alpha Software\",\n      \"wuid\": \"556992742275@s.whatsapp.net\",\n      \"phoneNumber\": \"556992742275\"\n    }\n  ],\n  \"ticketId\": {{ $('get_data').item.json.ticketID }}\n  \n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        7408,
+        1056
+      ],
+      "id": "5014030a-e598-4daa-934e-fb79c932ca46",
+      "name": "transfere financeiro",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/2551c9b5-cae9-4dde-9b19-961a44b5af82/sendVcard",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('get_data').item.json.Number }}\",\n  \"contact\": [\n    {\n      \"fullName\": \"Canal Atendimento - Agrotech\",\n      \"wuid\": \"556992583640@s.whatsapp.net\",\n      \"phoneNumber\": \"556992583640\"\n    }\n  ],\n  \"ticketId\": {{ $('get_data').item.json.ticketID }}\n  \n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        7424,
+        1264
+      ],
+      "id": "6cd6bcad-a6ea-4bdb-ade2-f39a424fb860",
+      "name": "transfere agrotech",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/2551c9b5-cae9-4dde-9b19-961a44b5af82/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Seu chat sera transferido para *${$('distribuição').item.json.atendenteNome}.*`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        8400,
+        864
+      ],
+      "id": "3f736808-db4e-4b31-a395-fd8d6ab79f72",
+      "name": "msg_cadastro1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "nswwbCwDsRkJlzLO",
+          "name": "auth z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        4496,
+        0
+      ],
+      "id": "fbbda0b8-a6ab-4e82-b5e3-682504155ed2",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "53819ada-2b85-4907-b92d-fe00c28a295e",
+              "leftValue": "={{ $('data_redis').item.json.navegacao.apresentacao }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        4624,
+        784
+      ],
+      "id": "ac80ed02-0afc-4906-b2dc-c371295e8735",
+      "name": "if_Atendimento"
+    },
+    {
+      "parameters": {
+        "operation": "incr",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}",
+        "expire": true,
+        "ttl": 30
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1728,
+        480
+      ],
+      "id": "fae6677e-8b32-4182-b281-e307cb9a8516",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c1100f5a-db9c-4e5a-8591-8175210e7e9f",
+              "leftValue": "={{ Object.values($json)[0] }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1920,
+        480
+      ],
+      "id": "84deca34-c78c-4eac-ac7e-3e526f4c34ce",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        8624,
+        -144
+      ],
+      "id": "03a7de2b-3a18-46b1-8fd9-42544beb2d4f",
+      "name": "limpar_msg_duplicada",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        9152,
+        1024
+      ],
+      "id": "41eeeaf1-c92c-45e8-b9a7-a6f04f5494fb",
+      "name": "limpar_msg_duplicada1",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        7664,
+        1536
+      ],
+      "id": "fd38ff09-c3dc-4ab7-90e7-37a89d4775d0",
+      "name": "limpar_msg_duplicada2",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        8736,
+        256
+      ],
+      "id": "5b46403d-abb7-41e1-8afd-dcd56acc7707",
+      "name": "limpar_msg_duplicada3",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        6864,
+        384
+      ],
+      "id": "8b462162-0730-454d-8dc7-29aa0b41a104",
+      "name": "limpar_msg_duplicada4",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        5072,
+        -288
+      ],
+      "id": "a864b247-c08a-4996-bd8f-20ec61ea4759",
+      "name": "limpar_msg_duplicada5",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        6096,
+        128
+      ],
+      "id": "e3408a90-3f57-4ee1-b7d5-0d21c4f2ab79",
+      "name": "limpar_msg_duplicada6",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        7136,
+        80
+      ],
+      "id": "70708590-1f1e-473b-ad9e-ea2b0530d770",
+      "name": "limpar_msg_duplicada7",
+      "credentials": {
+        "redis": {
+          "id": "3uOkOfPT1A3idWhS",
+          "name": "Redis account"
+        }
+      }
     }
   ],
-  "pinData": {},
   "connections": {
     "Webhook1": {
       "main": [
         [
           {
-            "node": "busca_cliente_z-pro",
+            "node": "Redis1",
             "type": "main",
             "index": 0
           }
@@ -1777,17 +2146,6 @@
         [
           {
             "node": "if_fromMe",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "if_fromMe": {
-      "main": [
-        [
-          {
-            "node": "if_queue",
             "type": "main",
             "index": 0
           }
@@ -1827,18 +2185,6 @@
         ]
       ]
     },
-    "if_handoff": {
-      "main": [
-        [],
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "if_queue": {
       "main": [
         [
@@ -1850,15 +2196,20 @@
         ]
       ]
     },
-    "If": {
+    "new_cliente": {
       "main": [
         [
           {
-            "node": "update_cliente",
+            "node": "limpar_msg_duplicada5",
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
         [
           {
             "node": "gerenciar_clientes",
@@ -1904,6 +2255,17 @@
         ]
       ]
     },
+    "Transferencia de fila de atendimento": {
+      "main": [
+        [
+          {
+            "node": "localizado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "msg_cliente_novo": {
       "main": [
         [
@@ -1927,6 +2289,17 @@
         [
           {
             "node": "login invalido1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "login invalido1": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada7",
             "type": "main",
             "index": 0
           }
@@ -2002,11 +2375,11 @@
         ]
       ]
     },
-    "Transferencia de fila de atendimento": {
+    "update_data_cliente": {
       "main": [
         [
           {
-            "node": "localizado1",
+            "node": "msg_menu_principal",
             "type": "main",
             "index": 0
           }
@@ -2029,6 +2402,17 @@
         [
           {
             "node": "login invalido1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_documento_vazio": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada6",
             "type": "main",
             "index": 0
           }
@@ -2146,6 +2530,178 @@
         ]
       ]
     },
+    "estados_menus": {
+      "main": [
+        [
+          {
+            "node": "if_Atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "if_Atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_transferencia1": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de fila de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "busca_cliente_z-pro": {
+      "main": [
+        [
+          {
+            "node": "get_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aguardando_cadastro": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "localizado1": {
+      "main": [
+        [
+          {
+            "node": "Redis5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis5": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_handoff": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_atendimento_humano": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_fromMe": {
+      "main": [
+        [
+          {
+            "node": "if_queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_menu_principal": {
+      "main": [
+        [
+          {
+            "node": "set_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_menu_principal": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_menu_suporte": {
+      "main": [
+        [
+          {
+            "node": "set_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_menu_suporte": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "parse_menu_principal": {
       "main": [
         [
@@ -2179,14 +2735,14 @@
         ],
         [
           {
-            "node": "buscar por usuarios online",
+            "node": "transfere financeiro",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "buscar por usuarios online",
+            "node": "transfere agrotech",
             "type": "main",
             "index": 0
           }
@@ -2232,127 +2788,11 @@
         ]
       ]
     },
-    "msg_menu_suporte": {
-      "main": [
-        [
-          {
-            "node": "set_menu_suporte",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "estados_menus": {
-      "main": [
-        [
-          {
-            "node": "msg_cliente_novo",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "msg_cadastro",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "msg_menu_principal",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "msg_menu_suporte",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "msg_cliente_novo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "msg_transferencia1": {
-      "main": [
-        [
-          {
-            "node": "Transferencia de fila de atendimento",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "busca_cliente_z-pro": {
-      "main": [
-        [
-          {
-            "node": "get_data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "update_data_cliente": {
-      "main": [
-        [
-          {
-            "node": "msg_menu_principal",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "msg_menu_principal": {
-      "main": [
-        [
-          {
-            "node": "set_menu_principal",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "localizado1": {
-      "main": [
-        [
-          {
-            "node": "Redis5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Redis5": {
-      "main": [
-        [
-          {
-            "node": "Redis4",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "distribuição": {
       "main": [
         [
           {
-            "node": "trasnfere fila e atendente",
+            "node": "Execute a SQL query",
             "type": "main",
             "index": 0
           }
@@ -2363,7 +2803,7 @@
       "main": [
         [
           {
-            "node": "distribuição",
+            "node": "Execute a SQL query1",
             "type": "main",
             "index": 0
           }
@@ -2381,22 +2821,132 @@
         ]
       ]
     },
-    "set_atendimento_humano": {
+    "Execute a SQL query": {
       "main": [
-        []
+        [
+          {
+            "node": "Execute a SQL query2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query1": {
+      "main": [
+        [
+          {
+            "node": "distribuição",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query2": {
+      "main": [
+        [
+          {
+            "node": "msg_cadastro1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transfere financeiro": {
+      "main": [
+        [
+          {
+            "node": "set_atendimento_humano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transfere agrotech": {
+      "main": [
+        [
+          {
+            "node": "set_atendimento_humano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cadastro1": {
+      "main": [
+        [
+          {
+            "node": "trasnfere fila e atendente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "msg_cliente_novo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_Atendimento": {
+      "main": [
+        [],
+        [
+          {
+            "node": "msg_cliente_novo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "busca_cliente_z-pro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "limpar_msg_duplicada": {
+      "main": [
+        [
+          {
+            "node": "Redis4",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate"
-  },
-  "versionId": "ecff6904-b407-4fde-8348-572fad231965",
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "788079ff01eef8eb2d0a67f6f81ff98421e5c62209beae02ea6e0b537243536b"
-  },
-  "id": "Czw6SD6hkz7HLbH2",
-  "tags": []
+  }
 }

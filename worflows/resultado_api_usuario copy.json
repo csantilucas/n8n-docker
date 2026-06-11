@@ -7,152 +7,7 @@
         "name": "Administrador",
         "email": "admin@zpro.io",
         "profile": "admin",
-        "blockWavoip": false,
-        "menuPermissions": {
-          "filas": true,
-          "funil": true,
-          "grupo": true,
-          "massa": true,
-          "notas": true,
-          "agenda": true,
-          "kanban": true,
-          "wavoip": true,
-          "equipes": true,
-          "galeria": true,
-          "sessoes": true,
-          "tarefas": true,
-          "contatos": true,
-          "usuarios": true,
-          "audit-log": true,
-          "campanhas": true,
-          "chat-flow": true,
-          "dashboard": true,
-          "etiquetas": true,
-          "avaliacoes": true,
-          "fechamento": true,
-          "logligacao": true,
-          "protocolos": true,
-          "relatorios": true,
-          "api-service": true,
-          "agendamentos": true,
-          "aniversarios": true,
-          "chat-privado": true,
-          "auto-resposta": true,
-          "google-calendar": true,
-          "instagramMencoes": true,
-          "mensagens-rapidas": true,
-          "tiktokComentarios": true,
-          "horarioAtendimento": true,
-          "youtubeComentarios": true,
-          "facebookComentarios": true,
-          "painel-atendimentos": true,
-          "instagramComentarios": true,
-          "woocommerce-produtos": true
-        },
-        "isOnline": true,
-        "sipEnabled": false,
-        "sipStatus": "offline",
-        "sipUsername": "",
-        "sipPassword": "",
-        "sipServer": "",
-        "sipPort": 8089,
-        "sipTransport": null,
-        "businessHours": [
-          {
-            "day": 0,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Domingo"
-          },
-          {
-            "day": 1,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Segunda-Feira"
-          },
-          {
-            "day": 2,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Terça-Feira"
-          },
-          {
-            "day": 3,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Quarta-Feira"
-          },
-          {
-            "day": 4,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Quinta-Feira"
-          },
-          {
-            "day": 5,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Sexta-Feira"
-          },
-          {
-            "day": 6,
-            "hr1": "08:00",
-            "hr2": "12:00",
-            "hr3": "14:00",
-            "hr4": "18:00",
-            "type": "O",
-            "label": "Sábado"
-          }
-        ],
-        "restrictedUser": "disabled",
-        "phone": "",
-        "inactive": false,
-        "profilePicture": null,
-        "configs": {
-          "filtrosAtendimento": {
-            "showAll": false,
-            "includeClosed": false,
-            "status": [
-              "open",
-              "pending"
-            ],
-            "withUnreadMessages": false,
-            "orderAsc": false,
-            "queuesIds": [],
-            "whatsappIds": [],
-            "selectedUsers": [],
-            "selectedTagIds": [],
-            "selectedKanbanIds": [],
-            "isReversed": false,
-            "sortByAnswered": false,
-            "density": "comfortable",
-            "dateFrom": "",
-            "dateTo": ""
-          },
-          "isDark": false
-        },
-        "customProfileId": null,
-        "queues": [],
-        "whatsappAllowed": [],
-        "customProfile": null
+        "blockWavoip": false
       },
       {
         "id": 14,
@@ -316,6 +171,18 @@
         ],
         "whatsappAllowed": [
           {
+            "id": 11,
+            "name": "WABA-COMERCIAL",
+            "UserWhatsapp": {
+              "id": 105,
+              "userId": 14,
+              "whatsappId": 11,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.228Z",
+              "updatedAt": "2026-05-21T13:46:06.228Z"
+            }
+          },
+          {
             "id": 15,
             "name": "Alpha Software",
             "UserWhatsapp": {
@@ -325,30 +192,6 @@
               "isActive": true,
               "createdAt": "2026-05-21T13:46:06.230Z",
               "updatedAt": "2026-05-21T13:46:06.230Z"
-            }
-          },
-          {
-            "id": 12,
-            "name": "WABA-PRIORITÁRIO",
-            "UserWhatsapp": {
-              "id": 101,
-              "userId": 14,
-              "whatsappId": 12,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:06.224Z",
-              "updatedAt": "2026-05-21T13:46:06.224Z"
-            }
-          },
-          {
-            "id": 10,
-            "name": "WABA-FINANCEIRO",
-            "UserWhatsapp": {
-              "id": 103,
-              "userId": 14,
-              "whatsappId": 10,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:06.226Z",
-              "updatedAt": "2026-05-21T13:46:06.226Z"
             }
           },
           {
@@ -364,6 +207,18 @@
             }
           },
           {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 101,
+              "userId": 14,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:06.224Z",
+              "updatedAt": "2026-05-21T13:46:06.224Z"
+            }
+          },
+          {
             "id": 14,
             "name": "WABA-AGROTECH",
             "UserWhatsapp": {
@@ -376,15 +231,15 @@
             }
           },
           {
-            "id": 11,
-            "name": "WABA-COMERCIAL",
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
             "UserWhatsapp": {
-              "id": 105,
+              "id": 103,
               "userId": 14,
-              "whatsappId": 11,
+              "whatsappId": 10,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:06.228Z",
-              "updatedAt": "2026-05-21T13:46:06.228Z"
+              "createdAt": "2026-05-21T13:46:06.226Z",
+              "updatedAt": "2026-05-21T13:46:06.226Z"
             }
           }
         ],
@@ -555,15 +410,15 @@
         ],
         "whatsappAllowed": [
           {
-            "id": 14,
-            "name": "WABA-AGROTECH",
+            "id": 15,
+            "name": "Alpha Software",
             "UserWhatsapp": {
-              "id": 96,
+              "id": 98,
               "userId": 13,
-              "whatsappId": 14,
+              "whatsappId": 15,
               "isActive": true,
-              "createdAt": "2026-05-21T13:22:00.077Z",
-              "updatedAt": "2026-05-21T13:22:00.077Z"
+              "createdAt": "2026-05-21T13:22:00.078Z",
+              "updatedAt": "2026-05-21T13:22:00.078Z"
             }
           },
           {
@@ -591,18 +446,6 @@
             }
           },
           {
-            "id": 15,
-            "name": "Alpha Software",
-            "UserWhatsapp": {
-              "id": 98,
-              "userId": 13,
-              "whatsappId": 15,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:22:00.078Z",
-              "updatedAt": "2026-05-21T13:22:00.078Z"
-            }
-          },
-          {
             "id": 12,
             "name": "WABA-PRIORITÁRIO",
             "UserWhatsapp": {
@@ -612,6 +455,18 @@
               "isActive": true,
               "createdAt": "2026-05-21T13:22:00.078Z",
               "updatedAt": "2026-05-21T13:22:00.078Z"
+            }
+          },
+          {
+            "id": 14,
+            "name": "WABA-AGROTECH",
+            "UserWhatsapp": {
+              "id": 96,
+              "userId": 13,
+              "whatsappId": 14,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:22:00.077Z",
+              "updatedAt": "2026-05-21T13:22:00.077Z"
             }
           },
           {
@@ -768,47 +623,36 @@
             "id": 6,
             "queue": "N1-Suporte",
             "UsersQueues": {
-              "id": 75,
+              "id": 41,
               "queueId": 6,
               "userId": 5,
-              "createdAt": "2026-06-11T14:59:07.598Z",
-              "updatedAt": "2026-06-11T14:59:07.598Z"
-            }
-          },
-          {
-            "id": 2,
-            "queue": "Financeiro",
-            "UsersQueues": {
-              "id": 76,
-              "queueId": 2,
-              "userId": 5,
-              "createdAt": "2026-06-11T14:59:07.599Z",
-              "updatedAt": "2026-06-11T14:59:07.599Z"
+              "createdAt": "2026-05-19T13:05:25.286Z",
+              "updatedAt": "2026-05-19T13:05:25.286Z"
             }
           },
           {
             "id": 1,
             "queue": "Suporte",
             "UsersQueues": {
-              "id": 74,
+              "id": 40,
               "queueId": 1,
               "userId": 5,
-              "createdAt": "2026-06-11T14:59:07.598Z",
-              "updatedAt": "2026-06-11T14:59:07.598Z"
+              "createdAt": "2026-05-19T13:05:25.285Z",
+              "updatedAt": "2026-05-19T13:05:25.285Z"
             }
           }
         ],
         "whatsappAllowed": [
           {
-            "id": 12,
-            "name": "WABA-PRIORITÁRIO",
+            "id": 9,
+            "name": "WABA-SUPORTE",
             "UserWhatsapp": {
-              "id": 109,
+              "id": 107,
               "userId": 5,
-              "whatsappId": 12,
+              "whatsappId": 9,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:11.175Z",
-              "updatedAt": "2026-05-21T13:46:11.175Z"
+              "createdAt": "2026-05-21T13:46:11.176Z",
+              "updatedAt": "2026-05-21T13:46:11.176Z"
             }
           },
           {
@@ -824,15 +668,27 @@
             }
           },
           {
-            "id": 15,
-            "name": "Alpha Software",
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
             "UserWhatsapp": {
-              "id": 111,
+              "id": 108,
               "userId": 5,
-              "whatsappId": 15,
+              "whatsappId": 10,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:11.177Z",
-              "updatedAt": "2026-05-21T13:46:11.177Z"
+              "createdAt": "2026-05-21T13:46:11.176Z",
+              "updatedAt": "2026-05-21T13:46:11.176Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 109,
+              "userId": 5,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:11.175Z",
+              "updatedAt": "2026-05-21T13:46:11.175Z"
             }
           },
           {
@@ -848,27 +704,15 @@
             }
           },
           {
-            "id": 9,
-            "name": "WABA-SUPORTE",
+            "id": 15,
+            "name": "Alpha Software",
             "UserWhatsapp": {
-              "id": 107,
+              "id": 111,
               "userId": 5,
-              "whatsappId": 9,
+              "whatsappId": 15,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:11.176Z",
-              "updatedAt": "2026-05-21T13:46:11.176Z"
-            }
-          },
-          {
-            "id": 10,
-            "name": "WABA-FINANCEIRO",
-            "UserWhatsapp": {
-              "id": 108,
-              "userId": 5,
-              "whatsappId": 10,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:11.176Z",
-              "updatedAt": "2026-05-21T13:46:11.176Z"
+              "createdAt": "2026-05-21T13:46:11.177Z",
+              "updatedAt": "2026-05-21T13:46:11.177Z"
             }
           }
         ],
@@ -1048,18 +892,6 @@
             }
           },
           {
-            "id": 12,
-            "name": "WABA-PRIORITÁRIO",
-            "UserWhatsapp": {
-              "id": 113,
-              "userId": 9,
-              "whatsappId": 12,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:16.475Z",
-              "updatedAt": "2026-05-21T13:46:16.475Z"
-            }
-          },
-          {
             "id": 11,
             "name": "WABA-COMERCIAL",
             "UserWhatsapp": {
@@ -1105,6 +937,18 @@
               "isActive": true,
               "createdAt": "2026-05-21T13:46:16.476Z",
               "updatedAt": "2026-05-21T13:46:16.476Z"
+            }
+          },
+          {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 113,
+              "userId": 9,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:16.475Z",
+              "updatedAt": "2026-05-21T13:46:16.475Z"
             }
           }
         ],
@@ -1276,6 +1120,18 @@
         ],
         "whatsappAllowed": [
           {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 120,
+              "userId": 10,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:20.892Z",
+              "updatedAt": "2026-05-21T13:46:20.892Z"
+            }
+          },
+          {
             "id": 14,
             "name": "WABA-AGROTECH",
             "UserWhatsapp": {
@@ -1288,15 +1144,15 @@
             }
           },
           {
-            "id": 12,
-            "name": "WABA-PRIORITÁRIO",
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
             "UserWhatsapp": {
-              "id": 120,
+              "id": 122,
               "userId": 10,
-              "whatsappId": 12,
+              "whatsappId": 10,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:20.892Z",
-              "updatedAt": "2026-05-21T13:46:20.892Z"
+              "createdAt": "2026-05-21T13:46:20.893Z",
+              "updatedAt": "2026-05-21T13:46:20.893Z"
             }
           },
           {
@@ -1312,18 +1168,6 @@
             }
           },
           {
-            "id": 15,
-            "name": "Alpha Software",
-            "UserWhatsapp": {
-              "id": 124,
-              "userId": 10,
-              "whatsappId": 15,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:20.893Z",
-              "updatedAt": "2026-05-21T13:46:20.893Z"
-            }
-          },
-          {
             "id": 11,
             "name": "WABA-COMERCIAL",
             "UserWhatsapp": {
@@ -1336,12 +1180,12 @@
             }
           },
           {
-            "id": 10,
-            "name": "WABA-FINANCEIRO",
+            "id": 15,
+            "name": "Alpha Software",
             "UserWhatsapp": {
-              "id": 122,
+              "id": 124,
               "userId": 10,
-              "whatsappId": 10,
+              "whatsappId": 15,
               "isActive": true,
               "createdAt": "2026-05-21T13:46:20.893Z",
               "updatedAt": "2026-05-21T13:46:20.893Z"
@@ -1515,18 +1359,6 @@
         ],
         "whatsappAllowed": [
           {
-            "id": 12,
-            "name": "WABA-PRIORITÁRIO",
-            "UserWhatsapp": {
-              "id": 126,
-              "userId": 7,
-              "whatsappId": 12,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:51.964Z",
-              "updatedAt": "2026-05-21T13:46:51.964Z"
-            }
-          },
-          {
             "id": 11,
             "name": "WABA-COMERCIAL",
             "UserWhatsapp": {
@@ -1551,6 +1383,30 @@
             }
           },
           {
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
+            "UserWhatsapp": {
+              "id": 126,
+              "userId": 7,
+              "whatsappId": 12,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.964Z",
+              "updatedAt": "2026-05-21T13:46:51.964Z"
+            }
+          },
+          {
+            "id": 15,
+            "name": "Alpha Software",
+            "UserWhatsapp": {
+              "id": 127,
+              "userId": 7,
+              "whatsappId": 15,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:51.966Z",
+              "updatedAt": "2026-05-21T13:46:51.966Z"
+            }
+          },
+          {
             "id": 14,
             "name": "WABA-AGROTECH",
             "UserWhatsapp": {
@@ -1572,18 +1428,6 @@
               "isActive": true,
               "createdAt": "2026-05-21T13:46:51.965Z",
               "updatedAt": "2026-05-21T13:46:51.965Z"
-            }
-          },
-          {
-            "id": 15,
-            "name": "Alpha Software",
-            "UserWhatsapp": {
-              "id": 127,
-              "userId": 7,
-              "whatsappId": 15,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:51.966Z",
-              "updatedAt": "2026-05-21T13:46:51.966Z"
             }
           }
         ],
@@ -1766,7 +1610,7 @@
           "instagramComentarios": true,
           "woocommerce-produtos": true
         },
-        "isOnline": false,
+        "isOnline": true,
         "sipEnabled": false,
         "sipStatus": "offline",
         "sipUsername": "",
@@ -1872,15 +1716,27 @@
             }
           },
           {
-            "id": 12,
-            "name": "WABA-PRIORITÁRIO",
+            "id": 9,
+            "name": "WABA-SUPORTE",
             "UserWhatsapp": {
-              "id": 134,
+              "id": 133,
               "userId": 8,
-              "whatsappId": 12,
+              "whatsappId": 9,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:56.959Z",
-              "updatedAt": "2026-05-21T13:46:56.959Z"
+              "createdAt": "2026-05-21T13:46:56.958Z",
+              "updatedAt": "2026-05-21T13:46:56.958Z"
+            }
+          },
+          {
+            "id": 10,
+            "name": "WABA-FINANCEIRO",
+            "UserWhatsapp": {
+              "id": 131,
+              "userId": 8,
+              "whatsappId": 10,
+              "isActive": true,
+              "createdAt": "2026-05-21T13:46:56.958Z",
+              "updatedAt": "2026-05-21T13:46:56.958Z"
             }
           },
           {
@@ -1908,27 +1764,15 @@
             }
           },
           {
-            "id": 10,
-            "name": "WABA-FINANCEIRO",
+            "id": 12,
+            "name": "WABA-PRIORITÁRIO",
             "UserWhatsapp": {
-              "id": 131,
+              "id": 134,
               "userId": 8,
-              "whatsappId": 10,
+              "whatsappId": 12,
               "isActive": true,
-              "createdAt": "2026-05-21T13:46:56.958Z",
-              "updatedAt": "2026-05-21T13:46:56.958Z"
-            }
-          },
-          {
-            "id": 9,
-            "name": "WABA-SUPORTE",
-            "UserWhatsapp": {
-              "id": 133,
-              "userId": 8,
-              "whatsappId": 9,
-              "isActive": true,
-              "createdAt": "2026-05-21T13:46:56.958Z",
-              "updatedAt": "2026-05-21T13:46:56.958Z"
+              "createdAt": "2026-05-21T13:46:56.959Z",
+              "updatedAt": "2026-05-21T13:46:56.959Z"
             }
           }
         ],
