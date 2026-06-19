@@ -1,0 +1,3573 @@
+{
+  "name": "chat_alpha canal suporte",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "app-suporte",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -3440,
+        464
+      ],
+      "id": "d8f4cf21-68b8-4f84-b8e7-3b5672268f69",
+      "name": "Webhook1",
+      "webhookId": "0c1aaaa6-189c-4a70-a520-ebd7b8f8a98a"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "903a4d37-6568-4515-ac8a-ca1078d1750d",
+              "name": "cpf",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.cpf }}",
+              "type": "string"
+            },
+            {
+              "id": "1ab96dd9-c663-4e1f-b607-d054a099d9b7",
+              "name": "clienteID",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.id }}",
+              "type": "number"
+            },
+            {
+              "id": "957202d4-39c6-4772-9576-7aea39a89b42",
+              "name": "Number",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.number }}",
+              "type": "string"
+            },
+            {
+              "id": "249dc942-ef6e-4c08-9505-de0544484b6e",
+              "name": "conversation",
+              "value": "={{ $('Webhook1').item.json.body.msg.text?.body || $('Webhook1').item.json.body.msg.interactive?.button_reply?.id || $('Webhook1').item.json.body.msg.interactive?.button_reply?.title || $('Webhook1').item.json.body.msg.interactive?.list_reply?.id || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "89152dcd-cb87-4373-8a45-7ce1e7e9cbf8",
+              "name": "fromMe",
+              "value": "={{ $('Webhook1').item.json.body.msg.fromMe ?? $('Webhook1').item.json.body.msg.key?.fromMe ?? false }}",
+              "type": "boolean"
+            },
+            {
+              "id": "123533f4-4711-4276-b3d7-eb11f4b5493d",
+              "name": "pushName",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.pushname }}",
+              "type": "string"
+            },
+            {
+              "id": "e7829727-2d92-4fff-ba2c-8e7c0643bc1b",
+              "name": "remoteJid",
+              "value": "={{ $('Webhook1').item.json.body.ticket.protocol }}",
+              "type": "string"
+            },
+            {
+              "id": "66bf2c8c-0983-41ca-9ce6-237311917a4d",
+              "name": "whatsappId",
+              "value": "={{ $('Webhook1').item.json.body.ticket.whatsappId }}",
+              "type": "number"
+            },
+            {
+              "id": "dc0f644a-dd53-44f3-8f9c-17fee861088d",
+              "name": "ticketID",
+              "value": "={{ $('Webhook1').item.json.body.ticket.id }}",
+              "type": "number"
+            },
+            {
+              "id": "45ccb972-3313-4ef4-bb71-60b26329147c",
+              "name": "queueId",
+              "value": "={{ $('Webhook1').item.json.body.ticket.queueId }}",
+              "type": "number"
+            },
+            {
+              "id": "dea37797-1494-4408-991d-db5635db2063",
+              "name": "data_info",
+              "value": "={{ $json.pagination.total }}",
+              "type": "number"
+            },
+            {
+              "id": "43e177df-798a-4dd7-80b7-e575ce0b8d88",
+              "name": "data_value",
+              "value": "={{ $json.data[0].value }}",
+              "type": "string"
+            },
+            {
+              "id": "6a060993-f257-441a-a001-92e11a710ef2",
+              "name": "chat_flow",
+              "value": "={{ $('Webhook1').item.json.body.ticket.chatFlowId }}",
+              "type": "string"
+            },
+            {
+              "id": "8fb333f2-a0b5-4faf-b784-272991de2a4c",
+              "name": "btn_data",
+              "value": "={{ $('Webhook1').item.json.body.msg.interactive.button_reply.title }}",
+              "type": "string"
+            },
+            {
+              "id": "m1n2p3u4-t5-6e7n-8u9-0inputmenu01",
+              "name": "menu_input",
+              "value": "={{ ($('Webhook1').item.json.body.msg.interactive?.button_reply?.id || $('Webhook1').item.json.body.msg.text?.body || '').toString().toLowerCase().trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2352,
+        480
+      ],
+      "id": "af790f03-3c4a-42ea-adf5-4a3ca6382b3b",
+      "name": "get_data"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "dados_sessao",
+        "key": "={{ \"status:\" + $json.remoteJid }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1568,
+        464
+      ],
+      "id": "27cf0a06-4a8d-4556-9bc1-4da6f936ba32",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1360,
+        480
+      ],
+      "id": "f87c4eff-5ae7-4e74-bf68-bddc325bba0c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $json.dados_sessao }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1168,
+        480
+      ],
+      "id": "f4b527b6-6ff1-466a-9bc1-8c11d866f054",
+      "name": "data_redis",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "569fcced-dfd1-4cd8-bff6-958f356566aa",
+              "leftValue": "={{ $json.queueId }}",
+              "rightValue": 17,
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1824,
+        480
+      ],
+      "id": "7cb5630c-af0b-48c2-89e6-37b084b3ee88",
+      "name": "if_queue"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"menu_cadastro\",\n      \"apresentacao\":1,\n      \"cliente\": \"\",\n      \"contagem_erro\":0\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        176,
+        -160
+      ],
+      "id": "13703f61-720e-486b-b78e-f1cc84e05e8e",
+      "name": "new_cliente",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7e121b6c-4666-442a-af6d-a8a7a274815d",
+                    "leftValue": "={{ $('get_data').item.json.conversation || $('get_data').item.json.btn_data}}",
+                    "rightValue": "btn2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Não"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('get_data').item.json.conversation || $('get_data').item.json.btn_data}}",
+                    "rightValue": "btn1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "0498e2bd-c70f-49bf-b099-7b9a6e53ce96"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sim"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        608,
+        352
+      ],
+      "id": "05968dfa-825c-4b4b-9e15-5c93aed5c161",
+      "name": "resposta_apresentação"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Aguarde, seu chat sera transferido.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1168,
+        336
+      ],
+      "id": "ac2430ba-eaaf-41c0-a345-b17bb747a710",
+      "name": "msg_transferencia",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 2,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3216,
+        80
+      ],
+      "id": "22009524-ece9-4d71-9e28-b0207a176a58",
+      "name": "Transferencia de fila de atendimento",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendButtonWABA",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({    \n    \"number\": $('get_data').item.json.Number,    \n    \"message\": \"*Olá! Seja bem-vindo à Alpha Software.*\\nVocê já é nosso cliente?\",  \n      \"button1\": \"Sim\",   \n      \"button2\": \"Não\", \n    \"ticketId\": $('get_data').item.json.ticketID\n\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        32,
+        16
+      ],
+      "id": "62993d8d-64ca-4cbb-9590-667d79ccdd6d",
+      "name": "msg_cliente_novo",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
+              "leftValue": "={{ $json.sucesso }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1792,
+        -128
+      ],
+      "id": "9b342369-190c-444e-812a-50b02af392b5",
+      "name": "encontrado1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": \"CNPJ/CPF inválido ou fora do padrão\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-nao-encontrado\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3024,
+        592
+      ],
+      "id": "44d26add-8ddc-4464-a0bb-407d374f0516",
+      "name": "login invalido1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `um momento, estamos buscando seu cadastro`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1344,
+        -112
+      ],
+      "id": "c1bf0273-a79c-4eea-9f37-f057c46b7f4c",
+      "name": "buscando",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://192.168.1.9:5001/api/chatbot/identificacao/id-cliente\n",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $('get_documento').item.json.message.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1552,
+        -112
+      ],
+      "id": "d702e9e4-cabc-4831-9ef2-f4a2a98e9413",
+      "name": "Api_alpha localizar",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "937ba465-25bb-4929-b775-f1dfd76949e8",
+              "name": "message.conversation",
+              "value": "={{ $('get_data').item.json.conversation.replace(/\\D/g, '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1136,
+        -112
+      ],
+      "id": "9542c0e8-23f1-4d92-b6e2-b5fc829c6c1b",
+      "name": "get_documento"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('get_data').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4416,
+        -144
+      ],
+      "id": "ef8e2ef7-2f09-423d-b452-c5e161dd1232",
+      "name": "Redis4",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updateContactExtraInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"contactId\": {{ $('get_data').item.json.clienteID }},\n    \"extraInfo\": [\n        {\n            \"name\": \"cliente\",\n            \"value\": \"cliente_aguardando\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -192,
+        224
+      ],
+      "id": "44a24864-d93b-48a0-89d7-5213df3169b0",
+      "name": "update_cliente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updateContactExtraInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"contactId\": {{ $('get_data').item.json.clienteID }},\n    \"extraInfo\": [\n        {\n            \"name\": \"cliente\",\n            \"value\": \"cliente\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2320,
+        -144
+      ],
+      "id": "8b25a2d6-0fa6-459f-9eeb-46031df94c71",
+      "name": "update_nosso_cliente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updateContact",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('get_data').item.json.Number }}\",\n  \"cpf\":\"{{ $('get_documento').item.json.message.conversation}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2624,
+        -160
+      ],
+      "id": "f838c665-2ed3-4913-86a6-d91a52f68cfa",
+      "name": "update_data_cliente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updateContactExtraInfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"contactId\": {{ $('get_data').item.json.clienteID }},\n    \"extraInfo\": [\n        {\n            \"name\": \"cliente\",\n            \"value\": \"cliente_novo\"\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        928,
+        336
+      ],
+      "id": "38d2b4d4-29b3-4cfd-9e56-3369edf2d8a7",
+      "name": "update_cliente_novo",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Informações inválidas. Por favor, envie o *CPF* ou *CNPJ* do seu cadastro (apenas números).',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-vazio\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1120,
+        128
+      ],
+      "id": "1166d25f-b4d6-4ecf-bbf7-07227bf11d5a",
+      "name": "msg_documento_vazio",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "lTs7x3vMLus8mXsX",
+          "name": "z-pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Por favor informe os *CNPJ/CPF* da empresa, *apenas os numeros*.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1456,
+        464
+      ],
+      "id": "e620a338-4a2d-43fb-8170-67995c2790e9",
+      "name": "msg_cadastro",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'selecione uma das opções do menu',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1280,
+        1184
+      ],
+      "id": "0a423f7d-c22d-4fdb-a4db-a5556444687f",
+      "name": "msg_erro",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('get_data').item.json.data_value }}",
+                    "rightValue": "cliente_novo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "b9b0f8d6-752e-4e1e-ad28-2ac5332423ea"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente_novo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "24981a6f-98b4-49bd-a974-47d4671d02f4",
+                    "leftValue": "={{ $('get_data').item.json.data_value }}",
+                    "rightValue": "=cliente_aguardando",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente_aguardando"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f2f4a585-fcf7-477f-a6e0-3d14c65d3def",
+                    "leftValue": "={{ $('get_data').item.json.data_value }}",
+                    "rightValue": "cliente",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "nosso_cliente"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -416,
+        400
+      ],
+      "id": "868600f3-98f5-4c80-814b-e1bea0af112c",
+      "name": "gerenciar_clientes"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "77ba767b-ca37-4153-8946-f256a0f7b332",
+              "leftValue": "={{ $('get_data').item.json.conversation }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        896,
+        -96
+      ],
+      "id": "8d0818e3-55b9-4e90-9756-82734f408bd0",
+      "name": "mensagem_vazia"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e97ed1a8-5bd4-4ea4-9220-d8af29a985eb",
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "aguardando_cadastro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "aguardando_cadastro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "menu_cadastro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "973d4568-b9d2-4c47-8a44-858a8dbd8732"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_cadastro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "menu-principal-redis",
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "menu_principal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_principal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "menu-suporte-redis",
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "menu_suporte",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_suporte"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        128,
+        368
+      ],
+      "id": "3ff69732-d10e-410a-8fa8-993cdb9a03c8",
+      "name": "estados_redis"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "menu_cadastro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "reenviar-menu-cadastro"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_cadastro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "aguardando_cadastro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "reenviar-aguardando-cadastro"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "aguardando_cadastro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "menu_principal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "reenviar-menu-principal"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_principal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+                    "rightValue": "menu_suporte",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "reenviar-menu-suporte"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_suporte"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        896
+      ],
+      "id": "be6cecfa-ee9a-45d3-900a-0da9d6079db3",
+      "name": "estados_menus"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'sinto muito ocorreu um erro, vou transferir se chat',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2800,
+        16
+      ],
+      "id": "b40ab872-8f3b-488b-87fe-9a792d2e7ca8",
+      "name": "msg_transferencia1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/getContactExtraInfo?contactId={{ $('Webhook1').item.json.body.ticket.contact.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2528,
+        480
+      ],
+      "id": "f15932b1-ea9d-4209-80fe-8f9b765e23dd",
+      "name": "busca_cliente_z-pro",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"aguardando_cadastro\",\n      \"cliente\": \"\",\n      \"contagem_erro\":0\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        464
+      ],
+      "id": "cc595670-bf14-4f92-8841-8f6eab78e96d",
+      "name": "aguardando_cadastro",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('get_data').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        3712,
+        -144
+      ],
+      "id": "636db81c-6c59-4a7a-8d36-60d91250e0a7",
+      "name": "Redis5",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "hf1-chatflow-redis",
+              "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+              "rightValue": "chatflow_ativo",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "hf2-chatflow-ticket",
+              "leftValue": "={{ $('get_data').item.json.chat_flow }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "hf3-atendimento-humano",
+              "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+              "rightValue": "atendimento_humano",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "hf4-fora-expediente",
+              "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+              "rightValue": "fora_expediente",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "hf5-processando-acao",
+              "leftValue": "={{ $('data_redis').item.json.navegacao.prox_menu }}",
+              "rightValue": "processando_acao",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -992,
+        480
+      ],
+      "id": "9d9a426a-d2ab-43a6-a8bd-13f8d2ff5cbc",
+      "name": "if_handoff"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"atendimento_humano\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4448,
+        1040
+      ],
+      "id": "f4dc2f14-062c-4d34-8795-48b124abe2e1",
+      "name": "set_atendimento_humano",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0a27d2d1-9f0d-4584-b500-c68120c8a36c",
+              "leftValue": "={{ $json.fromMe }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2144,
+        480
+      ],
+      "id": "aebb769a-5522-4646-bc72-6afdec6104c6",
+      "name": "if_fromMe"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendButtonWABA",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"message\": \"Para atendermos você com mais agilidade, escolha um departamento:\",\n  \"button1\": \"Suporte\",\n  \"button2\": \"Financeiro e Com.\",\n  \"button3\": \"Agrotech\",\n  \"ticketId\": $('get_data').item.json.ticketID\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3408,
+        240
+      ],
+      "id": "fb2e77a7-df7f-4139-94dc-5de5d54e96c8",
+      "name": "msg_menu_principal",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"menu_principal\",\n      \"cliente\": \"\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        3648,
+        320
+      ],
+      "id": "4d3db41a-5139-47c4-b28f-0cea4470771e",
+      "name": "set_menu_principal",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendButtonWABA",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"message\": \"*Suporte* — escolha a área:\",\n  \"button1\": \"Fiscal\",\n  \"button2\": \"Financeiro\",\n  \"button3\": \"Operacional\",\n  \"ticketId\": $('get_data').item.json.ticketID\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2384,
+        1504
+      ],
+      "id": "e4165dd1-800a-4405-b416-83c0ae1de360",
+      "name": "msg_menu_suporte",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"menu_suporte\",\n      \"cliente\": \"suporte\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2656,
+        1504
+      ],
+      "id": "2fd6517d-6e40-4f68-9a86-83e6a63e2626",
+      "name": "set_menu_suporte",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"processando_acao\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 120
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        864
+      ],
+      "id": "b7e8f9a0-1c2d-4e3f-8a5b-6c7d8e9f0a1b",
+      "name": "set_processando_acao",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"processando_acao\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 120
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        1056
+      ],
+      "id": "c8d9e0f1-2a3b-4c5d-9e0f-1a2b3c4d5e6f",
+      "name": "set_processando_fin",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"processando_acao\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 120
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        1264
+      ],
+      "id": "d9e0f1a2-3b4c-5d6e-0f1a-2b3c4d5e6f7a",
+      "name": "set_processando_agro",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const conv = ($('get_data').first().json.conversation || '').toString().toLowerCase().trim();\nconst btnTexto = ($('get_data').first().json.btn_data || '').toString().toLowerCase().trim();\nconst raw = btnTexto || conv;\n\nconst opcoes = {\n  '1': 'suporte', 'btn1': 'suporte', 'suporte': 'suporte',\n  '2': 'financeiro', 'btn2': 'financeiro', 'financeiro': 'financeiro',\n  'financeiro e com': 'financeiro', 'financeiro e com.': 'financeiro',\n  '3': 'agrotech', 'btn3': 'agrotech', 'agrotech': 'agrotech'\n};\n\nconst opcao = opcoes[raw] || 'erro';\n\nreturn [{ json: { rota: opcao, departamento: opcao === 'erro' ? '' : opcao, input_recebido: raw } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        816
+      ],
+      "id": "214c85d3-f01f-4b06-8a9e-cd98ca84e808",
+      "name": "parse_menu_principal"
+    },
+    {
+      "parameters": {
+        "jsCode": "const conv = ($('get_data').first().json.conversation || '').toString().toLowerCase().trim();\nconst btnTexto = ($('get_data').first().json.btn_data || '').toString().toLowerCase().trim();\n\n// 🟢 O SEGREDO AQUI: Priorizar o TÍTULO do botão (btnTexto) em vez do ID genérico (btn2)\nconst raw = btnTexto || conv;\n\n// 1. Mapeia a entrada do utilizador para uma chave padrão\nlet chave = '';\n\n// Como priorizamos o texto, se o usuário clicar no menu antigo, \n// o 'raw' será \"financeiro e com.\" e ele NÃO vai entrar na regra abaixo!\nif (['1', 'btn1', 'fiscal'].includes(raw)) {\n  chave = 'fiscal';\n} \nelse if (['2', 'btn2', 'financeiro'].includes(raw)) {\n  chave = 'financeiro';\n} \nelse if (['3', 'btn3', 'operacional'].includes(raw)) {\n  chave = 'operacional';\n}\n\n// 2. Define o departamento e a fila para cada chave\nconst config = {\n  'fiscal': { departamento: 'suporte_fiscal', fila: 'N2-Suporte' },\n  'financeiro': { departamento: 'suporte_financeiro', fila: 'Financeiro' },\n  'operacional': { departamento: 'suporte_operacional', fila: 'N1-Suporte' }\n};\n\n// 3. Obtém o resultado ou retorna erro\nconst resultado = config[chave];\n\nreturn [{\n  json: {\n    input_recebido: raw,\n    rota: resultado ? 'sucesso' : 'erro',\n    departamento: resultado ? resultado.departamento : '',\n    fila: resultado ? resultado.fila : ''\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        736
+      ],
+      "id": "aa32e4b1-2341-468f-9578-bc2a03ac4830",
+      "name": "parse_menu_suporte"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota }}",
+                    "rightValue": "suporte",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "rota-suporte"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "suporte"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota }}",
+                    "rightValue": "financeiro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "rota-financeiro"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "financeiro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota }}",
+                    "rightValue": "agrotech",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "rota-agrotech"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "agrotech"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        2112,
+        1024
+      ],
+      "id": "4f796de5-72a0-44d3-80e0-31f6ba3f91ed",
+      "name": "rotear_menu_principal"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.departamento }}",
+                    "rightValue": "suporte_fiscal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "rota-fiscal"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fiscal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.departamento }}",
+                    "rightValue": "suporte_financeiro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "rota-fin-suporte"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "financeiro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.departamento }}",
+                    "rightValue": "suporte_operacional",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "rota-operacional"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "operacional"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        2096,
+        704
+      ],
+      "id": "0cf78f6e-d48f-405d-85db-7efbedb1e5c6",
+      "name": "rotear_menu_suporte"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ==========================================\n// ➔ MATRIZ ÚNICA DE CONFIGURAÇÃO (GERAL)\n// ==========================================\n// Os turnos estão em MINUTOS totais do dia\n// ==========================================\n// ➔ MATRIZ ÚNICA DE CONFIGURAÇÃO (GERAL)\n// ==========================================\n\nconst EQUIPE = [\n  { nome: 'gabriel',   id: 5,  deptos: ['suporte', 'suporte_operacional', 'financeiro'],  filas: [6, 2],    turnos: [[420, 650], [750, 1010]] }, // Saída 16:50\n  { nome: 'pedro',     id: 6, deptos: ['suporte', 'suporte_fiscal'],                     filas: [7],       turnos: [[430, 650], [750, 1010]] }, // Saída 16:50\n  { nome: 'gustavo',   id: 7,  deptos: ['suporte', 'suporte_fiscal'],                     filas: [7],       turnos: [[490, 740], [840, 1070]] }, // Saída 17:50\n  { nome: 'kariny',    id: 4,  deptos: ['suporte', 'suporte_operacional', 'financeiro'],  filas: [6, 2, 1], turnos: [[490, 740], [840, 1070]] }, // Saída 17:50\n  { nome: 'geneses',   id: 9,  deptos: ['suporte', 'suporte_fiscal'],                     filas: [7],       turnos: [[490, 740], [840, 1070]] }, // Saída 17:50\n  { nome: 'thiago',    id: 11, deptos: ['suporte'],                                       filas: [8],       turnos: [[490, 740], [840, 1070]] }, // Saída 17:50\n  { nome: 'junior',    id: 8,  deptos: ['suporte'],                                       filas: [8],       turnos: [[490, 740], [840, 1070]] }, // Saída 17:50 \n  { nome: 'guilherme', id: 10, deptos: ['suporte', 'suporte_operacional'],                filas: [6],       turnos: [[490, 740], [840, 1070]] }, // Saída 17:50\n  { nome: 'tainara',   id: 3,  deptos: ['suporte'],                                       filas: [1],       turnos: [[450, 690], [780, 1055]] }  // Saída 17:35\n];\n\nconst FILA_FALLBACK_ID = 6;\nconst FILA_FALLBACK_NOME = 'N1-Suporte';\n\n// ==========================================\n// CÁLCULO DE HORÁRIO EXATO (America/Manaus)\n// ==========================================\nconst agora = new Date();\nconst formatter = new Intl.DateTimeFormat(\"en-US\", {\n  timeZone: \"America/Manaus\", hour: \"numeric\", minute: \"numeric\", hour12: false\n});\n\nconst parts = formatter.formatToParts(agora);\nlet horaAtual = parseInt(parts.find(p => p.type === 'hour').value, 10);\nif (horaAtual === 24) horaAtual = 0; \nconst minutoAtual = parseInt(parts.find(p => p.type === 'minute').value, 10);\n\nconst minutosAtuais = (horaAtual * 60) + minutoAtual;\nconst horaChatFormatada = `${String(horaAtual).padStart(2, '0')}:${String(minutoAtual).padStart(2, '0')}`;\n\n// ==========================================\n// IDENTIFICAÇÃO DO DEPARTAMENTO ALVO\n// ==========================================\nlet deptoPuxado = '';\ntry { deptoPuxado = $('parse_menu_principal').first().json.departamento || ''; } catch (e) {}\nif (!deptoPuxado) {\n  try { deptoPuxado = $('parse_menu_suporte').first().json.departamento || ''; } catch (e) {}\n}\nconst departamento = String(deptoPuxado || 'suporte').trim().toLowerCase();\n\nconst MAPA_FILAS = { suporte: 6, suporte_fiscal: 7, suporte_operacional: 6, financeiro: 2, suporte_financeiro: 2, agrotech: 4 };\nconst targetQueueId = MAPA_FILAS[departamento] || FILA_FALLBACK_ID;\n\n// ==========================================\n// PROCESSAMENTO DE CARGA DO BANCO\n// ==========================================\nconst itensDoBanco = $input.all();\nconst cargaAtendimentos = {};\nfor (const item of itensDoBanco) {\n  const logs = Array.isArray(item.json) ? item.json : [item.json];\n  for (const log of logs) {\n    if (log.id_user) {\n      cargaAtendimentos[Number(log.id_user)] = (cargaAtendimentos[Number(log.id_user)] || 0) + Number(log.contagem_transferencia || 0);\n    }\n  }\n}\n\nconst apiResp = $('buscar por usuarios online').first().json;\nconst usuariosRaw = apiResp.data || apiResp.body?.data || [];\n\n// ==========================================\n// FILTRAGEM DINÂMICA VIA ARRAY UNIFICADO\n// ==========================================\nconst candidatosValidos = [];\n\nfor (const usuarioAPI of usuariosRaw) {\n  const uid = Number(usuarioAPI.id);\n\n  if (usuarioAPI.profile === 'admin' && uid !== 4) continue; \n  \n  const statusOnline = usuarioAPI.isOnline;\n  const taOnline = statusOnline === true || statusOnline === \"true\" || statusOnline === 1;\n  if (!taOnline) continue;\n\n  const config = EQUIPE.find(e => e.id === uid || String(usuarioAPI.name).toLowerCase().includes(e.nome));\n  if (!config) continue;\n\n  const pertenceAoDestino = config.deptos.includes(departamento) || config.filas.includes(Number(targetQueueId));\n  if (!pertenceAoDestino) continue;\n\n  const estaNoExpediente = config.turnos.some(([inicio, fim]) => minutosAtuais >= inicio && minutosAtuais <= fim);\n  if (!estaNoExpediente) continue;\n\n  candidatosValidos.push({\n    userId: uid,\n    name: usuarioAPI.name,\n    qtdAtendimentos: cargaAtendimentos[uid] || 0,\n    queueId: targetQueueId,\n    queueName: usuarioAPI.queues?.find(q => Number(q.id) === Number(targetQueueId))?.queue || FILA_FALLBACK_NOME\n  });\n}\n\n// ==========================================\n// DECISÃO DE ENVIO: PRIORIDADE TOTAL PARA A MENOR CARGA\n// ==========================================\nlet chosen = null;\nlet status = 'open';\nlet modoDistribuicao = 'fila_menor_carga';\n\nfunction selecionarAnalistaComMenorCarga(lista) {\n  lista.sort((a, b) => a.qtdAtendimentos - b.qtdAtendimentos);\n  const menorCargaEncontrada = lista[0].qtdAtendimentos;\n  const empatados = lista.filter(c => c.qtdAtendimentos === menorCargaEncontrada);\n  \n  if (empatados.length > 1) {\n    modoDistribuicao = 'fila_empate_aleatorio';\n    const indexAleatorio = Math.floor(Math.random() * empatados.length);\n    return empatados[indexAleatorio];\n  } else {\n    modoDistribuicao = 'fila_menor_carga';\n    return lista[0];\n  }\n}\n\nif (candidatosValidos.length > 0) {\n  chosen = selecionarAnalistaComMenorCarga(candidatosValidos);\n} else {\n  // 🟢 SE NINGUÉM DO DEPTO ESTIVER DISPONÍVEL NO HORÁRIO: Joga como PENDING para a triagem da fila\n  status = 'pending';\n  modoDistribuicao = 'fallback_no_online';\n  \n  const candidatosFallback = [];\n  for (const usuarioAPI of usuariosRaw) {\n    const uid = Number(usuarioAPI.id);\n    const statusOnline = usuarioAPI.isOnline;\n    const taOnline = statusOnline === true || statusOnline === \"true\" || statusOnline === 1;\n    if (!taOnline) continue;\n    \n    const config = EQUIPE.find(e => e.id === uid || String(usuarioAPI.name).toLowerCase().includes(e.nome));\n    if (config && config.turnos.some(([inicio, fim]) => minutosAtuais >= inicio && minutosAtuais <= fim)) {\n      \n      const filaIdDinamica = config.filas[0] || FILA_FALLBACK_ID;\n      const filaNomeDinamica = usuarioAPI.queues?.find(q => Number(q.id) === Number(filaIdDinamica))?.queue || FILA_FALLBACK_NOME;\n\n      candidatosFallback.push({\n        userId: uid,\n        name: usuarioAPI.name,\n        qtdAtendimentos: cargaAtendimentos[uid] || 0,\n        queueId: filaIdDinamica,\n        queueName: filaNomeDinamica\n      });\n    }\n  }\n\n  if (candidatosFallback.length > 0) {\n    chosen = selecionarAnalistaComMenorCarga(candidatosFallback);\n    status = 'open';\n    modoDistribuicao = 'redirected_' + modoDistribuicao;\n  }\n}\n\nreturn [{\n  json: {\n    departamento,\n    queueId: chosen ? Number(chosen.queueId) : Number(targetQueueId),\n    queueName: chosen ? chosen.queueName : FILA_FALLBACK_NOME,\n    userId: chosen ? chosen.userId : null,\n    status, \n    horaChat: horaChatFormatada,\n    minutosAtualServidor: minutosAtuais,\n    atendenteNome: chosen ? chosen.name : null,\n    atendenteOnline: chosen ? true : false,\n    modoDistribuicao,\n    ticketId: $('get_data').first().json.ticketID,\n    clienteID: $('get_data').first().json.clienteID\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3040,
+        864
+      ],
+      "id": "34973713-4aa9-4893-99f3-9ab8bec7a549",
+      "name": "distribuição"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/listUsers?pageNumber=1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2624,
+        864
+      ],
+      "id": "ae948870-b471-4409-bfeb-77128044766b",
+      "name": "buscar por usuarios online",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updateticketinfo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  ticketId: $('distribuição').item.json.ticketId,\n  userId: $('distribuição').item.json.userId,\n  queueId: $('distribuição').item.json.queueId,\n  status: $('distribuição').item.json.status,\n  n8nStatus: false,\n  chatFlowId: null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4304,
+        880
+      ],
+      "id": "79696c6c-a7b3-4ca1-a68c-e20c82a13c39",
+      "name": "trasnfere fila e atendente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE TABLE IF NOT EXISTS log_atendimentos (\n    id SERIAL PRIMARY KEY, \n    id_user INT, \n    atendente_nome VARCHAR(100),\n    contagem_transferencia INT DEFAULT 1,\n    fila VARCHAR(100),\n    depto VARCHAR(100)\n);\n\n\nTRUNCATE TABLE log_atendimentos;\n\n\n-- -- Felipe \n\n-- INSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \n-- VALUES (14, 'Felipe', 1, 'AgroTech', 'agrotech');\n\n-- -- Gabriel \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (5, 'Gabriel', 1, 'N1-Suporte', 'suporte_operacional');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (5, 'Gabriel', 1, 'Financeiro', 'Financeiro');\n\n\n-- Kariny\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'Financeiro', 'Financeiro');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'AgroTech', 'suporte_operacional');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'Suporte', 'suporte_operacional');\n\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (4, 'Kariny', 1, 'N1-Suporte', 'suporte_operacional');\n\n-- Geneses \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (9, 'Geneses', 1, 'N2-Suporte', 'suporte_fiscal');\n\n-- Guilherme \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (10, 'Guilherme', 1, 'N1-Suporte', 'suporte_operacional');\n\n-- Gustavo \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (7, 'Gustavo', 1, 'N2-Suporte', 'suporte_fiscal');\n\n-- Junior \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (8, 'Junior', 1, 'N3-Suporte', 'suporte');\n\n-- Thiago \nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (11, 'Thiago', 1, 'N3-Suporte', 'suporte');\n\n-- Pedro\nINSERT INTO log_atendimentos (id_user, atendente_nome, contagem_transferencia, fila, depto) \nVALUES (9, 'Pedro', 1, 'N2-Suporte', 'suporte_fiscal');\n\n\n\n\n\n\n\n\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        3232,
+        864
+      ],
+      "id": "24f3f538-267d-467f-96a6-d73e53ddde3b",
+      "name": "Execute a SQL query",
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "TYHBUv94MSItFup6",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select id_user, atendente_nome, contagem_transferencia, fila, depto from log_atendimentos where depto = '{{ $('rotear_menu_suporte').item.json.departamento }}'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        2848,
+        864
+      ],
+      "id": "a1b30c47-ae3e-4836-8249-28593186aad5",
+      "name": "Execute a SQL query1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "TYHBUv94MSItFup6",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE log_atendimentos \nSET contagem_transferencia = contagem_transferencia + 1 \nWHERE id_user = {{ $('distribuição').item.json.userId }} \n  AND depto = '{{ $('distribuição').item.json.departamento }}'\n  AND fila = '{{ $('distribuição').item.json.queueName }}'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        3440,
+        864
+      ],
+      "id": "c3f4c589-0edc-44bb-af42-8fd162068cce",
+      "name": "Execute a SQL query2",
+      "credentials": {
+        "postgres": {
+          "id": "TYHBUv94MSItFup6",
+          "name": "Postgres account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendVcard",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('get_data').item.json.Number }}\",\n  \"contact\": [\n    {\n      \"fullName\": \"Canal Financeiro - Alpha Software\",\n      \"wuid\": \"556992742275@s.whatsapp.net\",\n      \"phoneNumber\": \"556992742275\"\n    }\n  ],\n  \"ticketId\": {{ $('get_data').item.json.ticketID }}\n  \n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2704,
+        1056
+      ],
+      "id": "17a425ec-b726-4548-9425-ef9f34bb5a56",
+      "name": "transfere financeiro",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendVcard",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('get_data').item.json.Number }}\",\n  \"contact\": [\n    {\n      \"fullName\": \"Canal Atendimento - Agrotech\",\n      \"wuid\": \"556992583640@s.whatsapp.net\",\n      \"phoneNumber\": \"556992583640\"\n    }\n  ],\n  \"ticketId\": {{ $('get_data').item.json.ticketID }}\n  \n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2720,
+        1264
+      ],
+      "id": "ad083ae8-a67c-4ebe-8764-9095e9d62347",
+      "name": "transfere agrotech",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Seu chat sera transferido para *${$('distribuição').item.json.atendenteNome}.*`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3968,
+        736
+      ],
+      "id": "09dda6a8-0ed2-462a-b7de-2ebe47fc41f8",
+      "name": "msg_cadastro1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "incr",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}",
+        "expire": true,
+        "ttl": 4
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2976,
+        480
+      ],
+      "id": "6b866be0-cddc-440d-bf25-0e742cebf92c",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c1100f5a-db9c-4e5a-8591-8175210e7e9f",
+              "leftValue": "={{ Object.values($json)[0] }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2784,
+        480
+      ],
+      "id": "7e03ec24-36cb-4850-a274-87b5c636b689",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        128
+      ],
+      "id": "d2866c50-e67b-41ca-afd0-e2bade78e0e4",
+      "name": "limpar_msg_duplicada6",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2608,
+        688
+      ],
+      "id": "ac256d16-c7f5-4ff0-aa08-977450afc8d0",
+      "name": "limpar_msg_duplicada8",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": $('distribuição1').item.json.userId,\n  \"status\": $('distribuição1').item.json.status,\n  \"queueId\": 6,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4336,
+        544
+      ],
+      "id": "3c594d69-86db-44f6-9dc1-de3866d8b991",
+      "name": "transferencia de atendimento2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"closed\",\n  \"queueId\": 6,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3568,
+        1136
+      ],
+      "id": "67786a04-495b-4e8f-bb95-b709d74f6bcb",
+      "name": "transferencia de atendimento",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e4ad0be1-bc8e-4a3a-9ddf-0bc389b0ea4c",
+              "name": "api_id",
+              "value": "9c27a2a0-d676-4aea-a0ed-8da908a4acb6",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3232,
+        464
+      ],
+      "id": "48d8a317-a67e-4ede-9b59-e181bb57c792",
+      "name": "apiID"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_data').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 2,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1696,
+        272
+      ],
+      "id": "9fe3b2c8-43bb-4cf7-b7d6-006f82b8fa4b",
+      "name": "Transferencia de fila de atendimento1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2960,
+        1536
+      ],
+      "id": "77c8f4f5-7a7b-4832-ab52-ee65d513c7af",
+      "name": "limpar_msg_duplicada2",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4672,
+        1040
+      ],
+      "id": "9a0fb7ad-a791-4566-89ce-874c8cbe854c",
+      "name": "limpar_msg_duplicada1",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        4032,
+        256
+      ],
+      "id": "b392a29d-d754-476d-a1ea-81bbfea37f35",
+      "name": "limpar_msg_duplicada3",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        3920,
+        -144
+      ],
+      "id": "de67b02d-b955-41e8-9804-029cccda8911",
+      "name": "limpar_msg_duplicada",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        384
+      ],
+      "id": "d52649b1-40d4-44b6-9d34-75b83ebacde6",
+      "name": "limpar_msg_duplicada4",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"lock:\" + $('Webhook1').item.json.body.ticket.protocol}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        368,
+        -288
+      ],
+      "id": "8bf2e33c-f5f3-4f10-a67d-c360107a8ff9",
+      "name": "limpar_msg_duplicada5",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 0.5
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        384,
+        -160
+      ],
+      "id": "8e00bd0e-ce02-4bf7-87b5-42ef5f70e5ea",
+      "name": "Wait",
+      "webhookId": "8ee60d2e-dc26-4670-b191-ec01088936bc"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Chat encerrado. chame novamente nesse contato, ou mande uma nova mensagem para inciar um novo atendimento`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3296,
+        1136
+      ],
+      "id": "29047b53-b6a7-47eb-a12b-ff2684506544",
+      "name": "msg_cadastro2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f08a56c6-4c13-4fe2-a3d8-23b4887e2e49",
+              "leftValue": "={{ $('encontrado1').item.json.erro }}",
+              "rightValue": "Mais de um cliente encontrado com o CPF/CNPJ informado",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2224,
+        176
+      ],
+      "id": "2154e7bd-e072-4882-85a8-63dc0c72388c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":\"vamos transferir seu chat\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-nao-encontrado\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3328,
+        528
+      ],
+      "id": "4ec52f05-2a41-41e7-ab8d-b758148822ed",
+      "name": "login invalido2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":$('encontrado1').item.json.erro,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-nao-encontrado\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        2992,
+        336
+      ],
+      "id": "430046d6-e53c-4137-964a-121faa01cf26",
+      "name": "login invalido",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from log_atendimentos where depto = 'suporte_operacional' and fila = 'N1-Suporte'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        3712,
+        528
+      ],
+      "id": "da66b0ef-b39f-4b85-a5af-4b3e8c5a09fa",
+      "name": "Execute a SQL query3",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "TYHBUv94MSItFup6",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ==========================================\n// ➔ MATRIZ ÚNICA DE CONFIGURAÇÃO DA EQUIPE (SÓ SUPORTE)\n// ==========================================\n// Os turnos estão em MINUTOS totais do dia (Ex: 07:00 = 7 * 60 = 420 | 12:30 = 12 * 60 + 30 = 750)\nconst EQUIPE = [\n  { nome: 'gabriel',   id: 5,  deptos: ['suporte', 'suporte_operacional'], filas: [6],    turnos: [[420, 660], [750, 1020]] }, // 07:00-11:00, 12:30-17:00\n  { nome: 'kariny',    id: 4,  deptos: ['suporte', 'suporte_operacional'], filas: [6, 1], turnos: [[480, 750], [840, 1080]] }, // 08:00-12:30, 14:00-18:00\n  { nome: 'guilherme', id: 10, deptos: ['suporte', 'suporte_operacional'], filas: [6],    turnos: [[480, 750], [840, 1080]] }, // 08:00-12:30, 14:00-18:00\n  { nome: 'tainara',   id: 3,  deptos: ['suporte'],                        filas: [1],    turnos: [[450, 690], [780, 1065]] }  // 07:30-11:30, 13:00-17:45\n];\n\nconst FILA_FALLBACK_ID = 6;\nconst FILA_FALLBACK_NOME = 'N1-Suporte';\n\n// ==========================================\n// CÁLCULO DE HORÁRIO EXATO (America/Manaus)\n// ==========================================\nconst agora = new Date();\nconst formatter = new Intl.DateTimeFormat(\"en-US\", {\n  timeZone: \"America/Manaus\", \n  hour: \"numeric\", \n  minute: \"numeric\", \n  hour12: false\n});\n\nconst parts = formatter.formatToParts(agora);\nlet horaAtual = parseInt(parts.find(p => p.type === 'hour').value, 10);\nif (horaAtual === 24) horaAtual = 0; // Prevenção de formatação padrão do JS\n\nconst minutoAtual = parseInt(parts.find(p => p.type === 'minute').value, 10);\n\n// Calcula quantos minutos já se passaram no dia no fuso de Manaus\nconst minutosAtuais = (horaAtual * 60) + minutoAtual;\n\n// Formata a hora textual para o retorno do JSON (ex: \"16:04\")\nconst horaChatFormatada = `${String(horaAtual).padStart(2, '0')}:${String(minutoAtual).padStart(2, '0')}`;\n\n// ==========================================\n// IDENTIFICAÇÃO DO DEPARTAMENTO ALVO\n// ==========================================\nlet deptoPuxado = '';\ntry { deptoPuxado = $('parse_menu_suporte').first().json.departamento || ''; } catch (e) {}\nif (!deptoPuxado) {\n  try { deptoPuxado = $('parse_menu_principal').first().json.departamento || ''; } catch (e) {}\n}\nconst departamento = String(deptoPuxado || 'suporte').trim().toLowerCase();\n\n// Mapeamento padrão de IDs de fila do suporte\nconst MAPA_FILAS = { suporte: 6, suporte_fiscal: 7, suporte_operacional: 6 };\nconst targetQueueId = MAPA_FILAS[departamento] || FILA_FALLBACK_ID;\n\n// ==========================================\n// PROCESSAMENTO DE CARGA DO BANCO (Quem tem menos atendimentos)\n// ==========================================\nconst itensDoBanco = $input.all();\nconst cargaAtendimentos = {};\nfor (const item of itensDoBanco) {\n  const logs = Array.isArray(item.json) ? item.json : [item.json];\n  for (const log of logs) {\n    if (log.id_user) {\n      cargaAtendimentos[Number(log.id_user)] = (cargaAtendimentos[Number(log.id_user)] || 0) + Number(log.contagem_transferencia || 0);\n    }\n  }\n}\n\nconst apiResp = $('buscar por usuarios online1').first().json;\nconst usuariosRaw = apiResp.data || apiResp.body?.data || [];\n\n// ==========================================\n// FILTRAGEM DINÂMICA VIA ARRAY UNIFICADO\n// ==========================================\nconst candidatosValidos = [];\n\nfor (const usuarioAPI of usuariosRaw) {\n  if (usuarioAPI.profile === 'admin' && usuarioAPI.id !== 4) continue; // Kariny liberada\n  if (usuarioAPI.isOnline !== true) continue; // Só avalia quem está efetivamente com Z-Pro logado\n\n  const config = EQUIPE.find(e => e.id === usuarioAPI.id || usuarioAPI.name.toLowerCase().includes(e.nome));\n  if (!config) continue;\n\n  // 1. Valida se o analista pertence à rota do departamento/fila solicitado\n  const pertenceAoSuporte = config.deptos.includes(departamento) || config.filas.includes(targetQueueId);\n  if (!pertenceAoSuporte) continue;\n\n  // 2. Valida de forma EXATA se o analista está no seu turno no fuso de Manaus\n  const estaNoExpediente = config.turnos.some(([inicio, fim]) => minutosAtuais >= inicio && minutosAtuais <= fim);\n  if (!estaNoExpediente) continue;\n\n  candidatosValidos.push({\n    userId: usuarioAPI.id,\n    name: usuarioAPI.name,\n    qtdAtendimentos: cargaAtendimentos[usuarioAPI.id] || 0, // Carga injetada aqui\n    queueId: targetQueueId,\n    queueName: usuarioAPI.queues?.find(q => q.id === targetQueueId)?.queue || FILA_FALLBACK_NOME\n  });\n}\n\n// ==========================================\n// DECISÃO DE ENVIO: PRIORIDADE TOTAL PARA A MENOR CARGA\n// ==========================================\nlet chosen = null;\nlet status = 'open';\nlet modoDistribuicao = 'fila_menor_carga';\n\n// 🟢 FUNÇÃO DE DESEMPATE SEGURO\nfunction selecionarAnalistaComMenorCarga(lista) {\n  // 1. Ordena rigorosamente (do menor para o maior atendimento)\n  lista.sort((a, b) => a.qtdAtendimentos - b.qtdAtendimentos);\n  \n  // 2. Isola o número da menor carga e filtra quem tem exatamente esse número\n  const menorCargaEncontrada = lista[0].qtdAtendimentos;\n  const empatados = lista.filter(c => c.qtdAtendimentos === menorCargaEncontrada);\n  \n  // 3. Se houver empate entre os menores, sorteia; se não, vence quem tem menos\n  if (empatados.length > 1) {\n    modoDistribuicao = 'fila_empate_aleatorio';\n    const indexAleatorio = Math.floor(Math.random() * empatados.length);\n    return empatados[indexAleatorio];\n  } else {\n    modoDistribuicao = 'fila_menor_carga';\n    return lista[0];\n  }\n}\n\nif (candidatosValidos.length > 0) {\n  chosen = selecionarAnalistaComMenorCarga(candidatosValidos);\n} else {\n  // 🟢 SE NINGUÉM DO SUPORTE ESTIVER DISPONÍVEL NO HORÁRIO: Joga como PENDING\n  status = 'pending';\n  modoDistribuicao = 'fallback_no_online';\n  \n  const candidatosFallback = [];\n  for (const usuarioAPI of usuariosRaw) {\n    if (usuarioAPI.isOnline !== true) continue;\n    \n    const config = EQUIPE.find(e => e.id === usuarioAPI.id || usuarioAPI.name.toLowerCase().includes(e.nome));\n    if (config && config.turnos.some(([inicio, fim]) => minutosAtuais >= inicio && minutosAtuais <= fim)) {\n      \n      const filaIdDinamica = config.filas[0] || FILA_FALLBACK_ID;\n      const filaNomeDinamica = usuarioAPI.queues?.find(q => q.id === filaIdDinamica)?.queue || FILA_FALLBACK_NOME;\n\n      candidatosFallback.push({\n        userId: usuarioAPI.id,\n        name: usuarioAPI.name,\n        qtdAtendimentos: cargaAtendimentos[usuarioAPI.id] || 0,\n        queueId: filaIdDinamica,\n        queueName: filaNomeDinamica\n      });\n    }\n  }\n\n  // Se achar alguém válido no fallback, aplica a mesma regra da MENOR carga\n  if (candidatosFallback.length > 0) {\n    chosen = selecionarAnalistaComMenorCarga(candidatosFallback);\n    status = 'open';\n    modoDistribuicao = 'redirected_' + modoDistribuicao;\n  }\n}\n\nreturn [{\n  json: {\n    departamento,\n    queueId: chosen ? Number(chosen.queueId) : Number(targetQueueId),\n    queueName: chosen ? chosen.queueName : FILA_FALLBACK_NOME,\n    userId: chosen ? chosen.userId : null,\n    status, \n    horaChat: horaChatFormatada,\n    minutosAtualServidor: minutosAtuais, // Para você conseguir debugar e ver se o cálculo bate\n    atendenteNome: chosen ? chosen.name : null,\n    atendenteOnline: chosen ? true : false,\n    modoDistribuicao,\n    ticketId: $('get_data').first().json.ticketID,\n    clienteID: $('get_data').first().json.clienteID\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3888,
+        528
+      ],
+      "id": "90481988-a3bf-45a2-83c1-4ce52760fb48",
+      "name": "distribuição1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/listUsers?pageNumber=1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3536,
+        528
+      ],
+      "id": "a5d0233b-df67-4166-846c-0ec230f99582",
+      "name": "buscar por usuarios online1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE log_atendimentos \nSET contagem_transferencia = contagem_transferencia + 1 \nWHERE id_user = {{ $('distribuição1').item.json.userId }} \n  AND depto = '{{ $('distribuição1').item.json.departamento }}'\n  AND fila = 'suporte_operacional'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4080,
+        528
+      ],
+      "id": "cc0d7aae-55ff-4363-a132-a891307a6142",
+      "name": "Execute a SQL query4",
+      "credentials": {
+        "postgres": {
+          "id": "TYHBUv94MSItFup6",
+          "name": "Postgres account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Não temos analistas online no moemento. Seu chat sera transferido para a fila.`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"boas-vindas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3968,
+        960
+      ],
+      "id": "1010bf16-d1e7-4113-98e2-57d9ddc8349b",
+      "name": "msg_cadastro3",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1591f191-644e-4703-a290-f520cc711953",
+              "leftValue": "={{ $('distribuição').item.json.userId }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3648,
+        864
+      ],
+      "id": "8d213880-c484-4a09-bfd9-786dae60482e",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "07d814ae-8585-4aa4-a3b7-f1da22ff1b8c",
+              "leftValue": "={{ $now.setZone('America/Manaus').hour >= 7 && $now.setZone('America/Manaus').hour < 18 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -752,
+        496
+      ],
+      "id": "d3460589-f6b7-4366-9c7b-9749b7c44de2",
+      "name": "if_time"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Olá! No momento, nosso suporte está offline.\\n\\nNosso horário de atendimento é de segunda a sexta, das 07h às 18h, e aos sábados, das 07h às 12h.\\n\\nSua mensagem foi recebida e será a nossa prioridade assim que retornarmos ao expediente.\\n\\nObrigado por aguardar!`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"fora-expediente\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -544,
+        688
+      ],
+      "id": "0aea09aa-b16f-4a44-a35c-8fb06d0ccb6e",
+      "name": "msg_transferencia2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    \"navegacao\": {\n      \"prox_menu\": \"fora_expediente\"\n    }\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        688
+      ],
+      "id": "a8f3c2e1-9b4d-4a7c-8e6f-1d2c3b4a5e6f",
+      "name": "set_fora_expediente",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "apiID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_data": {
+      "main": [
+        [
+          {
+            "node": "if_fromMe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_fromMe": {
+      "main": [
+        [
+          {
+            "node": "if_queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "data_redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "data_redis": {
+      "main": [
+        [
+          {
+            "node": "if_handoff",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_handoff": {
+      "main": [
+        [],
+        [
+          {
+            "node": "if_time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if_queue": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "resposta_apresentação": {
+      "main": [
+        [
+          {
+            "node": "update_cliente_novo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_transferencia": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de fila de atendimento1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cliente_novo": {
+      "main": [
+        [
+          {
+            "node": "new_cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "encontrado1": {
+      "main": [
+        [
+          {
+            "node": "update_nosso_cliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscando": {
+      "main": [
+        [
+          {
+            "node": "Api_alpha localizar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Api_alpha localizar": {
+      "main": [
+        [
+          {
+            "node": "encontrado1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_documento": {
+      "main": [
+        [
+          {
+            "node": "buscando",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_cliente": {
+      "main": [
+        [
+          {
+            "node": "msg_cliente_novo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_nosso_cliente": {
+      "main": [
+        [
+          {
+            "node": "update_data_cliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_transferencia1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transferencia de fila de atendimento": {
+      "main": [
+        [
+          {
+            "node": "Redis5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_cliente_novo": {
+      "main": [
+        [
+          {
+            "node": "msg_transferencia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cadastro": {
+      "main": [
+        [
+          {
+            "node": "aguardando_cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_erro": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "gerenciar_clientes": {
+      "main": [
+        [
+          {
+            "node": "estados_redis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "estados_redis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "estados_redis",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "update_cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mensagem_vazia": {
+      "main": [
+        [
+          {
+            "node": "get_documento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_documento_vazio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "estados_redis": {
+      "main": [
+        [
+          {
+            "node": "mensagem_vazia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "resposta_apresentação",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "parse_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "parse_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "limpar_msg_duplicada6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "parse_menu_principal": {
+      "main": [
+        [
+          {
+            "node": "rotear_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "parse_menu_suporte": {
+      "main": [
+        [
+          {
+            "node": "rotear_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rotear_menu_principal": {
+      "main": [
+        [
+          {
+            "node": "set_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_processando_fin",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_processando_agro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rotear_menu_suporte": {
+      "main": [
+        [
+          {
+            "node": "set_processando_acao",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_processando_acao",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_processando_acao",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_menu_suporte": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "estados_menus": {
+      "main": [
+        [
+          {
+            "node": "msg_cliente_novo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "set_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "limpar_msg_duplicada6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_transferencia1": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de fila de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "busca_cliente_z-pro": {
+      "main": [
+        [
+          {
+            "node": "get_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_data_cliente": {
+      "main": [
+        [
+          {
+            "node": "set_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_menu_principal": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis5": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "distribuição": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar por usuarios online": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "trasnfere fila e atendente": {
+      "main": [
+        [
+          {
+            "node": "set_atendimento_humano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query1": {
+      "main": [
+        [
+          {
+            "node": "distribuição",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query2": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transfere financeiro": {
+      "main": [
+        [
+          {
+            "node": "msg_cadastro2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transfere agrotech": {
+      "main": [
+        [
+          {
+            "node": "msg_cadastro2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cadastro1": {
+      "main": [
+        [
+          {
+            "node": "trasnfere fila e atendente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "new_cliente": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_menu_suporte": {
+      "main": [
+        [
+          {
+            "node": "msg_menu_suporte",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_processando_acao": {
+      "main": [
+        [
+          {
+            "node": "buscar por usuarios online",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_processando_fin": {
+      "main": [
+        [
+          {
+            "node": "transfere financeiro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_processando_agro": {
+      "main": [
+        [
+          {
+            "node": "transfere agrotech",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "busca_cliente_z-pro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "limpar_msg_duplicada8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_atendimento_humano": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_menu_principal": {
+      "main": [
+        [
+          {
+            "node": "msg_menu_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aguardando_cadastro": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_documento_vazio": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "login invalido1": {
+      "main": [
+        [
+          {
+            "node": "login invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia de atendimento2": {
+      "main": [
+        []
+      ]
+    },
+    "transferencia de atendimento": {
+      "main": [
+        [
+          {
+            "node": "set_atendimento_humano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apiID": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "limpar_msg_duplicada": {
+      "main": [
+        [
+          {
+            "node": "Redis4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cadastro2": {
+      "main": [
+        [
+          {
+            "node": "transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "login invalido1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "login invalido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "login invalido2": {
+      "main": [
+        [
+          {
+            "node": "buscar por usuarios online1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "login invalido": {
+      "main": [
+        [
+          {
+            "node": "login invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query3": {
+      "main": [
+        [
+          {
+            "node": "distribuição1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar por usuarios online1": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "distribuição1": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute a SQL query4": {
+      "main": [
+        [
+          {
+            "node": "transferencia de atendimento2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cadastro3": {
+      "main": [
+        [
+          {
+            "node": "trasnfere fila e atendente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "msg_cadastro1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_cadastro3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "limpar_msg_duplicada2": {
+      "main": [
+        []
+      ]
+    },
+    "limpar_msg_duplicada1": {
+      "main": [
+        []
+      ]
+    },
+    "if_time": {
+      "main": [
+        [
+          {
+            "node": "gerenciar_clientes",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "msg_transferencia2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_transferencia2": {
+      "main": [
+        [
+          {
+            "node": "set_fora_expediente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_fora_expediente": {
+      "main": [
+        [
+          {
+            "node": "limpar_msg_duplicada8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "60c5419f-eefa-401f-9da4-06e8ada53bf6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3678bd5061341658e7288de84a25579816bf990c1607019a9f8d8be83f4a0b4a"
+  },
+  "nodeGroups": [],
+  "id": "ybZlChsySbfFtR25",
+  "tags": []
+}

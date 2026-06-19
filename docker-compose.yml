@@ -12,6 +12,8 @@ services:
     restart: always
     networks:
       - stack_automacao
+    ports:
+      - "5432:5432"
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -30,38 +32,19 @@ services:
     volumes:
       - redis_data:/data
 
-  # --- EVOLUTION API ---
-  evolution_api:
-    image: evoapicloud/evolution-api:latest
-    container_name: evolution_api
-    restart: always
-    networks:
-      - stack_automacao
-    ports:
-      - "8080:8080"
-    environment:
-      - SERVER_URL=http://${SERVER_URL}:8080
-      - DATABASE_ENABLED=true
-      - DATABASE_PROVIDER=postgresql
-      - DATABASE_CONNECTION_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?schema=evolution
-      - CACHE_REDIS_ENABLED=true
-      - CACHE_REDIS_ENABLED=true
-      - CACHE_REDIS_URI=redis://:${REDIS_PASSWORD}@redis:6379/1
-      - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY}
-    depends_on:
-      - db
-      - redis
 
   # --- N8N ---
   n8n:
     image: docker.n8n.io/n8nio/n8n:latest
     container_name: n8n_app
+    user: "root"
     restart: always
     networks:
       - stack_automacao
     ports:
       - "5678:5678"
     environment:
+      - N8N_SECURE_COOKIE=false
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=db
       - DB_POSTGRESDB_PORT=5432
@@ -70,10 +53,18 @@ services:
       - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_DISABLE_FILESYSTEM_OPERATIONS=false
+      - N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=false
+      - N8N_FILE_ACCESS_WHITELIST=/home/node/Documentos,/home/node/.n8n-files,/tmp
+      - N8N_RESTRICT_FILE_ACCESS_TO=/home/node/Documentos;/home/node/.n8n-files;/tmp
     volumes:
       - n8n_data:/home/node/.n8n
+      - C:/Users/Terminal/Documents/n8n_docs:/home/node/Documentos
     depends_on:
       - db
+  
 
 volumes:
   postgres_data:
