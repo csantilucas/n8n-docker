@@ -1,0 +1,4655 @@
+{
+  "name": "chatbot integração com z-pro teste (Modificado)",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "19cc6ccc-1ff1-460f-bb46-e91dab524c35",
+              "leftValue": "={{ $json.sucesso }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -6192,
+        192
+      ],
+      "id": "c4c1a618-f986-4970-b2f0-97f521dfee34",
+      "name": "encontrado1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Não encontrei um cadastro vinculado ao CPF ou CNPJ informado. Por favor, confira os dados e informe outro documento para continuar.`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-nao-encontrado\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6192,
+        16
+      ],
+      "id": "c8c7dbe2-eb03-4d77-9c1a-285e4c595ae5",
+      "name": "login invalido1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\":$json.texto_erro,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        432,
+        4224
+      ],
+      "id": "e63db61f-ccac-413d-a6c0-d4486953c420",
+      "name": "invalido2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('get_data').item.json.conversation || $('get_data').item.json.btn_data}}",
+                    "rightValue": "btn1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "0a384f85-9869-4b1b-875a-610c5f658a73"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "sim"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "06c1d80d-3786-4261-9330-2249441947ef",
+                    "leftValue": "={{ $('get_data').item.json.conversation || $('get_data').item.json.btn_data}}",
+                    "rightValue": "btn2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "nao"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "allMatchingOutputs": false
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -8864,
+        2464
+      ],
+      "id": "74eb3241-3049-4067-8a59-83ab3f329a2c",
+      "name": "Switch4"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"autorizado\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n\n        \"exec_id\": $execution.id\n      }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -8016,
+        1840
+      ],
+      "id": "1ba28179-c2e4-4fab-bed9-855787e33f98",
+      "name": "SET CLIENTE1",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CPF\"\n    },\n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"exec_id\": $execution.id\n      }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -8464,
+        2448
+      ],
+      "id": "683a9c1b-6e4c-46fe-afb9-cc17dfaaf8fb",
+      "name": "SET CLIENTE4",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*${$json.auth.nome}*\n\nPercebemos que você ainda *não é cliente*\nda Preserva.\n\nPara direcionarmos seu atendimento ao\nsetor comercial, por favor informe os \ndados abaixo:\n\n*_CPF/CNPJ_*\n👤 *_Nome completo ou Razão Social_*\n📍 *_Cidade_*\n\nAssim que recebermos as informações, \num de nossos atendentes continuará\nseu atendimento. `,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"captacao-dados\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4976,
+        2352
+      ],
+      "id": "d6db26a2-c970-4105-a04a-eaed363a8eef",
+      "name": "transferencia1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"status:\" +  $('get_data').item.json.remoteJid}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -3856,
+        1920
+      ],
+      "id": "fbc92e69-c2d9-4aa1-aedd-038c0018efaa",
+      "name": "Redis3",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{\"status:\" +  $('get_data').item.json.remoteJid}}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -3680,
+        1920
+      ],
+      "id": "33545c48-43b2-4957-a308-f138ca620416",
+      "name": "Redis4",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $json.dados_sessao }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -8992,
+        3232
+      ],
+      "id": "57a3b2b9-f98c-45a0-ba6c-b1e02de42798",
+      "name": "data_redis1",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "937ba465-25bb-4929-b775-f1dfd76949e8",
+              "name": "message.conversation",
+              "value": "={{ $('get_data').item.json.conversation.replace(/\\D/g, '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -7216,
+        224
+      ],
+      "id": "3a6aa876-e707-411b-8947-87ad1bd112af",
+      "name": "get_data1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "dados_sessao",
+        "key": "={{ \"status:\" + $json.remoteJid }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -9440,
+        3216
+      ],
+      "id": "a5853e33-8a9e-4281-9770-b8b0d3518f3a",
+      "name": "Redis5",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat-preserva",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -11584,
+        3232
+      ],
+      "id": "93ef26e7-e03f-49e0-8978-65eead82f81b",
+      "name": "Webhook1",
+      "webhookId": "e39bacd9-7b82-42f5-9e2c-7fdac5837c2b"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": ` *CADASTRO LOCALIZADO!*\n━━━━━━━━━━━━━━━━━━\n\nPara sua segurança, informe os *4 primeiros dígitos* do CPF do responsável pela empresa\n\n ━━━━━━━━━━━━━━━━━━\n_Apenas números, por favor._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"cadastro-localizado\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -5968,
+        176
+      ],
+      "id": "a9a047c0-5cc3-4a11-81fa-00c777db0c8f",
+      "name": "valido1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": 'Desculpe, os números informados *não* correspondem ao *CPF* vinculado ao cadastro da empresa.\\nPor favor, verifique o número informado e encaminhe novamente.',\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"erro-autenticacao\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6160,
+        912
+      ],
+      "id": "ababde41-365b-4142-aa42-e211dbfe2e17",
+      "name": "invalido3",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "KPTytj9ToiA6pZMD",
+          "name": "z-pro_suporte"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {
+          "includeUnpaired": true
+        }
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -9232,
+        3232
+      ],
+      "id": "9a044c38-3a9f-4447-aa1f-652029334acb",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" +  $('get_data').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    \"auth\": {\n      \"nome\": $('get_data').item.json.pushName,\n      \"logado\": false,\n      \"estado_anterior\": \"cliente_novo\",\n      \"cliente\": \"\",\n      \"protocolo\":$('Webhook1').item.json.body.ticket.protocol ,\n      \"token\":\"\"\n    },\n    \"navegacao\": {\n      \"menu_atual\": \"\",\n      \"contagem_erro\":0,\n      \"exec_id\": $execution.id\n    },\n     \"cliente\": {\n      \"idCliente\": \"\",\n      \"nomeResponsavel\": \"\",\n      \"empresa\": \"\",\n      \"cnpj\":\"\",\n      \"cidade\": \"\",\n      \"bloqueado\":\"\",\n      \"Inativo\":\"\",\n      \"cpf_responsavel\":\"\",\n      \"email\":\"\",\n      \"senha\":\"\"\n  },\n  })\n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -8304,
+        1808
+      ],
+      "id": "6d5579c6-3eb5-4c8d-990b-5aa31efeb22a",
+      "name": "SET CLIENTE5",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "=httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $('definição_menu').item.json.mensagem_texto,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-menu3\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3648,
+        3216
+      ],
+      "id": "bff351e4-f5dc-42c3-a17d-116171870ee9",
+      "name": "HTTP Request24",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": \"sessão encerrada, até mais \",\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"encerrar-sessao\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3472,
+        1920
+      ],
+      "id": "769c6713-4449-4012-896b-9fc84f700a74",
+      "name": "logof1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_dados').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$('definição_menu').item.json, \n    \"navegacao\": {\n      \"menu_atual\": $('definição_menu').item.json.proximo_estado, \n      \"ultima_interacao\": $('get_dados').item.json.horario,\n      \"exec_id\": $execution.id\n    },\n    \"auth\": {\n      ...$('definição_menu').item.json.auth,\n      \"estado_anterior\": $('definição_menu').item.json.limpar_login ? \"\" : ($('definição_menu').item.json.auth?.estado_anterior || \"\")\n    },\n    \"message\": {\n      \"text\": $('get_dados').item.json.conversation,\n      \"type\": $('get_dados').item.json.messageType\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -3136,
+        3152
+      ],
+      "id": "411b6255-b8ec-4f95-bc1f-d09a5a1007c1",
+      "name": "estados_menus1",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendlistWaba",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\n  JSON.stringify({\n    \"number\": $('get_data').item.json.Number || \"Número não informado\",\n    \"header\": \"CADASTRO ENCONTRADO\",\n    \"body\": `Bem-vindo(a), ${$('switch-auth').item.json.cliente.nomeResponsavel}\n\nEmpresa: ${$('switch-auth').item.json.cliente.empresa}\nCidade: ${$('switch-auth').item.json.cliente.cidade}📍`,\n\n    \"footer\": \"Selecione uma opção abaixo:\",\n    \"button_text\": \"Ver opções\",\n    \"sections\": [\n      {\n        \"title\": \"Seção 1\",\n        \"rows\": [\n          {\n            \"id\": \"1\",\n            \"title\": \"Minhas faturas\",\n            \"description\": \"Listar minhas faturas recentes.\"\n          },\n          {\n            \"id\": \"2\",\n            \"title\": \"Meus CCR\",\n            \"description\": \"Listar meus ultimos CCRs.\"\n          },\n          {\n            \"id\": \"3\",\n            \"title\": \"Meus Contratos\",\n            \"description\": \"Listar meus contratos ativos.\"\n          },\n          {\n            \"id\": \"4\",\n            \"title\": \"Falar com atendente\",\n            \"description\": \"seu chat sera direcionado para um atendente.\"\n          }\n        ]\n      }\n    ],\n    \"ticketId\": $('get_data').item.json.ticketID || \"N/A\"\n  })\n}}\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6160,
+        672
+      ],
+      "id": "00bce586-eafd-47c6-bc4a-2a3e6d7f7026",
+      "name": "menu principal1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3920,
+        3216
+      ],
+      "id": "3b2dccbf-0a67-49c5-a9aa-907c510697b9",
+      "name": "HTTP Request3",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "=httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": \"Aguarde. Estamos buscando suas faturas\",\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"busca-faturas\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3296,
+        3648
+      ],
+      "id": "13d05de8-230f-4a90-be2f-572e37154a90",
+      "name": "HTTP Request25",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "53070489-f720-420a-8160-50c9e30eb2ba",
+              "name": "responsavel",
+              "value": "={{ $('encontrado1').item.json.dados.nomeResponsavel }}",
+              "type": "string"
+            },
+            {
+              "id": "cec9d65f-ccc2-4cc8-93f7-a20e0c64a2a8",
+              "name": "empresa",
+              "value": "={{ $('encontrado1').item.json.dados.empresa }}",
+              "type": "string"
+            },
+            {
+              "id": "3464d2b2-c69b-4041-8bd0-6b2c5fc2c364",
+              "name": "cnpj",
+              "value": "={{ $('encontrado1').item.json.dados.cpfCadastro }}",
+              "type": "string"
+            },
+            {
+              "id": "d7c9f06f-e065-47a4-876b-41676b82a97b",
+              "name": "cidade",
+              "value": "={{ $('encontrado1').item.json.dados.cidade }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -5776,
+        176
+      ],
+      "id": "72809bcd-cf73-44c6-8228-9e2bfb3c9da7",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3600,
+        3648
+      ],
+      "id": "5d806a26-91bb-42cd-9454-1ea754b14aa0",
+      "name": "HTTP Request26",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://192.168.1.27:5001/api/chatbot/fatura?limite=3",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Switch-menu1').item.json.auth.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3024,
+        3648
+      ],
+      "id": "d6f8e5ab-40c8-409d-aa53-659eeafaceb8",
+      "name": "API_ALPHA(Boletos)2",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a resposta da API\nconst resposta = $input.first().json;\nconst faturas = resposta.dados || [];\n\nif (resposta.sucesso === false || faturas.length === 0) {\n  return {\n    texto_final: \"*CONSULTA DE FATURAS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNenhuma fatura pendente foi encontrada no seu cadastro no momento.\\n\\n━━━━━━━━━━━━━━━━━━\\nDeseja consultar outra coisa? Digite *0* para voltar ao menu.\",\n    faturas_mapeadas: [],\n    nenhum_boleto: true\n  };\n}\n\nlet listaFormatada = \"*FATURAS ENCONTRADAS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet faturasMapeadas = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1;\n  const dataFormatada = new Date(item.vencimento).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  const valorFormatado = item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });\n\n  listaFormatada += `${opcao} - *Boleto:* ${item.numeroDocumento}\\n`;\n  listaFormatada += `   *Vencimento:* ${dataFormatada}\\n`;\n  listaFormatada += `   *Valor:* ${valorFormatado}\\n`;\n  listaFormatada += `   *Descrição:* ${item.descricao || 'Fatura em aberto'}\\n\\n`;\n\n  faturasMapeadas.push({\n    indice: opcao,\n    boleto_id: item.idBoleto,\n    numero_boleto: item.numeroDocumento\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\n\nreturn {\n  texto_final: listaFormatada,\n  faturas_mapeadas: faturasMapeadas,\n  nenhum_boleto: false\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2672,
+        3632
+      ],
+      "id": "5ab24370-0bbb-4f34-91a4-a16e1b276a98",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.texto_final,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-final\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2416,
+        3632
+      ],
+      "id": "b889a48e-e78b-4b43-801e-885a142ab4f9",
+      "name": "HTTP Request30",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `Digite o número da opção para receber o PDF da fatura desejada.\\n\\n━━━━━━━━━━━━━━━━━━\\n9 - Falar com atendente\\n0 - Voltar ao menu`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"menu-faturas-pdf\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2144,
+        3632
+      ],
+      "id": "203a8ff3-a4ad-43bd-82e4-7018a9c546e7",
+      "name": "HTTP Request31",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_dados').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"definição_menu\"].json, \n    \"navegacao\": {\n      \"menu_atual\": \"selecione_boleto\",\n      \"faturas_disponiveis\": $(\"Code in JavaScript3\").item.json.faturas_mapeadas,\n      \"texto_lista_faturas\": $(\"Code in JavaScript3\").item.json.texto_final,\n      \"ultima_interacao\": $now,\n      \"exec_id\": $execution.id\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -1888,
+        3632
+      ],
+      "id": "4b244acf-ed7c-497e-b892-5049d3cb60d8",
+      "name": "estados_menus6",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": `Aguarde um momento, estamos buscando seu cadastro`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6704,
+        208
+      ],
+      "id": "0dc198ff-51b6-43e0-99b0-553feb925b9d",
+      "name": "buscando",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"confirmacao-mensagem-certificados\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4048,
+        5472
+      ],
+      "id": "fa80769c-be03-4551-ad0d-c8c56d4397a9",
+      "name": "HTTP Request35",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*PLATAFORMA DE CERTIFICADOS*\n━━━━━━━━━━━━━━━━━━\n\nVocê pode acessar seus certificados de coleta diretamente pela nossa plataforma:\n\n*Acesse aqui:*\nhttps://documentos-alphasoftware.premiumasp.net/\n\n*DADOS DE ACESSO*\n\n• *Domínio:* \\`preservasolucoes\\` \n• *E-mail:* ${$('definição_menu').item.json.cliente.email || \"não encontrado\"}\n• *Senha:* _Os 4 primeiros dígitos do seu CPF/CNPJ_\n\n━━━━━━━━━━━━━━━━━━\n_Dica: Clique no link acima para fazer o login._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"plataforma-certificados\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3840,
+        5472
+      ],
+      "id": "d3c1f3ff-c950-45f1-97da-338e5b2613bc",
+      "name": "HTTP Request36",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": ` *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. \n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"transferencia-atendimento\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3904,
+        4128
+      ],
+      "id": "e75cef2a-dd4f-4a1f-ac24-dd66449f9c95",
+      "name": "HTTP Request37",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c6fa4e9e-80ac-488a-b262-7c553666c1b6",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "abrir_menu",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "37f94411-62d1-49ac-8ee0-8aa5a3f6f056",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fallback"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d654f92e-218f-424f-86f8-0a6f6cefbd64",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "buscar_faturas",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "faturas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fe2e3886-0019-431c-82dc-b31b2210db51",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "selecione_boleto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "selecione_boleto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1755e496-725f-49c6-8635-ef51c5e5ded0",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "ir_atendimento",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "atendente"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c3c1833f-1620-468a-a34b-63c556914a9a",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "menu_ccr",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_ccr"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "919df953-4f52-4c56-9663-fe4900ba4a50",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "buscar_ccr",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "buscar_ccr"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b3a676ce-9a95-4f0f-b95d-fff00fe0e6f8",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "menu_contrato",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "menu_contratos"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f696d7d0-7a4e-43cf-a7ed-cf231516ab16",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "cliente_bloqueado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente_bloquado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d58154d5-b97d-4d97-9490-5aa935ad8c98",
+                    "leftValue": "={{ $json.rota_destino }}",
+                    "rightValue": "ir_atendimento",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "atendimento com humano"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -5104,
+        3520
+      ],
+      "id": "747f9933-f7e3-489c-b0dd-5a2693ae7d2e",
+      "name": "Switch-menu1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*CCRs DISPONÍVEIS*\n━━━━━━━━━━━━━━━━━━\nEncontramos CCRs vinculados ao seu cadastro.\nComo deseja receber?\n\n1 - Último CCR\n2 - Últimos 3 CCRs\n3 - Últimos 6 CCRs\n━━━━━━━━━━━━━━━━━━\n\n9 - Falar com atendente\n0 - Voltar ao menu\n\nDigite a opção desejada.`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"menu-ccrs-disponiveis\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3600,
+        5472
+      ],
+      "id": "642d47f4-7abe-4f08-8d42-23d9008affe0",
+      "name": "HTTP Request38",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_dados').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"definição_menu\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"buscar_ccr\", \n      \"ultima_interacao\": $now,\n      \"exec_id\": $execution.id\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -3376,
+        5472
+      ],
+      "id": "3a9fe862-1524-4fad-83ce-82b8b14700ec",
+      "name": "estados_menus7",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.mensagem_texto,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-dinamica\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4048,
+        5760
+      ],
+      "id": "65f3ac07-75ae-4dad-a169-d84beb76813e",
+      "name": "HTTP Request39",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:5001/api/chatbot/ccr?limite={{ $('Switch-menu1').item.json.quantidade_ccr }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('definição_menu').item.json.auth.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3760,
+        5760
+      ],
+      "id": "b8e60d9d-e0ef-4319-b441-25fee2df45b4",
+      "name": "API_ALPHA(Ccr)1",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.texto_ccr,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-ccr\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3328,
+        5744
+      ],
+      "id": "69f24324-a374-46e0-9131-3538e6bec3f7",
+      "name": "HTTP Request40",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_dados').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"definição_menu\"].json,\n    \"navegacao\": {\n      \"menu_atual\": \"fluxo_finalizado\", \n      \"ultima_interacao\": $now,\n      \"exec_id\": $execution.id\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        5504
+      ],
+      "id": "1e804b7e-d715-4b88-b847-de89b6ef8e0e",
+      "name": "finalizado2",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": ` *ATENDIMENTO FINALIZADO*\\n━━━━━━━━━━━━━━━━━━\\n\\nFoi um prazer te atender\", \\nSe precisar de qualquer informação,\\né só me chamar novamente.\\n\\n*O que deseja fazer agora?*\\n\\n1 - Iniciar novo atendimento\\n2 - Falar com atendente\\n\\n━━━━━━━━━━━━━━━━━━\\n_Digite *Sair* para encerrar a sessão._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"atendimento-finalizado\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -544,
+        5504
+      ],
+      "id": "122591dc-ed68-46ad-99c6-5571818fd8ac",
+      "name": "finalizado3",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a resposta da API (acessando a primeira posição do array retornado)\nconst resposta = $input.first().json;\n\n// Busca o array de coletas dentro do campo 'dados' da nova API\nconst listaCcr = resposta.dados || [];\n\n// VERIFICAÇÃO: Se a API retornou sucesso = false ou se a lista de dados veio vazia\nif (resposta.sucesso === false || listaCcr.length === 0) {\n  return { \n    texto_ccr: \"Nenhuma coleta foi localizada para o seu cadastro no momento.\" \n  };\n}\n\n// 2. Monta o cabeçalho\nlet mensagem = `*CCRs LOCALIZADOS (${listaCcr.length})*\\n`;\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\\n\";\n\n// 3. Percorre a lista e adiciona cada item formatado\nlistaCcr.forEach((item, index) => {\n    // Formata a data convertendo o padrão ISO da nova API\n    const data = new Date(item.datacoleta).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n    \n    // Verifica a quantidade usando o novo nome da propriedade\n    const quantidade = item.quantidade > 0 ? `${item.quantidade} un/kg` : \"Consulte no PDF\";\n    \n    mensagem += `${index + 1}️⃣ *Coleta em ${data}*\\n`;\n    mensagem += `*Qtd:* ${quantidade}\\n`;\n    mensagem += `🔗 *Link:* ${item.link}\\n\\n`;\n});\n\nmensagem += \"━━━━━━━━━━━━━━━━━━\\n\";\nmensagem += \"_Clique nos links acima para visualizar os documentos._\";\n\nreturn {\n    texto_ccr: mensagem\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3536,
+        5744
+      ],
+      "id": "98931678-217e-47e7-baab-057c40c039da",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.texto_final,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-texto-final\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3200,
+        5088
+      ],
+      "id": "0e311a86-cd72-463c-b1ec-b55ce9d12311",
+      "name": "HTTP Request41",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a entrada do n8n\nconst entrada = $input.first().json;\n\nlet faturas = [];\nlet sucesso = false;\n\n// BLINDAGEM: Testa se a estrutura veio envelopada em array ou como objeto direto\nif (Array.isArray(entrada)) {\n  sucesso = entrada[0]?.sucesso;\n  faturas = entrada[0]?.dados || [];\n} else if (entrada.dados) {\n  sucesso = entrada.sucesso;\n  faturas = entrada.dados || [];\n} else if (entrada.body && entrada.body.dados) { // Caso venha dentro do 'body' do HTTP Request\n  sucesso = entrada.body.sucesso;\n  faturas = entrada.body.dados || [];\n}\n\n// VERIFICAÇÃO: Se a esteira falhou ou o array de dados reais está zerado\nif (sucesso === false || faturas.length === 0) {\n  return [{\n    json: {\n      texto_final: \"*CONSULTA DE CONTRATOS*\\n━━━━━━━━━━━━━━━━━━\\n\\nNão localizamos contratos ativos ou anteriores vinculados ao seu cadastro no momento.\\n\\n━━━━━━━━━━━━━━━━━━\\nDigite *0* para voltar ao menu principal.\",\n      contratos_mapeados: [],\n      sucesso_busca: false\n    }\n  }];\n}\n\n// 2. Formata a lista e mapeia para o Redis\nlet listaFormatada = \"📜 *CONTRATOS LOCALIZADOS*\\n━━━━━━━━━━━━━━━━━━\\n\\n\";\nlet contratosMapeados = [];\n\nfaturas.forEach((item, index) => {\n  const opcao = index + 1;\n  \n  const dataValidade = new Date(item.validade).toLocaleDateString('pt-BR', { timeZone: 'UTC' });\n  const situacaoAtual = item.situacao || \"\";\n  const statusIcon = situacaoAtual.toLowerCase() === \"ativo\" ? \"🟢\" : \"🔴\";\n  const statusTexto = `*${situacaoAtual}*`;\n\n  listaFormatada += `${opcao}️⃣ *Contrato:* ${item.numeroContrato}\\n`;\n  listaFormatada += `📅 *Validade:* ${dataValidade}\\n`;\n  listaFormatada += `📌 *Status:* ${statusIcon} ${statusTexto}\\n\\n`;\n\n  contratosMapeados.push({\n    indice: opcao,\n    contrato_id: item.idContrato,\n    numero_contrato: item.numeroContrato,\n    validade: dataValidade\n  });\n});\n\nlistaFormatada += \"━━━━━━━━━━━━━━━━━━\\n\";\n\n\nreturn [{\n  json: {\n    texto_final: listaFormatada,\n    contratos_mapeados: contratosMapeados,\n    sucesso_busca: true\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -3392,
+        5088
+      ],
+      "id": "3772419b-762c-4b8c-9a71-a6e75f7ac33e",
+      "name": "Code in JavaScript5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"confirmacao-final\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4016,
+        5104
+      ],
+      "id": "765683bc-41d9-4516-a030-b252acadaab2",
+      "name": "HTTP Request42",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('definição_menu').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"Inativo\" : \"Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"Sim\" : \" Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('definição_menu').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('get_dados').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3632,
+        4128
+      ],
+      "id": "f4e09ccc-5f62-4d02-a5ff-0ca4c91229ee",
+      "name": "HTTP Request43",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*AVISO IMPORTANTE*\n━━━━━━━━━━━━━━━━━━\nOlá! Identificamos que o seu cadastro possui uma *pendência administrativa* ou está *inativo*.\n\nPor este motivo, as consultas automáticas de faturas e documentos estão suspensas temporariamente por aqui. \n\n*Como resolver?*\nAguarde um momento, estou transferindo você para um consultor que poderá te ajudar com a regularização agora mesmo. `,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"aviso-pendencia-administrativa\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3808,
+        4624
+      ],
+      "id": "48788eb6-072b-438b-aae8-0162c56b8d88",
+      "name": "HTTP Request44",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": ` *TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. \n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"transferencia-consultor\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3568,
+        4624
+      ],
+      "id": "6818c2ee-307e-4d01-a32e-4964c7579f46",
+      "name": "HTTP Request45",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=\n{{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":`ola *${$('get_data').item.json.pushName}*, seja bem-vindo(a)! \\nSou o assistente virtual da *Preserva*`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"fora-expediente\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -8704,
+        1808
+      ],
+      "id": "6fa09e42-0408-47ef-aa3e-c5e0a4c664f0",
+      "name": "apresentecao",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" +  $('get_data').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n      \"contagem_erro\": (($node[\"Merge1\"].json.dados_sessao.parseJson().navegacao?.contagem_erro || 0) + 1),\n      \"exec_id\": $execution.id\n    }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -4992,
+        2064
+      ],
+      "id": "197a2dad-c354-42ba-991f-e7f3a3f50462",
+      "name": "estados_menus",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "322f422a-b1df-4743-852d-f867181b9ce9",
+              "leftValue": "={{ $('data_redis1').item.json.navegacao.contagem_erro.toString() }}",
+              "rightValue": "=2",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -4800,
+        2064
+      ],
+      "id": "b9e609ea-1a37-47d7-9d01-ef7f77949a4b",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "541cb187-62c0-4f6d-ae0b-367f2621a5d4",
+                    "leftValue": "={{ $('get_data').item.json.conversation }}",
+                    "rightValue": "sair",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "logof"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "646a3091-8189-4715-8ce3-283a4fd8c232",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "cliente_novo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente novo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.auth.logado }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "ba05c81a-5090-4188-b440-fe769146d4d4"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "autenticado_autorizado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "383fb634-43f7-4f53-a706-eace6cfb7c68",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "autorizado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "autorizado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d97afbda-d402-4cba-a344-f0c631c832f2",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "AGUARDANDO_CPF",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "aguardando_cpf"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8ea7857d-220f-4e7e-88d0-f02167089bf4",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "login",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "login"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a41f6871-d41d-4054-a3e2-2629194b6d43",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "AGUARDANDO_CONFIRMAR",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "aguardando_confirmar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c88377b4-2902-418d-b457-020214ba4a96",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "token_invalido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "token invalido"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -8656,
+        3152
+      ],
+      "id": "e5c42591-edc0-4eaf-84bd-c457d97b7522",
+      "name": "Switch-menu"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e0089a19-8b0c-4c3b-8173-e12b4cb4c443",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "login",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "logado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "AGUARDANDO_CPF",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "dfcbc9a8-a678-4eca-a92c-153d288d46d0"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "AUTH"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9dbb5e66-bcde-498d-9624-b42931dcfdc3",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "AGUARDANDO_CONFIRMAR",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "confirmar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9f4a1a20-31fd-4d61-9be6-50bfe3af685e",
+                    "leftValue": "={{ $json.auth.estado_anterior }}",
+                    "rightValue": "token_invalido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "token invalido"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -7216,
+        640
+      ],
+      "id": "3c9f6b67-f188-47b9-bf49-93f6f5a08882",
+      "name": "switch-auth"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('get_data').item.json.conversation || $('get_data').item.json.btn_data}}",
+                    "rightValue": "btn1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ed6d20d5-cd71-4ada-8139-9daac5f1f77b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "cliente"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "061cb7a7-fcf9-4d3d-bd3d-b43493383e9b",
+                    "leftValue": "={{ $('get_data').item.json.conversation || $('get_data').item.json.btn_data}}",
+                    "rightValue": "btn2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "nao cliente"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -8704,
+        2128
+      ],
+      "id": "2df78dfb-0c72-400d-a9af-c1d304092a86",
+      "name": "Switch-aceite"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. CAPTURA FIXA DO MERGE\nconst dadosMerge = $('Merge1').first().json.dados_sessao;\n\nlet estadoAuth = 'inicio';\nlet menuAtual = '';\nlet sessaoObjeto = {};\n\ntry {\n  sessaoObjeto = typeof dadosMerge === 'string'\n    ? JSON.parse(dadosMerge)\n    : (dadosMerge || {});\n\n  estadoAuth = sessaoObjeto?.auth?.estado_anterior || 'inicio';\n  menuAtual = sessaoObjeto?.navegacao?.menu_atual ?? '';\n} catch (e) {\n  estadoAuth = 'inicio';\n  menuAtual = '';\n  sessaoObjeto = {};\n}\n\n// Prioridade: mensagem contextual gerada pelo menu3 no fallback de menu\nlet menu3Data = null;\ntry {\n  menu3Data = $('definição_menu').first().json;\n  if (menu3Data?.rota_destino === 'fallback' && menu3Data?.mensagem_texto) {\n    return [{\n      json: {\n        texto_erro: menu3Data.mensagem_texto,\n        estado_validado: estadoAuth,\n        menu_validado: menuAtual\n      }\n    }];\n  }\n} catch (e) {}\n\nconst prefixoErro = '*Opção inválida.*\\n\\nA resposta enviada não corresponde a nenhuma opção disponível. Selecione uma das opções abaixo:\\n\\n';\n\nconst menuPrincipalMsg = `*MENU PRINCIPAL*\n━━━━━━━━━━━━━━━━━━\nComo posso te ajudar hoje?\n\n1 - *Minhas faturas*\n2 - *Meus CCR* (Comprovantes)\n3 - *MTR* (Manifestos)\n4 - *Meus contratos*\n9 - *Falar com atendente*\n\n━━━━━━━━━━━━━━━━━━\nDigite *Sair* para encerrar o atendimento.`;\n\nconst menuCCRMsg = `*MEUS COMPROVANTES (CCR)*\n━━━━━━━━━━━━━━━━━━\nComo deseja visualizar suas últimas coletas?\n\n1 - Último CCR\n2 - Últimos 3 CCRs\n3 - Últimos 6 CCRs\n\n━━━━━━━━━━━━━━━━━━\n9 - Falar com atendente\n0 - Voltar ao menu anterior`;\n\nconst menuBuscarCCRMsg = `*CCRs DISPONÍVEIS*\n━━━━━━━━━━━━━━━━━━\nComo deseja receber?\n\n1 - Último CCR\n2 - Últimos 3 CCRs\n3 - Últimos 6 CCRs\n━━━━━━━━━━━━━━━━━━\n\n9 - Falar com atendente\n0 - Voltar ao menu`;\n\nconst rodapeBoleto = `Digite o número da opção para receber o PDF da fatura desejada.\n\n━━━━━━━━━━━━━━━━━━\n9 - Falar com atendente\n0 - Voltar ao menu`;\n\nlet mensagem = '';\n\nif (estadoAuth === 'cliente_novo' || (menuAtual === '' && estadoAuth !== 'autenticado_autorizado')) {\n  mensagem = 'Não foi possível compreender sua resposta.\\n\\nPor favor, responda apenas *1* para SIM ou *2* para NÃO para nos informar se você já possui cadastro conosco.';\n} else if (estadoAuth === 'token_invalido' || estadoAuth === 'TOKEN_EXPIRADO') {\n  mensagem = '*SESSÃO EXPIRADA*\\n━━━━━━━━━━━━━━━━━━\\n\\nSua sessão expirou por tempo limite atingido.\\n\\nPor favor, envie qualquer mensagem de texto para reiniciar o seu processo de identificação.';\n} else if (estadoAuth === 'autorizado') {\n  mensagem = '*Opção inválida.*\\n\\nPor favor, digite apenas *1* se deseja confirmar a validação dos seus dados ou *2* caso queira cancelar.';\n} else if (estadoAuth === 'AGUARDANDO_CPF') {\n  mensagem = 'O CPF ou CNPJ informado não foi localizado em nosso sistema ou está inconsistente.\\n\\nPor favor, certifique-se de enviar *apenas os números* do documento cadastrado na plataforma.';\n} else if (estadoAuth === 'AGUARDANDO_CONFIRMAR') {\n  mensagem = '*Confirmação de Segurança*\\n\\nO dado informado não confere com o CPF do responsável pela empresa.\\n\\nPor favor, digite apenas os *4 primeiros dígitos* do CPF do titular do cadastro para liberar o acesso.';\n} else if (menuAtual === 'selecione_boleto') {\n  const listaFaturas = sessaoObjeto?.navegacao?.texto_lista_faturas || '';\n  mensagem = prefixoErro + listaFaturas + (listaFaturas ? '\\n\\n' : '') + rodapeBoleto;\n} else if (menuAtual === 'buscar_ccr') {\n  mensagem = prefixoErro + menuBuscarCCRMsg;\n} else if (menuAtual === 'Meus_CCR' || menuAtual === 'nenu_ccr') {\n  mensagem = prefixoErro + menuCCRMsg;\n} else if (menuAtual === 'Menu_Principal' || estadoAuth === 'autenticado_autorizado') {\n  mensagem = prefixoErro + menuPrincipalMsg;\n} else if (menuAtual === 'fluxo_finalizado') {\n  mensagem = prefixoErro + '1 - Iniciar novo atendimento\\n2 - Falar com atendente';\n} else {\n  mensagem = 'Não foi possível localizar essa opção no menu.\\n\\nPor favor, envie apenas o *número* correspondente à opção desejada ou digite *Sair* a qualquer momento para finalizar.';\n}\n\nreturn [{\n  json: {\n    texto_erro: mensagem,\n    estado_validado: estadoAuth,\n    menu_validado: menuAtual\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -5584,
+        2064
+      ],
+      "id": "d1ac519a-bc51-4348-9184-988e3b1deb1d",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\":\"Muitas tentativas inválidas.\\nSeu chat será transferido a um atendente. Aguarde.\",\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4576,
+        2368
+      ],
+      "id": "0008dbc4-5cc9-4a86-b644-b0b78a73dc94",
+      "name": "invalido",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_dados').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3200,
+        4112
+      ],
+      "id": "bac7443f-0a8f-4a44-b912-91a272d97bd0",
+      "name": "Transferencia de atendimento",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*NOVO ATENDIMENTO COMERCIAL*\n━━━━━━━━━━━━━━━━━━\n*DADOS DO CLIENTE:*\n• *Nome:* ${$('definição_menu').item.json.auth.nome}\n• *Cidade:* ${$('Switch-menu1').item.json.cliente.cidade}\n• *Empresa:* ${$('Switch-menu1').item.json.cliente.razao_social || $('Switch-menu1').item.json.cliente.fantasia}\n• *Status:* ${$('Switch-menu1').item.json.cliente.inativo ? \"Inativo\" : \"Ativo\"}\n• *Bloqueado:* ${$('Switch-menu1').item.json.cliente.bloqueado ? \"Sim\" : \" Não\"}\n\n*CONTEXTO:*\n• *Último Menu:* ${$('definição_menu').item.json.navegacao.menu_atual}\n• *Telefone:* ${$('get_dados').item.json.Number}\n\n━━━━━━━━━━━━━━━━━━\n_Briefing enviado automaticamente pelo sistema._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"briefing-comercial\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3632,
+        4384
+      ],
+      "id": "0393ae24-173c-4d78-b8d2-51ae159c44d3",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_dados').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4800,
+        2352
+      ],
+      "id": "4e302083-18ff-47c8-8ba8-5663b7614e5d",
+      "name": "transferencia de atendimneto1",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_dados').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4352,
+        2368
+      ],
+      "id": "ad4b8982-202d-45af-8bec-9da046a9e090",
+      "name": "transferencia de atendimento2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:5001/api/chatbot/arquivo?id_boleto={{ $('Switch-menu1').item.json.idFatura }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Switch-menu1').item.json.auth.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3728,
+        5984
+      ],
+      "id": "732f4c68-7168-4fc6-bd4e-77f4f5759cbe",
+      "name": "API_ALPHA(Boletos)",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/base64",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "base64Data",
+              "value": "={{ $json.dados }}"
+            },
+            {
+              "name": "body",
+              "value": "seu pdf"
+            },
+            {
+              "name": "number",
+              "value": "={{ $('get_dados').item.json.Number }}"
+            },
+            {
+              "name": "whatsappId",
+              "value": "={{ $('get_dados').item.json.whatsappId }}"
+            },
+            {
+              "name": "externalKey",
+              "value": "mensagem-confirmacao-fatura"
+            },
+            {
+              "name": "isClosed",
+              "value": "false"
+            },
+            {
+              "name": "fileName",
+              "value": "fatura"
+            },
+            {
+              "name": "mimeType",
+              "value": "application/pdf"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2976,
+        5904
+      ],
+      "id": "7ca73963-1c83-45b5-8a6e-c7f91284030d",
+      "name": "HTTP Request34",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": $json.mensagem_confirmacao,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4048,
+        5968
+      ],
+      "id": "93921d13-348e-4de6-a754-c438a04b8222",
+      "name": "HTTP Request46",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.1.27:5001/api/chatbot/identificacao/localizar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $('get_data1').item.json.message.conversation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6496,
+        208
+      ],
+      "id": "8aeabd24-f847-478d-92b2-1d25e734ac3b",
+      "name": "Api_alpha localizar",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d734dac-a60e-4063-b084-c5a36c35ccef",
+              "name": "status_erro",
+              "value": "={{ $json.error?.response?.status || $json.error?.status || 500 }}",
+              "type": "string"
+            },
+            {
+              "id": "bfbd9bb9-afe8-4fc5-aaec-f71bb8f1154c",
+              "name": "mensagem_erro",
+              "value": "={{ $json.error?.response?.data?.message || $json.error?.message || \"Erro interno na requisição\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -688,
+        4192
+      ],
+      "id": "a1f15070-c778-487a-88ec-a33027b9c57f",
+      "name": "captura de erro"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura o status padronizado do nó anterior\nconst status = Number($input.first().json.status_erro) || 500;\nconst mensagem = $input.first().json.mensagem_erro || '';\n\nlet rotaDestino = 'erro_geral';\nlet textoAviso = 'Desculpe, ocorreu uma instabilidade temporária no sistema. Por favor, tente novamente em alguns instantes.';\n\n// 2. Verifica se o erro é de autenticação (Token Inválido / Expirado)\nif (status === 401 || status === 403 || (mensagem && mensagem.toLowerCase().includes('unauthorized'))) {\n  rotaDestino = 'token_expirado';\n  textoAviso = `*SESSÃO EXPIRADA*\\nSinto muito, você atingiu o tempo limite da sua sessão por motivos de segurança. Por favor, envie novamente o CNPJ/CPF para uma nova autenticação.`;\n}\n\n// 3. Retorna os dados organizados para o Switch/Redis seguinte\nreturn [{\n  json: {\n    rota_erro: rotaDestino,\n    texto_erro: textoAviso\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -400,
+        4192
+      ],
+      "id": "e42211a7-3fea-486e-83d7-2e745c027481",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota_erro }}",
+                    "rightValue": "token_expirado",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "934899da-60e2-4d17-8082-3b71d5b80dff"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "token_expirado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rota_erro }}",
+                    "rightValue": "erro_geral",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "erro_geral"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -64,
+        4176
+      ],
+      "id": "b0357070-b874-430c-9e51-54e67d17e3c0",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": $json.texto_erro,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"aviso-sessao-expirada\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        144,
+        3952
+      ],
+      "id": "ad0e7b54-533f-41b6-80c6-df86dd25aa11",
+      "name": "token expirado",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid}}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"logado\":false,\n      \"estado_anterior\": \"token_invalido\"\n    },\n      \"navegacao\": {\n        ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"exec_id\": $execution.id\n      }\n  }) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        352,
+        3952
+      ],
+      "id": "949680ca-1659-4f99-9a4c-a1c844841730",
+      "name": "finalizado",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \n  JSON.stringify({\n    ...$node[\"Merge1\"].json.dados_sessao.parseJson(), \n    \"auth\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().auth,\n      \"estado_anterior\": \"AGUARDANDO_CONFIRMAR\"\n    },\n      \"cliente\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().cliente,\n          \"idCliente\":$json.idCliente,\n          \"nomeResponsavel\":$json.responsavel,\n          \"cnpj\":$json.cnpj,\n          \"empresa\":$json.empresa,\n          \"cidade\":$json.cidade,\n      }, \"navegacao\": {\n      ...$node[\"Merge1\"].json.dados_sessao.parseJson().navegacao,\n        \"exec_id\": $execution.id\n      }\n  }) \n}}\n\n",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -5568,
+        176
+      ],
+      "id": "394eb76e-01c0-4216-94b5-1d8d58df3187",
+      "name": "SET AGUARDANDO_CONFIRMAR",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('get_dados').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2944,
+        4112
+      ],
+      "id": "aeae19e7-f36d-4815-8742-e621a74f126e",
+      "name": "deletar sessao",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('get_dados').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -2704,
+        4128
+      ],
+      "id": "83d3fe95-c7ea-4c10-a559-bf9fbe542060",
+      "name": "deleta registro da sessao",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "77ba767b-ca37-4153-8946-f256a0f7b332",
+              "leftValue": "={{ $json.message.conversation }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -6928,
+        224
+      ],
+      "id": "8c9015a3-2aa2-4fdc-8efa-1bcceb5b7b2e",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.error.status.toString() }}",
+                    "rightValue": "401",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "0ac2e274-ca4b-4529-8c92-107625269eff"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "credenciais invalidas"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "73062c6b-1643-45bf-8847-a1ea095af2b3",
+                    "leftValue": "={{ $json.error.status.toString() }}",
+                    "rightValue": "=500",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "erro do servidor"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -6656,
+        928
+      ],
+      "id": "f2a4a209-e3f7-4934-a5b4-b1aacec64ba1",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=\n\n{{\nJSON.stringify({\n  \"number\": $('fila').item.json.Number,\n  \"body\": `🤖 Ops! Parece que tive um probleminha técnico por aqui e não consegui concluir sua solicitação.\nvou te tranferir para um atendente`,\n  \"whatsappId\": $('fila').item.json.whatsappId,\n  \"externalKey\": \"busca-cadastro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6160,
+        1136
+      ],
+      "id": "20db1a64-3b15-4925-b5c6-4527271a03e9",
+      "name": "invalido4",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "={{\"status:\" + $('get_data').item.json.remoteJid }}",
+        "value": "={{ \nJSON.stringify({\n  ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\"), \n  \n  \"auth\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").auth,\n    \"data_login\": new Date().toISOString(),\n    \"logado\": true,\n    \"estado_anterior\": \"autenticado_autorizado\",\n    \"token\": $('Api_alpha autenticar').item.json.token\n  },\n\n  \"cliente\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").cliente,\n    \"idCliente\": $('extrair token').item.json.cliente.id,\n    \"nomeResponsavel\": $('extrair token').item.json.cliente.nome_responsavel,\n    \"cpf_responsavel\": $('extrair token').item.json.cliente.cpf,\n    \"email\": $('extrair token').item.json.cliente.email,\n    \"senha\":$json.cliente.senha,\n    \"Inativo\":$json.cliente.inativo ,\n    \"bloqueado\": $('extrair token').item.json.cliente.bloqueado\n  },\n\n  \"navegacao\": {\n    ...JSON.parse($('Merge1').item.json.dados_sessao || \"{}\").navegacao,\n    \"menu_atual\": \"Menu_Principal\",\n\n    \"contagem_erro\":0,\n    \"exec_id\": $execution.id\n  }\n}) \n}}",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -6368,
+        672
+      ],
+      "id": "b0bbdf2a-c723-42dd-a137-f763ff24194d",
+      "name": "DADOS_COMPLETOS",
+      "credentials": {
+        "redis": {
+          "id": "XjOxkwE7JcCOA7r2",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.1.27:5001/api/chatbot/identificacao/token",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "documento",
+              "value": "={{ $json.cliente.cnpj }}"
+            },
+            {
+              "name": "senha",
+              "value": "={{ $('get_data').item.json.conversation.replace(/\\D/g, '') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -6848,
+        688
+      ],
+      "id": "5441e742-57d6-4eab-9985-56507ede1316",
+      "name": "Api_alpha autenticar",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "26b3f664-822b-4451-a9c1-2cb97d898f94",
+              "leftValue": "={{ $json.dados }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -3456,
+        5968
+      ],
+      "id": "49ba56fb-b68e-45fb-bbe3-59126bd0c8ee",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": \"Desculpe o transtorno! 😔\\n\\nNão conseguimos gerar o PDF do seu boleto neste momento.\\n\\nPor favor, *entre em constato com suporte* para que possamos te ajudar. 🛡️\",\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"mensagem-confirmacao-fatura\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2960,
+        6096
+      ],
+      "id": "75ad2338-6c54-4889-96aa-7078677084b9",
+      "name": "HTTP Request47",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1e2d3c4-b5a6-7890-cdef-123456789abc",
+              "name": "erro_tipo",
+              "value": "menu_fallback",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3776,
+        3472
+      ],
+      "id": "247c921b-4aca-40fc-bf1f-c46841d7c8e4",
+      "name": "marca erro menu"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('marca erro menu').isExecuted ? 'menu_fallback' : '' }}",
+                    "rightValue": "menu_fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "b2c3d4e5-f6a7-8901-bcde-234567890abc"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "fallback_menu"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -3424,
+        3216
+      ],
+      "id": "13c02f3b-c0b4-43e6-b5e3-1f850f1182e2",
+      "name": "Switch-apos-menu24"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fb6bceb9-ade3-408e-892a-4eaf22253165",
+                    "leftValue": "={{ $json.estado_validado }}",
+                    "rightValue": "token_invalido",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('marca erro menu').isExecuted ? 'menu_fallback' : '' }}",
+                    "rightValue": "menu_fallback",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c3d4e5f6-a7b8-9012-cdef-345678901abc"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ja_enviado"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -4432,
+        1936
+      ],
+      "id": "b79178d6-75ef-4d58-bcec-3bf1648875c8",
+      "name": "Switch-pos-if1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": `*TRANSFERÊNCIA DE ATENDIMENTO*\n━━━━━━━━━━━━━━━━━━\nEntendido! Estou transferindo seu chat para um de nossos consultores agora. \n\nPor favor, aguarde um momento. \n_Não é necessário enviar novas mensagens agora._`,\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"transferencia-atendimento\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -8464,
+        2688
+      ],
+      "id": "06aded71-1713-4898-b3c2-94991cfcd5f5",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\":$json.texto_erro,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"mensagem-erro\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -4064,
+        1920
+      ],
+      "id": "99456b2b-c188-47f3-b518-5605bd65553a",
+      "name": "invalido5",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://host.docker.internal:5001/api/chatbot/contrato",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Switch-menu1').item.json.auth.token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -3712,
+        5104
+      ],
+      "id": "c2d6530e-189f-4a89-99e4-fe60b7050a37",
+      "name": "API_ALPHA(Contratos)",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "amount": 10,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -384,
+        4864
+      ],
+      "id": "39e11f12-24ca-4641-b8bf-57bfb91a7add",
+      "name": "Espera Inatividade (10 min)",
+      "webhookId": "998e28e9-a45c-459b-a877-8d01f73aa696"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "redis_check_inatividade",
+        "key": "={{ \"status:\" + $('get_dados').item.json.remoteJid }}",
+        "options": {
+          "dotNotation": true
+        }
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        4864
+      ],
+      "id": "eba9b2ec-8568-403a-8899-bf50422f8bad",
+      "name": "Verifica Redis Inatividade"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cond-inactivity",
+              "leftValue": "={{ $json.redis_check_inatividade ? (JSON.parse($json.redis_check_inatividade).navegacao?.exec_id || 'inativo') : 'vazio' }}",
+              "rightValue": "={{ String($execution.id) }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        64,
+        4864
+      ],
+      "id": "4e24d01e-8c2f-4399-b16f-806a9061e14c",
+      "name": "Ainda na mesma sessao?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_dados').item.json.Number,\n  \"body\": \"Devido ao longo tempo de inatividade, estou transferindo o seu atendimento para um consultor. Aguarde um momento.\",\n  \"whatsappId\": $('get_dados').item.json.whatsappId,\n  \"externalKey\": \"inatividade-transferencia\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        288,
+        4864
+      ],
+      "id": "3e75e59f-2f85-4e34-b14c-13e53223ed2c",
+      "name": "msg_inatividade"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/updatequeue",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"ticketId\": $('get_dados').item.json.ticketID, \n  \"userId\": null,\n  \"status\": \"pending\",\n  \"queueId\": 9,\n  \"n8nStatus\": false, \n  \"chatFlowId\": null\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        512,
+        4864
+      ],
+      "id": "27f1fd09-7d52-43f7-a217-8b12cf7b7513",
+      "name": "transferencia_inatividade"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ \"status:\" + $('get_dados').item.json.remoteJid }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        736,
+        4864
+      ],
+      "id": "e74094bb-40c9-4715-8964-d2e69765bcab",
+      "name": "deleta_sessao_inatividade"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0a27d2d1-9f0d-4584-b500-c68120c8a36c",
+              "leftValue": "={{ $json.fromMe }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -10224,
+        3216
+      ],
+      "id": "0ecbcf6b-f931-4178-a8fb-17787fd4140d",
+      "name": "from_me"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "fe60b9c3-7bb2-411a-9731-1bb5239b57b9",
+              "leftValue": "={{ $json.body.ticket.contact.number }}",
+              "rightValue": "556992162902",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -11296,
+        3232
+      ],
+      "id": "88b395dc-172c-4cd4-a678-f06229271f23",
+      "name": "number"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "569fcced-dfd1-4cd8-bff6-958f356566aa",
+              "leftValue": "={{ $json.queueId }}",
+              "rightValue": 9,
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -9680,
+        3232
+      ],
+      "id": "551c1824-7db7-470d-af26-06c87b4d4d51",
+      "name": "fila"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "08df8afd-b943-4644-8f87-809c95a2c8a0",
+              "name": "api_id",
+              "value": "027b0db4-80d4-4a13-a8af-9f5f19bfb667",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -10992,
+        3216
+      ],
+      "id": "70a024ca-9414-477e-80b6-e613e0ce44be",
+      "name": "apiID"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "903a4d37-6568-4515-ac8a-ca1078d1750d",
+              "name": "cpf",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.cpf }}",
+              "type": "string"
+            },
+            {
+              "id": "1ab96dd9-c663-4e1f-b607-d054a099d9b7",
+              "name": "clienteID",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.id }}",
+              "type": "number"
+            },
+            {
+              "id": "957202d4-39c6-4772-9576-7aea39a89b42",
+              "name": "Number",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.number }}",
+              "type": "string"
+            },
+            {
+              "id": "249dc942-ef6e-4c08-9505-de0544484b6e",
+              "name": "conversation",
+              "value": "={{ $('Webhook1').item.json.body.msg.text?.body || $('Webhook1').item.json.body.msg.interactive?.button_reply?.id || $('Webhook1').item.json.body.msg.interactive?.button_reply?.title || $('Webhook1').item.json.body.msg.interactive?.list_reply?.id || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "89152dcd-cb87-4373-8a45-7ce1e7e9cbf8",
+              "name": "fromMe",
+              "value": "={{ $('Webhook1').item.json.body.msg.fromMe ?? $('Webhook1').item.json.body.msg.key?.fromMe ?? false }}",
+              "type": "boolean"
+            },
+            {
+              "id": "123533f4-4711-4276-b3d7-eb11f4b5493d",
+              "name": "pushName",
+              "value": "={{ $('Webhook1').item.json.body.ticket.contact.pushname }}",
+              "type": "string"
+            },
+            {
+              "id": "e7829727-2d92-4fff-ba2c-8e7c0643bc1b",
+              "name": "remoteJid",
+              "value": "={{ $('Webhook1').item.json.body.ticket.protocol }}",
+              "type": "string"
+            },
+            {
+              "id": "66bf2c8c-0983-41ca-9ce6-237311917a4d",
+              "name": "whatsappId",
+              "value": "={{ $('Webhook1').item.json.body.ticket.whatsappId }}",
+              "type": "number"
+            },
+            {
+              "id": "dc0f644a-dd53-44f3-8f9c-17fee861088d",
+              "name": "ticketID",
+              "value": "={{ $('Webhook1').item.json.body.ticket.id }}",
+              "type": "number"
+            },
+            {
+              "id": "45ccb972-3313-4ef4-bb71-60b26329147c",
+              "name": "queueId",
+              "value": "={{ $('Webhook1').item.json.body.ticket.queueId }}",
+              "type": "number"
+            },
+            {
+              "id": "dea37797-1494-4408-991d-db5635db2063",
+              "name": "data_info",
+              "value": "={{ $json.pagination.total }}",
+              "type": "number"
+            },
+            {
+              "id": "43e177df-798a-4dd7-80b7-e575ce0b8d88",
+              "name": "data_value",
+              "value": "={{ $json.data[0].value }}",
+              "type": "string"
+            },
+            {
+              "id": "6a060993-f257-441a-a001-92e11a710ef2",
+              "name": "chat_flow",
+              "value": "={{ $('Webhook1').item.json.body.ticket.chatFlowId }}",
+              "type": "string"
+            },
+            {
+              "id": "8fb333f2-a0b5-4faf-b784-272991de2a4c",
+              "name": "btn_data",
+              "value": "={{ $('Webhook1').item.json.body.msg.interactive.button_reply.title }}",
+              "type": "string"
+            },
+            {
+              "id": "m1n2p3u4-t5-6e7n-8u9-0inputmenu01",
+              "name": "menu_input",
+              "value": "={{ ($('Webhook1').item.json.body.msg.interactive?.button_reply?.id || $('Webhook1').item.json.body.msg.text?.body || '').toString().toLowerCase().trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -10480,
+        3216
+      ],
+      "id": "3a7b1f20-0118-495a-9fb1-4d52807a65ad",
+      "name": "get_data"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "721b9f32-964e-4416-a1f9-06e0d8ec9575",
+              "leftValue": "={{ $('Webhook1').item.json.body.ticket.queueId }}",
+              "rightValue": 17,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -10784,
+        3216
+      ],
+      "id": "9195efe3-65cc-4dac-ac40-80e6ca877898",
+      "name": "If_queue"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({\n  \"number\": $('get_data').item.json.Number,\n  \"body\": ` *VALIDAÇÃO DE ACESSO*\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n\\n` +\n          `Por favor, informe o *CPF* ou *CNPJ* do cadastro.\\n` +\n          `_Digite apenas os números._\\n\\n` +\n          `━━━━━━━━━━━━━━━━━━\\n` +\n          `🛡️ _Seus dados estão protegidos e criptografados._`,\n  \"whatsappId\": $('get_data').item.json.whatsappId,\n  \"externalKey\": \"solicitacao-cpf-cnpj\",\n  \"isClosed\": false\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -8208,
+        2448
+      ],
+      "id": "9dbbfd0a-bba2-46a8-9779-ce7487581a19",
+      "name": "msg_cadastro",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendButtonWABA",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({    \n    \"number\": $('get_data').item.json.Number,    \n    \"message\":`*${$('get_data').item.json.pushName}* Para continuar, precisamos validar seus *dados*. _Deseja continuar?_`,  \n      \"button1\": \"Sim\",   \n      \"button2\": \"Não\", \n    \"ticketId\": $('get_data').item.json.ticketID\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -8256,
+        1984
+      ],
+      "id": "87dac3f8-4ccf-4d47-9707-f8d60a505cc6",
+      "name": "msg_validacao",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.alphasoftware.com.br/v2/api/external/{{ $('apiID').item.json.api_id }}/sendButtonWABA",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{\nJSON.stringify({    \n    \"number\": $('get_data').item.json.Number,    \n    \"message\": \"Você já é nosso *cliente*?\",  \n      \"button1\": \"Sim\",   \n      \"button2\": \"Não\", \n    \"ticketId\": $('get_data').item.json.ticketID\n\n})\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -8480,
+        1808
+      ],
+      "id": "9cf79a76-3a3c-46a1-90ba-814660674f07",
+      "name": "msg_cliente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "AxPJFft4UPioMv0j",
+          "name": "z-pro-preserva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Captura a resposta da API do nó anterior\nconst respostaApi = $input.first().json;\n\n// Extrai o token usando a chave exata do seu retorno (\"token\")\nconst token = respostaApi.token; \n\nif (!token) {\n  return [{ \n    json: { \n      sucesso_decode: false, \n      erro: \"Token não encontrado na resposta da API.\" \n    } \n  }];\n}\n\ntry {\n  // Isola o payload (segunda parte do JWT)\n  const base64Url = token.split('.')[1];\n  \n  // Normaliza o padrão Base64Url para Base64 tradicional\n  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');\n  \n  // Decodifica o Base64 para string UTF-8 Puro\n  const payloadTexto = Buffer.from(base64, 'base64').toString('utf-8');\n  \n  // Converte a string em objeto real\n  const dadosDecodificados = JSON.parse(payloadTexto);\n\n  // 2. Retorna os dados mastigados para o fluxo do n8n\n  return [{\n    json: {\n      sucesso_decode: true,\n      tipo_token: respostaApi.tipo || \"Bearer\",\n      expira_em_minutos: respostaApi.expiraEmMinutos || 15,\n      cliente: {\n        id: dadosDecodificados.id_client || dadosDecodificados.id_cliente,\n        nome_responsavel: dadosDecodificados.responsavel,\n        cpf: dadosDecodificados.cpf,\n        email: dadosDecodificados.email,\n        senha: dadosDecodificados.senha,\n        bloqueado: dadosDecodificados.bloqueado,\n        inativo: dadosDecodificados.inativo\n      },\n      exp_timestamp: dadosDecodificados.exp\n    }\n  }];\n\n} catch (error) {\n  return [{ \n    json: { \n      sucesso_decode: false, \n      erro: \"Falha ao decodificar o token JWT: \" + error.message \n    } \n  }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6608,
+        672
+      ],
+      "id": "73645622-0dd6-48ec-ac38-5d08a618102a",
+      "name": "extrair token"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. CAPTURA DOS DADOS DE ENTRADA\nconst inputJson = $input.first().json;\nconst dadosCliente = inputJson.cliente || {};\n\n// 2. VERIFICAÇÃO DE STATUS (INATIVO OU BLOQUEADO)\nconst estaInativo = dadosCliente.inativo === true || dadosCliente.inativo === \"Sim\";\nconst estaBloqueado = dadosCliente.bloqueado === true || dadosCliente.bloqueado === \"Sim\";\n\nif (estaInativo || estaBloqueado) {\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"Atenção\",\n        mensagem_texto: \"Prezado cliente, identificamos uma pendência administrativa em seu cadastro que impede a consulta automática de dados. Vamos transferir seu chat para um atendente.\",\n        proximo_estado: \"Menu_Principal\",\n        rota_destino: \"cliente_bloqueado\",\n        sucesso: false\n    };\n}\n\n// 2.1 CAPTURA A MENSAGEM DO \"AGORA\" (COM BLINDAGEM DE ERROS)\nlet msgWebhook = \"\";\ntry {\n    // Corrigido de 'get_dados' para 'get_data'\n    msgWebhook = $('get_data').first().json.conversation || \"\";\n} catch (e) {\n    // Fallback de segurança se o nó não estiver acessível no contexto\n    msgWebhook = inputJson.conversation || \"\";\n}\n\nconst rawMsg = msgWebhook.toString().toLowerCase().trim();\n\n// Extrai apenas os números (converte qualquer botão ou opção de lista no número real)\nconst msgNum = rawMsg.replace(/\\D/g, '');\n\n// 3. REFERÊNCIAS DO CONTEXTO\nconst menuSalvo = inputJson.navegacao?.menu_atual || \"Menu_Principal\";\nconst nomeUsuario = inputJson.auth?.nome || \"Cliente\";\n\nconst prefixoErro = \"*Opção inválida.*\\n\\nA resposta enviada não corresponde a nenhuma opção disponível. Selecione uma das opções abaixo:\\n\\n\";\nconst rodapeBoleto = \"Digite o número da opção para receber o PDF da fatura desejada.\\n\\n━━━━━━━━━━━━━━━━━━\\n9 - Falar com atendente\\n0 - Voltar ao menu\";\n\nconst montarMsgErroBoleto = (ctx) => {\n  const lista = ctx.navegacao?.texto_lista_faturas || \"\";\n  return prefixoErro + lista + (lista ? \"\\n\\n\" : \"\") + rodapeBoleto;\n};\n\nconst montarMsgErroMenu = (textoMenu) => prefixoErro + (textoMenu || \"Por favor, envie apenas o número correspondente à opção desejada.\");\n\n// --- 4. DICIONÁRIO DE MENUS ---\nconst menuPrincipal = {\n  nome: \"Menu_Principal\",\n  msg: `*MENU PRINCIPAL*\\n━━━━━━━━━━━━━━━━━━\\nOlá, *${nomeUsuario}*!\\nComo posso te ajudar hoje?\\n\\n1 - *Minhas faturas*\\n2 - *Meus CCR* (Comprovantes)\\n3 - *Meus contratos*\\n4 - *Falar com atendente*\\n\\n━━━━━━━━━━━━━━━━━━\\nDigite *Sair* para encerrar o atendimento.`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_Faturas\", rota: \"buscar_faturas\" },\n    \"2\": { prox: \"Meus_CCR\", rota: \"menu_ccr\" },\n    \"3\": { prox: \"Meus_Contratos\", rota: \"menu_contrato\" },\n    \"4\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n  }\n};\n\nconst menuCCR = {\n  nome: \"Meus_CCR\",\n  msg: `*MEUS COMPROVANTES (CCR)*\\n━━━━━━━━━━━━━━━━━━\\nComo deseja visualizar suas últimas coletas?\\n\\n1 - Último CCR\\n2 - Últimos 3 CCRs\\n3 - Últimos 6 CCRs\\n\\n━━━━━━━━━━━━━━━━━━\\n9 - Falar com atendente\\n0 - Voltar ao menu anterior`,\n  opcoes: {\n    \"1\": { prox: \"Buscando_CCR_1\", rota: \"buscar_ccr\" },\n    \"2\": { prox: \"Buscando_CCR_3\", rota: \"buscar_ccr\" },\n    \"3\": { prox: \"Buscando_CCR_6\", rota: \"buscar_ccr\" },\n    \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" },\n    \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" }\n  }\n};\n\nconst mapaMenus = {\n  \"Menu_Principal\": menuPrincipal,\n  \"Meus_CCR\": menuCCR,\n  \"nenu_ccr\": menuCCR,\n  \"buscar_ccr\": menuCCR,\n  \"selecione_boleto\": {\n    msg: rodapeBoleto,\n    opcoes: {\n      \"0\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" },\n      \"9\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n    }\n  },\n  \"fluxo_finalizado\": {\n    msg: \"1 - Iniciar novo atendimento\\n2 - Falar com atendente\",\n    opcoes: {\n      \"1\": { prox: \"Menu_Principal\", rota: \"abrir_menu\" },\n      \"2\": { prox: \"Atendimento_Humano\", rota: \"ir_atendimento\" }\n    }\n  }\n};\n\n// --- 5.1 MENU DE CCR ---\nif ((menuSalvo === \"buscar_ccr\" || menuSalvo === \"Meus_CCR\" || menuSalvo === \"nenu_ccr\") && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const mapaQuantidade = { \"1\": 1, \"2\": 3, \"3\": 6 };\n    const qtdSelecionada = mapaQuantidade[msgNum];\n\n    if (qtdSelecionada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `Opção ${msgNum} selecionada.`,\n            mensagem_texto: `Estou localizando os seus últimos ${qtdSelecionada} CCRs. Aguarde um momento...`,\n            quantidade_ccr: qtdSelecionada,\n            rota_destino: \"buscar_ccr\",\n            sucesso: true\n        };\n    }\n\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"Opção inválida\",\n        mensagem_texto: montarMsgErroMenu(menuCCR.msg),\n        proximo_estado: menuSalvo === \"buscar_ccr\" ? \"buscar_ccr\" : \"Meus_CCR\",\n        rota_destino: \"fallback\",\n        sucesso: false\n    };\n}\n\n// --- 5.2 MENU DE BOLETOS ---\nif (menuSalvo === \"selecione_boleto\" && msgNum !== \"0\" && msgNum !== \"9\" && msgNum !== \"\") {\n    const faturas = inputJson.navegacao?.faturas_disponiveis || [];\n    const escolhaUsuario = msgNum.trim();\n    const faturaAchada = faturas.find(f => f.indice.toString() === escolhaUsuario);\n\n    if (faturaAchada) {\n        return {\n            ...inputJson,\n            mensagem_confirmacao: `Boleto ${msgNum} selecionado.`,\n            mensagem_texto: `Localizei o boleto ${faturaAchada.numero_boleto}. Estou gerando o ficheiro para você...`,\n            idFatura: faturaAchada.boleto_id,\n            rota_destino: \"selecione_boleto\",\n            sucesso: true\n        };\n    }\n\n    return {\n        ...inputJson,\n        mensagem_confirmacao: \"Opção inválida\",\n        mensagem_texto: montarMsgErroBoleto(inputJson),\n        proximo_estado: \"selecione_boleto\",\n        rota_destino: \"fallback\",\n        sucesso: false\n    };\n}\n\n// --- 5.3 NAVEGAÇÃO GERAL ---\nlet menuAtual = mapaMenus[menuSalvo] || mapaMenus[\"Menu_Principal\"];\nlet selecao = menuAtual.opcoes[msgNum];\n\nif (selecao && msgNum !== \"\") {\n  if (selecao.rota === \"buscar_faturas\") {\n    return {\n      ...inputJson,\n      mensagem_confirmacao: \"Minhas Faturas selecionado\",\n      mensagem_texto: \"Aguarde. Estamos a procurar as suas faturas.\",\n      proximo_estado: \"Buscando_Faturas\",\n      rota_destino: \"buscar_faturas\",\n      sucesso: true\n    };\n  }\n\n  let proximoMenu = mapaMenus[selecao.prox] || mapaMenus[\"Menu_Principal\"];\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"A processar\",\n    mensagem_texto: proximoMenu.msg || menuPrincipal.msg,\n    proximo_estado: selecao.prox,\n    rota_destino: selecao.rota,\n    sucesso: true\n  };\n}\n\nif (menuSalvo === \"selecione_boleto\") {\n  return {\n    ...inputJson,\n    mensagem_confirmacao: \"Opção inválida\",\n    mensagem_texto: montarMsgErroBoleto(inputJson),\n    proximo_estado: \"selecione_boleto\",\n    rota_destino: \"fallback\",\n    sucesso: false\n  };\n}\n\nreturn {\n  ...inputJson,\n  mensagem_confirmacao: \"Opção inválida\",\n  mensagem_texto: montarMsgErroMenu(menuAtual.msg),\n  proximo_estado: menuSalvo,\n  rota_destino: \"fallback\",\n  sucesso: false\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6192,
+        3584
+      ],
+      "id": "5c144e49-72b9-45a7-8891-362ddfeb4d94",
+      "name": "definição_menu"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "encontrado1": {
+      "main": [
+        [
+          {
+            "node": "valido1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "login invalido1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch4": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SET CLIENTE4": {
+      "main": [
+        [
+          {
+            "node": "msg_cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis3": {
+      "main": [
+        [
+          {
+            "node": "Redis4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis4": {
+      "main": [
+        [
+          {
+            "node": "logof1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "data_redis1": {
+      "main": [
+        [
+          {
+            "node": "Switch-menu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_data1": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis5": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "valido1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "data_redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request24": {
+      "main": [
+        [
+          {
+            "node": "Switch-apos-menu24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-apos-menu24": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "estados_menus1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "marca erro menu": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-pos-if1": {
+      "main": [
+        [
+          {
+            "node": "invalido5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request25": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Boletos)2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "SET AGUARDANDO_CONFIRMAR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request26": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request25",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Boletos)2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "captura de erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request30",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request30": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request31",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request31": {
+      "main": [
+        [
+          {
+            "node": "estados_menus6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscando": {
+      "main": [
+        [
+          {
+            "node": "Api_alpha localizar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request35": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request36",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request36": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request38",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request37": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request43",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-menu1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "marca erro menu",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request26",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request46",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request37",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request35",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request39",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request42",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request44",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request38": {
+      "main": [
+        [
+          {
+            "node": "estados_menus7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request39": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Ccr)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Ccr)1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "captura de erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request40": {
+      "main": [
+        [
+          {
+            "node": "finalizado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "finalizado2": {
+      "main": [
+        [
+          {
+            "node": "finalizado3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request40",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request41": {
+      "main": [
+        [
+          {
+            "node": "finalizado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request41",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request42": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Contratos)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request44": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request45",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apresentecao": {
+      "main": [
+        [
+          {
+            "node": "msg_cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia1": {
+      "main": [
+        [
+          {
+            "node": "transferencia de atendimneto1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request43": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "invalido",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch-pos-if1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-menu": {
+      "main": [
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch-aceite",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "definição_menu",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "switch-auth",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "switch-auth",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "switch-auth",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "switch-auth",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "apresentecao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "switch-auth": {
+      "main": [
+        [
+          {
+            "node": "valido1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_data1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Api_alpha autenticar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Api_alpha autenticar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch-aceite": {
+      "main": [
+        [
+          {
+            "node": "msg_validacao",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "transferencia1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "estados_menus": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "invalido": {
+      "main": [
+        [
+          {
+            "node": "transferencia de atendimento2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request45": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transferencia de atendimento": {
+      "main": [
+        [
+          {
+            "node": "deletar sessao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia de atendimneto1": {
+      "main": [
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia de atendimento2": {
+      "main": [
+        [
+          {
+            "node": "deletar sessao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Boletos)": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "captura de erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request46": {
+      "main": [
+        [
+          {
+            "node": "API_ALPHA(Boletos)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request34": {
+      "main": [
+        [
+          {
+            "node": "finalizado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Api_alpha localizar": {
+      "main": [
+        [
+          {
+            "node": "encontrado1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "captura de erro": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "token expirado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "invalido2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "token expirado": {
+      "main": [
+        [
+          {
+            "node": "finalizado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "deletar sessao": {
+      "main": [
+        [
+          {
+            "node": "deleta registro da sessao",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "buscando",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "invalido3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "invalido4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DADOS_COMPLETOS": {
+      "main": [
+        [
+          {
+            "node": "menu principal1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "login invalido1": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "invalido3": {
+      "main": [
+        [
+          {
+            "node": "estados_menus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "invalido4": {
+      "main": [
+        [
+          {
+            "node": "transferencia de atendimento2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Api_alpha autenticar": {
+      "main": [
+        [
+          {
+            "node": "extrair token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request34",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request47",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request47": {
+      "main": [
+        [
+          {
+            "node": "finalizado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Transferencia de atendimento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "invalido5": {
+      "main": [
+        [
+          {
+            "node": "Redis3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "API_ALPHA(Contratos)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript5",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "captura de erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Espera Inatividade (10 min)": {
+      "main": [
+        [
+          {
+            "node": "Verifica Redis Inatividade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica Redis Inatividade": {
+      "main": [
+        [
+          {
+            "node": "Ainda na mesma sessao?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ainda na mesma sessao?": {
+      "main": [
+        [
+          {
+            "node": "msg_inatividade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_inatividade": {
+      "main": [
+        [
+          {
+            "node": "transferencia_inatividade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transferencia_inatividade": {
+      "main": [
+        [
+          {
+            "node": "deleta_sessao_inatividade",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "from_me": {
+      "main": [
+        [
+          {
+            "node": "fila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "number": {
+      "main": [
+        [
+          {
+            "node": "apiID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fila": {
+      "main": [
+        [
+          {
+            "node": "Redis5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "apiID": {
+      "main": [
+        [
+          {
+            "node": "If_queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_data": {
+      "main": [
+        [
+          {
+            "node": "from_me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If_queue": {
+      "main": [
+        [
+          {
+            "node": "get_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_validacao": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "msg_cliente": {
+      "main": [
+        [
+          {
+            "node": "SET CLIENTE5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extrair token": {
+      "main": [
+        [
+          {
+            "node": "DADOS_COMPLETOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "definição_menu": {
+      "main": [
+        [
+          {
+            "node": "Switch-menu1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3a23ed3a-fb8a-4313-9f9a-5e123c2185d3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3678bd5061341658e7288de84a25579816bf990c1607019a9f8d8be83f4a0b4a"
+  },
+  "nodeGroups": [],
+  "id": "21OBsuzTGSCrWifX",
+  "tags": []
+}
